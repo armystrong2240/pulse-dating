@@ -1,0 +1,62 @@
+{
+  "users": [
+    {
+      "id": "3e8a34dc-5569-463e-8d82-cfdaa54a16d9",
+      "passwordHash": "$2b$10$Fo1/3UDLZhHT95abhxPVjuGDAIsQBSoh1nHeAJ/tFENYvcVZUuKPK",
+      "createdAt": "2026-04-30T22:48:51.463Z",
+      "media": [],
+      "email": "maya@demo.com",
+      "name": "Maya",
+      "age": 27,
+      "city": "Atlanta",
+      "bio": "Love rooftop dinners, anime nights, and spontaneous road trips.",
+      "interests": [
+        "Travel",
+        "Fitness",
+        "Photography"
+      ],
+      "lookingFor": "Long-term relationship",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800"
+    },
+    {
+      "id": "27461a7d-8282-4a90-87d5-5821b03671d1",
+      "passwordHash": "$2b$10$Fo1/3UDLZhHT95abhxPVjuGDAIsQBSoh1nHeAJ/tFENYvcVZUuKPK",
+      "createdAt": "2026-04-30T22:48:51.464Z",
+      "media": [],
+      "email": "jordan@demo.com",
+      "name": "Jordan",
+      "age": 31,
+      "city": "Dallas",
+      "bio": "Entrepreneur by day, salsa dancer by night.",
+      "interests": [
+        "Business",
+        "Dancing",
+        "Food"
+      ],
+      "lookingFor": "Meaningful connection",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800"
+    },
+    {
+      "id": "2cb655f7-d37b-44c1-92be-2af2e7e60620",
+      "passwordHash": "$2b$10$Fo1/3UDLZhHT95abhxPVjuGDAIsQBSoh1nHeAJ/tFENYvcVZUuKPK",
+      "createdAt": "2026-04-30T22:48:51.464Z",
+      "media": [],
+      "email": "tiana@demo.com",
+      "name": "Tiana",
+      "age": 24,
+      "city": "Miami",
+      "bio": "Beach sunsets and deep conversations are my thing.",
+      "interests": [
+        "Music",
+        "Beach",
+        "Art"
+      ],
+      "lookingFor": "Dating and friendship",
+      "avatar": "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=800"
+    }
+  ],
+  "media": [],
+  "likes": [],
+  "messages": [],
+  "liveRooms": []
+}

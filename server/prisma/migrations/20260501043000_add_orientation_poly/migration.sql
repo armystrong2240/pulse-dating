@@ -1,0 +1,2 @@
+ALTER TABLE "User" ADD COLUMN "sexualOrientation" TEXT NOT NULL DEFAULT '';
+ALTER TABLE "User" ADD COLUMN "polyPreference" TEXT NOT NULL DEFAULT '';

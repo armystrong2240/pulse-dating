@@ -1,0 +1,49 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "preflight:prod": "node scripts/preflight-prod.mjs",
+    "start:prod": "npm run preflight:prod && npm run db:migrate:postgres && npm run start",
+    "db:generate": "prisma generate",
+    "db:generate:postgres": "node scripts/prisma-postgres.mjs generate",
+    "db:migrate": "prisma migrate deploy",
+    "db:migrate:postgres": "node scripts/prisma-postgres.mjs migrate deploy",
+    "db:status": "prisma migrate status",
+    "db:status:postgres": "node scripts/prisma-postgres.mjs migrate status",
+    "maintenance:retention": "node scripts/maintenance-retention.mjs",
+    "db:seed": "node prisma/seed.js",
+    "db:setup": "prisma migrate deploy && node prisma/seed.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Dating app backend",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1040.0",
+    "@prisma/adapter-better-sqlite3": "^7.8.0",
+    "@prisma/client": "^6.19.3",
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^12.9.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.4.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "lowdb": "^7.0.1",
+    "multer": "^2.1.1",
+    "nodemailer": "^8.0.7",
+    "socket.io": "^4.8.3",
+    "uuid": "^14.0.0",
+    "zod": "^4.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "prisma": "^6.19.3"
+  },
+  "type": "module"
+}
