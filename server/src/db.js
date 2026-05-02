@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -34,6 +33,7 @@ if (DATABASE_PROVIDER === "postgresql") {
     log: NODE_ENV === "development" ? ["warn", "error"] : ["error"],
   });
 } else {
+  const { PrismaBetterSqlite3 } = await import("@prisma/adapter-better-sqlite3");
   const dbUrl = resolveSqliteUrl(DATABASE_URL);
   const adapter = new PrismaBetterSqlite3({ url: dbUrl });
   prismaInstance = new PrismaClient({ adapter });
