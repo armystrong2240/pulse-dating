@@ -22,7 +22,7 @@ if (fs.existsSync(envPath)) {
   }
 }
 
-const nodeEnv = process.env.NODE_ENV || "development";
+const nodeEnv = (process.env.NODE_ENV || "development").trim();
 const jwtSecret = process.env.JWT_SECRET || "";
 const refreshSecret = process.env.REFRESH_SECRET || "";
 const dataEncryptionKey = process.env.DATA_ENCRYPTION_KEY || "";

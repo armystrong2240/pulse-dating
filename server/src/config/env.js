@@ -2,9 +2,13 @@ import { z } from "zod";
 
 const DEV_JWT_FALLBACK = "pulsedatE_jwt_secret_dev_only_change_in_prod";
 const DEV_REFRESH_FALLBACK = "pulsedatE_refresh_secret_dev_only_change_in_prod";
+const trimIfString = (value) => (typeof value === "string" ? value.trim() : value);
 
 const EnvSchema = z.object({
-  NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+  NODE_ENV: z.preprocess(
+    trimIfString,
+    z.enum(["development", "test", "production"]),
+  ).default("development"),
   LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("info"),
   PORT: z.coerce.number().int().positive().default(4000),
   CLIENT_URL: z.string().default("http://localhost:5173"),

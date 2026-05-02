@@ -7,7 +7,7 @@
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "preflight:prod": "node scripts/preflight-prod.mjs",
-    "start:prod": "npm run preflight:prod && npm run db:migrate:resolve && npm run db:migrate:postgres && npm run start",
+    "start:prod": "npm run preflight:prod && npm run db:migrate:postgres && npm run start",
     "db:migrate:resolve": "node scripts/prisma-postgres.mjs migrate resolve --rolled-back 0001_init || true",
     "db:generate": "prisma generate",
     "db:generate:postgres": "node scripts/prisma-postgres.mjs generate",
