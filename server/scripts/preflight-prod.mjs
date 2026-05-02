@@ -88,7 +88,20 @@ const runPrismaPostgres = (...args) => {
 };
 
 runPrismaPostgres("generate");
-runPrismaPostgres("migrate", "status");
+
+// Run migrate status as info only — migrations are applied by db:migrate:postgres in start:prod
+const statusResult = process.platform === "win32"
+  ? spawnSync("cmd.exe", ["/d", "/s", "/c", "node scripts/prisma-postgres.mjs migrate status"], {
+    stdio: "inherit",
+    env: { ...process.env, DATABASE_URL_POSTGRES: postgresUrl },
+  })
+  : spawnSync("sh", ["-lc", "node scripts/prisma-postgres.mjs migrate status"], {
+    stdio: "inherit",
+    env: { ...process.env, DATABASE_URL_POSTGRES: postgresUrl },
+  });
+if (statusResult.error) {
+  console.warn(`Preflight warning: migrate status check failed (${statusResult.error.message}). Continuing.`);
+}
 
 process.env.DATABASE_URL_POSTGRES = postgresUrl;
 const { PrismaClient } = await import("../generated/postgres-client/index.js");
