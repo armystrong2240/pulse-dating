@@ -59,10 +59,6 @@ export const LoginPage = () => {
           Create a profile
         </Link>
       </p>
-      <p className="muted" style={{ marginTop: "0.4rem", fontSize: "0.85rem" }}>
-        Demo accounts: maya@demo.com / jordan@demo.com / tiana@demo.com —
-        password: <code>demo1234</code>
-      </p>
     </section>
   );
 };
