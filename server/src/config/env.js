@@ -9,6 +9,7 @@ const EnvSchema = z.object({
   PORT: z.coerce.number().int().positive().default(4000),
   CLIENT_URL: z.string().default("http://localhost:5173"),
   ADMIN_EMAILS: z.string().default(""),
+  DATABASE_URL_POSTGRES: z.string().optional(),
   DATABASE_URL: z.string().default("file:./data/demo.db"),
   DATA_ENCRYPTION_KEY: z.string().default("dev_data_encryption_key_change_me_32_chars"),
   BCRYPT_ROUNDS: z.coerce.number().int().min(8).max(15).default(10),
@@ -27,11 +28,12 @@ if (!parsed.success) {
 
 const envData = parsed.data;
 const productionMode = envData.NODE_ENV === "production";
+const databaseUrl = envData.DATABASE_URL_POSTGRES || envData.DATABASE_URL;
 
 const isPostgresUrl =
-  envData.DATABASE_URL.startsWith("postgresql://") ||
-  envData.DATABASE_URL.startsWith("postgres://");
-const isSqliteUrl = envData.DATABASE_URL.startsWith("file:");
+  databaseUrl.startsWith("postgresql://") ||
+  databaseUrl.startsWith("postgres://");
+const isSqliteUrl = databaseUrl.startsWith("file:");
 
 if (!isPostgresUrl && !isSqliteUrl) {
   throw new Error(
@@ -74,7 +76,7 @@ export const ADMIN_EMAILS = new Set(
     .map((email) => email.trim().toLowerCase())
     .filter(Boolean),
 );
-export const DATABASE_URL = envData.DATABASE_URL;
+export const DATABASE_URL = databaseUrl;
 export const DATABASE_PROVIDER = isPostgresUrl ? "postgresql" : "sqlite";
 export const DATA_ENCRYPTION_KEY = envData.DATA_ENCRYPTION_KEY;
 export const BCRYPT_ROUNDS = productionMode
