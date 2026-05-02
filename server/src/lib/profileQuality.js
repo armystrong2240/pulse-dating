@@ -19,7 +19,7 @@ export function computeProfileQuality(user, mediaCount = 0) {
   })();
 
   const checks = {
-    photos: mediaCount >= 4,
+    photos: mediaCount >= 3,
     bio: (user.bio || "").trim().length >= 120,
     prompts: prompts.length >= 3,
     interests: interests.length >= 5,
@@ -36,7 +36,7 @@ export function computeProfileQuality(user, mediaCount = 0) {
   if (checks.intent) score += 10;
 
   const tips = [];
-  if (!checks.photos) tips.push("Add at least 4 photos");
+  if (!checks.photos) tips.push("Add at least 3 photos");
   if (!checks.bio) tips.push("Write a bio with at least 120 characters");
   if (!checks.prompts) tips.push("Answer at least 3 profile prompts");
   if (!checks.interests) tips.push("Add at least 5 interests");

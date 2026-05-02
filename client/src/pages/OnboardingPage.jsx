@@ -42,7 +42,7 @@ export function OnboardingPage() {
       basics: Boolean(
         profile.name && profile.age >= 18 && profile.city && profile.bio?.trim().length >= 20
       ),
-      photos: Array.isArray(profile.media) && profile.media.length >= 4,
+      photos: Array.isArray(profile.media) && profile.media.length >= 3,
       prompts:
         Array.isArray(profile.profilePrompts) &&
         profile.profilePrompts.filter((p) => p?.q && p?.a).length >= 3,
@@ -93,7 +93,7 @@ export function OnboardingPage() {
     {
       key: "photos",
       title: "Add photos",
-      detail: "Upload at least 4 photos so your profile feels real.",
+      detail: "Upload at least 3 photos so your profile feels real.",
       cta: "Add photos",
       link: `/profiles/${user?.id}?mode=edit&tab=media&from=onboarding`,
     },
