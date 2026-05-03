@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const successMessage = location.state?.message;
 
   const onChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -51,9 +53,13 @@ export const LoginPage = () => {
         </button>
       </form>
 
+      {successMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{successMessage}</p>}
       {error && <p className="error">{error}</p>}
 
       <p className="muted" style={{ marginTop: "1rem" }}>
+        <Link to="/forgot-password" className="link">Forgot password?</Link>
+      </p>
+      <p className="muted" style={{ marginTop: "0.5rem" }}>
         New here?{" "}
         <Link to="/register" className="link">
           Create a profile

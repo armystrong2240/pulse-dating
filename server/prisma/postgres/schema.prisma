@@ -43,6 +43,9 @@ model User {
   onboardingCompleted Boolean @default(false)
   emailVerified Boolean @default(false)
   verifyToken  String?
+  resetToken       String?
+  resetTokenExpiry DateTime?
+  pushSubscription String?
   createdAt    DateTime @default(now())
 
   media          Media[]

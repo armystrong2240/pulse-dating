@@ -21,6 +21,7 @@ import profileQualityRoutes from "./routes/profileQuality.js";
 import profileRoutes from "./routes/profiles.js";
 import securityAdminRoutes from "./routes/securityAdmin.js";
 import safetyRoutes from "./routes/safety.js";
+import pushRoutes from "./routes/push.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -116,6 +117,7 @@ app.use("/api/friends", apiLimiter, friendRoutes);
 app.use("/api/profile-quality", apiLimiter, profileQualityRoutes);
 app.use("/api/onboarding", apiLimiter, onboardingRoutes);
 app.use("/api/security-admin", apiLimiter, securityAdminRoutes);
+app.use("/api/push", apiLimiter, pushRoutes);
 app.get("/api/health", (_req, res) =>
   res.json({ ok: true, timestamp: new Date().toISOString() }),
 );

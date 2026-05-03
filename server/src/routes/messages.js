@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { Router } from "express";
 import { prisma } from "../db.js";
 import { requireAuth } from "../middleware/auth.js";
+import { sendPushToUser } from "./push.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -104,8 +105,25 @@ router.post("/", requireAuth, async (req, res) => {
   });
 
   // Real-time: broadcast to room via socket
-  const { io } = req.app.locals;
+  const { io, userSockets } = req.app.locals;
   io?.to(roomId).emit("chat:new_message", message);
+
+  // Push notification to the other user in a DM room (roomId format: "dm-<userId1>-<userId2>")
+  if (roomId.startsWith("dm-")) {
+    const parts = roomId.split("-");
+    const otherUserId = parts.find((p) => p !== "dm" && p !== req.user.id);
+    if (otherUserId) {
+      const isConnected = userSockets?.get(otherUserId)?.size > 0;
+      if (!isConnected) {
+        await sendPushToUser(
+          otherUserId,
+          `New message from ${sender?.name || "Someone"}`,
+          text ? text.slice(0, 80) : "Sent you an image",
+          `/chat/${req.user.id}`
+        );
+      }
+    }
+  }
 
   return res.status(201).json(message);
 });

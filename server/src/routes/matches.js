@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { parseInterests, prisma } from "../db.js";
 import { requireAuth } from "../middleware/auth.js";
+import { sendPushToUser } from "./push.js";
 
 const router = Router();
 const DAILY_LIKE_LIMIT = 20;
@@ -125,6 +126,9 @@ router.post("/like/:targetId", requireAuth, async (req, res) => {
     userSockets?.get(fromId)?.forEach((sid) =>
       io.to(sid).emit("match:new", { matchedUser: { id: them.id, name: them.name, avatar: them.avatar }, icebreaker })
     );
+    // Push notifications for users not currently connected
+    await sendPushToUser(toId, "New Match! 💘", `You matched with ${me.name}!`, "/matches");
+    await sendPushToUser(fromId, "New Match! 💘", `You matched with ${them.name}!`, "/matches");
   }
 
   return res.json({ liked, mutualMatch });

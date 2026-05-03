@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { api } from "../api/client";
+import { registerPushNotifications, unregisterPushNotifications } from "../api/push";
 
 const AuthContext = createContext(null);
 
@@ -36,16 +37,21 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     const { data } = await api.post("/auth/login", { email, password });
     applyToken(data.token, data.user);
+    registerPushNotifications();
     return data.user;
   };
 
   const register = async (fields) => {
     const { data } = await api.post("/auth/register", fields);
     applyToken(data.token, data.user);
+    registerPushNotifications();
     return data.user;
   };
 
-  const logout = () => applyToken(null, null);
+  const logout = () => {
+    unregisterPushNotifications();
+    applyToken(null, null);
+  };
 
   return (
     <AuthContext.Provider value={{ user, loading, login, register, logout }}>

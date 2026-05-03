@@ -12,7 +12,7 @@ import {
 } from "../lib/dataProtection.js";
 import { logSecurityEvent } from "../lib/securityEvents.js";
 import { JWT_SECRET, REFRESH_SECRET, requireAuth } from "../middleware/auth.js";
-import { sendVerificationEmail } from "../mailer.js";
+import { sendPasswordResetEmail, sendVerificationEmail } from "../mailer.js";
 
 const router = Router();
 const REFRESH_COOKIE = "pd_refresh";
@@ -425,6 +425,59 @@ router.get("/verify-email", async (req, res) => {
   });
 
   return res.json({ ok: true, message: "Email verified! You can close this tab." });
+});
+
+// ── Forgot Password ────────────────────────────────────────────────────────
+router.post("/forgot-password", async (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ error: "Email required" });
+
+  const user = await prisma.user.findUnique({ where: { email: email.toLowerCase() } });
+  // Always return 200 to avoid email enumeration
+  if (!user) return res.json({ ok: true });
+
+  const resetToken = crypto.randomUUID();
+  const resetTokenExpiry = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { resetToken, resetTokenExpiry },
+  });
+
+  const baseUrl = CLIENT_URL.split(",")[0].trim() || `${req.protocol}://${req.get("host")}`;
+  const url = `${baseUrl}/reset-password?token=${resetToken}`;
+
+  sendPasswordResetEmail(user.email, user.name, url).catch((err) =>
+    console.error("[mailer] reset email failed:", err?.message || err)
+  );
+
+  return res.json({ ok: true });
+});
+
+// ── Reset Password ─────────────────────────────────────────────────────────
+router.post("/reset-password", async (req, res) => {
+  const { token, password } = req.body;
+  if (!token || !password) return res.status(400).json({ error: "Token and password required" });
+  if (password.length < 8) return res.status(400).json({ error: "Password must be at least 8 characters" });
+
+  const user = await prisma.user.findFirst({
+    where: {
+      resetToken: token,
+      resetTokenExpiry: { gt: new Date() },
+    },
+  });
+  if (!user) return res.status(400).json({ error: "Invalid or expired reset link" });
+
+  const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { passwordHash, resetToken: null, resetTokenExpiry: null },
+  });
+
+  // Invalidate all refresh tokens
+  await prisma.refreshToken.deleteMany({ where: { userId: user.id } });
+
+  return res.json({ ok: true, message: "Password reset successfully" });
 });
 
 export default router;
