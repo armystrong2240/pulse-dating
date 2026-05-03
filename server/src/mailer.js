@@ -29,7 +29,7 @@ export async function sendVerificationEmail(to, name, token, baseUrl) {
   const t = await getTransporter();
   const url = `${baseUrl}/verify-email?token=${token}`;
   const info = await t.sendMail({
-    from: '"PulseDate 💘" <noreply@pulsedate.app>',
+    from: '"PulseDate 💘" <noreply@pulsedate.net>',
     to,
     subject: "Verify your PulseDate email",
     html: `<h2>Hey ${name}!</h2>

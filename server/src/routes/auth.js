@@ -188,7 +188,7 @@ router.post("/register", registerLimiter, async (req, res) => {
   });
 
   const baseUrl = CLIENT_URL.split(",")[0].trim() || `${req.protocol}://${req.get("host")}`;
-  sendVerificationEmail(user.email, user.name, verifyToken, baseUrl).catch(() => {});
+  sendVerificationEmail(user.email, user.name, verifyToken, baseUrl).catch((err) => console.error("[mailer] verification email failed:", err?.message || err));
 
   const { accessToken, refreshToken } = issueTokens(user.id, user.email);
   const refreshTokenHash = hashRefreshToken(refreshToken);
