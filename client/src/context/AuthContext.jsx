@@ -48,8 +48,13 @@ export const AuthProvider = ({ children }) => {
     return data.user;
   };
 
-  const logout = () => {
+  const logout = async () => {
     unregisterPushNotifications();
+    try {
+      await api.post("/auth/logout");
+    } catch {
+      // ignore — server may already be unreachable; clear client state regardless
+    }
     applyToken(null, null);
   };
 

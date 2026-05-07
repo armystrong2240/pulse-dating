@@ -42,8 +42,8 @@ export const Navbar = () => {
     return () => { s.off("friend:request", onRequest); s.off("friend:accepted", onAccepted); };
   }, [socket?.socket]);
 
-  const onLogout = () => {
-    logout();
+  const onLogout = async () => {
+    await logout();
     navigate("/login");
   };
 
