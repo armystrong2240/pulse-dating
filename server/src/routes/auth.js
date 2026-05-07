@@ -53,7 +53,7 @@ const toPublic = ({ passwordHash: _, ...pub }) => {
 };
 
 const PasswordSchema = z.string().superRefine((value, ctx) => {
-  const minLength = isProduction ? 12 : 8;
+  const minLength = 8;
   if (value.length < minLength) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
