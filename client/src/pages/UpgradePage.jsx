@@ -297,8 +297,6 @@ export default function UpgradePage() {
             <div key={item} style={{ color: "#666", fontSize: 13 }}>{item}</div>
           ))}
         </div>
-      </div>
-    </div>
 
         {/* ── Roses currency ───────────────────────────────────────── */}
         {roses !== null && (
@@ -400,7 +398,7 @@ export default function UpgradePage() {
             )}
           </div>
         )}
-    </div>
+      </div>
     </div>
   );
 }

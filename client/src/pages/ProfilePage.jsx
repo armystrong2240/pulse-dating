@@ -958,14 +958,13 @@ export const ProfilePage = () => {
                             </div>
                           )}
                         </div>
-                          <textarea value={form.lookingFor} onChange={(e) => onField("lookingFor", e.target.value)} placeholder="What I am looking for" rows={3} />
-                          <select value={form.polyPreference} onChange={(e) => onField("polyPreference", e.target.value)} style={{ marginTop: "0.25rem" }}>
-                            <option value="">Relationship style (optional)</option>
-                            {POLY_PREFERENCE_OPTIONS.map((opt) => (
-                              <option key={opt} value={opt}>{opt}</option>
-                            ))}
-                          </select>
-                        </div>
+                        <textarea value={form.lookingFor} onChange={(e) => onField("lookingFor", e.target.value)} placeholder="What I am looking for" rows={3} />
+                        <select value={form.polyPreference} onChange={(e) => onField("polyPreference", e.target.value)} style={{ marginTop: "0.25rem" }}>
+                          <option value="">Relationship style (optional)</option>
+                          {POLY_PREFERENCE_OPTIONS.map((opt) => (
+                            <option key={opt} value={opt}>{opt}</option>
+                          ))}
+                        </select>
                       </div>
                     )}
                     {editTab === "prompts" && (
