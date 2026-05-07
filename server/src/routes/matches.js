@@ -4,8 +4,17 @@ import { requireAuth } from "../middleware/auth.js";
 import { sendPushToUser } from "./push.js";
 
 const router = Router();
-const DAILY_LIKE_LIMIT = 20;
-const DAILY_SUPER_LIKE_LIMIT = 3;
+
+// Tier-based limits
+const LIMITS = {
+  free: { dailyLikes: 20, superLikes: 1, seeWhoLikedYou: false },
+  plus: { dailyLikes: Infinity, superLikes: 5, seeWhoLikedYou: true },
+  gold: { dailyLikes: Infinity, superLikes: Infinity, seeWhoLikedYou: true },
+};
+
+function getLimits(tier) {
+  return LIMITS[tier] || LIMITS.free;
+}
 
 const ICEBREAKERS = [
   "You both love {interest} — ask them about their favorite experience with it!",
@@ -32,6 +41,9 @@ const toPublic = (user, media = []) => {
 // Get today's like count for the current user
 router.get("/likes/today", requireAuth, async (req, res) => {
   const today = new Date().toISOString().slice(0, 10);
+  const user = await prisma.user.findUnique({ where: { id: req.user.id }, select: { premiumTier: true } });
+  const limits = getLimits(user?.premiumTier);
+
   const [row, superCount] = await Promise.all([
     prisma.dailyLike.findUnique({
       where: { userId_date: { userId: req.user.id, date: today } },
@@ -46,9 +58,10 @@ router.get("/likes/today", requireAuth, async (req, res) => {
   ]);
   return res.json({
     count: row?.count ?? 0,
-    limit: DAILY_LIKE_LIMIT,
+    limit: limits.dailyLikes === Infinity ? null : limits.dailyLikes,
     superLikeCount: superCount,
-    superLikeLimit: DAILY_SUPER_LIKE_LIMIT,
+    superLikeLimit: limits.superLikes === Infinity ? null : limits.superLikes,
+    tier: user?.premiumTier || "free",
   });
 });
 
@@ -62,36 +75,52 @@ router.post("/like/:targetId", requireAuth, async (req, res) => {
     return res.status(400).json({ error: "Cannot like yourself" });
   }
 
-  // Enforce daily like limit only for positive likes
-  if (liked) {
+  const sender = await prisma.user.findUnique({ where: { id: fromId }, select: { premiumTier: true } });
+  const limits = getLimits(sender?.premiumTier);
+
+  // Enforce daily like limit only for positive likes (free tier only)
+  if (liked && limits.dailyLikes !== Infinity) {
     const today = new Date().toISOString().slice(0, 10);
     const row = await prisma.dailyLike.upsert({
       where: { userId_date: { userId: fromId, date: today } },
       update: {},
       create: { userId: fromId, date: today, count: 0 },
     });
-    if (row.count >= DAILY_LIKE_LIMIT) {
+    if (row.count >= limits.dailyLikes) {
       return res.status(429).json({
-        error: `Daily like limit of ${DAILY_LIKE_LIMIT} reached. Come back tomorrow!`,
+        error: `Daily like limit of ${limits.dailyLikes} reached. Upgrade to Plus for unlimited likes!`,
         limitReached: true,
+        requiresUpgrade: true,
+        minTier: "plus",
       });
     }
     await prisma.dailyLike.update({
       where: { userId_date: { userId: fromId, date: today } },
       data: { count: { increment: 1 } },
     });
+  } else if (liked) {
+    // Still track for analytics, but don't block
+    const today = new Date().toISOString().slice(0, 10);
+    await prisma.dailyLike.upsert({
+      where: { userId_date: { userId: fromId, date: today } },
+      update: { count: { increment: 1 } },
+      create: { userId: fromId, date: today, count: 1 },
+    });
+  }
 
-    // Enforce super like limit
-    if (superLike) {
-      const superCount = await prisma.like.count({
-        where: { fromId, superLike: true, createdAt: { gte: new Date(today) } },
+  // Enforce super like limit
+  if (liked && superLike && limits.superLikes !== Infinity) {
+    const today = new Date().toISOString().slice(0, 10);
+    const superCount = await prisma.like.count({
+      where: { fromId, superLike: true, createdAt: { gte: new Date(today) } },
+    });
+    if (superCount >= limits.superLikes) {
+      return res.status(429).json({
+        error: `Daily Super Like limit of ${limits.superLikes} reached. Upgrade to Plus for more!`,
+        superLimitReached: true,
+        requiresUpgrade: true,
+        minTier: "plus",
       });
-      if (superCount >= DAILY_SUPER_LIKE_LIMIT) {
-        return res.status(429).json({
-          error: `Daily Pulse limit of ${DAILY_SUPER_LIKE_LIMIT} reached. Come back tomorrow!`,
-          superLimitReached: true,
-        });
-      }
     }
   }
 
@@ -134,13 +163,17 @@ router.post("/like/:targetId", requireAuth, async (req, res) => {
   return res.json({ liked, mutualMatch });
 });
 
-// People who liked me (names blurred for non-mutual)
+// People who liked me (names blurred for non-mutual on free tier)
 router.get("/liked-me", requireAuth, async (req, res) => {
   const myId = req.user.id;
+  const user = await prisma.user.findUnique({ where: { id: myId }, select: { premiumTier: true } });
+  const limits = getLimits(user?.premiumTier);
+  const canSeeAll = limits.seeWhoLikedYou;
 
   const rows = await prisma.like.findMany({
     where: { toId: myId, liked: true },
     include: { from: { select: { id: true, name: true, avatar: true, age: true, city: true } } },
+    orderBy: { createdAt: "desc" },
   });
 
   // Check which ones are mutual
@@ -148,15 +181,23 @@ router.get("/liked-me", requireAuth, async (req, res) => {
     (await prisma.like.findMany({ where: { fromId: myId, liked: true } })).map((l) => l.toId)
   );
 
-  return res.json(rows.map((r) => ({
-    id: r.from.id,
-    age: r.from.age,
-    city: r.from.city,
-    isMutual: iLiked.has(r.from.id),
-    // Blur identity unless mutual
-    name: iLiked.has(r.from.id) ? r.from.name : "Someone",
-    avatar: iLiked.has(r.from.id) ? r.from.avatar : null,
-  })));
+  return res.json({
+    likedMe: rows.map((r) => {
+      const isMutual = iLiked.has(r.from.id);
+      const reveal = isMutual || canSeeAll;
+      return {
+        id: reveal ? r.from.id : null,
+        age: r.from.age,
+        city: reveal ? r.from.city : null,
+        isMutual,
+        name: reveal ? r.from.name : "Someone",
+        avatar: reveal ? r.from.avatar : null,
+        blurred: !reveal,
+      };
+    }),
+    requiresUpgrade: !canSeeAll,
+    minTier: "plus",
+  });
 });
 
 router.get("/", requireAuth, async (req, res) => {
@@ -247,26 +288,43 @@ router.get("/daily-pick", requireAuth, async (req, res) => {
   alreadyActed.add(myId);
 
   const candidates = await prisma.user.findMany({
-    where: { id: { notIn: [...alreadyActed] }, paused: false },
+    where: { id: { notIn: [...alreadyActed] }, paused: false, onboardingCompleted: true },
     include: { media: { orderBy: [{ sortOrder: "asc" }, { uploadedAt: "asc" }] } },
-    take: 50,
+    take: 100,
   });
 
   if (!candidates.length) return res.json(null);
 
   const myInterests = (() => { try { return JSON.parse(me.interests); } catch { return []; } })();
+  const now = Date.now();
 
   const scored = candidates.map((u) => {
     const theirInts = (() => { try { return JSON.parse(u.interests); } catch { return []; } })();
+    // Interest overlap score (Jaccard similarity)
     const shared = myInterests.filter((i) => theirInts.includes(i)).length;
     const total = new Set([...myInterests, ...theirInts]).size;
-    const score = total > 0 ? shared / total : 0;
-    return { u, score };
+    const interestScore = total > 0 ? shared / total : 0;
+    // Profile quality score (normalized)
+    const qualityScore = (u.profileScore || 0) / 100;
+    // Recency score — recently active users rank higher
+    const lastSeenMs = u.lastSeen ? now - new Date(u.lastSeen).getTime() : now;
+    const recencyScore = Math.max(0, 1 - lastSeenMs / (7 * 24 * 60 * 60 * 1000)); // decays over 7 days
+    // Boosted users get a bump
+    const boostScore = u.boostedUntil && new Date(u.boostedUntil) > new Date() ? 0.3 : 0;
+    // Verified gets a small bump
+    const verifiedScore = u.verified ? 0.1 : 0;
+
+    const total_score = interestScore * 0.4 + qualityScore * 0.25 + recencyScore * 0.2 + boostScore + verifiedScore;
+    return { u, score: total_score };
   });
+
   scored.sort((a, b) => b.score - a.score);
   const pick = scored[0].u;
+  const meInts = myInterests;
+  const themInts = (() => { try { return JSON.parse(pick.interests); } catch { return []; } })();
+  const icebreaker = getIcebreaker(meInts, themInts);
 
-  return res.json(toPublic(pick, pick.media));
+  return res.json({ ...toPublic(pick, pick.media), icebreaker });
 });
 
 export default router;

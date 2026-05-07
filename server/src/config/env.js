@@ -19,6 +19,10 @@ const EnvSchema = z.object({
   BCRYPT_ROUNDS: z.coerce.number().int().min(8).max(15).default(10),
   JWT_SECRET: z.string().default(DEV_JWT_FALLBACK),
   REFRESH_SECRET: z.string().default(DEV_REFRESH_FALLBACK),
+  PAYPAL_CLIENT_ID: z.string().default(""),
+  PAYPAL_CLIENT_SECRET: z.string().default(""),
+  PAYPAL_PLAN_PLUS_ID: z.string().default(""),
+  PAYPAL_PLAN_GOLD_ID: z.string().default(""),
 });
 
 const parsed = EnvSchema.safeParse(process.env);
@@ -88,3 +92,7 @@ export const BCRYPT_ROUNDS = productionMode
   : envData.BCRYPT_ROUNDS;
 export const JWT_SECRET = envData.JWT_SECRET;
 export const REFRESH_SECRET = envData.REFRESH_SECRET;
+export const PAYPAL_CLIENT_ID = envData.PAYPAL_CLIENT_ID;
+export const PAYPAL_CLIENT_SECRET = envData.PAYPAL_CLIENT_SECRET;
+export const PAYPAL_PLAN_PLUS_ID = envData.PAYPAL_PLAN_PLUS_ID;
+export const PAYPAL_PLAN_GOLD_ID = envData.PAYPAL_PLAN_GOLD_ID;

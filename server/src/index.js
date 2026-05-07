@@ -12,14 +12,18 @@ import { initDb, prisma } from "./db.js";
 import { logger } from "./lib/logger.js";
 import { requestContext } from "./middleware/requestContext.js";
 import authRoutes from "./routes/auth.js";
+import billingRoutes from "./routes/billing.js";
 import friendRoutes from "./routes/friends.js";
+import giftRoutes from "./routes/gifts.js";
 import liveRoutes from "./routes/live.js";
 import matchRoutes from "./routes/matches.js";
 import messageRoutes from "./routes/messages.js";
 import onboardingRoutes from "./routes/onboarding.js";
 import profileQualityRoutes from "./routes/profileQuality.js";
 import profileRoutes from "./routes/profiles.js";
+import referralRoutes from "./routes/referrals.js";
 import securityAdminRoutes from "./routes/securityAdmin.js";
+import adminRoutes from "./routes/admin.js";
 import safetyRoutes from "./routes/safety.js";
 import pushRoutes from "./routes/push.js";
 
@@ -89,6 +93,17 @@ if (isProduction) {
 }
 app.use(requestContext);
 app.use(cookieParser());
+// Capture raw body for Stripe webhooks before JSON parsing
+app.use((req, _res, next) => {
+  if (req.originalUrl === "/api/billing/webhook") {
+    let raw = "";
+    req.setEncoding("utf8");
+    req.on("data", (chunk) => { raw += chunk; });
+    req.on("end", () => { req.rawBody = raw; next(); });
+  } else {
+    next();
+  }
+});
 app.use(express.json({ limit: "10mb" }));
 app.use("/uploads", express.static(uploadsDir));
 
@@ -108,15 +123,19 @@ const apiLimiter = rateLimit({
 });
 
 app.use("/api/auth", authLimiter, authRoutes);
+app.use("/api/billing", apiLimiter, billingRoutes);
 app.use("/api/profiles", apiLimiter, profileRoutes);
 app.use("/api/matches", apiLimiter, matchRoutes);
 app.use("/api/messages", apiLimiter, messageRoutes);
 app.use("/api/live", apiLimiter, liveRoutes);
 app.use("/api/safety", apiLimiter, safetyRoutes);
 app.use("/api/friends", apiLimiter, friendRoutes);
+app.use("/api/gifts", apiLimiter, giftRoutes);
+app.use("/api/referrals", apiLimiter, referralRoutes);
 app.use("/api/profile-quality", apiLimiter, profileQualityRoutes);
 app.use("/api/onboarding", apiLimiter, onboardingRoutes);
 app.use("/api/security-admin", apiLimiter, securityAdminRoutes);
+app.use("/api/admin", apiLimiter, adminRoutes);
 app.use("/api/push", apiLimiter, pushRoutes);
 app.get("/api/health", (_req, res) =>
   res.json({ ok: true, timestamp: new Date().toISOString() }),
@@ -148,11 +167,15 @@ app.use((err, req, res, next) => {
 
 io.on("connection", (socket) => {
   // Auth: client sends its userId on connect
-  socket.on("auth:identify", (userId) => {
+  socket.on("auth:identify", async (userId) => {
     if (!userId) return;
     if (!userSockets.has(userId)) userSockets.set(userId, new Set());
     userSockets.get(userId).add(socket.id);
     socket.data.userId = userId;
+    // Update lastSeen on connect
+    try {
+      await prisma.user.update({ where: { id: userId }, data: { lastSeen: new Date() } });
+    } catch { /* non-critical */ }
   });
   // Chat
   socket.on("chat:join", (roomId = "global") => {
@@ -223,12 +246,18 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnecting", async () => {
-    // Clean up user socket tracking
+    // Clean up user socket tracking + update lastSeen
     if (socket.data.userId) {
       const sockets = userSockets.get(socket.data.userId);
       if (sockets) {
         sockets.delete(socket.id);
-        if (sockets.size === 0) userSockets.delete(socket.data.userId);
+        if (sockets.size === 0) {
+          userSockets.delete(socket.data.userId);
+          // Update lastSeen when fully offline
+          try {
+            await prisma.user.update({ where: { id: socket.data.userId }, data: { lastSeen: new Date() } });
+          } catch { /* non-critical */ }
+        }
       }
     }
     for (const roomName of socket.rooms) {

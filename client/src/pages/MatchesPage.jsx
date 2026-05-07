@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api, toAssetUrl } from "../api/client";
+import { useAuth } from "../context/AuthContext";
 
 const SafetyCardModal = ({ profile, onClose }) => {
   const info = `Date Safety Info\nName: ${profile.name}\nAge: ${profile.age}\nCity: ${profile.city}\nProfile: ${window.location.origin}/profiles/${profile.id}\nTime: ${new Date().toLocaleString()}`;
@@ -26,15 +27,21 @@ const SafetyCardModal = ({ profile, onClose }) => {
 };
 
 export const MatchesPage = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [matches, setMatches] = useState([]);
   const [pending, setPending] = useState([]);
   const [likedMe, setLikedMe] = useState([]);
+  const [likedMeRequiresUpgrade, setLikedMeRequiresUpgrade] = useState(false);
   const [safetyProfile, setSafetyProfile] = useState(null);
 
   useEffect(() => {
     api.get("/matches").then((r) => setMatches(r.data));
     api.get("/matches/pending").then((r) => setPending(r.data));
-    api.get("/matches/liked-me").then((r) => setLikedMe(r.data));
+    api.get("/matches/liked-me").then((r) => {
+      setLikedMe(r.data.likedMe || []);
+      setLikedMeRequiresUpgrade(r.data.requiresUpgrade || false);
+    });
   }, []);
 
   return (
@@ -72,9 +79,41 @@ export const MatchesPage = () => {
           <h3 style={{ marginTop: "2rem" }}>
             💝 {likedMe.length} {likedMe.length === 1 ? "person" : "people"} liked you
           </h3>
-          <p className="muted" style={{marginBottom:"1rem", fontSize:"0.85rem"}}>
-            Like them back to reveal who they are!
-          </p>
+          {likedMeRequiresUpgrade ? (
+            <div style={{
+              background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)",
+              border: "1px solid #9b59b6",
+              borderRadius: 12,
+              padding: "1.5rem",
+              marginBottom: "1rem",
+              textAlign: "center",
+            }}>
+              <div style={{ fontSize: 40, marginBottom: 8 }}>⭐</div>
+              <div style={{ fontWeight: 700, marginBottom: 6 }}>See who liked you</div>
+              <p style={{ color: "#aaa", fontSize: 13, marginBottom: 16 }}>
+                {likedMe.length} people already liked you. Upgrade to Plus to see who they are — without waiting for a match!
+              </p>
+              <button
+                onClick={() => navigate("/upgrade")}
+                style={{
+                  background: "linear-gradient(135deg, #9b59b6 0%, #6c3483 100%)",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: 10,
+                  padding: "0.75rem 1.5rem",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  fontSize: 14,
+                }}
+              >
+                Upgrade to Plus →
+              </button>
+            </div>
+          ) : (
+            <p className="muted" style={{ marginBottom: "1rem", fontSize: "0.85rem" }}>
+              Like them back to connect!
+            </p>
+          )}
           <div className="profile-grid">
             {likedMe.map((person) => (
               <article className="profile-card liked-me-card" key={person.id}>

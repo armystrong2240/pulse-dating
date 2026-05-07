@@ -14,8 +14,11 @@ export const Navbar = () => {
   const [pendingFriends, setPendingFriends] = useState(0);
   const [onboardingNeeded, setOnboardingNeeded] = useState(false);
 
+  const [isAdmin, setIsAdmin] = useState(false);
+
   useEffect(() => {
     if (!user) return;
+    api.get("/admin/stats").then(() => setIsAdmin(true)).catch(() => setIsAdmin(false));
     api.get("/friends/requests").then((r) => setPendingFriends(r.data.length)).catch(() => {});
     api.get("/onboarding/status")
       .then((r) => setOnboardingNeeded(!r.data.onboardingCompleted))
@@ -74,6 +77,27 @@ export const Navbar = () => {
           <NavLink to="/viewed-me" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             👁 Viewed Me
           </NavLink>
+          <NavLink to="/referrals" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            🎁 Invite
+          </NavLink>
+          {(!user?.isPremium) && (
+            <NavLink to="/upgrade" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+              style={{ color: "#f39c12", fontWeight: 700 }}>
+              ⭐ Upgrade
+            </NavLink>
+          )}
+          {user?.isPremium && (
+            <NavLink to="/upgrade" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+              style={{ color: user?.premiumTier === "gold" ? "#f39c12" : "#9b59b6", fontWeight: 700 }}>
+              {user?.premiumTier === "gold" ? "💎 Gold" : "⭐ Plus"}
+            </NavLink>
+          )}
+          {isAdmin && (
+            <NavLink to="/admin" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+              style={{ color: "#e74c3c", fontWeight: 700 }}>
+              🛡 Admin
+            </NavLink>
+          )}
           <NavLink to={`/profiles/${user.id}`}
             className={({ isActive }) => isActive ? "nav-link active nav-me" : "nav-link nav-me"}>
             {user.avatar ? (

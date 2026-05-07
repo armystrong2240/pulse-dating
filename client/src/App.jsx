@@ -16,6 +16,10 @@ import { RegisterPage } from "./pages/RegisterPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { VerifyEmailPage } from "./pages/VerifyEmailPage";
 import { ViewedMePage } from "./pages/ViewedMePage";
+import UpgradePage from "./pages/UpgradePage";
+import BillingSuccessPage from "./pages/BillingSuccessPage";
+import ReferralPage from "./pages/ReferralPage";
+import AdminPage from "./pages/AdminPage";
 import "./App.css";
 
 function App() {
@@ -43,6 +47,10 @@ function App() {
             <Route path="/friends" element={<ProtectedRoute><FriendsPage /></ProtectedRoute>} />
             <Route path="/live" element={<ProtectedRoute><LivePage /></ProtectedRoute>} />
             <Route path="/viewed-me" element={<ProtectedRoute><ViewedMePage /></ProtectedRoute>} />
+            <Route path="/upgrade" element={<ProtectedRoute><UpgradePage /></ProtectedRoute>} />
+            <Route path="/billing/success" element={<ProtectedRoute><BillingSuccessPage /></ProtectedRoute>} />
+            <Route path="/referrals" element={<ProtectedRoute><ReferralPage /></ProtectedRoute>} />
+            <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

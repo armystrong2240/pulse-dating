@@ -5,6 +5,14 @@ import { useAuth } from "../context/AuthContext";
 import { useSocket } from "../context/SocketContext";
 
 const QUICK_EMOJIS = ["❤️", "😂", "😮", "😢", "👍", "🔥"];
+const GIFT_CATALOG = [
+  { type: "rose",    emoji: "🌹", name: "Rose" },
+  { type: "heart",   emoji: "💖", name: "Heart" },
+  { type: "coffee",  emoji: "☕", name: "Coffee" },
+  { type: "star",    emoji: "⭐", name: "Star" },
+  { type: "fire",    emoji: "🔥", name: "Fire" },
+  { type: "diamond", emoji: "💎", name: "Diamond" },
+];
 
 // ── Typing indicator bubble ──────────────────────────────────────────────────
 const TypingBubble = () => (
@@ -34,6 +42,9 @@ export const ChatPage = () => {
   const fileRef = useRef(null);
   const [uploading, setUploading] = useState(false);
   const [convoLoading, setConvoLoading] = useState(true);
+  const [showGiftPicker, setShowGiftPicker] = useState(false);
+  const [sendingGift, setSendingGift] = useState(false);
+  const [giftMsg, setGiftMsg] = useState("");
 
   // Load conversations list
   const loadConversations = useCallback(async () => {
@@ -181,6 +192,36 @@ export const ChatPage = () => {
   const onReact = async (messageId, emoji) => {
     await api.post("/messages/react", { messageId, emoji });
     setHoveredId(null);
+  };
+
+  const onSendGift = async (giftType) => {
+    if (!activeRoomId || sendingGift) return;
+    setSendingGift(true);
+    try {
+      await api.post(`/gifts/send/${activeRoomId}`, { giftType, message: giftMsg });
+      setShowGiftPicker(false);
+      setGiftMsg("");
+      // Inject a synthetic gift message into the thread
+      const giftItem = GIFT_CATALOG.find((g) => g.type === giftType);
+      setMessages((prev) => [...prev, {
+        id: `gift-${Date.now()}`,
+        senderId: user?.id,
+        senderName: user?.name,
+        roomId: activeRoomId,
+        text: `${giftItem?.emoji || "🎁"} Sent a ${giftItem?.name || giftType}!${giftMsg ? ` "${giftMsg}"` : ""}`,
+        createdAt: new Date().toISOString(),
+        reactions: [],
+      }]);
+    } catch (e) {
+      const msg = e.response?.data?.error || "Could not send gift.";
+      if (e.response?.data?.requiresUpgrade) {
+        window.location.href = "/upgrade";
+      } else {
+        alert(msg);
+      }
+    } finally {
+      setSendingGift(false);
+    }
   };
 
   const groupReactions = (reactions = []) => {
@@ -353,6 +394,77 @@ export const ChatPage = () => {
                 style={{ display: "none" }}
                 onChange={onImageUpload}
               />
+              <button
+                type="button"
+                className="chat-img-btn"
+                title="Send a gift"
+                onClick={() => setShowGiftPicker((v) => !v)}
+                style={{ fontSize: 18 }}
+              >
+                🎁
+              </button>
+              {showGiftPicker && (
+                <div style={{
+                  position: "absolute",
+                  bottom: "100%",
+                  left: 0,
+                  background: "#1a1a2e",
+                  border: "1px solid #333",
+                  borderRadius: 12,
+                  padding: "1rem",
+                  zIndex: 100,
+                  minWidth: 280,
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+                }}>
+                  <div style={{ fontSize: 13, color: "#aaa", marginBottom: 8, fontWeight: 600 }}>Send a Gift (Plus/Gold)</div>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 10 }}>
+                    {GIFT_CATALOG.map((g) => (
+                      <button
+                        key={g.type}
+                        type="button"
+                        onClick={() => onSendGift(g.type)}
+                        disabled={sendingGift}
+                        title={g.name}
+                        style={{
+                          background: "none",
+                          border: "1px solid #333",
+                          borderRadius: 8,
+                          padding: "0.5rem",
+                          cursor: "pointer",
+                          fontSize: 22,
+                          transition: "border-color 0.2s",
+                        }}
+                      >
+                        {g.emoji}
+                      </button>
+                    ))}
+                  </div>
+                  <input
+                    value={giftMsg}
+                    onChange={(e) => setGiftMsg(e.target.value)}
+                    placeholder="Add a message (optional)"
+                    maxLength={200}
+                    style={{
+                      width: "100%",
+                      background: "#111",
+                      border: "1px solid #333",
+                      borderRadius: 6,
+                      padding: "0.4rem 0.6rem",
+                      color: "#fff",
+                      fontSize: 13,
+                      outline: "none",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowGiftPicker(false)}
+                    style={{ marginTop: 8, background: "none", border: "none", color: "#777", cursor: "pointer", fontSize: 12 }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
               <input
                 className="chat-text-input"
                 value={text}
