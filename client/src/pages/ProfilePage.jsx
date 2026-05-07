@@ -55,6 +55,7 @@ const EDIT_TABS = [
   { value: "prompts", label: "Prompts" },
   { value: "vibe", label: "Vibe" },
   { value: "media", label: "Media" },
+  { value: "visibility", label: "Visibility" },
 ];
 
 const TAB_FIELDS = {
@@ -75,6 +76,7 @@ const TAB_FIELDS = {
   vibe: ["profileTheme", "profileGraphic", "musicUrl", "profileMotto", "dreamDate"],
   prompts: ["profilePrompts"],
   media: ["avatar"],
+  visibility: ["profileVisibility"],
 };
 
 const THEME_STYLE_MAP = {
@@ -245,6 +247,7 @@ export const ProfilePage = () => {
     latitude: p.latitude ?? 0,
     longitude: p.longitude ?? 0,
     profilePrompts: Array.isArray(p.profilePrompts) ? p.profilePrompts : [],
+    profileVisibility: (() => { try { return typeof p.profileVisibility === "object" ? (p.profileVisibility || {}) : JSON.parse(p.profileVisibility || "{}"); } catch { return {}; } })(),
   }), []);
 
   useEffect(() => {
@@ -531,6 +534,7 @@ export const ProfilePage = () => {
           .split(",")
           .map((i) => i.trim())
           .filter(Boolean),
+        profileVisibility: form.profileVisibility || {},
       };
 
       const { data } = await api.put(`/profiles/${id}`, payload);
@@ -1086,6 +1090,48 @@ export const ProfilePage = () => {
                           Drag to reorder or use arrow buttons. Order auto-saves on change.
                           {savingMedia ? " Saving..." : ""}
                         </p>
+                      </div>
+                    )}
+                    {editTab === "visibility" && (
+                      <div className="profile-edit-grid" style={{ gridTemplateColumns: "1fr" }}>
+                        <p className="muted" style={{ fontSize: "0.85rem", margin: "0 0 0.5rem" }}>
+                          Choose which fields other members can see on your profile. Toggling a field off hides it from everyone except you.
+                        </p>
+                        {[
+                          { key: "sexualOrientation", label: "Sexual Orientation" },
+                          { key: "genderIdentity",    label: "Gender Identity" },
+                          { key: "pronouns",          label: "Pronouns" },
+                          { key: "polyPreference",    label: "Relationship Style" },
+                          { key: "age",               label: "Age" },
+                          { key: "city",              label: "City / Location" },
+                          { key: "lookingFor",        label: "What I'm Looking For" },
+                          { key: "bio",               label: "About Me" },
+                          { key: "interests",         label: "Interests" },
+                          { key: "profilePrompts",    label: "Profile Prompts" },
+                        ].map(({ key, label }) => {
+                          const hidden = !!(form.profileVisibility || {})[key];
+                          return (
+                            <label key={key} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.5rem 0.75rem", background: hidden ? "#1a1215" : "#0f1a0f", border: `1px solid ${hidden ? "#c0392b44" : "#2a4a2a"}`, borderRadius: 8, cursor: "pointer", userSelect: "none" }}>
+                              <span style={{ fontSize: "0.9rem" }}>{label}</span>
+                              <span style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                                <span style={{ fontSize: "0.8rem", color: hidden ? "#e74c3c" : "#2ecc71" }}>
+                                  {hidden ? "Hidden" : "Visible"}
+                                </span>
+                                <input
+                                  type="checkbox"
+                                  checked={!hidden}
+                                  onChange={(e) => {
+                                    const next = { ...(form.profileVisibility || {}) };
+                                    if (e.target.checked) delete next[key];
+                                    else next[key] = true;
+                                    onField("profileVisibility", next);
+                                  }}
+                                  style={{ width: 18, height: 18, cursor: "pointer", accentColor: "#2ecc71" }}
+                                />
+                              </span>
+                            </label>
+                          );
+                        })}
                       </div>
                     )}
                   </>

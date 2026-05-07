@@ -160,6 +160,7 @@ exports.Prisma.UserScalarFieldEnum = {
   phoneVerified: 'phoneVerified',
   autoHidden: 'autoHidden',
   profileScore: 'profileScore',
+  profileVisibility: 'profileVisibility',
   onboardingStep: 'onboardingStep',
   onboardingCompleted: 'onboardingCompleted',
   emailVerified: 'emailVerified',

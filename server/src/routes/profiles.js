@@ -67,12 +67,32 @@ function haversineMiles(lat1, lon1, lat2, lon2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-const toPublic = (user, media = []) => {
+// Fields users are allowed to hide from other members
+const HIDEABLE_FIELDS = [
+  "sexualOrientation", "genderIdentity", "pronouns", "polyPreference",
+  "age", "city", "lookingFor", "interests", "bio", "profilePrompts",
+];
+
+const toPublic = (user, media = [], viewerId = null) => {
   const decrypted = decryptSensitiveUserFields(user);
   const { passwordHash: _, email: __, latitude: _lat, longitude: _lon, ...pub } = decrypted;
   const parsed = parseInterests(pub);
   // Parse profilePrompts JSON
   try { parsed.profilePrompts = JSON.parse(pub.profilePrompts || "[]"); } catch { parsed.profilePrompts = []; }
+
+  // Apply visibility preferences — owner always sees their own full profile
+  if (viewerId !== user.id) {
+    let hidden = {};
+    try { hidden = JSON.parse(pub.profileVisibility || "{}"); } catch { hidden = {}; }
+    for (const field of HIDEABLE_FIELDS) {
+      if (hidden[field]) {
+        if (Array.isArray(parsed[field])) parsed[field] = [];
+        else if (typeof parsed[field] === "number") parsed[field] = null;
+        else parsed[field] = "";
+      }
+    }
+  }
+
   return { ...parsed, media };
 };
 
@@ -153,7 +173,7 @@ router.get("/", requireAuth, async (req, res) => {
     const distanceMi = useGeo && (u.latitude !== 0 || u.longitude !== 0)
       ? Math.round(haversineMiles(userLat, userLng, u.latitude, u.longitude))
       : null;
-    return { ...toPublic(u, u.media), compatScore, distanceMi };
+    return { ...toPublic(u, u.media, myId), compatScore, distanceMi };
   });
 
   // Sort by distance when geo-search is active
@@ -202,7 +222,7 @@ router.get("/:id", requireAuth, async (req, res) => {
     });
   }
 
-  return res.json(toPublic(user, user.media));
+  return res.json(toPublic(user, user.media, req.user.id));
 });
 
 const UpdateSchema = z.object({
@@ -227,6 +247,7 @@ const UpdateSchema = z.object({
   latitude: z.coerce.number().min(-90).max(90).optional(),
   longitude: z.coerce.number().min(-180).max(180).optional(),
   profilePrompts: z.array(z.object({ q: z.string(), a: z.string() })).max(5).optional(),
+  profileVisibility: z.record(z.boolean()).optional(),
 });
 
 router.put("/:id", requireAuth, async (req, res) => {
@@ -239,7 +260,7 @@ router.put("/:id", requireAuth, async (req, res) => {
     return res.status(400).json({ error: parsed.error.issues[0].message });
   }
 
-  const { interests, profilePrompts, ...rest } = parsed.data;
+  const { interests, profilePrompts, profileVisibility, ...rest } = parsed.data;
   const data = { ...rest };
   if (interests !== undefined) {
     data.interests = serializeInterests(
@@ -254,6 +275,9 @@ router.put("/:id", requireAuth, async (req, res) => {
   if (profilePrompts !== undefined) {
     data.profilePrompts = JSON.stringify(profilePrompts);
   }
+  if (profileVisibility !== undefined) {
+    data.profileVisibility = JSON.stringify(profileVisibility);
+  }
 
   const protectedData = encryptSensitiveUserFields(data);
 
@@ -263,7 +287,7 @@ router.put("/:id", requireAuth, async (req, res) => {
     include: { media: { orderBy: [{ sortOrder: "asc" }, { uploadedAt: "asc" }] } },
   });
   await syncProfileScore(req.user.id);
-  return res.json(toPublic(user, user.media));
+  return res.json(toPublic(user, user.media, req.user.id));
 });
 
 router.put("/:id/media/order", requireAuth, async (req, res) => {

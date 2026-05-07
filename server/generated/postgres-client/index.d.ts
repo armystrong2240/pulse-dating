@@ -2820,6 +2820,7 @@ export namespace Prisma {
     phoneVerified: boolean | null
     autoHidden: boolean | null
     profileScore: number | null
+    profileVisibility: string | null
     onboardingStep: string | null
     onboardingCompleted: boolean | null
     emailVerified: boolean | null
@@ -2872,6 +2873,7 @@ export namespace Prisma {
     phoneVerified: boolean | null
     autoHidden: boolean | null
     profileScore: number | null
+    profileVisibility: string | null
     onboardingStep: string | null
     onboardingCompleted: boolean | null
     emailVerified: boolean | null
@@ -2924,6 +2926,7 @@ export namespace Prisma {
     phoneVerified: number
     autoHidden: number
     profileScore: number
+    profileVisibility: number
     onboardingStep: number
     onboardingCompleted: number
     emailVerified: number
@@ -2998,6 +3001,7 @@ export namespace Prisma {
     phoneVerified?: true
     autoHidden?: true
     profileScore?: true
+    profileVisibility?: true
     onboardingStep?: true
     onboardingCompleted?: true
     emailVerified?: true
@@ -3050,6 +3054,7 @@ export namespace Prisma {
     phoneVerified?: true
     autoHidden?: true
     profileScore?: true
+    profileVisibility?: true
     onboardingStep?: true
     onboardingCompleted?: true
     emailVerified?: true
@@ -3102,6 +3107,7 @@ export namespace Prisma {
     phoneVerified?: true
     autoHidden?: true
     profileScore?: true
+    profileVisibility?: true
     onboardingStep?: true
     onboardingCompleted?: true
     emailVerified?: true
@@ -3241,6 +3247,7 @@ export namespace Prisma {
     phoneVerified: boolean
     autoHidden: boolean
     profileScore: number
+    profileVisibility: string
     onboardingStep: string
     onboardingCompleted: boolean
     emailVerified: boolean
@@ -3312,6 +3319,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: boolean
+    profileVisibility?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -3388,6 +3396,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: boolean
+    profileVisibility?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -3440,6 +3449,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: boolean
+    profileVisibility?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -3492,6 +3502,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: boolean
+    profileVisibility?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -3505,7 +3516,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "age" | "city" | "state" | "zipCode" | "pronouns" | "genderIdentity" | "sexualOrientation" | "polyPreference" | "bio" | "interests" | "lookingFor" | "profileTheme" | "profileGraphic" | "musicUrl" | "profileMotto" | "dreamDate" | "avatar" | "latitude" | "longitude" | "profilePrompts" | "verified" | "verifiedStatus" | "paused" | "boostedUntil" | "isPremium" | "premiumTier" | "boostCredits" | "roseBalance" | "loginStreak" | "lastLoginDate" | "phoneNumber" | "phoneVerified" | "autoHidden" | "profileScore" | "onboardingStep" | "onboardingCompleted" | "emailVerified" | "verifyToken" | "resetToken" | "resetTokenExpiry" | "pushSubscription" | "referralCode" | "referredById" | "lastSeen" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "age" | "city" | "state" | "zipCode" | "pronouns" | "genderIdentity" | "sexualOrientation" | "polyPreference" | "bio" | "interests" | "lookingFor" | "profileTheme" | "profileGraphic" | "musicUrl" | "profileMotto" | "dreamDate" | "avatar" | "latitude" | "longitude" | "profilePrompts" | "verified" | "verifiedStatus" | "paused" | "boostedUntil" | "isPremium" | "premiumTier" | "boostCredits" | "roseBalance" | "loginStreak" | "lastLoginDate" | "phoneNumber" | "phoneVerified" | "autoHidden" | "profileScore" | "profileVisibility" | "onboardingStep" | "onboardingCompleted" | "emailVerified" | "verifyToken" | "resetToken" | "resetTokenExpiry" | "pushSubscription" | "referralCode" | "referredById" | "lastSeen" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     media?: boolean | User$mediaArgs<ExtArgs>
     likesSent?: boolean | User$likesSentArgs<ExtArgs>
@@ -3601,6 +3612,7 @@ export namespace Prisma {
       phoneVerified: boolean
       autoHidden: boolean
       profileScore: number
+      profileVisibility: string
       onboardingStep: string
       onboardingCompleted: boolean
       emailVerified: boolean
@@ -4096,6 +4108,7 @@ export namespace Prisma {
     readonly phoneVerified: FieldRef<"User", 'Boolean'>
     readonly autoHidden: FieldRef<"User", 'Boolean'>
     readonly profileScore: FieldRef<"User", 'Int'>
+    readonly profileVisibility: FieldRef<"User", 'String'>
     readonly onboardingStep: FieldRef<"User", 'String'>
     readonly onboardingCompleted: FieldRef<"User", 'Boolean'>
     readonly emailVerified: FieldRef<"User", 'Boolean'>
@@ -24697,6 +24710,7 @@ export namespace Prisma {
     phoneVerified: 'phoneVerified',
     autoHidden: 'autoHidden',
     profileScore: 'profileScore',
+    profileVisibility: 'profileVisibility',
     onboardingStep: 'onboardingStep',
     onboardingCompleted: 'onboardingCompleted',
     emailVerified: 'emailVerified',
@@ -25069,6 +25083,7 @@ export namespace Prisma {
     phoneVerified?: BoolFilter<"User"> | boolean
     autoHidden?: BoolFilter<"User"> | boolean
     profileScore?: IntFilter<"User"> | number
+    profileVisibility?: StringFilter<"User"> | string
     onboardingStep?: StringFilter<"User"> | string
     onboardingCompleted?: BoolFilter<"User"> | boolean
     emailVerified?: BoolFilter<"User"> | boolean
@@ -25144,6 +25159,7 @@ export namespace Prisma {
     phoneVerified?: SortOrder
     autoHidden?: SortOrder
     profileScore?: SortOrder
+    profileVisibility?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
@@ -25224,6 +25240,7 @@ export namespace Prisma {
     phoneVerified?: BoolFilter<"User"> | boolean
     autoHidden?: BoolFilter<"User"> | boolean
     profileScore?: IntFilter<"User"> | number
+    profileVisibility?: StringFilter<"User"> | string
     onboardingStep?: StringFilter<"User"> | string
     onboardingCompleted?: BoolFilter<"User"> | boolean
     emailVerified?: BoolFilter<"User"> | boolean
@@ -25297,6 +25314,7 @@ export namespace Prisma {
     phoneVerified?: SortOrder
     autoHidden?: SortOrder
     profileScore?: SortOrder
+    profileVisibility?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
@@ -25357,6 +25375,7 @@ export namespace Prisma {
     phoneVerified?: BoolWithAggregatesFilter<"User"> | boolean
     autoHidden?: BoolWithAggregatesFilter<"User"> | boolean
     profileScore?: IntWithAggregatesFilter<"User"> | number
+    profileVisibility?: StringWithAggregatesFilter<"User"> | string
     onboardingStep?: StringWithAggregatesFilter<"User"> | string
     onboardingCompleted?: BoolWithAggregatesFilter<"User"> | boolean
     emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
@@ -26541,6 +26560,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -26616,6 +26636,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -26691,6 +26712,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -26766,6 +26788,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -26841,6 +26864,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -26893,6 +26917,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -26945,6 +26970,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -28391,6 +28417,7 @@ export namespace Prisma {
     phoneVerified?: SortOrder
     autoHidden?: SortOrder
     profileScore?: SortOrder
+    profileVisibility?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
@@ -28453,6 +28480,7 @@ export namespace Prisma {
     phoneVerified?: SortOrder
     autoHidden?: SortOrder
     profileScore?: SortOrder
+    profileVisibility?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
@@ -28505,6 +28533,7 @@ export namespace Prisma {
     phoneVerified?: SortOrder
     autoHidden?: SortOrder
     profileScore?: SortOrder
+    profileVisibility?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
@@ -31997,6 +32026,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32071,6 +32101,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32161,6 +32192,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -32235,6 +32267,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -32309,6 +32342,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32383,6 +32417,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32462,6 +32497,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32536,6 +32572,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32626,6 +32663,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -32700,6 +32738,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -32785,6 +32824,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -32859,6 +32899,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -32933,6 +32974,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33007,6 +33049,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33086,6 +33129,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33160,6 +33204,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33250,6 +33295,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33324,6 +33370,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33409,6 +33456,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33483,6 +33531,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33557,6 +33606,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33631,6 +33681,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33745,6 +33796,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33819,6 +33871,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33936,6 +33989,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34010,6 +34064,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34133,6 +34188,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34207,6 +34263,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34281,6 +34338,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34355,6 +34413,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34434,6 +34493,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34508,6 +34568,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34598,6 +34659,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34672,6 +34734,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34757,6 +34820,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34831,6 +34895,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34905,6 +34970,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34979,6 +35045,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35069,6 +35136,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35143,6 +35211,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35217,6 +35286,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35291,6 +35361,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35370,6 +35441,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35444,6 +35516,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35534,6 +35607,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35608,6 +35682,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35693,6 +35768,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35767,6 +35843,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35841,6 +35918,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35915,6 +35993,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36005,6 +36084,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36079,6 +36159,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36153,6 +36234,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36227,6 +36309,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36317,6 +36400,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36391,6 +36475,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36465,6 +36550,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36539,6 +36625,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36629,6 +36716,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36703,6 +36791,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36777,6 +36866,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36851,6 +36941,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36941,6 +37032,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37015,6 +37107,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37089,6 +37182,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37163,6 +37257,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37253,6 +37348,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37327,6 +37423,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37401,6 +37498,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37475,6 +37573,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37554,6 +37653,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37628,6 +37728,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37718,6 +37819,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37792,6 +37894,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37877,6 +37980,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37951,6 +38055,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38025,6 +38130,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -38099,6 +38205,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -38189,6 +38296,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38263,6 +38371,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38337,6 +38446,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -38411,6 +38521,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -38501,6 +38612,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38575,6 +38687,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38649,6 +38762,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -38723,6 +38837,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -38813,6 +38928,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38887,6 +39003,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38961,6 +39078,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -39035,6 +39153,7 @@ export namespace Prisma {
     phoneVerified?: boolean
     autoHidden?: boolean
     profileScore?: number
+    profileVisibility?: string
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -39125,6 +39244,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -39199,6 +39319,7 @@ export namespace Prisma {
     phoneVerified?: BoolFieldUpdateOperationsInput | boolean
     autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
+    profileVisibility?: StringFieldUpdateOperationsInput | string
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean

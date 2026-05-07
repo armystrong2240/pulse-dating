@@ -47,6 +47,7 @@ model User {
   phoneVerified       Boolean   @default(false)
   autoHidden          Boolean   @default(false)
   profileScore        Int       @default(0)
+  profileVisibility   String    @default("{}") // JSON: hidden field keys
   onboardingStep      String    @default("basics")
   onboardingCompleted Boolean   @default(false)
   emailVerified       Boolean   @default(false)
@@ -82,6 +83,8 @@ model User {
   roseLedger             RoseLedger[]
   phoneVerifications     PhoneVerification[]
   scheduledBoosts        ScheduledBoost[]
+
+  @@index([latitude, longitude])
 }
 
 model Media {
