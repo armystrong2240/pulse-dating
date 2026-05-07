@@ -21,64 +21,59 @@ const AdminPasswordSchema = z.object({
 
 // GET /api/admin/stats — overall platform stats
 router.get("/stats", requireAuth, requireAdmin, async (_req, res) => {
-  const safeCount = async (promise, fallback = 0) => {
-    try {
-      return await promise;
-    } catch {
-      return fallback;
-    }
-  };
-
-  const [
-    totalUsers,
-    verifiedUsers,
-    premiumUsers,
-    totalMatches,
-    totalMessages,
-    totalReports,
-    totalGifts,
-    totalReferrals,
-    newUsersToday,
-    newUsersThisWeek,
-  ] = await Promise.all([
-    safeCount(prisma.user.count()),
-    safeCount(prisma.user.count({ where: { emailVerified: true } })),
-    safeCount(prisma.user.count({ where: { isPremium: true } })),
-    safeCount(prisma.like.count({ where: { liked: true } })),
-    safeCount(prisma.message.count()),
-    safeCount(prisma.report.count()),
-    safeCount(prisma.gift.count()),
-    safeCount(prisma.referral.count()),
-    safeCount(
-      prisma.user.count({
-        where: { createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } },
-      }),
-    ),
-    safeCount(
-      prisma.user.count({
-        where: { createdAt: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } },
-      }),
-    ),
-  ]);
-
-  let tierBreakdown = [];
   try {
-    tierBreakdown = await prisma.user.groupBy({
-      by: ["premiumTier"],
-      _count: { premiumTier: true },
-    });
-  } catch {
-    tierBreakdown = [];
-  }
+    const safeCount = async (fn) => {
+      try { return await fn(); } catch { return 0; }
+    };
 
-  return res.json({
-    stats: {
-      users: { total: totalUsers, verified: verifiedUsers, premium: premiumUsers, newToday: newUsersToday, newThisWeek: newUsersThisWeek },
-      engagement: { totalMatches, totalMessages, totalGifts, totalReferrals },
-      moderation: { totalReports },
-      tierBreakdown: Object.fromEntries(tierBreakdown.map((t) => [t.premiumTier || "free", t._count.premiumTier])),
-    },
-  });
+    const [
+      totalUsers,
+      verifiedUsers,
+      premiumUsers,
+      totalMatches,
+      totalMessages,
+      totalReports,
+      totalGifts,
+      totalReferrals,
+      newUsersToday,
+      newUsersThisWeek,
+    ] = await Promise.all([
+      safeCount(() => prisma.user.count()),
+      safeCount(() => prisma.user.count({ where: { emailVerified: true } })),
+      safeCount(() => prisma.user.count({ where: { isPremium: true } })),
+      safeCount(() => prisma.like.count({ where: { liked: true } })),
+      safeCount(() => prisma.message.count()),
+      safeCount(() => prisma.report.count()),
+      safeCount(() => prisma.gift.count()),
+      safeCount(() => prisma.referral.count()),
+      safeCount(() => prisma.user.count({
+        where: { createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } },
+      })),
+      safeCount(() => prisma.user.count({
+        where: { createdAt: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } },
+      })),
+    ]);
+
+    let tierBreakdown = {};
+    try {
+      const rows = await prisma.user.groupBy({ by: ["premiumTier"], _count: { premiumTier: true } });
+      tierBreakdown = Object.fromEntries(rows.map((t) => [t.premiumTier || "free", t._count.premiumTier]));
+    } catch {
+      tierBreakdown = {};
+    }
+
+    return res.json({
+      stats: {
+        users: { total: totalUsers, verified: verifiedUsers, premium: premiumUsers, newToday: newUsersToday, newThisWeek: newUsersThisWeek },
+        engagement: { totalMatches, totalMessages, totalGifts, totalReferrals },
+        moderation: { totalReports },
+        tierBreakdown,
+      },
+    });
+  } catch (err) {
+    console.error("[admin/stats] unexpected error:", err);
+    return res.status(500).json({ error: "Stats unavailable", detail: err?.message });
+  }
 });
 
 // GET /api/admin/users — paginated user list with search
