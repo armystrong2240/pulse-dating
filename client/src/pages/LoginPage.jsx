@@ -17,8 +17,8 @@ export const LoginPage = () => {
     e.preventDefault();
     try {
       setError("");
-      await login(form.email, form.password);
-      navigate("/");
+      const signedInUser = await login(form.email, form.password);
+      navigate(signedInUser?.isAdmin ? "/admin" : "/");
     } catch (err) {
       setError(err.response?.data?.error || "Login failed");
     }

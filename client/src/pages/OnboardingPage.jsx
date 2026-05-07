@@ -15,6 +15,12 @@ export function OnboardingPage() {
   const [finishing, setFinishing] = useState(false);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    if (user?.isAdmin) {
+      navigate("/admin", { replace: true });
+    }
+  }, [navigate, user?.isAdmin]);
+
   const load = useCallback(async () => {
     if (!user?.id) return;
     setError("");

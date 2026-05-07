@@ -20,6 +20,10 @@ export const Navbar = () => {
     if (!user) return;
     api.get("/admin/stats").then(() => setIsAdmin(true)).catch(() => setIsAdmin(false));
     api.get("/friends/requests").then((r) => setPendingFriends(r.data.length)).catch(() => {});
+    if (user?.isAdmin) {
+      setOnboardingNeeded(false);
+      return;
+    }
     api.get("/onboarding/status")
       .then((r) => setOnboardingNeeded(!r.data.onboardingCompleted))
       .catch(() => {});

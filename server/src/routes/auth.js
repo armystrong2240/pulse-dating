@@ -4,7 +4,7 @@ import { Router } from "express";
 import rateLimit from "express-rate-limit";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
-import { BCRYPT_ROUNDS, CLIENT_URL, isProduction } from "../config/env.js";
+import { ADMIN_EMAILS, BCRYPT_ROUNDS, CLIENT_URL, isProduction } from "../config/env.js";
 import { parseInterests, prisma, serializeInterests } from "../db.js";
 import {
   decryptSensitiveUserFields,
@@ -43,8 +43,13 @@ const refreshLimiter = rateLimit({
   message: { error: "Too many token refresh requests. Please try again shortly." },
 });
 
-const toPublic = ({ passwordHash: _, ...pub }) =>
-  parseInterests(decryptSensitiveUserFields(pub));
+const toPublic = ({ passwordHash: _, ...pub }) => {
+  const safe = parseInterests(decryptSensitiveUserFields(pub));
+  return {
+    ...safe,
+    isAdmin: ADMIN_EMAILS.has(String(safe.email || "").toLowerCase()),
+  };
+};
 
 const PasswordSchema = z.string().superRefine((value, ctx) => {
   const minLength = isProduction ? 12 : 8;
