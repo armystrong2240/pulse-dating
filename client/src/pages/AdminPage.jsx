@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { api } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 
@@ -7,7 +6,6 @@ const TABS = ["Overview", "Users", "Reports", "Subscriptions", "Security"];
 
 export default function AdminPage() {
   const { user } = useAuth();
-  const navigate = useNavigate();
   const [tab, setTab] = useState("Overview");
   const [stats, setStats] = useState(null);
   const [users, setUsers] = useState([]);
@@ -18,6 +16,8 @@ export default function AdminPage() {
   const [subscriptions, setSubscriptions] = useState(null);
   const [security, setSecurity] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [resettingPassword, setResettingPassword] = useState(false);
+  const [newAdminPassword, setNewAdminPassword] = useState("");
   const [error, setError] = useState("");
   const [toast, setToast] = useState("");
 
@@ -79,6 +79,24 @@ export default function AdminPage() {
       loadTab("Users");
     } catch {
       showToast("Failed to verify user.");
+    }
+  };
+
+  const rotateAdminPassword = async () => {
+    if (!newAdminPassword || newAdminPassword.length < 12) {
+      showToast("New password must be at least 12 characters.");
+      return;
+    }
+
+    setResettingPassword(true);
+    try {
+      await api.post("/admin/me/password", { newPassword: newAdminPassword });
+      setNewAdminPassword("");
+      showToast("Admin password updated. Log in again with the new password.");
+    } catch (err) {
+      showToast(err.response?.data?.error || "Failed to update admin password.");
+    } finally {
+      setResettingPassword(false);
     }
   };
 
@@ -176,6 +194,15 @@ export default function AdminPage() {
       width: 260,
       marginBottom: 14,
     },
+    input: {
+      padding: "9px 12px",
+      borderRadius: 8,
+      border: "1px solid rgba(255,255,255,0.14)",
+      background: "rgba(255,255,255,0.03)",
+      color: "#e0e8ff",
+      minWidth: 280,
+      fontSize: "0.8rem",
+    },
     error: {
       background: "rgba(255,60,60,0.12)",
       border: "1px solid rgba(255,60,60,0.3)",
@@ -230,6 +257,31 @@ export default function AdminPage() {
       {/* ── Overview ── */}
       {tab === "Overview" && stats && (
         <>
+          <div style={s.card}>
+            <div style={{ fontSize: "0.7rem", color: "#88aacc", marginBottom: 12, letterSpacing: 1 }}>
+              ADMIN PASSWORD
+            </div>
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+              <input
+                type="password"
+                placeholder="New admin password (12+ chars)"
+                style={s.input}
+                value={newAdminPassword}
+                onChange={(e) => setNewAdminPassword(e.target.value)}
+              />
+              <button
+                style={s.btn("#8e44ad")}
+                onClick={rotateAdminPassword}
+                disabled={resettingPassword}
+              >
+                {resettingPassword ? "Updating..." : "Update Password"}
+              </button>
+            </div>
+            <div style={{ marginTop: 8, fontSize: "0.68rem", color: "#88aacc" }}>
+              This updates password for {user?.email} and revokes active refresh sessions.
+            </div>
+          </div>
+
           <div style={s.card}>
             <div style={{ fontSize: "0.7rem", color: "#88aacc", marginBottom: 12, letterSpacing: 1 }}>USERS</div>
             <div style={s.statGrid}>

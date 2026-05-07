@@ -1,4 +1,7 @@
 import { Router } from "express";
+import bcrypt from "bcryptjs";
+import { z } from "zod";
+import { BCRYPT_ROUNDS } from "../config/env.js";
 import { prisma } from "../db.js";
 import { requireAuth } from "../middleware/auth.js";
 import { ADMIN_EMAILS } from "../config/env.js";
@@ -11,6 +14,10 @@ function requireAdmin(req, res, next) {
   }
   return next();
 }
+
+const AdminPasswordSchema = z.object({
+  newPassword: z.string().min(12, "Password must be at least 12 characters"),
+});
 
 // GET /api/admin/stats — overall platform stats
 router.get("/stats", requireAuth, requireAdmin, async (_req, res) => {
@@ -140,6 +147,26 @@ router.post("/users/:id/verify", requireAuth, requireAdmin, async (req, res) => 
     where: { id: req.params.id },
     data: { verified: true, verifiedStatus: "verified" },
   });
+  return res.json({ ok: true });
+});
+
+// POST /api/admin/me/password — rotate currently logged-in admin password
+router.post("/me/password", requireAuth, requireAdmin, async (req, res) => {
+  const parsed = AdminPasswordSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: parsed.error.issues[0].message });
+  }
+
+  const passwordHash = await bcrypt.hash(parsed.data.newPassword, BCRYPT_ROUNDS);
+
+  await prisma.user.update({
+    where: { id: req.user.id },
+    data: { passwordHash },
+  });
+
+  // Revoke existing refresh sessions so the new password takes effect immediately.
+  await prisma.refreshToken.deleteMany({ where: { userId: req.user.id } });
+
   return res.json({ ok: true });
 });
 
