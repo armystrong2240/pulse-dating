@@ -7,7 +7,7 @@ export const ProfileCard = ({ profile }) => {
       <img src={toAssetUrl(profile.avatar)} alt={`${profile.name} avatar`} />
       <div className="profile-card-body">
         <h3>{profile.name}, {profile.age}</h3>
-        <p className="muted">{profile.city}</p>
+        <p className="muted">{profile.city}{profile.sexualOrientation ? ` · ${profile.sexualOrientation}` : ""}</p>
         <p>{profile.bio}</p>
         <div className="chip-row">
           {profile.interests.map((interest) => (

@@ -105,7 +105,9 @@ const SwipeDeck = ({ profiles, onLike, onPass, onPulse, onUndo, limitReached, su
               </span>
             )}
           </div>
-          <p className="muted" style={{ fontSize: "0.85rem" }}>{current.city}</p>
+          <p className="muted" style={{ fontSize: "0.85rem" }}>
+            {current.city}{current.sexualOrientation ? ` · ${current.sexualOrientation}` : ""}
+          </p>
           {current.lookingFor && (
             <p style={{ fontSize: "0.8rem", color: "var(--accent-2)" }}>
               Looking for: {current.lookingFor}
