@@ -151,11 +151,19 @@ exports.Prisma.UserScalarFieldEnum = {
   paused: 'paused',
   boostedUntil: 'boostedUntil',
   isPremium: 'isPremium',
+  premiumTier: 'premiumTier',
+  boostCredits: 'boostCredits',
   profileScore: 'profileScore',
   onboardingStep: 'onboardingStep',
   onboardingCompleted: 'onboardingCompleted',
   emailVerified: 'emailVerified',
   verifyToken: 'verifyToken',
+  resetToken: 'resetToken',
+  resetTokenExpiry: 'resetTokenExpiry',
+  pushSubscription: 'pushSubscription',
+  referralCode: 'referralCode',
+  referredById: 'referredById',
+  lastSeen: 'lastSeen',
   createdAt: 'createdAt'
 };
 
@@ -264,6 +272,38 @@ exports.Prisma.SecurityEventScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.SubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  stripeCustomerId: 'stripeCustomerId',
+  stripeSubscriptionId: 'stripeSubscriptionId',
+  stripePriceId: 'stripePriceId',
+  tier: 'tier',
+  status: 'status',
+  currentPeriodEnd: 'currentPeriodEnd',
+  cancelAtPeriodEnd: 'cancelAtPeriodEnd',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GiftScalarFieldEnum = {
+  id: 'id',
+  fromId: 'fromId',
+  toId: 'toId',
+  giftType: 'giftType',
+  message: 'message',
+  seen: 'seen',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ReferralScalarFieldEnum = {
+  id: 'id',
+  referrerId: 'referrerId',
+  refereeId: 'refereeId',
+  rewardGiven: 'rewardGiven',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -293,7 +333,10 @@ exports.Prisma.ModelName = {
   LiveRoom: 'LiveRoom',
   RefreshToken: 'RefreshToken',
   DailyLike: 'DailyLike',
-  SecurityEvent: 'SecurityEvent'
+  SecurityEvent: 'SecurityEvent',
+  Subscription: 'Subscription',
+  Gift: 'Gift',
+  Referral: 'Referral'
 };
 
 /**

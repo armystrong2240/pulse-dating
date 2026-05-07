@@ -38,6 +38,8 @@ model User {
   paused          Boolean  @default(false)
   boostedUntil    DateTime?
   isPremium       Boolean  @default(false)
+  premiumTier     String   @default("free")
+  boostCredits    Int      @default(0)
   profileScore    Int      @default(0)
   onboardingStep  String   @default("basics")
   onboardingCompleted Boolean @default(false)
@@ -46,6 +48,9 @@ model User {
   resetToken       String?
   resetTokenExpiry DateTime?
   pushSubscription String?
+  referralCode  String?  @unique
+  referredById  String?
+  lastSeen      DateTime?
   createdAt    DateTime @default(now())
 
   media          Media[]
@@ -64,6 +69,10 @@ model User {
   securityEvents SecurityEvent[]
   friendRequestsSent     Friendship[] @relation("FriendRequestsSent")
   friendRequestsReceived Friendship[] @relation("FriendRequestsReceived")
+  subscription           Subscription?
+  giftsGiven             Gift[]       @relation("GiftsGiven")
+  giftsReceived          Gift[]       @relation("GiftsReceived")
+  referrals              Referral[]   @relation("ReferralsMade")
 }
 
 model Media {
@@ -215,4 +224,48 @@ model SecurityEvent {
   @@index([createdAt])
   @@index([eventType])
   @@index([userId])
+}
+
+model Subscription {
+  id                   String    @id @default(uuid())
+  userId               String    @unique
+  stripeCustomerId     String    @unique
+  stripeSubscriptionId String?
+  stripePriceId        String?
+  tier                 String    @default("free")
+  status               String    @default("active")
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean   @default(false)
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Gift {
+  id        String   @id @default(uuid())
+  fromId    String
+  toId      String
+  giftType  String
+  message   String   @default("")
+  seen      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  from User @relation("GiftsGiven",    fields: [fromId], references: [id], onDelete: Cascade)
+  to   User @relation("GiftsReceived", fields: [toId],   references: [id], onDelete: Cascade)
+
+  @@index([toId])
+  @@index([fromId])
+}
+
+model Referral {
+  id          String   @id @default(uuid())
+  referrerId  String
+  refereeId   String   @unique
+  rewardGiven Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  referrer User @relation("ReferralsMade", fields: [referrerId], references: [id], onDelete: Cascade)
+
+  @@index([referrerId])
 }

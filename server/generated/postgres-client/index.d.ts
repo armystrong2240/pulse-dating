@@ -78,6 +78,21 @@ export type DailyLike = $Result.DefaultSelection<Prisma.$DailyLikePayload>
  * 
  */
 export type SecurityEvent = $Result.DefaultSelection<Prisma.$SecurityEventPayload>
+/**
+ * Model Subscription
+ * 
+ */
+export type Subscription = $Result.DefaultSelection<Prisma.$SubscriptionPayload>
+/**
+ * Model Gift
+ * 
+ */
+export type Gift = $Result.DefaultSelection<Prisma.$GiftPayload>
+/**
+ * Model Referral
+ * 
+ */
+export type Referral = $Result.DefaultSelection<Prisma.$ReferralPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -326,6 +341,36 @@ export class PrismaClient<
     * ```
     */
   get securityEvent(): Prisma.SecurityEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.subscription`: Exposes CRUD operations for the **Subscription** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Subscriptions
+    * const subscriptions = await prisma.subscription.findMany()
+    * ```
+    */
+  get subscription(): Prisma.SubscriptionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.gift`: Exposes CRUD operations for the **Gift** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Gifts
+    * const gifts = await prisma.gift.findMany()
+    * ```
+    */
+  get gift(): Prisma.GiftDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.referral`: Exposes CRUD operations for the **Referral** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Referrals
+    * const referrals = await prisma.referral.findMany()
+    * ```
+    */
+  get referral(): Prisma.ReferralDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -779,7 +824,10 @@ export namespace Prisma {
     LiveRoom: 'LiveRoom',
     RefreshToken: 'RefreshToken',
     DailyLike: 'DailyLike',
-    SecurityEvent: 'SecurityEvent'
+    SecurityEvent: 'SecurityEvent',
+    Subscription: 'Subscription',
+    Gift: 'Gift',
+    Referral: 'Referral'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -798,7 +846,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "media" | "like" | "profileView" | "message" | "messageReaction" | "blockedUser" | "report" | "friendship" | "liveRoom" | "refreshToken" | "dailyLike" | "securityEvent"
+      modelProps: "user" | "media" | "like" | "profileView" | "message" | "messageReaction" | "blockedUser" | "report" | "friendship" | "liveRoom" | "refreshToken" | "dailyLike" | "securityEvent" | "subscription" | "gift" | "referral"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1764,6 +1812,228 @@ export namespace Prisma {
           }
         }
       }
+      Subscription: {
+        payload: Prisma.$SubscriptionPayload<ExtArgs>
+        fields: Prisma.SubscriptionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SubscriptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SubscriptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          findFirst: {
+            args: Prisma.SubscriptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SubscriptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          findMany: {
+            args: Prisma.SubscriptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+          }
+          create: {
+            args: Prisma.SubscriptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          createMany: {
+            args: Prisma.SubscriptionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SubscriptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+          }
+          delete: {
+            args: Prisma.SubscriptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          update: {
+            args: Prisma.SubscriptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          deleteMany: {
+            args: Prisma.SubscriptionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SubscriptionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SubscriptionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+          }
+          upsert: {
+            args: Prisma.SubscriptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+          }
+          aggregate: {
+            args: Prisma.SubscriptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSubscription>
+          }
+          groupBy: {
+            args: Prisma.SubscriptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SubscriptionCountArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionCountAggregateOutputType> | number
+          }
+        }
+      }
+      Gift: {
+        payload: Prisma.$GiftPayload<ExtArgs>
+        fields: Prisma.GiftFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GiftFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GiftFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          findFirst: {
+            args: Prisma.GiftFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GiftFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          findMany: {
+            args: Prisma.GiftFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>[]
+          }
+          create: {
+            args: Prisma.GiftCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          createMany: {
+            args: Prisma.GiftCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GiftCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>[]
+          }
+          delete: {
+            args: Prisma.GiftDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          update: {
+            args: Prisma.GiftUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          deleteMany: {
+            args: Prisma.GiftDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GiftUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GiftUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>[]
+          }
+          upsert: {
+            args: Prisma.GiftUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          aggregate: {
+            args: Prisma.GiftAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGift>
+          }
+          groupBy: {
+            args: Prisma.GiftGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GiftGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GiftCountArgs<ExtArgs>
+            result: $Utils.Optional<GiftCountAggregateOutputType> | number
+          }
+        }
+      }
+      Referral: {
+        payload: Prisma.$ReferralPayload<ExtArgs>
+        fields: Prisma.ReferralFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReferralFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferralPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReferralFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferralPayload>
+          }
+          findFirst: {
+            args: Prisma.ReferralFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferralPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReferralFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferralPayload>
+          }
+          findMany: {
+            args: Prisma.ReferralFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferralPayload>[]
+          }
+          create: {
+            args: Prisma.ReferralCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferralPayload>
+          }
+          createMany: {
+            args: Prisma.ReferralCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReferralCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferralPayload>[]
+          }
+          delete: {
+            args: Prisma.ReferralDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferralPayload>
+          }
+          update: {
+            args: Prisma.ReferralUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferralPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReferralDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReferralUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReferralUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferralPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReferralUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferralPayload>
+          }
+          aggregate: {
+            args: Prisma.ReferralAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReferral>
+          }
+          groupBy: {
+            args: Prisma.ReferralGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReferralGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReferralCountArgs<ExtArgs>
+            result: $Utils.Optional<ReferralCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1873,6 +2143,9 @@ export namespace Prisma {
     refreshToken?: RefreshTokenOmit
     dailyLike?: DailyLikeOmit
     securityEvent?: SecurityEventOmit
+    subscription?: SubscriptionOmit
+    gift?: GiftOmit
+    referral?: ReferralOmit
   }
 
   /* Types for Logging */
@@ -1969,6 +2242,9 @@ export namespace Prisma {
     securityEvents: number
     friendRequestsSent: number
     friendRequestsReceived: number
+    giftsGiven: number
+    giftsReceived: number
+    referrals: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1988,6 +2264,9 @@ export namespace Prisma {
     securityEvents?: boolean | UserCountOutputTypeCountSecurityEventsArgs
     friendRequestsSent?: boolean | UserCountOutputTypeCountFriendRequestsSentArgs
     friendRequestsReceived?: boolean | UserCountOutputTypeCountFriendRequestsReceivedArgs
+    giftsGiven?: boolean | UserCountOutputTypeCountGiftsGivenArgs
+    giftsReceived?: boolean | UserCountOutputTypeCountGiftsReceivedArgs
+    referrals?: boolean | UserCountOutputTypeCountReferralsArgs
   }
 
   // Custom InputTypes
@@ -2113,6 +2392,27 @@ export namespace Prisma {
     where?: FriendshipWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountGiftsGivenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GiftWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountGiftsReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GiftWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReferralsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReferralWhereInput
+  }
+
 
   /**
    * Count Type MessageCountOutputType
@@ -2165,6 +2465,7 @@ export namespace Prisma {
     age: number | null
     latitude: number | null
     longitude: number | null
+    boostCredits: number | null
     profileScore: number | null
   }
 
@@ -2172,6 +2473,7 @@ export namespace Prisma {
     age: number | null
     latitude: number | null
     longitude: number | null
+    boostCredits: number | null
     profileScore: number | null
   }
 
@@ -2205,11 +2507,19 @@ export namespace Prisma {
     paused: boolean | null
     boostedUntil: Date | null
     isPremium: boolean | null
+    premiumTier: string | null
+    boostCredits: number | null
     profileScore: number | null
     onboardingStep: string | null
     onboardingCompleted: boolean | null
     emailVerified: boolean | null
     verifyToken: string | null
+    resetToken: string | null
+    resetTokenExpiry: Date | null
+    pushSubscription: string | null
+    referralCode: string | null
+    referredById: string | null
+    lastSeen: Date | null
     createdAt: Date | null
   }
 
@@ -2243,11 +2553,19 @@ export namespace Prisma {
     paused: boolean | null
     boostedUntil: Date | null
     isPremium: boolean | null
+    premiumTier: string | null
+    boostCredits: number | null
     profileScore: number | null
     onboardingStep: string | null
     onboardingCompleted: boolean | null
     emailVerified: boolean | null
     verifyToken: string | null
+    resetToken: string | null
+    resetTokenExpiry: Date | null
+    pushSubscription: string | null
+    referralCode: string | null
+    referredById: string | null
+    lastSeen: Date | null
     createdAt: Date | null
   }
 
@@ -2281,11 +2599,19 @@ export namespace Prisma {
     paused: number
     boostedUntil: number
     isPremium: number
+    premiumTier: number
+    boostCredits: number
     profileScore: number
     onboardingStep: number
     onboardingCompleted: number
     emailVerified: number
     verifyToken: number
+    resetToken: number
+    resetTokenExpiry: number
+    pushSubscription: number
+    referralCode: number
+    referredById: number
+    lastSeen: number
     createdAt: number
     _all: number
   }
@@ -2295,6 +2621,7 @@ export namespace Prisma {
     age?: true
     latitude?: true
     longitude?: true
+    boostCredits?: true
     profileScore?: true
   }
 
@@ -2302,6 +2629,7 @@ export namespace Prisma {
     age?: true
     latitude?: true
     longitude?: true
+    boostCredits?: true
     profileScore?: true
   }
 
@@ -2335,11 +2663,19 @@ export namespace Prisma {
     paused?: true
     boostedUntil?: true
     isPremium?: true
+    premiumTier?: true
+    boostCredits?: true
     profileScore?: true
     onboardingStep?: true
     onboardingCompleted?: true
     emailVerified?: true
     verifyToken?: true
+    resetToken?: true
+    resetTokenExpiry?: true
+    pushSubscription?: true
+    referralCode?: true
+    referredById?: true
+    lastSeen?: true
     createdAt?: true
   }
 
@@ -2373,11 +2709,19 @@ export namespace Prisma {
     paused?: true
     boostedUntil?: true
     isPremium?: true
+    premiumTier?: true
+    boostCredits?: true
     profileScore?: true
     onboardingStep?: true
     onboardingCompleted?: true
     emailVerified?: true
     verifyToken?: true
+    resetToken?: true
+    resetTokenExpiry?: true
+    pushSubscription?: true
+    referralCode?: true
+    referredById?: true
+    lastSeen?: true
     createdAt?: true
   }
 
@@ -2411,11 +2755,19 @@ export namespace Prisma {
     paused?: true
     boostedUntil?: true
     isPremium?: true
+    premiumTier?: true
+    boostCredits?: true
     profileScore?: true
     onboardingStep?: true
     onboardingCompleted?: true
     emailVerified?: true
     verifyToken?: true
+    resetToken?: true
+    resetTokenExpiry?: true
+    pushSubscription?: true
+    referralCode?: true
+    referredById?: true
+    lastSeen?: true
     createdAt?: true
     _all?: true
   }
@@ -2536,11 +2888,19 @@ export namespace Prisma {
     paused: boolean
     boostedUntil: Date | null
     isPremium: boolean
+    premiumTier: string
+    boostCredits: number
     profileScore: number
     onboardingStep: string
     onboardingCompleted: boolean
     emailVerified: boolean
     verifyToken: string | null
+    resetToken: string | null
+    resetTokenExpiry: Date | null
+    pushSubscription: string | null
+    referralCode: string | null
+    referredById: string | null
+    lastSeen: Date | null
     createdAt: Date
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -2593,11 +2953,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: boolean
     isPremium?: boolean
+    premiumTier?: boolean
+    boostCredits?: boolean
     profileScore?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: boolean
+    resetToken?: boolean
+    resetTokenExpiry?: boolean
+    pushSubscription?: boolean
+    referralCode?: boolean
+    referredById?: boolean
+    lastSeen?: boolean
     createdAt?: boolean
     media?: boolean | User$mediaArgs<ExtArgs>
     likesSent?: boolean | User$likesSentArgs<ExtArgs>
@@ -2615,6 +2983,10 @@ export namespace Prisma {
     securityEvents?: boolean | User$securityEventsArgs<ExtArgs>
     friendRequestsSent?: boolean | User$friendRequestsSentArgs<ExtArgs>
     friendRequestsReceived?: boolean | User$friendRequestsReceivedArgs<ExtArgs>
+    subscription?: boolean | User$subscriptionArgs<ExtArgs>
+    giftsGiven?: boolean | User$giftsGivenArgs<ExtArgs>
+    giftsReceived?: boolean | User$giftsReceivedArgs<ExtArgs>
+    referrals?: boolean | User$referralsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2648,11 +3020,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: boolean
     isPremium?: boolean
+    premiumTier?: boolean
+    boostCredits?: boolean
     profileScore?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: boolean
+    resetToken?: boolean
+    resetTokenExpiry?: boolean
+    pushSubscription?: boolean
+    referralCode?: boolean
+    referredById?: boolean
+    lastSeen?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -2686,11 +3066,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: boolean
     isPremium?: boolean
+    premiumTier?: boolean
+    boostCredits?: boolean
     profileScore?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: boolean
+    resetToken?: boolean
+    resetTokenExpiry?: boolean
+    pushSubscription?: boolean
+    referralCode?: boolean
+    referredById?: boolean
+    lastSeen?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -2724,15 +3112,23 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: boolean
     isPremium?: boolean
+    premiumTier?: boolean
+    boostCredits?: boolean
     profileScore?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: boolean
+    resetToken?: boolean
+    resetTokenExpiry?: boolean
+    pushSubscription?: boolean
+    referralCode?: boolean
+    referredById?: boolean
+    lastSeen?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "age" | "city" | "state" | "zipCode" | "pronouns" | "genderIdentity" | "sexualOrientation" | "polyPreference" | "bio" | "interests" | "lookingFor" | "profileTheme" | "profileGraphic" | "musicUrl" | "profileMotto" | "dreamDate" | "avatar" | "latitude" | "longitude" | "profilePrompts" | "verified" | "verifiedStatus" | "paused" | "boostedUntil" | "isPremium" | "profileScore" | "onboardingStep" | "onboardingCompleted" | "emailVerified" | "verifyToken" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "age" | "city" | "state" | "zipCode" | "pronouns" | "genderIdentity" | "sexualOrientation" | "polyPreference" | "bio" | "interests" | "lookingFor" | "profileTheme" | "profileGraphic" | "musicUrl" | "profileMotto" | "dreamDate" | "avatar" | "latitude" | "longitude" | "profilePrompts" | "verified" | "verifiedStatus" | "paused" | "boostedUntil" | "isPremium" | "premiumTier" | "boostCredits" | "profileScore" | "onboardingStep" | "onboardingCompleted" | "emailVerified" | "verifyToken" | "resetToken" | "resetTokenExpiry" | "pushSubscription" | "referralCode" | "referredById" | "lastSeen" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     media?: boolean | User$mediaArgs<ExtArgs>
     likesSent?: boolean | User$likesSentArgs<ExtArgs>
@@ -2750,6 +3146,10 @@ export namespace Prisma {
     securityEvents?: boolean | User$securityEventsArgs<ExtArgs>
     friendRequestsSent?: boolean | User$friendRequestsSentArgs<ExtArgs>
     friendRequestsReceived?: boolean | User$friendRequestsReceivedArgs<ExtArgs>
+    subscription?: boolean | User$subscriptionArgs<ExtArgs>
+    giftsGiven?: boolean | User$giftsGivenArgs<ExtArgs>
+    giftsReceived?: boolean | User$giftsReceivedArgs<ExtArgs>
+    referrals?: boolean | User$referralsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2774,6 +3174,10 @@ export namespace Prisma {
       securityEvents: Prisma.$SecurityEventPayload<ExtArgs>[]
       friendRequestsSent: Prisma.$FriendshipPayload<ExtArgs>[]
       friendRequestsReceived: Prisma.$FriendshipPayload<ExtArgs>[]
+      subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
+      giftsGiven: Prisma.$GiftPayload<ExtArgs>[]
+      giftsReceived: Prisma.$GiftPayload<ExtArgs>[]
+      referrals: Prisma.$ReferralPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2805,11 +3209,19 @@ export namespace Prisma {
       paused: boolean
       boostedUntil: Date | null
       isPremium: boolean
+      premiumTier: string
+      boostCredits: number
       profileScore: number
       onboardingStep: string
       onboardingCompleted: boolean
       emailVerified: boolean
       verifyToken: string | null
+      resetToken: string | null
+      resetTokenExpiry: Date | null
+      pushSubscription: string | null
+      referralCode: string | null
+      referredById: string | null
+      lastSeen: Date | null
       createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -3221,6 +3633,10 @@ export namespace Prisma {
     securityEvents<T extends User$securityEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$securityEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SecurityEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     friendRequestsSent<T extends User$friendRequestsSentArgs<ExtArgs> = {}>(args?: Subset<T, User$friendRequestsSentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     friendRequestsReceived<T extends User$friendRequestsReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$friendRequestsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    subscription<T extends User$subscriptionArgs<ExtArgs> = {}>(args?: Subset<T, User$subscriptionArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    giftsGiven<T extends User$giftsGivenArgs<ExtArgs> = {}>(args?: Subset<T, User$giftsGivenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    giftsReceived<T extends User$giftsReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$giftsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    referrals<T extends User$referralsArgs<ExtArgs> = {}>(args?: Subset<T, User$referralsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3279,11 +3695,19 @@ export namespace Prisma {
     readonly paused: FieldRef<"User", 'Boolean'>
     readonly boostedUntil: FieldRef<"User", 'DateTime'>
     readonly isPremium: FieldRef<"User", 'Boolean'>
+    readonly premiumTier: FieldRef<"User", 'String'>
+    readonly boostCredits: FieldRef<"User", 'Int'>
     readonly profileScore: FieldRef<"User", 'Int'>
     readonly onboardingStep: FieldRef<"User", 'String'>
     readonly onboardingCompleted: FieldRef<"User", 'Boolean'>
     readonly emailVerified: FieldRef<"User", 'Boolean'>
     readonly verifyToken: FieldRef<"User", 'String'>
+    readonly resetToken: FieldRef<"User", 'String'>
+    readonly resetTokenExpiry: FieldRef<"User", 'DateTime'>
+    readonly pushSubscription: FieldRef<"User", 'String'>
+    readonly referralCode: FieldRef<"User", 'String'>
+    readonly referredById: FieldRef<"User", 'String'>
+    readonly lastSeen: FieldRef<"User", 'DateTime'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
@@ -4054,6 +4478,97 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FriendshipScalarFieldEnum | FriendshipScalarFieldEnum[]
+  }
+
+  /**
+   * User.subscription
+   */
+  export type User$subscriptionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    where?: SubscriptionWhereInput
+  }
+
+  /**
+   * User.giftsGiven
+   */
+  export type User$giftsGivenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    where?: GiftWhereInput
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    cursor?: GiftWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GiftScalarFieldEnum | GiftScalarFieldEnum[]
+  }
+
+  /**
+   * User.giftsReceived
+   */
+  export type User$giftsReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    where?: GiftWhereInput
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    cursor?: GiftWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GiftScalarFieldEnum | GiftScalarFieldEnum[]
+  }
+
+  /**
+   * User.referrals
+   */
+  export type User$referralsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralInclude<ExtArgs> | null
+    where?: ReferralWhereInput
+    orderBy?: ReferralOrderByWithRelationInput | ReferralOrderByWithRelationInput[]
+    cursor?: ReferralWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReferralScalarFieldEnum | ReferralScalarFieldEnum[]
   }
 
   /**
@@ -17080,6 +17595,3292 @@ export namespace Prisma {
 
 
   /**
+   * Model Subscription
+   */
+
+  export type AggregateSubscription = {
+    _count: SubscriptionCountAggregateOutputType | null
+    _min: SubscriptionMinAggregateOutputType | null
+    _max: SubscriptionMaxAggregateOutputType | null
+  }
+
+  export type SubscriptionMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    stripeCustomerId: string | null
+    stripeSubscriptionId: string | null
+    stripePriceId: string | null
+    tier: string | null
+    status: string | null
+    currentPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SubscriptionMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    stripeCustomerId: string | null
+    stripeSubscriptionId: string | null
+    stripePriceId: string | null
+    tier: string | null
+    status: string | null
+    currentPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SubscriptionCountAggregateOutputType = {
+    id: number
+    userId: number
+    stripeCustomerId: number
+    stripeSubscriptionId: number
+    stripePriceId: number
+    tier: number
+    status: number
+    currentPeriodEnd: number
+    cancelAtPeriodEnd: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SubscriptionMinAggregateInputType = {
+    id?: true
+    userId?: true
+    stripeCustomerId?: true
+    stripeSubscriptionId?: true
+    stripePriceId?: true
+    tier?: true
+    status?: true
+    currentPeriodEnd?: true
+    cancelAtPeriodEnd?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SubscriptionMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    stripeCustomerId?: true
+    stripeSubscriptionId?: true
+    stripePriceId?: true
+    tier?: true
+    status?: true
+    currentPeriodEnd?: true
+    cancelAtPeriodEnd?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SubscriptionCountAggregateInputType = {
+    id?: true
+    userId?: true
+    stripeCustomerId?: true
+    stripeSubscriptionId?: true
+    stripePriceId?: true
+    tier?: true
+    status?: true
+    currentPeriodEnd?: true
+    cancelAtPeriodEnd?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SubscriptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Subscription to aggregate.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Subscriptions
+    **/
+    _count?: true | SubscriptionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SubscriptionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SubscriptionMaxAggregateInputType
+  }
+
+  export type GetSubscriptionAggregateType<T extends SubscriptionAggregateArgs> = {
+        [P in keyof T & keyof AggregateSubscription]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSubscription[P]>
+      : GetScalarType<T[P], AggregateSubscription[P]>
+  }
+
+
+
+
+  export type SubscriptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubscriptionWhereInput
+    orderBy?: SubscriptionOrderByWithAggregationInput | SubscriptionOrderByWithAggregationInput[]
+    by: SubscriptionScalarFieldEnum[] | SubscriptionScalarFieldEnum
+    having?: SubscriptionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SubscriptionCountAggregateInputType | true
+    _min?: SubscriptionMinAggregateInputType
+    _max?: SubscriptionMaxAggregateInputType
+  }
+
+  export type SubscriptionGroupByOutputType = {
+    id: string
+    userId: string
+    stripeCustomerId: string
+    stripeSubscriptionId: string | null
+    stripePriceId: string | null
+    tier: string
+    status: string
+    currentPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: SubscriptionCountAggregateOutputType | null
+    _min: SubscriptionMinAggregateOutputType | null
+    _max: SubscriptionMaxAggregateOutputType | null
+  }
+
+  type GetSubscriptionGroupByPayload<T extends SubscriptionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SubscriptionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SubscriptionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
+            : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SubscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    stripeCustomerId?: boolean
+    stripeSubscriptionId?: boolean
+    stripePriceId?: boolean
+    tier?: boolean
+    status?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    stripeCustomerId?: boolean
+    stripeSubscriptionId?: boolean
+    stripePriceId?: boolean
+    tier?: boolean
+    status?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    stripeCustomerId?: boolean
+    stripeSubscriptionId?: boolean
+    stripePriceId?: boolean
+    tier?: boolean
+    status?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type SubscriptionSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    stripeCustomerId?: boolean
+    stripeSubscriptionId?: boolean
+    stripePriceId?: boolean
+    tier?: boolean
+    status?: boolean
+    currentPeriodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "stripeCustomerId" | "stripeSubscriptionId" | "stripePriceId" | "tier" | "status" | "currentPeriodEnd" | "cancelAtPeriodEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["subscription"]>
+  export type SubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SubscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SubscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $SubscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Subscription"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      stripeCustomerId: string
+      stripeSubscriptionId: string | null
+      stripePriceId: string | null
+      tier: string
+      status: string
+      currentPeriodEnd: Date | null
+      cancelAtPeriodEnd: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["subscription"]>
+    composites: {}
+  }
+
+  type SubscriptionGetPayload<S extends boolean | null | undefined | SubscriptionDefaultArgs> = $Result.GetResult<Prisma.$SubscriptionPayload, S>
+
+  type SubscriptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SubscriptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SubscriptionCountAggregateInputType | true
+    }
+
+  export interface SubscriptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Subscription'], meta: { name: 'Subscription' } }
+    /**
+     * Find zero or one Subscription that matches the filter.
+     * @param {SubscriptionFindUniqueArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SubscriptionFindUniqueArgs>(args: SelectSubset<T, SubscriptionFindUniqueArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Subscription that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SubscriptionFindUniqueOrThrowArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SubscriptionFindUniqueOrThrowArgs>(args: SelectSubset<T, SubscriptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Subscription that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionFindFirstArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SubscriptionFindFirstArgs>(args?: SelectSubset<T, SubscriptionFindFirstArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Subscription that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionFindFirstOrThrowArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SubscriptionFindFirstOrThrowArgs>(args?: SelectSubset<T, SubscriptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Subscriptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Subscriptions
+     * const subscriptions = await prisma.subscription.findMany()
+     * 
+     * // Get first 10 Subscriptions
+     * const subscriptions = await prisma.subscription.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SubscriptionFindManyArgs>(args?: SelectSubset<T, SubscriptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Subscription.
+     * @param {SubscriptionCreateArgs} args - Arguments to create a Subscription.
+     * @example
+     * // Create one Subscription
+     * const Subscription = await prisma.subscription.create({
+     *   data: {
+     *     // ... data to create a Subscription
+     *   }
+     * })
+     * 
+     */
+    create<T extends SubscriptionCreateArgs>(args: SelectSubset<T, SubscriptionCreateArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Subscriptions.
+     * @param {SubscriptionCreateManyArgs} args - Arguments to create many Subscriptions.
+     * @example
+     * // Create many Subscriptions
+     * const subscription = await prisma.subscription.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SubscriptionCreateManyArgs>(args?: SelectSubset<T, SubscriptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Subscriptions and returns the data saved in the database.
+     * @param {SubscriptionCreateManyAndReturnArgs} args - Arguments to create many Subscriptions.
+     * @example
+     * // Create many Subscriptions
+     * const subscription = await prisma.subscription.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Subscriptions and only return the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SubscriptionCreateManyAndReturnArgs>(args?: SelectSubset<T, SubscriptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Subscription.
+     * @param {SubscriptionDeleteArgs} args - Arguments to delete one Subscription.
+     * @example
+     * // Delete one Subscription
+     * const Subscription = await prisma.subscription.delete({
+     *   where: {
+     *     // ... filter to delete one Subscription
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SubscriptionDeleteArgs>(args: SelectSubset<T, SubscriptionDeleteArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Subscription.
+     * @param {SubscriptionUpdateArgs} args - Arguments to update one Subscription.
+     * @example
+     * // Update one Subscription
+     * const subscription = await prisma.subscription.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SubscriptionUpdateArgs>(args: SelectSubset<T, SubscriptionUpdateArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Subscriptions.
+     * @param {SubscriptionDeleteManyArgs} args - Arguments to filter Subscriptions to delete.
+     * @example
+     * // Delete a few Subscriptions
+     * const { count } = await prisma.subscription.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SubscriptionDeleteManyArgs>(args?: SelectSubset<T, SubscriptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Subscriptions
+     * const subscription = await prisma.subscription.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SubscriptionUpdateManyArgs>(args: SelectSubset<T, SubscriptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Subscriptions and returns the data updated in the database.
+     * @param {SubscriptionUpdateManyAndReturnArgs} args - Arguments to update many Subscriptions.
+     * @example
+     * // Update many Subscriptions
+     * const subscription = await prisma.subscription.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Subscriptions and only return the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SubscriptionUpdateManyAndReturnArgs>(args: SelectSubset<T, SubscriptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Subscription.
+     * @param {SubscriptionUpsertArgs} args - Arguments to update or create a Subscription.
+     * @example
+     * // Update or create a Subscription
+     * const subscription = await prisma.subscription.upsert({
+     *   create: {
+     *     // ... data to create a Subscription
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Subscription we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SubscriptionUpsertArgs>(args: SelectSubset<T, SubscriptionUpsertArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionCountArgs} args - Arguments to filter Subscriptions to count.
+     * @example
+     * // Count the number of Subscriptions
+     * const count = await prisma.subscription.count({
+     *   where: {
+     *     // ... the filter for the Subscriptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends SubscriptionCountArgs>(
+      args?: Subset<T, SubscriptionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SubscriptionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Subscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SubscriptionAggregateArgs>(args: Subset<T, SubscriptionAggregateArgs>): Prisma.PrismaPromise<GetSubscriptionAggregateType<T>>
+
+    /**
+     * Group by Subscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SubscriptionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SubscriptionGroupByArgs['orderBy'] }
+        : { orderBy?: SubscriptionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SubscriptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubscriptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Subscription model
+   */
+  readonly fields: SubscriptionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Subscription.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SubscriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Subscription model
+   */
+  interface SubscriptionFieldRefs {
+    readonly id: FieldRef<"Subscription", 'String'>
+    readonly userId: FieldRef<"Subscription", 'String'>
+    readonly stripeCustomerId: FieldRef<"Subscription", 'String'>
+    readonly stripeSubscriptionId: FieldRef<"Subscription", 'String'>
+    readonly stripePriceId: FieldRef<"Subscription", 'String'>
+    readonly tier: FieldRef<"Subscription", 'String'>
+    readonly status: FieldRef<"Subscription", 'String'>
+    readonly currentPeriodEnd: FieldRef<"Subscription", 'DateTime'>
+    readonly cancelAtPeriodEnd: FieldRef<"Subscription", 'Boolean'>
+    readonly createdAt: FieldRef<"Subscription", 'DateTime'>
+    readonly updatedAt: FieldRef<"Subscription", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Subscription findUnique
+   */
+  export type SubscriptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription findUniqueOrThrow
+   */
+  export type SubscriptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription findFirst
+   */
+  export type SubscriptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Subscriptions.
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Subscriptions.
+     */
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Subscription findFirstOrThrow
+   */
+  export type SubscriptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscription to fetch.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Subscriptions.
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Subscriptions.
+     */
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Subscription findMany
+   */
+  export type SubscriptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Subscriptions to fetch.
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Subscriptions to fetch.
+     */
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Subscriptions.
+     */
+    cursor?: SubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Subscriptions.
+     */
+    skip?: number
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Subscription create
+   */
+  export type SubscriptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Subscription.
+     */
+    data: XOR<SubscriptionCreateInput, SubscriptionUncheckedCreateInput>
+  }
+
+  /**
+   * Subscription createMany
+   */
+  export type SubscriptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Subscriptions.
+     */
+    data: SubscriptionCreateManyInput | SubscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Subscription createManyAndReturn
+   */
+  export type SubscriptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Subscriptions.
+     */
+    data: SubscriptionCreateManyInput | SubscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Subscription update
+   */
+  export type SubscriptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Subscription.
+     */
+    data: XOR<SubscriptionUpdateInput, SubscriptionUncheckedUpdateInput>
+    /**
+     * Choose, which Subscription to update.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription updateMany
+   */
+  export type SubscriptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Subscriptions.
+     */
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which Subscriptions to update
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * Limit how many Subscriptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Subscription updateManyAndReturn
+   */
+  export type SubscriptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to update Subscriptions.
+     */
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which Subscriptions to update
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * Limit how many Subscriptions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Subscription upsert
+   */
+  export type SubscriptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Subscription to update in case it exists.
+     */
+    where: SubscriptionWhereUniqueInput
+    /**
+     * In case the Subscription found by the `where` argument doesn't exist, create a new Subscription with this data.
+     */
+    create: XOR<SubscriptionCreateInput, SubscriptionUncheckedCreateInput>
+    /**
+     * In case the Subscription was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SubscriptionUpdateInput, SubscriptionUncheckedUpdateInput>
+  }
+
+  /**
+   * Subscription delete
+   */
+  export type SubscriptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter which Subscription to delete.
+     */
+    where: SubscriptionWhereUniqueInput
+  }
+
+  /**
+   * Subscription deleteMany
+   */
+  export type SubscriptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Subscriptions to delete
+     */
+    where?: SubscriptionWhereInput
+    /**
+     * Limit how many Subscriptions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Subscription without action
+   */
+  export type SubscriptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: SubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: SubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubscriptionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Gift
+   */
+
+  export type AggregateGift = {
+    _count: GiftCountAggregateOutputType | null
+    _min: GiftMinAggregateOutputType | null
+    _max: GiftMaxAggregateOutputType | null
+  }
+
+  export type GiftMinAggregateOutputType = {
+    id: string | null
+    fromId: string | null
+    toId: string | null
+    giftType: string | null
+    message: string | null
+    seen: boolean | null
+    createdAt: Date | null
+  }
+
+  export type GiftMaxAggregateOutputType = {
+    id: string | null
+    fromId: string | null
+    toId: string | null
+    giftType: string | null
+    message: string | null
+    seen: boolean | null
+    createdAt: Date | null
+  }
+
+  export type GiftCountAggregateOutputType = {
+    id: number
+    fromId: number
+    toId: number
+    giftType: number
+    message: number
+    seen: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type GiftMinAggregateInputType = {
+    id?: true
+    fromId?: true
+    toId?: true
+    giftType?: true
+    message?: true
+    seen?: true
+    createdAt?: true
+  }
+
+  export type GiftMaxAggregateInputType = {
+    id?: true
+    fromId?: true
+    toId?: true
+    giftType?: true
+    message?: true
+    seen?: true
+    createdAt?: true
+  }
+
+  export type GiftCountAggregateInputType = {
+    id?: true
+    fromId?: true
+    toId?: true
+    giftType?: true
+    message?: true
+    seen?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type GiftAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Gift to aggregate.
+     */
+    where?: GiftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Gifts to fetch.
+     */
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GiftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Gifts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Gifts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Gifts
+    **/
+    _count?: true | GiftCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GiftMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GiftMaxAggregateInputType
+  }
+
+  export type GetGiftAggregateType<T extends GiftAggregateArgs> = {
+        [P in keyof T & keyof AggregateGift]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGift[P]>
+      : GetScalarType<T[P], AggregateGift[P]>
+  }
+
+
+
+
+  export type GiftGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GiftWhereInput
+    orderBy?: GiftOrderByWithAggregationInput | GiftOrderByWithAggregationInput[]
+    by: GiftScalarFieldEnum[] | GiftScalarFieldEnum
+    having?: GiftScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GiftCountAggregateInputType | true
+    _min?: GiftMinAggregateInputType
+    _max?: GiftMaxAggregateInputType
+  }
+
+  export type GiftGroupByOutputType = {
+    id: string
+    fromId: string
+    toId: string
+    giftType: string
+    message: string
+    seen: boolean
+    createdAt: Date
+    _count: GiftCountAggregateOutputType | null
+    _min: GiftMinAggregateOutputType | null
+    _max: GiftMaxAggregateOutputType | null
+  }
+
+  type GetGiftGroupByPayload<T extends GiftGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GiftGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GiftGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GiftGroupByOutputType[P]>
+            : GetScalarType<T[P], GiftGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GiftSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fromId?: boolean
+    toId?: boolean
+    giftType?: boolean
+    message?: boolean
+    seen?: boolean
+    createdAt?: boolean
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gift"]>
+
+  export type GiftSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fromId?: boolean
+    toId?: boolean
+    giftType?: boolean
+    message?: boolean
+    seen?: boolean
+    createdAt?: boolean
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gift"]>
+
+  export type GiftSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fromId?: boolean
+    toId?: boolean
+    giftType?: boolean
+    message?: boolean
+    seen?: boolean
+    createdAt?: boolean
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gift"]>
+
+  export type GiftSelectScalar = {
+    id?: boolean
+    fromId?: boolean
+    toId?: boolean
+    giftType?: boolean
+    message?: boolean
+    seen?: boolean
+    createdAt?: boolean
+  }
+
+  export type GiftOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fromId" | "toId" | "giftType" | "message" | "seen" | "createdAt", ExtArgs["result"]["gift"]>
+  export type GiftInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type GiftIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type GiftIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    from?: boolean | UserDefaultArgs<ExtArgs>
+    to?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $GiftPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Gift"
+    objects: {
+      from: Prisma.$UserPayload<ExtArgs>
+      to: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      fromId: string
+      toId: string
+      giftType: string
+      message: string
+      seen: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["gift"]>
+    composites: {}
+  }
+
+  type GiftGetPayload<S extends boolean | null | undefined | GiftDefaultArgs> = $Result.GetResult<Prisma.$GiftPayload, S>
+
+  type GiftCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GiftFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GiftCountAggregateInputType | true
+    }
+
+  export interface GiftDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Gift'], meta: { name: 'Gift' } }
+    /**
+     * Find zero or one Gift that matches the filter.
+     * @param {GiftFindUniqueArgs} args - Arguments to find a Gift
+     * @example
+     * // Get one Gift
+     * const gift = await prisma.gift.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GiftFindUniqueArgs>(args: SelectSubset<T, GiftFindUniqueArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Gift that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GiftFindUniqueOrThrowArgs} args - Arguments to find a Gift
+     * @example
+     * // Get one Gift
+     * const gift = await prisma.gift.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GiftFindUniqueOrThrowArgs>(args: SelectSubset<T, GiftFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Gift that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftFindFirstArgs} args - Arguments to find a Gift
+     * @example
+     * // Get one Gift
+     * const gift = await prisma.gift.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GiftFindFirstArgs>(args?: SelectSubset<T, GiftFindFirstArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Gift that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftFindFirstOrThrowArgs} args - Arguments to find a Gift
+     * @example
+     * // Get one Gift
+     * const gift = await prisma.gift.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GiftFindFirstOrThrowArgs>(args?: SelectSubset<T, GiftFindFirstOrThrowArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Gifts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Gifts
+     * const gifts = await prisma.gift.findMany()
+     * 
+     * // Get first 10 Gifts
+     * const gifts = await prisma.gift.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const giftWithIdOnly = await prisma.gift.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GiftFindManyArgs>(args?: SelectSubset<T, GiftFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Gift.
+     * @param {GiftCreateArgs} args - Arguments to create a Gift.
+     * @example
+     * // Create one Gift
+     * const Gift = await prisma.gift.create({
+     *   data: {
+     *     // ... data to create a Gift
+     *   }
+     * })
+     * 
+     */
+    create<T extends GiftCreateArgs>(args: SelectSubset<T, GiftCreateArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Gifts.
+     * @param {GiftCreateManyArgs} args - Arguments to create many Gifts.
+     * @example
+     * // Create many Gifts
+     * const gift = await prisma.gift.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GiftCreateManyArgs>(args?: SelectSubset<T, GiftCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Gifts and returns the data saved in the database.
+     * @param {GiftCreateManyAndReturnArgs} args - Arguments to create many Gifts.
+     * @example
+     * // Create many Gifts
+     * const gift = await prisma.gift.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Gifts and only return the `id`
+     * const giftWithIdOnly = await prisma.gift.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GiftCreateManyAndReturnArgs>(args?: SelectSubset<T, GiftCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Gift.
+     * @param {GiftDeleteArgs} args - Arguments to delete one Gift.
+     * @example
+     * // Delete one Gift
+     * const Gift = await prisma.gift.delete({
+     *   where: {
+     *     // ... filter to delete one Gift
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GiftDeleteArgs>(args: SelectSubset<T, GiftDeleteArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Gift.
+     * @param {GiftUpdateArgs} args - Arguments to update one Gift.
+     * @example
+     * // Update one Gift
+     * const gift = await prisma.gift.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GiftUpdateArgs>(args: SelectSubset<T, GiftUpdateArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Gifts.
+     * @param {GiftDeleteManyArgs} args - Arguments to filter Gifts to delete.
+     * @example
+     * // Delete a few Gifts
+     * const { count } = await prisma.gift.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GiftDeleteManyArgs>(args?: SelectSubset<T, GiftDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Gifts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Gifts
+     * const gift = await prisma.gift.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GiftUpdateManyArgs>(args: SelectSubset<T, GiftUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Gifts and returns the data updated in the database.
+     * @param {GiftUpdateManyAndReturnArgs} args - Arguments to update many Gifts.
+     * @example
+     * // Update many Gifts
+     * const gift = await prisma.gift.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Gifts and only return the `id`
+     * const giftWithIdOnly = await prisma.gift.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GiftUpdateManyAndReturnArgs>(args: SelectSubset<T, GiftUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Gift.
+     * @param {GiftUpsertArgs} args - Arguments to update or create a Gift.
+     * @example
+     * // Update or create a Gift
+     * const gift = await prisma.gift.upsert({
+     *   create: {
+     *     // ... data to create a Gift
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Gift we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GiftUpsertArgs>(args: SelectSubset<T, GiftUpsertArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Gifts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftCountArgs} args - Arguments to filter Gifts to count.
+     * @example
+     * // Count the number of Gifts
+     * const count = await prisma.gift.count({
+     *   where: {
+     *     // ... the filter for the Gifts we want to count
+     *   }
+     * })
+    **/
+    count<T extends GiftCountArgs>(
+      args?: Subset<T, GiftCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GiftCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Gift.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GiftAggregateArgs>(args: Subset<T, GiftAggregateArgs>): Prisma.PrismaPromise<GetGiftAggregateType<T>>
+
+    /**
+     * Group by Gift.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GiftGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GiftGroupByArgs['orderBy'] }
+        : { orderBy?: GiftGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GiftGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGiftGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Gift model
+   */
+  readonly fields: GiftFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Gift.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GiftClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    from<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    to<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Gift model
+   */
+  interface GiftFieldRefs {
+    readonly id: FieldRef<"Gift", 'String'>
+    readonly fromId: FieldRef<"Gift", 'String'>
+    readonly toId: FieldRef<"Gift", 'String'>
+    readonly giftType: FieldRef<"Gift", 'String'>
+    readonly message: FieldRef<"Gift", 'String'>
+    readonly seen: FieldRef<"Gift", 'Boolean'>
+    readonly createdAt: FieldRef<"Gift", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Gift findUnique
+   */
+  export type GiftFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter, which Gift to fetch.
+     */
+    where: GiftWhereUniqueInput
+  }
+
+  /**
+   * Gift findUniqueOrThrow
+   */
+  export type GiftFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter, which Gift to fetch.
+     */
+    where: GiftWhereUniqueInput
+  }
+
+  /**
+   * Gift findFirst
+   */
+  export type GiftFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter, which Gift to fetch.
+     */
+    where?: GiftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Gifts to fetch.
+     */
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Gifts.
+     */
+    cursor?: GiftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Gifts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Gifts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Gifts.
+     */
+    distinct?: GiftScalarFieldEnum | GiftScalarFieldEnum[]
+  }
+
+  /**
+   * Gift findFirstOrThrow
+   */
+  export type GiftFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter, which Gift to fetch.
+     */
+    where?: GiftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Gifts to fetch.
+     */
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Gifts.
+     */
+    cursor?: GiftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Gifts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Gifts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Gifts.
+     */
+    distinct?: GiftScalarFieldEnum | GiftScalarFieldEnum[]
+  }
+
+  /**
+   * Gift findMany
+   */
+  export type GiftFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter, which Gifts to fetch.
+     */
+    where?: GiftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Gifts to fetch.
+     */
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Gifts.
+     */
+    cursor?: GiftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Gifts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Gifts.
+     */
+    skip?: number
+    distinct?: GiftScalarFieldEnum | GiftScalarFieldEnum[]
+  }
+
+  /**
+   * Gift create
+   */
+  export type GiftCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Gift.
+     */
+    data: XOR<GiftCreateInput, GiftUncheckedCreateInput>
+  }
+
+  /**
+   * Gift createMany
+   */
+  export type GiftCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Gifts.
+     */
+    data: GiftCreateManyInput | GiftCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Gift createManyAndReturn
+   */
+  export type GiftCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * The data used to create many Gifts.
+     */
+    data: GiftCreateManyInput | GiftCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Gift update
+   */
+  export type GiftUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Gift.
+     */
+    data: XOR<GiftUpdateInput, GiftUncheckedUpdateInput>
+    /**
+     * Choose, which Gift to update.
+     */
+    where: GiftWhereUniqueInput
+  }
+
+  /**
+   * Gift updateMany
+   */
+  export type GiftUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Gifts.
+     */
+    data: XOR<GiftUpdateManyMutationInput, GiftUncheckedUpdateManyInput>
+    /**
+     * Filter which Gifts to update
+     */
+    where?: GiftWhereInput
+    /**
+     * Limit how many Gifts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Gift updateManyAndReturn
+   */
+  export type GiftUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * The data used to update Gifts.
+     */
+    data: XOR<GiftUpdateManyMutationInput, GiftUncheckedUpdateManyInput>
+    /**
+     * Filter which Gifts to update
+     */
+    where?: GiftWhereInput
+    /**
+     * Limit how many Gifts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Gift upsert
+   */
+  export type GiftUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Gift to update in case it exists.
+     */
+    where: GiftWhereUniqueInput
+    /**
+     * In case the Gift found by the `where` argument doesn't exist, create a new Gift with this data.
+     */
+    create: XOR<GiftCreateInput, GiftUncheckedCreateInput>
+    /**
+     * In case the Gift was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GiftUpdateInput, GiftUncheckedUpdateInput>
+  }
+
+  /**
+   * Gift delete
+   */
+  export type GiftDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter which Gift to delete.
+     */
+    where: GiftWhereUniqueInput
+  }
+
+  /**
+   * Gift deleteMany
+   */
+  export type GiftDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Gifts to delete
+     */
+    where?: GiftWhereInput
+    /**
+     * Limit how many Gifts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Gift without action
+   */
+  export type GiftDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Referral
+   */
+
+  export type AggregateReferral = {
+    _count: ReferralCountAggregateOutputType | null
+    _min: ReferralMinAggregateOutputType | null
+    _max: ReferralMaxAggregateOutputType | null
+  }
+
+  export type ReferralMinAggregateOutputType = {
+    id: string | null
+    referrerId: string | null
+    refereeId: string | null
+    rewardGiven: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ReferralMaxAggregateOutputType = {
+    id: string | null
+    referrerId: string | null
+    refereeId: string | null
+    rewardGiven: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ReferralCountAggregateOutputType = {
+    id: number
+    referrerId: number
+    refereeId: number
+    rewardGiven: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ReferralMinAggregateInputType = {
+    id?: true
+    referrerId?: true
+    refereeId?: true
+    rewardGiven?: true
+    createdAt?: true
+  }
+
+  export type ReferralMaxAggregateInputType = {
+    id?: true
+    referrerId?: true
+    refereeId?: true
+    rewardGiven?: true
+    createdAt?: true
+  }
+
+  export type ReferralCountAggregateInputType = {
+    id?: true
+    referrerId?: true
+    refereeId?: true
+    rewardGiven?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ReferralAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Referral to aggregate.
+     */
+    where?: ReferralWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Referrals to fetch.
+     */
+    orderBy?: ReferralOrderByWithRelationInput | ReferralOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReferralWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Referrals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Referrals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Referrals
+    **/
+    _count?: true | ReferralCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReferralMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReferralMaxAggregateInputType
+  }
+
+  export type GetReferralAggregateType<T extends ReferralAggregateArgs> = {
+        [P in keyof T & keyof AggregateReferral]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReferral[P]>
+      : GetScalarType<T[P], AggregateReferral[P]>
+  }
+
+
+
+
+  export type ReferralGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReferralWhereInput
+    orderBy?: ReferralOrderByWithAggregationInput | ReferralOrderByWithAggregationInput[]
+    by: ReferralScalarFieldEnum[] | ReferralScalarFieldEnum
+    having?: ReferralScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReferralCountAggregateInputType | true
+    _min?: ReferralMinAggregateInputType
+    _max?: ReferralMaxAggregateInputType
+  }
+
+  export type ReferralGroupByOutputType = {
+    id: string
+    referrerId: string
+    refereeId: string
+    rewardGiven: boolean
+    createdAt: Date
+    _count: ReferralCountAggregateOutputType | null
+    _min: ReferralMinAggregateOutputType | null
+    _max: ReferralMaxAggregateOutputType | null
+  }
+
+  type GetReferralGroupByPayload<T extends ReferralGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReferralGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReferralGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReferralGroupByOutputType[P]>
+            : GetScalarType<T[P], ReferralGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReferralSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    referrerId?: boolean
+    refereeId?: boolean
+    rewardGiven?: boolean
+    createdAt?: boolean
+    referrer?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["referral"]>
+
+  export type ReferralSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    referrerId?: boolean
+    refereeId?: boolean
+    rewardGiven?: boolean
+    createdAt?: boolean
+    referrer?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["referral"]>
+
+  export type ReferralSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    referrerId?: boolean
+    refereeId?: boolean
+    rewardGiven?: boolean
+    createdAt?: boolean
+    referrer?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["referral"]>
+
+  export type ReferralSelectScalar = {
+    id?: boolean
+    referrerId?: boolean
+    refereeId?: boolean
+    rewardGiven?: boolean
+    createdAt?: boolean
+  }
+
+  export type ReferralOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "referrerId" | "refereeId" | "rewardGiven" | "createdAt", ExtArgs["result"]["referral"]>
+  export type ReferralInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    referrer?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ReferralIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    referrer?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ReferralIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    referrer?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ReferralPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Referral"
+    objects: {
+      referrer: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      referrerId: string
+      refereeId: string
+      rewardGiven: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["referral"]>
+    composites: {}
+  }
+
+  type ReferralGetPayload<S extends boolean | null | undefined | ReferralDefaultArgs> = $Result.GetResult<Prisma.$ReferralPayload, S>
+
+  type ReferralCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReferralFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReferralCountAggregateInputType | true
+    }
+
+  export interface ReferralDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Referral'], meta: { name: 'Referral' } }
+    /**
+     * Find zero or one Referral that matches the filter.
+     * @param {ReferralFindUniqueArgs} args - Arguments to find a Referral
+     * @example
+     * // Get one Referral
+     * const referral = await prisma.referral.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReferralFindUniqueArgs>(args: SelectSubset<T, ReferralFindUniqueArgs<ExtArgs>>): Prisma__ReferralClient<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Referral that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReferralFindUniqueOrThrowArgs} args - Arguments to find a Referral
+     * @example
+     * // Get one Referral
+     * const referral = await prisma.referral.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReferralFindUniqueOrThrowArgs>(args: SelectSubset<T, ReferralFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReferralClient<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Referral that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferralFindFirstArgs} args - Arguments to find a Referral
+     * @example
+     * // Get one Referral
+     * const referral = await prisma.referral.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReferralFindFirstArgs>(args?: SelectSubset<T, ReferralFindFirstArgs<ExtArgs>>): Prisma__ReferralClient<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Referral that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferralFindFirstOrThrowArgs} args - Arguments to find a Referral
+     * @example
+     * // Get one Referral
+     * const referral = await prisma.referral.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReferralFindFirstOrThrowArgs>(args?: SelectSubset<T, ReferralFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReferralClient<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Referrals that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferralFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Referrals
+     * const referrals = await prisma.referral.findMany()
+     * 
+     * // Get first 10 Referrals
+     * const referrals = await prisma.referral.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const referralWithIdOnly = await prisma.referral.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReferralFindManyArgs>(args?: SelectSubset<T, ReferralFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Referral.
+     * @param {ReferralCreateArgs} args - Arguments to create a Referral.
+     * @example
+     * // Create one Referral
+     * const Referral = await prisma.referral.create({
+     *   data: {
+     *     // ... data to create a Referral
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReferralCreateArgs>(args: SelectSubset<T, ReferralCreateArgs<ExtArgs>>): Prisma__ReferralClient<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Referrals.
+     * @param {ReferralCreateManyArgs} args - Arguments to create many Referrals.
+     * @example
+     * // Create many Referrals
+     * const referral = await prisma.referral.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReferralCreateManyArgs>(args?: SelectSubset<T, ReferralCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Referrals and returns the data saved in the database.
+     * @param {ReferralCreateManyAndReturnArgs} args - Arguments to create many Referrals.
+     * @example
+     * // Create many Referrals
+     * const referral = await prisma.referral.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Referrals and only return the `id`
+     * const referralWithIdOnly = await prisma.referral.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReferralCreateManyAndReturnArgs>(args?: SelectSubset<T, ReferralCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Referral.
+     * @param {ReferralDeleteArgs} args - Arguments to delete one Referral.
+     * @example
+     * // Delete one Referral
+     * const Referral = await prisma.referral.delete({
+     *   where: {
+     *     // ... filter to delete one Referral
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReferralDeleteArgs>(args: SelectSubset<T, ReferralDeleteArgs<ExtArgs>>): Prisma__ReferralClient<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Referral.
+     * @param {ReferralUpdateArgs} args - Arguments to update one Referral.
+     * @example
+     * // Update one Referral
+     * const referral = await prisma.referral.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReferralUpdateArgs>(args: SelectSubset<T, ReferralUpdateArgs<ExtArgs>>): Prisma__ReferralClient<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Referrals.
+     * @param {ReferralDeleteManyArgs} args - Arguments to filter Referrals to delete.
+     * @example
+     * // Delete a few Referrals
+     * const { count } = await prisma.referral.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReferralDeleteManyArgs>(args?: SelectSubset<T, ReferralDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Referrals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferralUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Referrals
+     * const referral = await prisma.referral.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReferralUpdateManyArgs>(args: SelectSubset<T, ReferralUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Referrals and returns the data updated in the database.
+     * @param {ReferralUpdateManyAndReturnArgs} args - Arguments to update many Referrals.
+     * @example
+     * // Update many Referrals
+     * const referral = await prisma.referral.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Referrals and only return the `id`
+     * const referralWithIdOnly = await prisma.referral.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReferralUpdateManyAndReturnArgs>(args: SelectSubset<T, ReferralUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Referral.
+     * @param {ReferralUpsertArgs} args - Arguments to update or create a Referral.
+     * @example
+     * // Update or create a Referral
+     * const referral = await prisma.referral.upsert({
+     *   create: {
+     *     // ... data to create a Referral
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Referral we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReferralUpsertArgs>(args: SelectSubset<T, ReferralUpsertArgs<ExtArgs>>): Prisma__ReferralClient<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Referrals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferralCountArgs} args - Arguments to filter Referrals to count.
+     * @example
+     * // Count the number of Referrals
+     * const count = await prisma.referral.count({
+     *   where: {
+     *     // ... the filter for the Referrals we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReferralCountArgs>(
+      args?: Subset<T, ReferralCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReferralCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Referral.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferralAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReferralAggregateArgs>(args: Subset<T, ReferralAggregateArgs>): Prisma.PrismaPromise<GetReferralAggregateType<T>>
+
+    /**
+     * Group by Referral.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferralGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReferralGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReferralGroupByArgs['orderBy'] }
+        : { orderBy?: ReferralGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReferralGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReferralGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Referral model
+   */
+  readonly fields: ReferralFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Referral.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReferralClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    referrer<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Referral model
+   */
+  interface ReferralFieldRefs {
+    readonly id: FieldRef<"Referral", 'String'>
+    readonly referrerId: FieldRef<"Referral", 'String'>
+    readonly refereeId: FieldRef<"Referral", 'String'>
+    readonly rewardGiven: FieldRef<"Referral", 'Boolean'>
+    readonly createdAt: FieldRef<"Referral", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Referral findUnique
+   */
+  export type ReferralFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralInclude<ExtArgs> | null
+    /**
+     * Filter, which Referral to fetch.
+     */
+    where: ReferralWhereUniqueInput
+  }
+
+  /**
+   * Referral findUniqueOrThrow
+   */
+  export type ReferralFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralInclude<ExtArgs> | null
+    /**
+     * Filter, which Referral to fetch.
+     */
+    where: ReferralWhereUniqueInput
+  }
+
+  /**
+   * Referral findFirst
+   */
+  export type ReferralFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralInclude<ExtArgs> | null
+    /**
+     * Filter, which Referral to fetch.
+     */
+    where?: ReferralWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Referrals to fetch.
+     */
+    orderBy?: ReferralOrderByWithRelationInput | ReferralOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Referrals.
+     */
+    cursor?: ReferralWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Referrals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Referrals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Referrals.
+     */
+    distinct?: ReferralScalarFieldEnum | ReferralScalarFieldEnum[]
+  }
+
+  /**
+   * Referral findFirstOrThrow
+   */
+  export type ReferralFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralInclude<ExtArgs> | null
+    /**
+     * Filter, which Referral to fetch.
+     */
+    where?: ReferralWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Referrals to fetch.
+     */
+    orderBy?: ReferralOrderByWithRelationInput | ReferralOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Referrals.
+     */
+    cursor?: ReferralWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Referrals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Referrals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Referrals.
+     */
+    distinct?: ReferralScalarFieldEnum | ReferralScalarFieldEnum[]
+  }
+
+  /**
+   * Referral findMany
+   */
+  export type ReferralFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralInclude<ExtArgs> | null
+    /**
+     * Filter, which Referrals to fetch.
+     */
+    where?: ReferralWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Referrals to fetch.
+     */
+    orderBy?: ReferralOrderByWithRelationInput | ReferralOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Referrals.
+     */
+    cursor?: ReferralWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Referrals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Referrals.
+     */
+    skip?: number
+    distinct?: ReferralScalarFieldEnum | ReferralScalarFieldEnum[]
+  }
+
+  /**
+   * Referral create
+   */
+  export type ReferralCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Referral.
+     */
+    data: XOR<ReferralCreateInput, ReferralUncheckedCreateInput>
+  }
+
+  /**
+   * Referral createMany
+   */
+  export type ReferralCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Referrals.
+     */
+    data: ReferralCreateManyInput | ReferralCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Referral createManyAndReturn
+   */
+  export type ReferralCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * The data used to create many Referrals.
+     */
+    data: ReferralCreateManyInput | ReferralCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Referral update
+   */
+  export type ReferralUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Referral.
+     */
+    data: XOR<ReferralUpdateInput, ReferralUncheckedUpdateInput>
+    /**
+     * Choose, which Referral to update.
+     */
+    where: ReferralWhereUniqueInput
+  }
+
+  /**
+   * Referral updateMany
+   */
+  export type ReferralUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Referrals.
+     */
+    data: XOR<ReferralUpdateManyMutationInput, ReferralUncheckedUpdateManyInput>
+    /**
+     * Filter which Referrals to update
+     */
+    where?: ReferralWhereInput
+    /**
+     * Limit how many Referrals to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Referral updateManyAndReturn
+   */
+  export type ReferralUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * The data used to update Referrals.
+     */
+    data: XOR<ReferralUpdateManyMutationInput, ReferralUncheckedUpdateManyInput>
+    /**
+     * Filter which Referrals to update
+     */
+    where?: ReferralWhereInput
+    /**
+     * Limit how many Referrals to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Referral upsert
+   */
+  export type ReferralUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Referral to update in case it exists.
+     */
+    where: ReferralWhereUniqueInput
+    /**
+     * In case the Referral found by the `where` argument doesn't exist, create a new Referral with this data.
+     */
+    create: XOR<ReferralCreateInput, ReferralUncheckedCreateInput>
+    /**
+     * In case the Referral was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReferralUpdateInput, ReferralUncheckedUpdateInput>
+  }
+
+  /**
+   * Referral delete
+   */
+  export type ReferralDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralInclude<ExtArgs> | null
+    /**
+     * Filter which Referral to delete.
+     */
+    where: ReferralWhereUniqueInput
+  }
+
+  /**
+   * Referral deleteMany
+   */
+  export type ReferralDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Referrals to delete
+     */
+    where?: ReferralWhereInput
+    /**
+     * Limit how many Referrals to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Referral without action
+   */
+  export type ReferralDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Referral
+     */
+    select?: ReferralSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Referral
+     */
+    omit?: ReferralOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferralInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -17123,11 +20924,19 @@ export namespace Prisma {
     paused: 'paused',
     boostedUntil: 'boostedUntil',
     isPremium: 'isPremium',
+    premiumTier: 'premiumTier',
+    boostCredits: 'boostCredits',
     profileScore: 'profileScore',
     onboardingStep: 'onboardingStep',
     onboardingCompleted: 'onboardingCompleted',
     emailVerified: 'emailVerified',
     verifyToken: 'verifyToken',
+    resetToken: 'resetToken',
+    resetTokenExpiry: 'resetTokenExpiry',
+    pushSubscription: 'pushSubscription',
+    referralCode: 'referralCode',
+    referredById: 'referredById',
+    lastSeen: 'lastSeen',
     createdAt: 'createdAt'
   };
 
@@ -17275,6 +21084,47 @@ export namespace Prisma {
   export type SecurityEventScalarFieldEnum = (typeof SecurityEventScalarFieldEnum)[keyof typeof SecurityEventScalarFieldEnum]
 
 
+  export const SubscriptionScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    stripeCustomerId: 'stripeCustomerId',
+    stripeSubscriptionId: 'stripeSubscriptionId',
+    stripePriceId: 'stripePriceId',
+    tier: 'tier',
+    status: 'status',
+    currentPeriodEnd: 'currentPeriodEnd',
+    cancelAtPeriodEnd: 'cancelAtPeriodEnd',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
+  export const GiftScalarFieldEnum: {
+    id: 'id',
+    fromId: 'fromId',
+    toId: 'toId',
+    giftType: 'giftType',
+    message: 'message',
+    seen: 'seen',
+    createdAt: 'createdAt'
+  };
+
+  export type GiftScalarFieldEnum = (typeof GiftScalarFieldEnum)[keyof typeof GiftScalarFieldEnum]
+
+
+  export const ReferralScalarFieldEnum: {
+    id: 'id',
+    referrerId: 'referrerId',
+    refereeId: 'refereeId',
+    rewardGiven: 'rewardGiven',
+    createdAt: 'createdAt'
+  };
+
+  export type ReferralScalarFieldEnum = (typeof ReferralScalarFieldEnum)[keyof typeof ReferralScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -17403,11 +21253,19 @@ export namespace Prisma {
     paused?: BoolFilter<"User"> | boolean
     boostedUntil?: DateTimeNullableFilter<"User"> | Date | string | null
     isPremium?: BoolFilter<"User"> | boolean
+    premiumTier?: StringFilter<"User"> | string
+    boostCredits?: IntFilter<"User"> | number
     profileScore?: IntFilter<"User"> | number
     onboardingStep?: StringFilter<"User"> | string
     onboardingCompleted?: BoolFilter<"User"> | boolean
     emailVerified?: BoolFilter<"User"> | boolean
     verifyToken?: StringNullableFilter<"User"> | string | null
+    resetToken?: StringNullableFilter<"User"> | string | null
+    resetTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
+    pushSubscription?: StringNullableFilter<"User"> | string | null
+    referralCode?: StringNullableFilter<"User"> | string | null
+    referredById?: StringNullableFilter<"User"> | string | null
+    lastSeen?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     media?: MediaListRelationFilter
     likesSent?: LikeListRelationFilter
@@ -17425,6 +21283,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventListRelationFilter
     friendRequestsSent?: FriendshipListRelationFilter
     friendRequestsReceived?: FriendshipListRelationFilter
+    subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
+    giftsGiven?: GiftListRelationFilter
+    giftsReceived?: GiftListRelationFilter
+    referrals?: ReferralListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -17457,11 +21319,19 @@ export namespace Prisma {
     paused?: SortOrder
     boostedUntil?: SortOrderInput | SortOrder
     isPremium?: SortOrder
+    premiumTier?: SortOrder
+    boostCredits?: SortOrder
     profileScore?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
     verifyToken?: SortOrderInput | SortOrder
+    resetToken?: SortOrderInput | SortOrder
+    resetTokenExpiry?: SortOrderInput | SortOrder
+    pushSubscription?: SortOrderInput | SortOrder
+    referralCode?: SortOrderInput | SortOrder
+    referredById?: SortOrderInput | SortOrder
+    lastSeen?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     media?: MediaOrderByRelationAggregateInput
     likesSent?: LikeOrderByRelationAggregateInput
@@ -17479,11 +21349,16 @@ export namespace Prisma {
     securityEvents?: SecurityEventOrderByRelationAggregateInput
     friendRequestsSent?: FriendshipOrderByRelationAggregateInput
     friendRequestsReceived?: FriendshipOrderByRelationAggregateInput
+    subscription?: SubscriptionOrderByWithRelationInput
+    giftsGiven?: GiftOrderByRelationAggregateInput
+    giftsReceived?: GiftOrderByRelationAggregateInput
+    referrals?: ReferralOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    referralCode?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
@@ -17514,11 +21389,18 @@ export namespace Prisma {
     paused?: BoolFilter<"User"> | boolean
     boostedUntil?: DateTimeNullableFilter<"User"> | Date | string | null
     isPremium?: BoolFilter<"User"> | boolean
+    premiumTier?: StringFilter<"User"> | string
+    boostCredits?: IntFilter<"User"> | number
     profileScore?: IntFilter<"User"> | number
     onboardingStep?: StringFilter<"User"> | string
     onboardingCompleted?: BoolFilter<"User"> | boolean
     emailVerified?: BoolFilter<"User"> | boolean
     verifyToken?: StringNullableFilter<"User"> | string | null
+    resetToken?: StringNullableFilter<"User"> | string | null
+    resetTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
+    pushSubscription?: StringNullableFilter<"User"> | string | null
+    referredById?: StringNullableFilter<"User"> | string | null
+    lastSeen?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     media?: MediaListRelationFilter
     likesSent?: LikeListRelationFilter
@@ -17536,7 +21418,11 @@ export namespace Prisma {
     securityEvents?: SecurityEventListRelationFilter
     friendRequestsSent?: FriendshipListRelationFilter
     friendRequestsReceived?: FriendshipListRelationFilter
-  }, "id" | "email">
+    subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
+    giftsGiven?: GiftListRelationFilter
+    giftsReceived?: GiftListRelationFilter
+    referrals?: ReferralListRelationFilter
+  }, "id" | "email" | "referralCode">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -17568,11 +21454,19 @@ export namespace Prisma {
     paused?: SortOrder
     boostedUntil?: SortOrderInput | SortOrder
     isPremium?: SortOrder
+    premiumTier?: SortOrder
+    boostCredits?: SortOrder
     profileScore?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
     verifyToken?: SortOrderInput | SortOrder
+    resetToken?: SortOrderInput | SortOrder
+    resetTokenExpiry?: SortOrderInput | SortOrder
+    pushSubscription?: SortOrderInput | SortOrder
+    referralCode?: SortOrderInput | SortOrder
+    referredById?: SortOrderInput | SortOrder
+    lastSeen?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
@@ -17614,11 +21508,19 @@ export namespace Prisma {
     paused?: BoolWithAggregatesFilter<"User"> | boolean
     boostedUntil?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     isPremium?: BoolWithAggregatesFilter<"User"> | boolean
+    premiumTier?: StringWithAggregatesFilter<"User"> | string
+    boostCredits?: IntWithAggregatesFilter<"User"> | number
     profileScore?: IntWithAggregatesFilter<"User"> | number
     onboardingStep?: StringWithAggregatesFilter<"User"> | string
     onboardingCompleted?: BoolWithAggregatesFilter<"User"> | boolean
     emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
     verifyToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    resetToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    resetTokenExpiry?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    pushSubscription?: StringNullableWithAggregatesFilter<"User"> | string | null
+    referralCode?: StringNullableWithAggregatesFilter<"User"> | string | null
+    referredById?: StringNullableWithAggregatesFilter<"User"> | string | null
+    lastSeen?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
@@ -18357,6 +22259,214 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"SecurityEvent"> | Date | string
   }
 
+  export type SubscriptionWhereInput = {
+    AND?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    OR?: SubscriptionWhereInput[]
+    NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    id?: StringFilter<"Subscription"> | string
+    userId?: StringFilter<"Subscription"> | string
+    stripeCustomerId?: StringFilter<"Subscription"> | string
+    stripeSubscriptionId?: StringNullableFilter<"Subscription"> | string | null
+    stripePriceId?: StringNullableFilter<"Subscription"> | string | null
+    tier?: StringFilter<"Subscription"> | string
+    status?: StringFilter<"Subscription"> | string
+    currentPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolFilter<"Subscription"> | boolean
+    createdAt?: DateTimeFilter<"Subscription"> | Date | string
+    updatedAt?: DateTimeFilter<"Subscription"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type SubscriptionOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripeCustomerId?: SortOrder
+    stripeSubscriptionId?: SortOrderInput | SortOrder
+    stripePriceId?: SortOrderInput | SortOrder
+    tier?: SortOrder
+    status?: SortOrder
+    currentPeriodEnd?: SortOrderInput | SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    stripeCustomerId?: string
+    AND?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    OR?: SubscriptionWhereInput[]
+    NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    stripeSubscriptionId?: StringNullableFilter<"Subscription"> | string | null
+    stripePriceId?: StringNullableFilter<"Subscription"> | string | null
+    tier?: StringFilter<"Subscription"> | string
+    status?: StringFilter<"Subscription"> | string
+    currentPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolFilter<"Subscription"> | boolean
+    createdAt?: DateTimeFilter<"Subscription"> | Date | string
+    updatedAt?: DateTimeFilter<"Subscription"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId" | "stripeCustomerId">
+
+  export type SubscriptionOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripeCustomerId?: SortOrder
+    stripeSubscriptionId?: SortOrderInput | SortOrder
+    stripePriceId?: SortOrderInput | SortOrder
+    tier?: SortOrder
+    status?: SortOrder
+    currentPeriodEnd?: SortOrderInput | SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SubscriptionCountOrderByAggregateInput
+    _max?: SubscriptionMaxOrderByAggregateInput
+    _min?: SubscriptionMinOrderByAggregateInput
+  }
+
+  export type SubscriptionScalarWhereWithAggregatesInput = {
+    AND?: SubscriptionScalarWhereWithAggregatesInput | SubscriptionScalarWhereWithAggregatesInput[]
+    OR?: SubscriptionScalarWhereWithAggregatesInput[]
+    NOT?: SubscriptionScalarWhereWithAggregatesInput | SubscriptionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Subscription"> | string
+    userId?: StringWithAggregatesFilter<"Subscription"> | string
+    stripeCustomerId?: StringWithAggregatesFilter<"Subscription"> | string
+    stripeSubscriptionId?: StringNullableWithAggregatesFilter<"Subscription"> | string | null
+    stripePriceId?: StringNullableWithAggregatesFilter<"Subscription"> | string | null
+    tier?: StringWithAggregatesFilter<"Subscription"> | string
+    status?: StringWithAggregatesFilter<"Subscription"> | string
+    currentPeriodEnd?: DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolWithAggregatesFilter<"Subscription"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
+  }
+
+  export type GiftWhereInput = {
+    AND?: GiftWhereInput | GiftWhereInput[]
+    OR?: GiftWhereInput[]
+    NOT?: GiftWhereInput | GiftWhereInput[]
+    id?: StringFilter<"Gift"> | string
+    fromId?: StringFilter<"Gift"> | string
+    toId?: StringFilter<"Gift"> | string
+    giftType?: StringFilter<"Gift"> | string
+    message?: StringFilter<"Gift"> | string
+    seen?: BoolFilter<"Gift"> | boolean
+    createdAt?: DateTimeFilter<"Gift"> | Date | string
+    from?: XOR<UserScalarRelationFilter, UserWhereInput>
+    to?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type GiftOrderByWithRelationInput = {
+    id?: SortOrder
+    fromId?: SortOrder
+    toId?: SortOrder
+    giftType?: SortOrder
+    message?: SortOrder
+    seen?: SortOrder
+    createdAt?: SortOrder
+    from?: UserOrderByWithRelationInput
+    to?: UserOrderByWithRelationInput
+  }
+
+  export type GiftWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GiftWhereInput | GiftWhereInput[]
+    OR?: GiftWhereInput[]
+    NOT?: GiftWhereInput | GiftWhereInput[]
+    fromId?: StringFilter<"Gift"> | string
+    toId?: StringFilter<"Gift"> | string
+    giftType?: StringFilter<"Gift"> | string
+    message?: StringFilter<"Gift"> | string
+    seen?: BoolFilter<"Gift"> | boolean
+    createdAt?: DateTimeFilter<"Gift"> | Date | string
+    from?: XOR<UserScalarRelationFilter, UserWhereInput>
+    to?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type GiftOrderByWithAggregationInput = {
+    id?: SortOrder
+    fromId?: SortOrder
+    toId?: SortOrder
+    giftType?: SortOrder
+    message?: SortOrder
+    seen?: SortOrder
+    createdAt?: SortOrder
+    _count?: GiftCountOrderByAggregateInput
+    _max?: GiftMaxOrderByAggregateInput
+    _min?: GiftMinOrderByAggregateInput
+  }
+
+  export type GiftScalarWhereWithAggregatesInput = {
+    AND?: GiftScalarWhereWithAggregatesInput | GiftScalarWhereWithAggregatesInput[]
+    OR?: GiftScalarWhereWithAggregatesInput[]
+    NOT?: GiftScalarWhereWithAggregatesInput | GiftScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Gift"> | string
+    fromId?: StringWithAggregatesFilter<"Gift"> | string
+    toId?: StringWithAggregatesFilter<"Gift"> | string
+    giftType?: StringWithAggregatesFilter<"Gift"> | string
+    message?: StringWithAggregatesFilter<"Gift"> | string
+    seen?: BoolWithAggregatesFilter<"Gift"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Gift"> | Date | string
+  }
+
+  export type ReferralWhereInput = {
+    AND?: ReferralWhereInput | ReferralWhereInput[]
+    OR?: ReferralWhereInput[]
+    NOT?: ReferralWhereInput | ReferralWhereInput[]
+    id?: StringFilter<"Referral"> | string
+    referrerId?: StringFilter<"Referral"> | string
+    refereeId?: StringFilter<"Referral"> | string
+    rewardGiven?: BoolFilter<"Referral"> | boolean
+    createdAt?: DateTimeFilter<"Referral"> | Date | string
+    referrer?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ReferralOrderByWithRelationInput = {
+    id?: SortOrder
+    referrerId?: SortOrder
+    refereeId?: SortOrder
+    rewardGiven?: SortOrder
+    createdAt?: SortOrder
+    referrer?: UserOrderByWithRelationInput
+  }
+
+  export type ReferralWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    refereeId?: string
+    AND?: ReferralWhereInput | ReferralWhereInput[]
+    OR?: ReferralWhereInput[]
+    NOT?: ReferralWhereInput | ReferralWhereInput[]
+    referrerId?: StringFilter<"Referral"> | string
+    rewardGiven?: BoolFilter<"Referral"> | boolean
+    createdAt?: DateTimeFilter<"Referral"> | Date | string
+    referrer?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "refereeId">
+
+  export type ReferralOrderByWithAggregationInput = {
+    id?: SortOrder
+    referrerId?: SortOrder
+    refereeId?: SortOrder
+    rewardGiven?: SortOrder
+    createdAt?: SortOrder
+    _count?: ReferralCountOrderByAggregateInput
+    _max?: ReferralMaxOrderByAggregateInput
+    _min?: ReferralMinOrderByAggregateInput
+  }
+
+  export type ReferralScalarWhereWithAggregatesInput = {
+    AND?: ReferralScalarWhereWithAggregatesInput | ReferralScalarWhereWithAggregatesInput[]
+    OR?: ReferralScalarWhereWithAggregatesInput[]
+    NOT?: ReferralScalarWhereWithAggregatesInput | ReferralScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Referral"> | string
+    referrerId?: StringWithAggregatesFilter<"Referral"> | string
+    refereeId?: StringWithAggregatesFilter<"Referral"> | string
+    rewardGiven?: BoolWithAggregatesFilter<"Referral"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Referral"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -18387,11 +22497,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -18409,6 +22527,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -18441,11 +22563,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -18463,6 +22593,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUpdateInput = {
@@ -18495,11 +22629,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -18517,6 +22659,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -18549,11 +22695,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -18571,6 +22725,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -18603,11 +22761,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -18641,11 +22807,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -18679,11 +22853,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19409,6 +23591,226 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SubscriptionCreateInput = {
+    id?: string
+    stripeCustomerId: string
+    stripeSubscriptionId?: string | null
+    stripePriceId?: string | null
+    tier?: string
+    status?: string
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutSubscriptionInput
+  }
+
+  export type SubscriptionUncheckedCreateInput = {
+    id?: string
+    userId: string
+    stripeCustomerId: string
+    stripeSubscriptionId?: string | null
+    stripePriceId?: string | null
+    tier?: string
+    status?: string
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SubscriptionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
+    tier?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSubscriptionNestedInput
+  }
+
+  export type SubscriptionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
+    tier?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubscriptionCreateManyInput = {
+    id?: string
+    userId: string
+    stripeCustomerId: string
+    stripeSubscriptionId?: string | null
+    stripePriceId?: string | null
+    tier?: string
+    status?: string
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SubscriptionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
+    tier?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubscriptionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
+    tier?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCreateInput = {
+    id?: string
+    giftType: string
+    message?: string
+    seen?: boolean
+    createdAt?: Date | string
+    from: UserCreateNestedOneWithoutGiftsGivenInput
+    to: UserCreateNestedOneWithoutGiftsReceivedInput
+  }
+
+  export type GiftUncheckedCreateInput = {
+    id?: string
+    fromId: string
+    toId: string
+    giftType: string
+    message?: string
+    seen?: boolean
+    createdAt?: Date | string
+  }
+
+  export type GiftUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    giftType?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    from?: UserUpdateOneRequiredWithoutGiftsGivenNestedInput
+    to?: UserUpdateOneRequiredWithoutGiftsReceivedNestedInput
+  }
+
+  export type GiftUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fromId?: StringFieldUpdateOperationsInput | string
+    toId?: StringFieldUpdateOperationsInput | string
+    giftType?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCreateManyInput = {
+    id?: string
+    fromId: string
+    toId: string
+    giftType: string
+    message?: string
+    seen?: boolean
+    createdAt?: Date | string
+  }
+
+  export type GiftUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    giftType?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fromId?: StringFieldUpdateOperationsInput | string
+    toId?: StringFieldUpdateOperationsInput | string
+    giftType?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferralCreateInput = {
+    id?: string
+    refereeId: string
+    rewardGiven?: boolean
+    createdAt?: Date | string
+    referrer: UserCreateNestedOneWithoutReferralsInput
+  }
+
+  export type ReferralUncheckedCreateInput = {
+    id?: string
+    referrerId: string
+    refereeId: string
+    rewardGiven?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ReferralUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refereeId?: StringFieldUpdateOperationsInput | string
+    rewardGiven?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    referrer?: UserUpdateOneRequiredWithoutReferralsNestedInput
+  }
+
+  export type ReferralUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    referrerId?: StringFieldUpdateOperationsInput | string
+    refereeId?: StringFieldUpdateOperationsInput | string
+    rewardGiven?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferralCreateManyInput = {
+    id?: string
+    referrerId: string
+    refereeId: string
+    rewardGiven?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ReferralUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refereeId?: StringFieldUpdateOperationsInput | string
+    rewardGiven?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferralUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    referrerId?: StringFieldUpdateOperationsInput | string
+    refereeId?: StringFieldUpdateOperationsInput | string
+    rewardGiven?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -19560,6 +23962,23 @@ export namespace Prisma {
     none?: FriendshipWhereInput
   }
 
+  export type SubscriptionNullableScalarRelationFilter = {
+    is?: SubscriptionWhereInput | null
+    isNot?: SubscriptionWhereInput | null
+  }
+
+  export type GiftListRelationFilter = {
+    every?: GiftWhereInput
+    some?: GiftWhereInput
+    none?: GiftWhereInput
+  }
+
+  export type ReferralListRelationFilter = {
+    every?: ReferralWhereInput
+    some?: ReferralWhereInput
+    none?: ReferralWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -19613,6 +24032,14 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type GiftOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ReferralOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
@@ -19643,11 +24070,19 @@ export namespace Prisma {
     paused?: SortOrder
     boostedUntil?: SortOrder
     isPremium?: SortOrder
+    premiumTier?: SortOrder
+    boostCredits?: SortOrder
     profileScore?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
     verifyToken?: SortOrder
+    resetToken?: SortOrder
+    resetTokenExpiry?: SortOrder
+    pushSubscription?: SortOrder
+    referralCode?: SortOrder
+    referredById?: SortOrder
+    lastSeen?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -19655,6 +24090,7 @@ export namespace Prisma {
     age?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    boostCredits?: SortOrder
     profileScore?: SortOrder
   }
 
@@ -19688,11 +24124,19 @@ export namespace Prisma {
     paused?: SortOrder
     boostedUntil?: SortOrder
     isPremium?: SortOrder
+    premiumTier?: SortOrder
+    boostCredits?: SortOrder
     profileScore?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
     verifyToken?: SortOrder
+    resetToken?: SortOrder
+    resetTokenExpiry?: SortOrder
+    pushSubscription?: SortOrder
+    referralCode?: SortOrder
+    referredById?: SortOrder
+    lastSeen?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -19726,11 +24170,19 @@ export namespace Prisma {
     paused?: SortOrder
     boostedUntil?: SortOrder
     isPremium?: SortOrder
+    premiumTier?: SortOrder
+    boostCredits?: SortOrder
     profileScore?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
     verifyToken?: SortOrder
+    resetToken?: SortOrder
+    resetTokenExpiry?: SortOrder
+    pushSubscription?: SortOrder
+    referralCode?: SortOrder
+    referredById?: SortOrder
+    lastSeen?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -19738,6 +24190,7 @@ export namespace Prisma {
     age?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    boostCredits?: SortOrder
     profileScore?: SortOrder
   }
 
@@ -20229,6 +24682,102 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type SubscriptionCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripeCustomerId?: SortOrder
+    stripeSubscriptionId?: SortOrder
+    stripePriceId?: SortOrder
+    tier?: SortOrder
+    status?: SortOrder
+    currentPeriodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SubscriptionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripeCustomerId?: SortOrder
+    stripeSubscriptionId?: SortOrder
+    stripePriceId?: SortOrder
+    tier?: SortOrder
+    status?: SortOrder
+    currentPeriodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SubscriptionMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripeCustomerId?: SortOrder
+    stripeSubscriptionId?: SortOrder
+    stripePriceId?: SortOrder
+    tier?: SortOrder
+    status?: SortOrder
+    currentPeriodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GiftCountOrderByAggregateInput = {
+    id?: SortOrder
+    fromId?: SortOrder
+    toId?: SortOrder
+    giftType?: SortOrder
+    message?: SortOrder
+    seen?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GiftMaxOrderByAggregateInput = {
+    id?: SortOrder
+    fromId?: SortOrder
+    toId?: SortOrder
+    giftType?: SortOrder
+    message?: SortOrder
+    seen?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GiftMinOrderByAggregateInput = {
+    id?: SortOrder
+    fromId?: SortOrder
+    toId?: SortOrder
+    giftType?: SortOrder
+    message?: SortOrder
+    seen?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ReferralCountOrderByAggregateInput = {
+    id?: SortOrder
+    referrerId?: SortOrder
+    refereeId?: SortOrder
+    rewardGiven?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ReferralMaxOrderByAggregateInput = {
+    id?: SortOrder
+    referrerId?: SortOrder
+    refereeId?: SortOrder
+    rewardGiven?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ReferralMinOrderByAggregateInput = {
+    id?: SortOrder
+    referrerId?: SortOrder
+    refereeId?: SortOrder
+    rewardGiven?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type MediaCreateNestedManyWithoutUserInput = {
     create?: XOR<MediaCreateWithoutUserInput, MediaUncheckedCreateWithoutUserInput> | MediaCreateWithoutUserInput[] | MediaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MediaCreateOrConnectWithoutUserInput | MediaCreateOrConnectWithoutUserInput[]
@@ -20341,6 +24890,33 @@ export namespace Prisma {
     connect?: FriendshipWhereUniqueInput | FriendshipWhereUniqueInput[]
   }
 
+  export type SubscriptionCreateNestedOneWithoutUserInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
+    connect?: SubscriptionWhereUniqueInput
+  }
+
+  export type GiftCreateNestedManyWithoutFromInput = {
+    create?: XOR<GiftCreateWithoutFromInput, GiftUncheckedCreateWithoutFromInput> | GiftCreateWithoutFromInput[] | GiftUncheckedCreateWithoutFromInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutFromInput | GiftCreateOrConnectWithoutFromInput[]
+    createMany?: GiftCreateManyFromInputEnvelope
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+  }
+
+  export type GiftCreateNestedManyWithoutToInput = {
+    create?: XOR<GiftCreateWithoutToInput, GiftUncheckedCreateWithoutToInput> | GiftCreateWithoutToInput[] | GiftUncheckedCreateWithoutToInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutToInput | GiftCreateOrConnectWithoutToInput[]
+    createMany?: GiftCreateManyToInputEnvelope
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+  }
+
+  export type ReferralCreateNestedManyWithoutReferrerInput = {
+    create?: XOR<ReferralCreateWithoutReferrerInput, ReferralUncheckedCreateWithoutReferrerInput> | ReferralCreateWithoutReferrerInput[] | ReferralUncheckedCreateWithoutReferrerInput[]
+    connectOrCreate?: ReferralCreateOrConnectWithoutReferrerInput | ReferralCreateOrConnectWithoutReferrerInput[]
+    createMany?: ReferralCreateManyReferrerInputEnvelope
+    connect?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
+  }
+
   export type MediaUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<MediaCreateWithoutUserInput, MediaUncheckedCreateWithoutUserInput> | MediaCreateWithoutUserInput[] | MediaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MediaCreateOrConnectWithoutUserInput | MediaCreateOrConnectWithoutUserInput[]
@@ -20451,6 +25027,33 @@ export namespace Prisma {
     connectOrCreate?: FriendshipCreateOrConnectWithoutAddresseeInput | FriendshipCreateOrConnectWithoutAddresseeInput[]
     createMany?: FriendshipCreateManyAddresseeInputEnvelope
     connect?: FriendshipWhereUniqueInput | FriendshipWhereUniqueInput[]
+  }
+
+  export type SubscriptionUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
+    connect?: SubscriptionWhereUniqueInput
+  }
+
+  export type GiftUncheckedCreateNestedManyWithoutFromInput = {
+    create?: XOR<GiftCreateWithoutFromInput, GiftUncheckedCreateWithoutFromInput> | GiftCreateWithoutFromInput[] | GiftUncheckedCreateWithoutFromInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutFromInput | GiftCreateOrConnectWithoutFromInput[]
+    createMany?: GiftCreateManyFromInputEnvelope
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+  }
+
+  export type GiftUncheckedCreateNestedManyWithoutToInput = {
+    create?: XOR<GiftCreateWithoutToInput, GiftUncheckedCreateWithoutToInput> | GiftCreateWithoutToInput[] | GiftUncheckedCreateWithoutToInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutToInput | GiftCreateOrConnectWithoutToInput[]
+    createMany?: GiftCreateManyToInputEnvelope
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+  }
+
+  export type ReferralUncheckedCreateNestedManyWithoutReferrerInput = {
+    create?: XOR<ReferralCreateWithoutReferrerInput, ReferralUncheckedCreateWithoutReferrerInput> | ReferralCreateWithoutReferrerInput[] | ReferralUncheckedCreateWithoutReferrerInput[]
+    connectOrCreate?: ReferralCreateOrConnectWithoutReferrerInput | ReferralCreateOrConnectWithoutReferrerInput[]
+    createMany?: ReferralCreateManyReferrerInputEnvelope
+    connect?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -20713,6 +25316,58 @@ export namespace Prisma {
     deleteMany?: FriendshipScalarWhereInput | FriendshipScalarWhereInput[]
   }
 
+  export type SubscriptionUpdateOneWithoutUserNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
+    upsert?: SubscriptionUpsertWithoutUserInput
+    disconnect?: SubscriptionWhereInput | boolean
+    delete?: SubscriptionWhereInput | boolean
+    connect?: SubscriptionWhereUniqueInput
+    update?: XOR<XOR<SubscriptionUpdateToOneWithWhereWithoutUserInput, SubscriptionUpdateWithoutUserInput>, SubscriptionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type GiftUpdateManyWithoutFromNestedInput = {
+    create?: XOR<GiftCreateWithoutFromInput, GiftUncheckedCreateWithoutFromInput> | GiftCreateWithoutFromInput[] | GiftUncheckedCreateWithoutFromInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutFromInput | GiftCreateOrConnectWithoutFromInput[]
+    upsert?: GiftUpsertWithWhereUniqueWithoutFromInput | GiftUpsertWithWhereUniqueWithoutFromInput[]
+    createMany?: GiftCreateManyFromInputEnvelope
+    set?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    disconnect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    delete?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    update?: GiftUpdateWithWhereUniqueWithoutFromInput | GiftUpdateWithWhereUniqueWithoutFromInput[]
+    updateMany?: GiftUpdateManyWithWhereWithoutFromInput | GiftUpdateManyWithWhereWithoutFromInput[]
+    deleteMany?: GiftScalarWhereInput | GiftScalarWhereInput[]
+  }
+
+  export type GiftUpdateManyWithoutToNestedInput = {
+    create?: XOR<GiftCreateWithoutToInput, GiftUncheckedCreateWithoutToInput> | GiftCreateWithoutToInput[] | GiftUncheckedCreateWithoutToInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutToInput | GiftCreateOrConnectWithoutToInput[]
+    upsert?: GiftUpsertWithWhereUniqueWithoutToInput | GiftUpsertWithWhereUniqueWithoutToInput[]
+    createMany?: GiftCreateManyToInputEnvelope
+    set?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    disconnect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    delete?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    update?: GiftUpdateWithWhereUniqueWithoutToInput | GiftUpdateWithWhereUniqueWithoutToInput[]
+    updateMany?: GiftUpdateManyWithWhereWithoutToInput | GiftUpdateManyWithWhereWithoutToInput[]
+    deleteMany?: GiftScalarWhereInput | GiftScalarWhereInput[]
+  }
+
+  export type ReferralUpdateManyWithoutReferrerNestedInput = {
+    create?: XOR<ReferralCreateWithoutReferrerInput, ReferralUncheckedCreateWithoutReferrerInput> | ReferralCreateWithoutReferrerInput[] | ReferralUncheckedCreateWithoutReferrerInput[]
+    connectOrCreate?: ReferralCreateOrConnectWithoutReferrerInput | ReferralCreateOrConnectWithoutReferrerInput[]
+    upsert?: ReferralUpsertWithWhereUniqueWithoutReferrerInput | ReferralUpsertWithWhereUniqueWithoutReferrerInput[]
+    createMany?: ReferralCreateManyReferrerInputEnvelope
+    set?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
+    disconnect?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
+    delete?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
+    connect?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
+    update?: ReferralUpdateWithWhereUniqueWithoutReferrerInput | ReferralUpdateWithWhereUniqueWithoutReferrerInput[]
+    updateMany?: ReferralUpdateManyWithWhereWithoutReferrerInput | ReferralUpdateManyWithWhereWithoutReferrerInput[]
+    deleteMany?: ReferralScalarWhereInput | ReferralScalarWhereInput[]
+  }
+
   export type MediaUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<MediaCreateWithoutUserInput, MediaUncheckedCreateWithoutUserInput> | MediaCreateWithoutUserInput[] | MediaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MediaCreateOrConnectWithoutUserInput | MediaCreateOrConnectWithoutUserInput[]
@@ -20935,6 +25590,58 @@ export namespace Prisma {
     update?: FriendshipUpdateWithWhereUniqueWithoutAddresseeInput | FriendshipUpdateWithWhereUniqueWithoutAddresseeInput[]
     updateMany?: FriendshipUpdateManyWithWhereWithoutAddresseeInput | FriendshipUpdateManyWithWhereWithoutAddresseeInput[]
     deleteMany?: FriendshipScalarWhereInput | FriendshipScalarWhereInput[]
+  }
+
+  export type SubscriptionUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
+    upsert?: SubscriptionUpsertWithoutUserInput
+    disconnect?: SubscriptionWhereInput | boolean
+    delete?: SubscriptionWhereInput | boolean
+    connect?: SubscriptionWhereUniqueInput
+    update?: XOR<XOR<SubscriptionUpdateToOneWithWhereWithoutUserInput, SubscriptionUpdateWithoutUserInput>, SubscriptionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type GiftUncheckedUpdateManyWithoutFromNestedInput = {
+    create?: XOR<GiftCreateWithoutFromInput, GiftUncheckedCreateWithoutFromInput> | GiftCreateWithoutFromInput[] | GiftUncheckedCreateWithoutFromInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutFromInput | GiftCreateOrConnectWithoutFromInput[]
+    upsert?: GiftUpsertWithWhereUniqueWithoutFromInput | GiftUpsertWithWhereUniqueWithoutFromInput[]
+    createMany?: GiftCreateManyFromInputEnvelope
+    set?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    disconnect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    delete?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    update?: GiftUpdateWithWhereUniqueWithoutFromInput | GiftUpdateWithWhereUniqueWithoutFromInput[]
+    updateMany?: GiftUpdateManyWithWhereWithoutFromInput | GiftUpdateManyWithWhereWithoutFromInput[]
+    deleteMany?: GiftScalarWhereInput | GiftScalarWhereInput[]
+  }
+
+  export type GiftUncheckedUpdateManyWithoutToNestedInput = {
+    create?: XOR<GiftCreateWithoutToInput, GiftUncheckedCreateWithoutToInput> | GiftCreateWithoutToInput[] | GiftUncheckedCreateWithoutToInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutToInput | GiftCreateOrConnectWithoutToInput[]
+    upsert?: GiftUpsertWithWhereUniqueWithoutToInput | GiftUpsertWithWhereUniqueWithoutToInput[]
+    createMany?: GiftCreateManyToInputEnvelope
+    set?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    disconnect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    delete?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    update?: GiftUpdateWithWhereUniqueWithoutToInput | GiftUpdateWithWhereUniqueWithoutToInput[]
+    updateMany?: GiftUpdateManyWithWhereWithoutToInput | GiftUpdateManyWithWhereWithoutToInput[]
+    deleteMany?: GiftScalarWhereInput | GiftScalarWhereInput[]
+  }
+
+  export type ReferralUncheckedUpdateManyWithoutReferrerNestedInput = {
+    create?: XOR<ReferralCreateWithoutReferrerInput, ReferralUncheckedCreateWithoutReferrerInput> | ReferralCreateWithoutReferrerInput[] | ReferralUncheckedCreateWithoutReferrerInput[]
+    connectOrCreate?: ReferralCreateOrConnectWithoutReferrerInput | ReferralCreateOrConnectWithoutReferrerInput[]
+    upsert?: ReferralUpsertWithWhereUniqueWithoutReferrerInput | ReferralUpsertWithWhereUniqueWithoutReferrerInput[]
+    createMany?: ReferralCreateManyReferrerInputEnvelope
+    set?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
+    disconnect?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
+    delete?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
+    connect?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
+    update?: ReferralUpdateWithWhereUniqueWithoutReferrerInput | ReferralUpdateWithWhereUniqueWithoutReferrerInput[]
+    updateMany?: ReferralUpdateManyWithWhereWithoutReferrerInput | ReferralUpdateManyWithWhereWithoutReferrerInput[]
+    deleteMany?: ReferralScalarWhereInput | ReferralScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutMediaInput = {
@@ -21217,6 +25924,62 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSecurityEventsInput, UserUpdateWithoutSecurityEventsInput>, UserUncheckedUpdateWithoutSecurityEventsInput>
+  }
+
+  export type UserCreateNestedOneWithoutSubscriptionInput = {
+    create?: XOR<UserCreateWithoutSubscriptionInput, UserUncheckedCreateWithoutSubscriptionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSubscriptionInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutSubscriptionNestedInput = {
+    create?: XOR<UserCreateWithoutSubscriptionInput, UserUncheckedCreateWithoutSubscriptionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSubscriptionInput
+    upsert?: UserUpsertWithoutSubscriptionInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSubscriptionInput, UserUpdateWithoutSubscriptionInput>, UserUncheckedUpdateWithoutSubscriptionInput>
+  }
+
+  export type UserCreateNestedOneWithoutGiftsGivenInput = {
+    create?: XOR<UserCreateWithoutGiftsGivenInput, UserUncheckedCreateWithoutGiftsGivenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGiftsGivenInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutGiftsReceivedInput = {
+    create?: XOR<UserCreateWithoutGiftsReceivedInput, UserUncheckedCreateWithoutGiftsReceivedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGiftsReceivedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutGiftsGivenNestedInput = {
+    create?: XOR<UserCreateWithoutGiftsGivenInput, UserUncheckedCreateWithoutGiftsGivenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGiftsGivenInput
+    upsert?: UserUpsertWithoutGiftsGivenInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGiftsGivenInput, UserUpdateWithoutGiftsGivenInput>, UserUncheckedUpdateWithoutGiftsGivenInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutGiftsReceivedNestedInput = {
+    create?: XOR<UserCreateWithoutGiftsReceivedInput, UserUncheckedCreateWithoutGiftsReceivedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGiftsReceivedInput
+    upsert?: UserUpsertWithoutGiftsReceivedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGiftsReceivedInput, UserUpdateWithoutGiftsReceivedInput>, UserUncheckedUpdateWithoutGiftsReceivedInput>
+  }
+
+  export type UserCreateNestedOneWithoutReferralsInput = {
+    create?: XOR<UserCreateWithoutReferralsInput, UserUncheckedCreateWithoutReferralsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReferralsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutReferralsNestedInput = {
+    create?: XOR<UserCreateWithoutReferralsInput, UserUncheckedCreateWithoutReferralsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReferralsInput
+    upsert?: UserUpsertWithoutReferralsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReferralsInput, UserUpdateWithoutReferralsInput>, UserUncheckedUpdateWithoutReferralsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -21811,6 +26574,117 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SubscriptionCreateWithoutUserInput = {
+    id?: string
+    stripeCustomerId: string
+    stripeSubscriptionId?: string | null
+    stripePriceId?: string | null
+    tier?: string
+    status?: string
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SubscriptionUncheckedCreateWithoutUserInput = {
+    id?: string
+    stripeCustomerId: string
+    stripeSubscriptionId?: string | null
+    stripePriceId?: string | null
+    tier?: string
+    status?: string
+    currentPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SubscriptionCreateOrConnectWithoutUserInput = {
+    where: SubscriptionWhereUniqueInput
+    create: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+  }
+
+  export type GiftCreateWithoutFromInput = {
+    id?: string
+    giftType: string
+    message?: string
+    seen?: boolean
+    createdAt?: Date | string
+    to: UserCreateNestedOneWithoutGiftsReceivedInput
+  }
+
+  export type GiftUncheckedCreateWithoutFromInput = {
+    id?: string
+    toId: string
+    giftType: string
+    message?: string
+    seen?: boolean
+    createdAt?: Date | string
+  }
+
+  export type GiftCreateOrConnectWithoutFromInput = {
+    where: GiftWhereUniqueInput
+    create: XOR<GiftCreateWithoutFromInput, GiftUncheckedCreateWithoutFromInput>
+  }
+
+  export type GiftCreateManyFromInputEnvelope = {
+    data: GiftCreateManyFromInput | GiftCreateManyFromInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GiftCreateWithoutToInput = {
+    id?: string
+    giftType: string
+    message?: string
+    seen?: boolean
+    createdAt?: Date | string
+    from: UserCreateNestedOneWithoutGiftsGivenInput
+  }
+
+  export type GiftUncheckedCreateWithoutToInput = {
+    id?: string
+    fromId: string
+    giftType: string
+    message?: string
+    seen?: boolean
+    createdAt?: Date | string
+  }
+
+  export type GiftCreateOrConnectWithoutToInput = {
+    where: GiftWhereUniqueInput
+    create: XOR<GiftCreateWithoutToInput, GiftUncheckedCreateWithoutToInput>
+  }
+
+  export type GiftCreateManyToInputEnvelope = {
+    data: GiftCreateManyToInput | GiftCreateManyToInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReferralCreateWithoutReferrerInput = {
+    id?: string
+    refereeId: string
+    rewardGiven?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ReferralUncheckedCreateWithoutReferrerInput = {
+    id?: string
+    refereeId: string
+    rewardGiven?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ReferralCreateOrConnectWithoutReferrerInput = {
+    where: ReferralWhereUniqueInput
+    create: XOR<ReferralCreateWithoutReferrerInput, ReferralUncheckedCreateWithoutReferrerInput>
+  }
+
+  export type ReferralCreateManyReferrerInputEnvelope = {
+    data: ReferralCreateManyReferrerInput | ReferralCreateManyReferrerInput[]
+    skipDuplicates?: boolean
+  }
+
   export type MediaUpsertWithWhereUniqueWithoutUserInput = {
     where: MediaWhereUniqueInput
     update: XOR<MediaUpdateWithoutUserInput, MediaUncheckedUpdateWithoutUserInput>
@@ -22208,6 +27082,115 @@ export namespace Prisma {
     data: XOR<FriendshipUpdateManyMutationInput, FriendshipUncheckedUpdateManyWithoutAddresseeInput>
   }
 
+  export type SubscriptionUpsertWithoutUserInput = {
+    update: XOR<SubscriptionUpdateWithoutUserInput, SubscriptionUncheckedUpdateWithoutUserInput>
+    create: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+    where?: SubscriptionWhereInput
+  }
+
+  export type SubscriptionUpdateToOneWithWhereWithoutUserInput = {
+    where?: SubscriptionWhereInput
+    data: XOR<SubscriptionUpdateWithoutUserInput, SubscriptionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SubscriptionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
+    tier?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubscriptionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripePriceId?: NullableStringFieldUpdateOperationsInput | string | null
+    tier?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUpsertWithWhereUniqueWithoutFromInput = {
+    where: GiftWhereUniqueInput
+    update: XOR<GiftUpdateWithoutFromInput, GiftUncheckedUpdateWithoutFromInput>
+    create: XOR<GiftCreateWithoutFromInput, GiftUncheckedCreateWithoutFromInput>
+  }
+
+  export type GiftUpdateWithWhereUniqueWithoutFromInput = {
+    where: GiftWhereUniqueInput
+    data: XOR<GiftUpdateWithoutFromInput, GiftUncheckedUpdateWithoutFromInput>
+  }
+
+  export type GiftUpdateManyWithWhereWithoutFromInput = {
+    where: GiftScalarWhereInput
+    data: XOR<GiftUpdateManyMutationInput, GiftUncheckedUpdateManyWithoutFromInput>
+  }
+
+  export type GiftScalarWhereInput = {
+    AND?: GiftScalarWhereInput | GiftScalarWhereInput[]
+    OR?: GiftScalarWhereInput[]
+    NOT?: GiftScalarWhereInput | GiftScalarWhereInput[]
+    id?: StringFilter<"Gift"> | string
+    fromId?: StringFilter<"Gift"> | string
+    toId?: StringFilter<"Gift"> | string
+    giftType?: StringFilter<"Gift"> | string
+    message?: StringFilter<"Gift"> | string
+    seen?: BoolFilter<"Gift"> | boolean
+    createdAt?: DateTimeFilter<"Gift"> | Date | string
+  }
+
+  export type GiftUpsertWithWhereUniqueWithoutToInput = {
+    where: GiftWhereUniqueInput
+    update: XOR<GiftUpdateWithoutToInput, GiftUncheckedUpdateWithoutToInput>
+    create: XOR<GiftCreateWithoutToInput, GiftUncheckedCreateWithoutToInput>
+  }
+
+  export type GiftUpdateWithWhereUniqueWithoutToInput = {
+    where: GiftWhereUniqueInput
+    data: XOR<GiftUpdateWithoutToInput, GiftUncheckedUpdateWithoutToInput>
+  }
+
+  export type GiftUpdateManyWithWhereWithoutToInput = {
+    where: GiftScalarWhereInput
+    data: XOR<GiftUpdateManyMutationInput, GiftUncheckedUpdateManyWithoutToInput>
+  }
+
+  export type ReferralUpsertWithWhereUniqueWithoutReferrerInput = {
+    where: ReferralWhereUniqueInput
+    update: XOR<ReferralUpdateWithoutReferrerInput, ReferralUncheckedUpdateWithoutReferrerInput>
+    create: XOR<ReferralCreateWithoutReferrerInput, ReferralUncheckedCreateWithoutReferrerInput>
+  }
+
+  export type ReferralUpdateWithWhereUniqueWithoutReferrerInput = {
+    where: ReferralWhereUniqueInput
+    data: XOR<ReferralUpdateWithoutReferrerInput, ReferralUncheckedUpdateWithoutReferrerInput>
+  }
+
+  export type ReferralUpdateManyWithWhereWithoutReferrerInput = {
+    where: ReferralScalarWhereInput
+    data: XOR<ReferralUpdateManyMutationInput, ReferralUncheckedUpdateManyWithoutReferrerInput>
+  }
+
+  export type ReferralScalarWhereInput = {
+    AND?: ReferralScalarWhereInput | ReferralScalarWhereInput[]
+    OR?: ReferralScalarWhereInput[]
+    NOT?: ReferralScalarWhereInput | ReferralScalarWhereInput[]
+    id?: StringFilter<"Referral"> | string
+    referrerId?: StringFilter<"Referral"> | string
+    refereeId?: StringFilter<"Referral"> | string
+    rewardGiven?: BoolFilter<"Referral"> | boolean
+    createdAt?: DateTimeFilter<"Referral"> | Date | string
+  }
+
   export type UserCreateWithoutMediaInput = {
     id?: string
     email: string
@@ -22238,11 +27221,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     likesSent?: LikeCreateNestedManyWithoutFromInput
     likesReceived?: LikeCreateNestedManyWithoutToInput
@@ -22259,6 +27250,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutMediaInput = {
@@ -22291,11 +27286,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
     likesReceived?: LikeUncheckedCreateNestedManyWithoutToInput
@@ -22312,6 +27315,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutMediaInput = {
@@ -22360,11 +27367,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesSent?: LikeUpdateManyWithoutFromNestedInput
     likesReceived?: LikeUpdateManyWithoutToNestedInput
@@ -22381,6 +27396,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMediaInput = {
@@ -22413,11 +27432,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
     likesReceived?: LikeUncheckedUpdateManyWithoutToNestedInput
@@ -22434,6 +27461,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserCreateWithoutLikesSentInput = {
@@ -22466,11 +27497,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesReceived?: LikeCreateNestedManyWithoutToInput
@@ -22487,6 +27526,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutLikesSentInput = {
@@ -22519,11 +27562,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesReceived?: LikeUncheckedCreateNestedManyWithoutToInput
@@ -22540,6 +27591,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutLikesSentInput = {
@@ -22577,11 +27632,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -22598,6 +27661,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutLikesReceivedInput = {
@@ -22630,11 +27697,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -22651,6 +27726,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutLikesReceivedInput = {
@@ -22699,11 +27778,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesReceived?: LikeUpdateManyWithoutToNestedInput
@@ -22720,6 +27807,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikesSentInput = {
@@ -22752,11 +27843,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesReceived?: LikeUncheckedUpdateManyWithoutToNestedInput
@@ -22773,6 +27872,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUpsertWithoutLikesReceivedInput = {
@@ -22816,11 +27919,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -22837,6 +27948,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikesReceivedInput = {
@@ -22869,11 +27984,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -22890,6 +28013,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserCreateWithoutViewsGivenInput = {
@@ -22922,11 +28049,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -22943,6 +28078,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutViewsGivenInput = {
@@ -22975,11 +28114,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -22996,6 +28143,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutViewsGivenInput = {
@@ -23033,11 +28184,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -23054,6 +28213,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutViewsReceivedInput = {
@@ -23086,11 +28249,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -23107,6 +28278,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutViewsReceivedInput = {
@@ -23155,11 +28330,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -23176,6 +28359,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutViewsGivenInput = {
@@ -23208,11 +28395,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -23229,6 +28424,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUpsertWithoutViewsReceivedInput = {
@@ -23272,11 +28471,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -23293,6 +28500,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutViewsReceivedInput = {
@@ -23325,11 +28536,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -23346,6 +28565,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserCreateWithoutMessagesInput = {
@@ -23378,11 +28601,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -23399,6 +28630,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutMessagesInput = {
@@ -23431,11 +28666,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -23452,6 +28695,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutMessagesInput = {
@@ -23524,11 +28771,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -23545,6 +28800,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesInput = {
@@ -23577,11 +28836,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -23598,6 +28865,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type MessageReactionUpsertWithWhereUniqueWithoutMessageInput = {
@@ -23673,11 +28944,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -23694,6 +28973,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutMessageReactionsInput = {
@@ -23726,11 +29009,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -23747,6 +29038,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutMessageReactionsInput = {
@@ -23828,11 +29123,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -23849,6 +29152,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessageReactionsInput = {
@@ -23881,11 +29188,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -23902,6 +29217,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserCreateWithoutBlocksGivenInput = {
@@ -23934,11 +29253,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -23955,6 +29282,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutBlocksGivenInput = {
@@ -23987,11 +29318,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -24008,6 +29347,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutBlocksGivenInput = {
@@ -24045,11 +29388,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -24066,6 +29417,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutBlocksReceivedInput = {
@@ -24098,11 +29453,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -24119,6 +29482,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutBlocksReceivedInput = {
@@ -24167,11 +29534,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -24188,6 +29563,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlocksGivenInput = {
@@ -24220,11 +29599,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -24241,6 +29628,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUpsertWithoutBlocksReceivedInput = {
@@ -24284,11 +29675,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -24305,6 +29704,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlocksReceivedInput = {
@@ -24337,11 +29740,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -24358,6 +29769,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserCreateWithoutReportsInput = {
@@ -24390,11 +29805,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -24411,6 +29834,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutReportsInput = {
@@ -24443,11 +29870,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -24464,6 +29899,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutReportsInput = {
@@ -24512,11 +29951,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -24533,6 +29980,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReportsInput = {
@@ -24565,11 +30016,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -24586,6 +30045,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserCreateWithoutFriendRequestsSentInput = {
@@ -24618,11 +30081,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -24639,6 +30110,10 @@ export namespace Prisma {
     reports?: ReportCreateNestedManyWithoutReporterInput
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutFriendRequestsSentInput = {
@@ -24671,11 +30146,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -24692,6 +30175,10 @@ export namespace Prisma {
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutFriendRequestsSentInput = {
@@ -24729,11 +30216,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -24750,6 +30245,10 @@ export namespace Prisma {
     reports?: ReportCreateNestedManyWithoutReporterInput
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutFriendRequestsReceivedInput = {
@@ -24782,11 +30281,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -24803,6 +30310,10 @@ export namespace Prisma {
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutFriendRequestsReceivedInput = {
@@ -24851,11 +30362,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -24872,6 +30391,10 @@ export namespace Prisma {
     reports?: ReportUpdateManyWithoutReporterNestedInput
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFriendRequestsSentInput = {
@@ -24904,11 +30427,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -24925,6 +30456,10 @@ export namespace Prisma {
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUpsertWithoutFriendRequestsReceivedInput = {
@@ -24968,11 +30503,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -24989,6 +30532,10 @@ export namespace Prisma {
     reports?: ReportUpdateManyWithoutReporterNestedInput
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFriendRequestsReceivedInput = {
@@ -25021,11 +30568,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -25042,6 +30597,10 @@ export namespace Prisma {
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserCreateWithoutLiveRoomsInput = {
@@ -25074,11 +30633,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -25095,6 +30662,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutLiveRoomsInput = {
@@ -25127,11 +30698,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -25148,6 +30727,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutLiveRoomsInput = {
@@ -25196,11 +30779,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -25217,6 +30808,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLiveRoomsInput = {
@@ -25249,11 +30844,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -25270,6 +30873,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserCreateWithoutRefreshTokensInput = {
@@ -25302,11 +30909,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -25323,6 +30938,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -25355,11 +30974,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -25376,6 +31003,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -25424,11 +31055,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -25445,6 +31084,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -25477,11 +31120,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -25498,6 +31149,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserCreateWithoutDailyLikesInput = {
@@ -25530,11 +31185,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -25551,6 +31214,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutDailyLikesInput = {
@@ -25583,11 +31250,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -25604,6 +31279,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutDailyLikesInput = {
@@ -25652,11 +31331,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -25673,6 +31360,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDailyLikesInput = {
@@ -25705,11 +31396,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -25726,6 +31425,10 @@ export namespace Prisma {
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserCreateWithoutSecurityEventsInput = {
@@ -25758,11 +31461,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaCreateNestedManyWithoutUserInput
     likesSent?: LikeCreateNestedManyWithoutFromInput
@@ -25779,6 +31490,10 @@ export namespace Prisma {
     reports?: ReportCreateNestedManyWithoutReporterInput
     friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
   }
 
   export type UserUncheckedCreateWithoutSecurityEventsInput = {
@@ -25811,11 +31526,19 @@ export namespace Prisma {
     paused?: boolean
     boostedUntil?: Date | string | null
     isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
     verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
     createdAt?: Date | string
     media?: MediaUncheckedCreateNestedManyWithoutUserInput
     likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
@@ -25832,6 +31555,10 @@ export namespace Prisma {
     reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
     friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
   }
 
   export type UserCreateOrConnectWithoutSecurityEventsInput = {
@@ -25880,11 +31607,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUpdateManyWithoutUserNestedInput
     likesSent?: LikeUpdateManyWithoutFromNestedInput
@@ -25901,6 +31636,10 @@ export namespace Prisma {
     reports?: ReportUpdateManyWithoutReporterNestedInput
     friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSecurityEventsInput = {
@@ -25933,11 +31672,19 @@ export namespace Prisma {
     paused?: BoolFieldUpdateOperationsInput | boolean
     boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     media?: MediaUncheckedUpdateManyWithoutUserNestedInput
     likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
@@ -25954,6 +31701,1114 @@ export namespace Prisma {
     reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
     friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+  }
+
+  export type UserCreateWithoutSubscriptionInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaCreateNestedManyWithoutUserInput
+    likesSent?: LikeCreateNestedManyWithoutFromInput
+    likesReceived?: LikeCreateNestedManyWithoutToInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserCreateNestedManyWithoutBlockedInput
+    reports?: ReportCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
+  }
+
+  export type UserUncheckedCreateWithoutSubscriptionInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutUserInput
+    likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
+    likesReceived?: LikeUncheckedCreateNestedManyWithoutToInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionUncheckedCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomUncheckedCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeUncheckedCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewUncheckedCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewUncheckedCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserUncheckedCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserUncheckedCreateNestedManyWithoutBlockedInput
+    reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+  }
+
+  export type UserCreateOrConnectWithoutSubscriptionInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSubscriptionInput, UserUncheckedCreateWithoutSubscriptionInput>
+  }
+
+  export type UserUpsertWithoutSubscriptionInput = {
+    update: XOR<UserUpdateWithoutSubscriptionInput, UserUncheckedUpdateWithoutSubscriptionInput>
+    create: XOR<UserCreateWithoutSubscriptionInput, UserUncheckedCreateWithoutSubscriptionInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSubscriptionInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSubscriptionInput, UserUncheckedUpdateWithoutSubscriptionInput>
+  }
+
+  export type UserUpdateWithoutSubscriptionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUpdateManyWithoutToNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSubscriptionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUncheckedUpdateManyWithoutToNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUncheckedUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUncheckedUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUncheckedUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUncheckedUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUncheckedUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUncheckedUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUncheckedUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+  }
+
+  export type UserCreateWithoutGiftsGivenInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaCreateNestedManyWithoutUserInput
+    likesSent?: LikeCreateNestedManyWithoutFromInput
+    likesReceived?: LikeCreateNestedManyWithoutToInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserCreateNestedManyWithoutBlockedInput
+    reports?: ReportCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
+  }
+
+  export type UserUncheckedCreateWithoutGiftsGivenInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutUserInput
+    likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
+    likesReceived?: LikeUncheckedCreateNestedManyWithoutToInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionUncheckedCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomUncheckedCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeUncheckedCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewUncheckedCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewUncheckedCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserUncheckedCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserUncheckedCreateNestedManyWithoutBlockedInput
+    reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+  }
+
+  export type UserCreateOrConnectWithoutGiftsGivenInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutGiftsGivenInput, UserUncheckedCreateWithoutGiftsGivenInput>
+  }
+
+  export type UserCreateWithoutGiftsReceivedInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaCreateNestedManyWithoutUserInput
+    likesSent?: LikeCreateNestedManyWithoutFromInput
+    likesReceived?: LikeCreateNestedManyWithoutToInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserCreateNestedManyWithoutBlockedInput
+    reports?: ReportCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
+  }
+
+  export type UserUncheckedCreateWithoutGiftsReceivedInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutUserInput
+    likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
+    likesReceived?: LikeUncheckedCreateNestedManyWithoutToInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionUncheckedCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomUncheckedCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeUncheckedCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewUncheckedCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewUncheckedCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserUncheckedCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserUncheckedCreateNestedManyWithoutBlockedInput
+    reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+  }
+
+  export type UserCreateOrConnectWithoutGiftsReceivedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutGiftsReceivedInput, UserUncheckedCreateWithoutGiftsReceivedInput>
+  }
+
+  export type UserUpsertWithoutGiftsGivenInput = {
+    update: XOR<UserUpdateWithoutGiftsGivenInput, UserUncheckedUpdateWithoutGiftsGivenInput>
+    create: XOR<UserCreateWithoutGiftsGivenInput, UserUncheckedCreateWithoutGiftsGivenInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutGiftsGivenInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutGiftsGivenInput, UserUncheckedUpdateWithoutGiftsGivenInput>
+  }
+
+  export type UserUpdateWithoutGiftsGivenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUpdateManyWithoutToNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutGiftsGivenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUncheckedUpdateManyWithoutToNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUncheckedUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUncheckedUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUncheckedUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUncheckedUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUncheckedUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUncheckedUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUncheckedUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+  }
+
+  export type UserUpsertWithoutGiftsReceivedInput = {
+    update: XOR<UserUpdateWithoutGiftsReceivedInput, UserUncheckedUpdateWithoutGiftsReceivedInput>
+    create: XOR<UserCreateWithoutGiftsReceivedInput, UserUncheckedCreateWithoutGiftsReceivedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutGiftsReceivedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutGiftsReceivedInput, UserUncheckedUpdateWithoutGiftsReceivedInput>
+  }
+
+  export type UserUpdateWithoutGiftsReceivedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUpdateManyWithoutToNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutGiftsReceivedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUncheckedUpdateManyWithoutToNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUncheckedUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUncheckedUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUncheckedUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUncheckedUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUncheckedUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUncheckedUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUncheckedUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+  }
+
+  export type UserCreateWithoutReferralsInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaCreateNestedManyWithoutUserInput
+    likesSent?: LikeCreateNestedManyWithoutFromInput
+    likesReceived?: LikeCreateNestedManyWithoutToInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserCreateNestedManyWithoutBlockedInput
+    reports?: ReportCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+  }
+
+  export type UserUncheckedCreateWithoutReferralsInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutUserInput
+    likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
+    likesReceived?: LikeUncheckedCreateNestedManyWithoutToInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionUncheckedCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomUncheckedCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeUncheckedCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewUncheckedCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewUncheckedCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserUncheckedCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserUncheckedCreateNestedManyWithoutBlockedInput
+    reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+  }
+
+  export type UserCreateOrConnectWithoutReferralsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReferralsInput, UserUncheckedCreateWithoutReferralsInput>
+  }
+
+  export type UserUpsertWithoutReferralsInput = {
+    update: XOR<UserUpdateWithoutReferralsInput, UserUncheckedUpdateWithoutReferralsInput>
+    create: XOR<UserCreateWithoutReferralsInput, UserUncheckedCreateWithoutReferralsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReferralsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReferralsInput, UserUncheckedUpdateWithoutReferralsInput>
+  }
+
+  export type UserUpdateWithoutReferralsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUpdateManyWithoutToNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReferralsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUncheckedUpdateManyWithoutToNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUncheckedUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUncheckedUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUncheckedUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUncheckedUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUncheckedUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUncheckedUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUncheckedUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
   }
 
   export type MediaCreateManyUserInput = {
@@ -26073,6 +32928,31 @@ export namespace Prisma {
     id?: string
     requesterId: string
     status?: string
+    createdAt?: Date | string
+  }
+
+  export type GiftCreateManyFromInput = {
+    id?: string
+    toId: string
+    giftType: string
+    message?: string
+    seen?: boolean
+    createdAt?: Date | string
+  }
+
+  export type GiftCreateManyToInput = {
+    id?: string
+    fromId: string
+    giftType: string
+    message?: string
+    seen?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ReferralCreateManyReferrerInput = {
+    id?: string
+    refereeId: string
+    rewardGiven?: boolean
     createdAt?: Date | string
   }
 
@@ -26435,6 +33315,81 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     requesterId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUpdateWithoutFromInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    giftType?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    to?: UserUpdateOneRequiredWithoutGiftsReceivedNestedInput
+  }
+
+  export type GiftUncheckedUpdateWithoutFromInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    toId?: StringFieldUpdateOperationsInput | string
+    giftType?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUncheckedUpdateManyWithoutFromInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    toId?: StringFieldUpdateOperationsInput | string
+    giftType?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUpdateWithoutToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    giftType?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    from?: UserUpdateOneRequiredWithoutGiftsGivenNestedInput
+  }
+
+  export type GiftUncheckedUpdateWithoutToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fromId?: StringFieldUpdateOperationsInput | string
+    giftType?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUncheckedUpdateManyWithoutToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fromId?: StringFieldUpdateOperationsInput | string
+    giftType?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferralUpdateWithoutReferrerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refereeId?: StringFieldUpdateOperationsInput | string
+    rewardGiven?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferralUncheckedUpdateWithoutReferrerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refereeId?: StringFieldUpdateOperationsInput | string
+    rewardGiven?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferralUncheckedUpdateManyWithoutReferrerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refereeId?: StringFieldUpdateOperationsInput | string
+    rewardGiven?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
