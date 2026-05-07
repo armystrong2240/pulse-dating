@@ -21,6 +21,14 @@ const AdminPasswordSchema = z.object({
 
 // GET /api/admin/stats — overall platform stats
 router.get("/stats", requireAuth, requireAdmin, async (_req, res) => {
+  const safeCount = async (promise, fallback = 0) => {
+    try {
+      return await promise;
+    } catch {
+      return fallback;
+    }
+  };
+
   const [
     totalUsers,
     verifiedUsers,
@@ -33,26 +41,35 @@ router.get("/stats", requireAuth, requireAdmin, async (_req, res) => {
     newUsersToday,
     newUsersThisWeek,
   ] = await Promise.all([
-    prisma.user.count(),
-    prisma.user.count({ where: { emailVerified: true } }),
-    prisma.user.count({ where: { isPremium: true } }),
-    prisma.like.count({ where: { liked: true } }),
-    prisma.message.count(),
-    prisma.report.count(),
-    prisma.gift.count(),
-    prisma.referral.count(),
-    prisma.user.count({
-      where: { createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } },
-    }),
-    prisma.user.count({
-      where: { createdAt: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } },
-    }),
+    safeCount(prisma.user.count()),
+    safeCount(prisma.user.count({ where: { emailVerified: true } })),
+    safeCount(prisma.user.count({ where: { isPremium: true } })),
+    safeCount(prisma.like.count({ where: { liked: true } })),
+    safeCount(prisma.message.count()),
+    safeCount(prisma.report.count()),
+    safeCount(prisma.gift.count()),
+    safeCount(prisma.referral.count()),
+    safeCount(
+      prisma.user.count({
+        where: { createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } },
+      }),
+    ),
+    safeCount(
+      prisma.user.count({
+        where: { createdAt: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } },
+      }),
+    ),
   ]);
 
-  const tierBreakdown = await prisma.user.groupBy({
-    by: ["premiumTier"],
-    _count: { premiumTier: true },
-  });
+  let tierBreakdown = [];
+  try {
+    tierBreakdown = await prisma.user.groupBy({
+      by: ["premiumTier"],
+      _count: { premiumTier: true },
+    });
+  } catch {
+    tierBreakdown = [];
+  }
 
   return res.json({
     stats: {
