@@ -14,6 +14,7 @@ import {
   BCRYPT_ROUNDS,
   CLIENT_URL,
   PORT,
+  REDIS_URL,
   isProduction,
 } from "./config/env.js";
 import { initDb, prisma } from "./db.js";
@@ -30,10 +31,14 @@ import onboardingRoutes from "./routes/onboarding.js";
 import profileQualityRoutes from "./routes/profileQuality.js";
 import profileRoutes from "./routes/profiles.js";
 import referralRoutes from "./routes/referrals.js";
+import rosesRoutes from "./routes/roses.js";
+import phoneRoutes from "./routes/phone.js";
+import boostsRoutes from "./routes/boosts.js";
 import securityAdminRoutes from "./routes/securityAdmin.js";
 import adminRoutes from "./routes/admin.js";
 import safetyRoutes from "./routes/safety.js";
 import pushRoutes from "./routes/push.js";
+import { startBackgroundJobs } from "./lib/backgroundJobs.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -115,12 +120,27 @@ app.use((req, _res, next) => {
 app.use(express.json({ limit: "10mb" }));
 app.use("/uploads", express.static(uploadsDir));
 
-// Rate limiting — tighter on auth, loose on general API
+// Rate limiting — Redis-backed in production when REDIS_URL is set, in-memory otherwise
+let rateLimitStore;
+if (REDIS_URL) {
+  try {
+    const { createClient } = await import("redis");
+    const { RedisStore } = await import("rate-limit-redis");
+    const redisClient = createClient({ url: REDIS_URL });
+    await redisClient.connect();
+    rateLimitStore = new RedisStore({ sendCommand: (...args) => redisClient.sendCommand(args) });
+    logger.info("rate_limit.store", { backend: "redis" });
+  } catch (e) {
+    logger.warn("rate_limit.redis_failed", { error: e?.message, fallback: "memory" });
+  }
+}
+
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: isProduction ? 30 : 100,
   standardHeaders: true,
   legacyHeaders: false,
+  store: rateLimitStore,
   message: { error: "Too many requests, please try again later." },
 });
 const apiLimiter = rateLimit({
@@ -128,6 +148,7 @@ const apiLimiter = rateLimit({
   max: isProduction ? 120 : 200,
   standardHeaders: true,
   legacyHeaders: false,
+  store: rateLimitStore,
 });
 
 app.use("/api/auth", authLimiter, authRoutes);
@@ -145,6 +166,9 @@ app.use("/api/onboarding", apiLimiter, onboardingRoutes);
 app.use("/api/security-admin", apiLimiter, securityAdminRoutes);
 app.use("/api/admin", apiLimiter, adminRoutes);
 app.use("/api/push", apiLimiter, pushRoutes);
+app.use("/api/roses", apiLimiter, rosesRoutes);
+app.use("/api/phone", apiLimiter, phoneRoutes);
+app.use("/api/boosts", apiLimiter, boostsRoutes);
 app.get("/api/health", (_req, res) =>
   res.json({ ok: true, timestamp: new Date().toISOString() }),
 );
@@ -324,6 +348,7 @@ const start = async () => {
       port: PORT,
       url: `http://localhost:${PORT}`,
     });
+    startBackgroundJobs();
   });
 };
 

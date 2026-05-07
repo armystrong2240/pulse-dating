@@ -39,6 +39,12 @@ model User {
   isPremium       Boolean  @default(false)
   premiumTier     String   @default("free")  // free | plus | gold
   boostCredits    Int      @default(0)
+  roseBalance     Int      @default(0)        // premium currency
+  loginStreak     Int      @default(0)
+  lastLoginDate   String   @default("")        // YYYY-MM-DD
+  phoneNumber     String?  @unique
+  phoneVerified   Boolean  @default(false)
+  autoHidden      Boolean  @default(false)     // auto-hidden due to reports
   profileScore    Int      @default(0)
   onboardingStep  String   @default("basics")
   onboardingCompleted Boolean @default(false)
@@ -69,6 +75,11 @@ model User {
   giftsGiven             Gift[]       @relation("GiftsGiven")
   giftsReceived          Gift[]       @relation("GiftsReceived")
   referrals              Referral[]   @relation("ReferralsMade")
+  roseLedger             RoseLedger[]
+  phoneVerifications     PhoneVerification[]
+  scheduledBoosts        ScheduledBoost[]
+
+  @@index([latitude, longitude])
 }
 
 model Media {
@@ -264,4 +275,48 @@ model Referral {
   referrer User @relation("ReferralsMade", fields: [referrerId], references: [id], onDelete: Cascade)
 
   @@index([referrerId])
+}
+
+// Premium virtual currency ledger
+model RoseLedger {
+  id        String   @id @default(uuid())
+  userId    String
+  delta     Int      // positive = earned, negative = spent
+  reason    String   // purchase | streak_bonus | referral | gift_sent | superlike
+  refId     String?  // optional related entity id
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// Phone number verification codes
+model PhoneVerification {
+  id        String   @id @default(uuid())
+  userId    String
+  phone     String
+  code      String
+  expiresAt DateTime
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// Scheduled profile boosts
+model ScheduledBoost {
+  id          String   @id @default(uuid())
+  userId      String
+  scheduledAt DateTime
+  durationMin Int      @default(30)
+  fired       Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([scheduledAt])
 }

@@ -6,6 +6,7 @@ import { Router } from "express";
 import { prisma } from "../db.js";
 import { requireAuth } from "../middleware/auth.js";
 import { sendPushToUser } from "./push.js";
+import { moderateText } from "../lib/aiServices.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -90,6 +91,17 @@ router.get("/", requireAuth, async (req, res) => {
 router.post("/", requireAuth, async (req, res) => {
   const { roomId = "global", text } = req.body;
   if (!text && !req.body.imageUrl) return res.status(400).json({ error: "text or imageUrl is required" });
+
+  // AI content moderation (non-blocking — if AI is down, message still sends)
+  if (text) {
+    const mod = await moderateText(text);
+    if (!mod.safe) {
+      return res.status(422).json({
+        error: "Your message was flagged by our content filter. Please keep conversations respectful.",
+        flaggedCategories: mod.flaggedCategories,
+      });
+    }
+  }
 
   const sender = await prisma.user.findUnique({ where: { id: req.user.id } });
   const message = await prisma.message.create({

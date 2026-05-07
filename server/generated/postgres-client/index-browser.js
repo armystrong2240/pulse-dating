@@ -153,6 +153,12 @@ exports.Prisma.UserScalarFieldEnum = {
   isPremium: 'isPremium',
   premiumTier: 'premiumTier',
   boostCredits: 'boostCredits',
+  roseBalance: 'roseBalance',
+  loginStreak: 'loginStreak',
+  lastLoginDate: 'lastLoginDate',
+  phoneNumber: 'phoneNumber',
+  phoneVerified: 'phoneVerified',
+  autoHidden: 'autoHidden',
   profileScore: 'profileScore',
   onboardingStep: 'onboardingStep',
   onboardingCompleted: 'onboardingCompleted',
@@ -304,6 +310,34 @@ exports.Prisma.ReferralScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.RoseLedgerScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  delta: 'delta',
+  reason: 'reason',
+  refId: 'refId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PhoneVerificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  phone: 'phone',
+  code: 'code',
+  expiresAt: 'expiresAt',
+  verified: 'verified',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ScheduledBoostScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  scheduledAt: 'scheduledAt',
+  durationMin: 'durationMin',
+  fired: 'fired',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -336,7 +370,10 @@ exports.Prisma.ModelName = {
   SecurityEvent: 'SecurityEvent',
   Subscription: 'Subscription',
   Gift: 'Gift',
-  Referral: 'Referral'
+  Referral: 'Referral',
+  RoseLedger: 'RoseLedger',
+  PhoneVerification: 'PhoneVerification',
+  ScheduledBoost: 'ScheduledBoost'
 };
 
 /**

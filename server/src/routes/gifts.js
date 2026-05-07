@@ -131,4 +131,29 @@ router.get("/catalog", (_req, res) => {
   return res.json({ catalog });
 });
 
+// GET /api/gifts/leaderboard — top 10 most gifted users this month
+router.get("/leaderboard", requireAuth, async (_req, res) => {
+  const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+
+  const rows = await prisma.gift.groupBy({
+    by: ["toId"],
+    _count: { toId: true },
+    where: { createdAt: { gte: monthStart } },
+    orderBy: { _count: { toId: "desc" } },
+    take: 10,
+  });
+
+  const enriched = await Promise.all(
+    rows.map(async (r, idx) => {
+      const user = await prisma.user.findUnique({
+        where: { id: r.toId },
+        select: { id: true, name: true, avatar: true, city: true },
+      });
+      return { rank: idx + 1, user, giftCount: r._count.toId };
+    })
+  );
+
+  return res.json({ leaderboard: enriched.filter((r) => r.user), month: monthStart.toISOString().slice(0, 7) });
+});
+
 export default router;

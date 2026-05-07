@@ -40,12 +40,18 @@ model User {
   isPremium           Boolean   @default(false)
   premiumTier         String    @default("free")
   boostCredits        Int       @default(0)
+  roseBalance         Int       @default(0)
+  loginStreak         Int       @default(0)
+  lastLoginDate       String    @default("")
+  phoneNumber         String?   @unique
+  phoneVerified       Boolean   @default(false)
+  autoHidden          Boolean   @default(false)
   profileScore        Int       @default(0)
   onboardingStep      String    @default("basics")
   onboardingCompleted Boolean   @default(false)
   emailVerified       Boolean   @default(false)
   verifyToken         String?
-  resetToken          String?
+  resetToken          String?   @unique
   resetTokenExpiry    DateTime?
   pushSubscription    String?
   referralCode        String?   @unique
@@ -54,25 +60,28 @@ model User {
   createdAt           DateTime  @default(now())
 
   media                  Media[]
-  likesSent              Like[]            @relation("LikeFrom")
-  likesReceived          Like[]            @relation("LikeTo")
+  likesSent              Like[]              @relation("LikeFrom")
+  likesReceived          Like[]              @relation("LikeTo")
   messages               Message[]
   messageReactions       MessageReaction[]
   liveRooms              LiveRoom[]
   refreshTokens          RefreshToken[]
   dailyLikes             DailyLike[]
-  viewsGiven             ProfileView[]     @relation("ViewsGiven")
-  viewsReceived          ProfileView[]     @relation("ViewsReceived")
-  blocksGiven            BlockedUser[]     @relation("BlocksGiven")
-  blocksReceived         BlockedUser[]     @relation("BlocksReceived")
-  reports                Report[]          @relation("ReportsMade")
+  viewsGiven             ProfileView[]       @relation("ViewsGiven")
+  viewsReceived          ProfileView[]       @relation("ViewsReceived")
+  blocksGiven            BlockedUser[]       @relation("BlocksGiven")
+  blocksReceived         BlockedUser[]       @relation("BlocksReceived")
+  reports                Report[]            @relation("ReportsMade")
   securityEvents         SecurityEvent[]
-  friendRequestsSent     Friendship[]      @relation("FriendRequestsSent")
-  friendRequestsReceived Friendship[]      @relation("FriendRequestsReceived")
+  friendRequestsSent     Friendship[]        @relation("FriendRequestsSent")
+  friendRequestsReceived Friendship[]        @relation("FriendRequestsReceived")
   subscription           Subscription?
-  giftsGiven             Gift[]            @relation("GiftsGiven")
-  giftsReceived          Gift[]            @relation("GiftsReceived")
-  referrals              Referral[]        @relation("ReferralsMade")
+  giftsGiven             Gift[]              @relation("GiftsGiven")
+  giftsReceived          Gift[]              @relation("GiftsReceived")
+  referrals              Referral[]          @relation("ReferralsMade")
+  roseLedger             RoseLedger[]
+  phoneVerifications     PhoneVerification[]
+  scheduledBoosts        ScheduledBoost[]
 }
 
 model Media {
@@ -268,4 +277,45 @@ model Referral {
   referrer User @relation("ReferralsMade", fields: [referrerId], references: [id], onDelete: Cascade)
 
   @@index([referrerId])
+}
+
+model RoseLedger {
+  id        String   @id @default(uuid())
+  userId    String
+  delta     Int
+  reason    String
+  refId     String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model PhoneVerification {
+  id        String   @id @default(uuid())
+  userId    String
+  phone     String
+  code      String
+  expiresAt DateTime
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model ScheduledBoost {
+  id          String   @id @default(uuid())
+  userId      String
+  scheduledAt DateTime
+  durationMin Int      @default(30)
+  fired       Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([scheduledAt])
 }

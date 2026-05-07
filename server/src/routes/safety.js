@@ -60,6 +60,16 @@ router.post("/report/:targetId", requireAuth, async (req, res) => {
       details: parsed.data.details || "",
     },
   });
+
+  // Auto-hide check: if this user now has 3+ reports, hide them immediately
+  const reportCount = await prisma.report.count({ where: { reportedId } });
+  if (reportCount >= 3) {
+    await prisma.user.update({
+      where: { id: reportedId },
+      data: { autoHidden: true, paused: true },
+    });
+  }
+
   return res.json({ reported: true });
 });
 

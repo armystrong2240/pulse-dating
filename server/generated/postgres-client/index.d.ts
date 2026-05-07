@@ -93,6 +93,21 @@ export type Gift = $Result.DefaultSelection<Prisma.$GiftPayload>
  * 
  */
 export type Referral = $Result.DefaultSelection<Prisma.$ReferralPayload>
+/**
+ * Model RoseLedger
+ * 
+ */
+export type RoseLedger = $Result.DefaultSelection<Prisma.$RoseLedgerPayload>
+/**
+ * Model PhoneVerification
+ * 
+ */
+export type PhoneVerification = $Result.DefaultSelection<Prisma.$PhoneVerificationPayload>
+/**
+ * Model ScheduledBoost
+ * 
+ */
+export type ScheduledBoost = $Result.DefaultSelection<Prisma.$ScheduledBoostPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -371,6 +386,36 @@ export class PrismaClient<
     * ```
     */
   get referral(): Prisma.ReferralDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.roseLedger`: Exposes CRUD operations for the **RoseLedger** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RoseLedgers
+    * const roseLedgers = await prisma.roseLedger.findMany()
+    * ```
+    */
+  get roseLedger(): Prisma.RoseLedgerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.phoneVerification`: Exposes CRUD operations for the **PhoneVerification** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PhoneVerifications
+    * const phoneVerifications = await prisma.phoneVerification.findMany()
+    * ```
+    */
+  get phoneVerification(): Prisma.PhoneVerificationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.scheduledBoost`: Exposes CRUD operations for the **ScheduledBoost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ScheduledBoosts
+    * const scheduledBoosts = await prisma.scheduledBoost.findMany()
+    * ```
+    */
+  get scheduledBoost(): Prisma.ScheduledBoostDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -827,7 +872,10 @@ export namespace Prisma {
     SecurityEvent: 'SecurityEvent',
     Subscription: 'Subscription',
     Gift: 'Gift',
-    Referral: 'Referral'
+    Referral: 'Referral',
+    RoseLedger: 'RoseLedger',
+    PhoneVerification: 'PhoneVerification',
+    ScheduledBoost: 'ScheduledBoost'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -846,7 +894,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "media" | "like" | "profileView" | "message" | "messageReaction" | "blockedUser" | "report" | "friendship" | "liveRoom" | "refreshToken" | "dailyLike" | "securityEvent" | "subscription" | "gift" | "referral"
+      modelProps: "user" | "media" | "like" | "profileView" | "message" | "messageReaction" | "blockedUser" | "report" | "friendship" | "liveRoom" | "refreshToken" | "dailyLike" | "securityEvent" | "subscription" | "gift" | "referral" | "roseLedger" | "phoneVerification" | "scheduledBoost"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2034,6 +2082,228 @@ export namespace Prisma {
           }
         }
       }
+      RoseLedger: {
+        payload: Prisma.$RoseLedgerPayload<ExtArgs>
+        fields: Prisma.RoseLedgerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RoseLedgerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoseLedgerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RoseLedgerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoseLedgerPayload>
+          }
+          findFirst: {
+            args: Prisma.RoseLedgerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoseLedgerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RoseLedgerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoseLedgerPayload>
+          }
+          findMany: {
+            args: Prisma.RoseLedgerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoseLedgerPayload>[]
+          }
+          create: {
+            args: Prisma.RoseLedgerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoseLedgerPayload>
+          }
+          createMany: {
+            args: Prisma.RoseLedgerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RoseLedgerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoseLedgerPayload>[]
+          }
+          delete: {
+            args: Prisma.RoseLedgerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoseLedgerPayload>
+          }
+          update: {
+            args: Prisma.RoseLedgerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoseLedgerPayload>
+          }
+          deleteMany: {
+            args: Prisma.RoseLedgerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RoseLedgerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RoseLedgerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoseLedgerPayload>[]
+          }
+          upsert: {
+            args: Prisma.RoseLedgerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoseLedgerPayload>
+          }
+          aggregate: {
+            args: Prisma.RoseLedgerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRoseLedger>
+          }
+          groupBy: {
+            args: Prisma.RoseLedgerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RoseLedgerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RoseLedgerCountArgs<ExtArgs>
+            result: $Utils.Optional<RoseLedgerCountAggregateOutputType> | number
+          }
+        }
+      }
+      PhoneVerification: {
+        payload: Prisma.$PhoneVerificationPayload<ExtArgs>
+        fields: Prisma.PhoneVerificationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PhoneVerificationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PhoneVerificationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PhoneVerificationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PhoneVerificationPayload>
+          }
+          findFirst: {
+            args: Prisma.PhoneVerificationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PhoneVerificationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PhoneVerificationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PhoneVerificationPayload>
+          }
+          findMany: {
+            args: Prisma.PhoneVerificationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PhoneVerificationPayload>[]
+          }
+          create: {
+            args: Prisma.PhoneVerificationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PhoneVerificationPayload>
+          }
+          createMany: {
+            args: Prisma.PhoneVerificationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PhoneVerificationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PhoneVerificationPayload>[]
+          }
+          delete: {
+            args: Prisma.PhoneVerificationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PhoneVerificationPayload>
+          }
+          update: {
+            args: Prisma.PhoneVerificationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PhoneVerificationPayload>
+          }
+          deleteMany: {
+            args: Prisma.PhoneVerificationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PhoneVerificationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PhoneVerificationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PhoneVerificationPayload>[]
+          }
+          upsert: {
+            args: Prisma.PhoneVerificationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PhoneVerificationPayload>
+          }
+          aggregate: {
+            args: Prisma.PhoneVerificationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePhoneVerification>
+          }
+          groupBy: {
+            args: Prisma.PhoneVerificationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PhoneVerificationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PhoneVerificationCountArgs<ExtArgs>
+            result: $Utils.Optional<PhoneVerificationCountAggregateOutputType> | number
+          }
+        }
+      }
+      ScheduledBoost: {
+        payload: Prisma.$ScheduledBoostPayload<ExtArgs>
+        fields: Prisma.ScheduledBoostFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ScheduledBoostFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduledBoostPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ScheduledBoostFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduledBoostPayload>
+          }
+          findFirst: {
+            args: Prisma.ScheduledBoostFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduledBoostPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ScheduledBoostFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduledBoostPayload>
+          }
+          findMany: {
+            args: Prisma.ScheduledBoostFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduledBoostPayload>[]
+          }
+          create: {
+            args: Prisma.ScheduledBoostCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduledBoostPayload>
+          }
+          createMany: {
+            args: Prisma.ScheduledBoostCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ScheduledBoostCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduledBoostPayload>[]
+          }
+          delete: {
+            args: Prisma.ScheduledBoostDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduledBoostPayload>
+          }
+          update: {
+            args: Prisma.ScheduledBoostUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduledBoostPayload>
+          }
+          deleteMany: {
+            args: Prisma.ScheduledBoostDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ScheduledBoostUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ScheduledBoostUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduledBoostPayload>[]
+          }
+          upsert: {
+            args: Prisma.ScheduledBoostUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduledBoostPayload>
+          }
+          aggregate: {
+            args: Prisma.ScheduledBoostAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateScheduledBoost>
+          }
+          groupBy: {
+            args: Prisma.ScheduledBoostGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ScheduledBoostGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ScheduledBoostCountArgs<ExtArgs>
+            result: $Utils.Optional<ScheduledBoostCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2146,6 +2416,9 @@ export namespace Prisma {
     subscription?: SubscriptionOmit
     gift?: GiftOmit
     referral?: ReferralOmit
+    roseLedger?: RoseLedgerOmit
+    phoneVerification?: PhoneVerificationOmit
+    scheduledBoost?: ScheduledBoostOmit
   }
 
   /* Types for Logging */
@@ -2245,6 +2518,9 @@ export namespace Prisma {
     giftsGiven: number
     giftsReceived: number
     referrals: number
+    roseLedger: number
+    phoneVerifications: number
+    scheduledBoosts: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2267,6 +2543,9 @@ export namespace Prisma {
     giftsGiven?: boolean | UserCountOutputTypeCountGiftsGivenArgs
     giftsReceived?: boolean | UserCountOutputTypeCountGiftsReceivedArgs
     referrals?: boolean | UserCountOutputTypeCountReferralsArgs
+    roseLedger?: boolean | UserCountOutputTypeCountRoseLedgerArgs
+    phoneVerifications?: boolean | UserCountOutputTypeCountPhoneVerificationsArgs
+    scheduledBoosts?: boolean | UserCountOutputTypeCountScheduledBoostsArgs
   }
 
   // Custom InputTypes
@@ -2413,6 +2692,27 @@ export namespace Prisma {
     where?: ReferralWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRoseLedgerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoseLedgerWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPhoneVerificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PhoneVerificationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountScheduledBoostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduledBoostWhereInput
+  }
+
 
   /**
    * Count Type MessageCountOutputType
@@ -2466,6 +2766,8 @@ export namespace Prisma {
     latitude: number | null
     longitude: number | null
     boostCredits: number | null
+    roseBalance: number | null
+    loginStreak: number | null
     profileScore: number | null
   }
 
@@ -2474,6 +2776,8 @@ export namespace Prisma {
     latitude: number | null
     longitude: number | null
     boostCredits: number | null
+    roseBalance: number | null
+    loginStreak: number | null
     profileScore: number | null
   }
 
@@ -2509,6 +2813,12 @@ export namespace Prisma {
     isPremium: boolean | null
     premiumTier: string | null
     boostCredits: number | null
+    roseBalance: number | null
+    loginStreak: number | null
+    lastLoginDate: string | null
+    phoneNumber: string | null
+    phoneVerified: boolean | null
+    autoHidden: boolean | null
     profileScore: number | null
     onboardingStep: string | null
     onboardingCompleted: boolean | null
@@ -2555,6 +2865,12 @@ export namespace Prisma {
     isPremium: boolean | null
     premiumTier: string | null
     boostCredits: number | null
+    roseBalance: number | null
+    loginStreak: number | null
+    lastLoginDate: string | null
+    phoneNumber: string | null
+    phoneVerified: boolean | null
+    autoHidden: boolean | null
     profileScore: number | null
     onboardingStep: string | null
     onboardingCompleted: boolean | null
@@ -2601,6 +2917,12 @@ export namespace Prisma {
     isPremium: number
     premiumTier: number
     boostCredits: number
+    roseBalance: number
+    loginStreak: number
+    lastLoginDate: number
+    phoneNumber: number
+    phoneVerified: number
+    autoHidden: number
     profileScore: number
     onboardingStep: number
     onboardingCompleted: number
@@ -2622,6 +2944,8 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     boostCredits?: true
+    roseBalance?: true
+    loginStreak?: true
     profileScore?: true
   }
 
@@ -2630,6 +2954,8 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     boostCredits?: true
+    roseBalance?: true
+    loginStreak?: true
     profileScore?: true
   }
 
@@ -2665,6 +2991,12 @@ export namespace Prisma {
     isPremium?: true
     premiumTier?: true
     boostCredits?: true
+    roseBalance?: true
+    loginStreak?: true
+    lastLoginDate?: true
+    phoneNumber?: true
+    phoneVerified?: true
+    autoHidden?: true
     profileScore?: true
     onboardingStep?: true
     onboardingCompleted?: true
@@ -2711,6 +3043,12 @@ export namespace Prisma {
     isPremium?: true
     premiumTier?: true
     boostCredits?: true
+    roseBalance?: true
+    loginStreak?: true
+    lastLoginDate?: true
+    phoneNumber?: true
+    phoneVerified?: true
+    autoHidden?: true
     profileScore?: true
     onboardingStep?: true
     onboardingCompleted?: true
@@ -2757,6 +3095,12 @@ export namespace Prisma {
     isPremium?: true
     premiumTier?: true
     boostCredits?: true
+    roseBalance?: true
+    loginStreak?: true
+    lastLoginDate?: true
+    phoneNumber?: true
+    phoneVerified?: true
+    autoHidden?: true
     profileScore?: true
     onboardingStep?: true
     onboardingCompleted?: true
@@ -2890,6 +3234,12 @@ export namespace Prisma {
     isPremium: boolean
     premiumTier: string
     boostCredits: number
+    roseBalance: number
+    loginStreak: number
+    lastLoginDate: string
+    phoneNumber: string | null
+    phoneVerified: boolean
+    autoHidden: boolean
     profileScore: number
     onboardingStep: string
     onboardingCompleted: boolean
@@ -2955,6 +3305,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: boolean
     boostCredits?: boolean
+    roseBalance?: boolean
+    loginStreak?: boolean
+    lastLoginDate?: boolean
+    phoneNumber?: boolean
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -2987,6 +3343,9 @@ export namespace Prisma {
     giftsGiven?: boolean | User$giftsGivenArgs<ExtArgs>
     giftsReceived?: boolean | User$giftsReceivedArgs<ExtArgs>
     referrals?: boolean | User$referralsArgs<ExtArgs>
+    roseLedger?: boolean | User$roseLedgerArgs<ExtArgs>
+    phoneVerifications?: boolean | User$phoneVerificationsArgs<ExtArgs>
+    scheduledBoosts?: boolean | User$scheduledBoostsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3022,6 +3381,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: boolean
     boostCredits?: boolean
+    roseBalance?: boolean
+    loginStreak?: boolean
+    lastLoginDate?: boolean
+    phoneNumber?: boolean
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -3068,6 +3433,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: boolean
     boostCredits?: boolean
+    roseBalance?: boolean
+    loginStreak?: boolean
+    lastLoginDate?: boolean
+    phoneNumber?: boolean
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -3114,6 +3485,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: boolean
     boostCredits?: boolean
+    roseBalance?: boolean
+    loginStreak?: boolean
+    lastLoginDate?: boolean
+    phoneNumber?: boolean
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
@@ -3128,7 +3505,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "age" | "city" | "state" | "zipCode" | "pronouns" | "genderIdentity" | "sexualOrientation" | "polyPreference" | "bio" | "interests" | "lookingFor" | "profileTheme" | "profileGraphic" | "musicUrl" | "profileMotto" | "dreamDate" | "avatar" | "latitude" | "longitude" | "profilePrompts" | "verified" | "verifiedStatus" | "paused" | "boostedUntil" | "isPremium" | "premiumTier" | "boostCredits" | "profileScore" | "onboardingStep" | "onboardingCompleted" | "emailVerified" | "verifyToken" | "resetToken" | "resetTokenExpiry" | "pushSubscription" | "referralCode" | "referredById" | "lastSeen" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "age" | "city" | "state" | "zipCode" | "pronouns" | "genderIdentity" | "sexualOrientation" | "polyPreference" | "bio" | "interests" | "lookingFor" | "profileTheme" | "profileGraphic" | "musicUrl" | "profileMotto" | "dreamDate" | "avatar" | "latitude" | "longitude" | "profilePrompts" | "verified" | "verifiedStatus" | "paused" | "boostedUntil" | "isPremium" | "premiumTier" | "boostCredits" | "roseBalance" | "loginStreak" | "lastLoginDate" | "phoneNumber" | "phoneVerified" | "autoHidden" | "profileScore" | "onboardingStep" | "onboardingCompleted" | "emailVerified" | "verifyToken" | "resetToken" | "resetTokenExpiry" | "pushSubscription" | "referralCode" | "referredById" | "lastSeen" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     media?: boolean | User$mediaArgs<ExtArgs>
     likesSent?: boolean | User$likesSentArgs<ExtArgs>
@@ -3150,6 +3527,9 @@ export namespace Prisma {
     giftsGiven?: boolean | User$giftsGivenArgs<ExtArgs>
     giftsReceived?: boolean | User$giftsReceivedArgs<ExtArgs>
     referrals?: boolean | User$referralsArgs<ExtArgs>
+    roseLedger?: boolean | User$roseLedgerArgs<ExtArgs>
+    phoneVerifications?: boolean | User$phoneVerificationsArgs<ExtArgs>
+    scheduledBoosts?: boolean | User$scheduledBoostsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3178,6 +3558,9 @@ export namespace Prisma {
       giftsGiven: Prisma.$GiftPayload<ExtArgs>[]
       giftsReceived: Prisma.$GiftPayload<ExtArgs>[]
       referrals: Prisma.$ReferralPayload<ExtArgs>[]
+      roseLedger: Prisma.$RoseLedgerPayload<ExtArgs>[]
+      phoneVerifications: Prisma.$PhoneVerificationPayload<ExtArgs>[]
+      scheduledBoosts: Prisma.$ScheduledBoostPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3211,6 +3594,12 @@ export namespace Prisma {
       isPremium: boolean
       premiumTier: string
       boostCredits: number
+      roseBalance: number
+      loginStreak: number
+      lastLoginDate: string
+      phoneNumber: string | null
+      phoneVerified: boolean
+      autoHidden: boolean
       profileScore: number
       onboardingStep: string
       onboardingCompleted: boolean
@@ -3637,6 +4026,9 @@ export namespace Prisma {
     giftsGiven<T extends User$giftsGivenArgs<ExtArgs> = {}>(args?: Subset<T, User$giftsGivenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     giftsReceived<T extends User$giftsReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$giftsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     referrals<T extends User$referralsArgs<ExtArgs> = {}>(args?: Subset<T, User$referralsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    roseLedger<T extends User$roseLedgerArgs<ExtArgs> = {}>(args?: Subset<T, User$roseLedgerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    phoneVerifications<T extends User$phoneVerificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$phoneVerificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    scheduledBoosts<T extends User$scheduledBoostsArgs<ExtArgs> = {}>(args?: Subset<T, User$scheduledBoostsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3697,6 +4089,12 @@ export namespace Prisma {
     readonly isPremium: FieldRef<"User", 'Boolean'>
     readonly premiumTier: FieldRef<"User", 'String'>
     readonly boostCredits: FieldRef<"User", 'Int'>
+    readonly roseBalance: FieldRef<"User", 'Int'>
+    readonly loginStreak: FieldRef<"User", 'Int'>
+    readonly lastLoginDate: FieldRef<"User", 'String'>
+    readonly phoneNumber: FieldRef<"User", 'String'>
+    readonly phoneVerified: FieldRef<"User", 'Boolean'>
+    readonly autoHidden: FieldRef<"User", 'Boolean'>
     readonly profileScore: FieldRef<"User", 'Int'>
     readonly onboardingStep: FieldRef<"User", 'String'>
     readonly onboardingCompleted: FieldRef<"User", 'Boolean'>
@@ -4569,6 +4967,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReferralScalarFieldEnum | ReferralScalarFieldEnum[]
+  }
+
+  /**
+   * User.roseLedger
+   */
+  export type User$roseLedgerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerInclude<ExtArgs> | null
+    where?: RoseLedgerWhereInput
+    orderBy?: RoseLedgerOrderByWithRelationInput | RoseLedgerOrderByWithRelationInput[]
+    cursor?: RoseLedgerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RoseLedgerScalarFieldEnum | RoseLedgerScalarFieldEnum[]
+  }
+
+  /**
+   * User.phoneVerifications
+   */
+  export type User$phoneVerificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationInclude<ExtArgs> | null
+    where?: PhoneVerificationWhereInput
+    orderBy?: PhoneVerificationOrderByWithRelationInput | PhoneVerificationOrderByWithRelationInput[]
+    cursor?: PhoneVerificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PhoneVerificationScalarFieldEnum | PhoneVerificationScalarFieldEnum[]
+  }
+
+  /**
+   * User.scheduledBoosts
+   */
+  export type User$scheduledBoostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostInclude<ExtArgs> | null
+    where?: ScheduledBoostWhereInput
+    orderBy?: ScheduledBoostOrderByWithRelationInput | ScheduledBoostOrderByWithRelationInput[]
+    cursor?: ScheduledBoostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ScheduledBoostScalarFieldEnum | ScheduledBoostScalarFieldEnum[]
   }
 
   /**
@@ -20881,6 +21351,3300 @@ export namespace Prisma {
 
 
   /**
+   * Model RoseLedger
+   */
+
+  export type AggregateRoseLedger = {
+    _count: RoseLedgerCountAggregateOutputType | null
+    _avg: RoseLedgerAvgAggregateOutputType | null
+    _sum: RoseLedgerSumAggregateOutputType | null
+    _min: RoseLedgerMinAggregateOutputType | null
+    _max: RoseLedgerMaxAggregateOutputType | null
+  }
+
+  export type RoseLedgerAvgAggregateOutputType = {
+    delta: number | null
+  }
+
+  export type RoseLedgerSumAggregateOutputType = {
+    delta: number | null
+  }
+
+  export type RoseLedgerMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    delta: number | null
+    reason: string | null
+    refId: string | null
+    createdAt: Date | null
+  }
+
+  export type RoseLedgerMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    delta: number | null
+    reason: string | null
+    refId: string | null
+    createdAt: Date | null
+  }
+
+  export type RoseLedgerCountAggregateOutputType = {
+    id: number
+    userId: number
+    delta: number
+    reason: number
+    refId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type RoseLedgerAvgAggregateInputType = {
+    delta?: true
+  }
+
+  export type RoseLedgerSumAggregateInputType = {
+    delta?: true
+  }
+
+  export type RoseLedgerMinAggregateInputType = {
+    id?: true
+    userId?: true
+    delta?: true
+    reason?: true
+    refId?: true
+    createdAt?: true
+  }
+
+  export type RoseLedgerMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    delta?: true
+    reason?: true
+    refId?: true
+    createdAt?: true
+  }
+
+  export type RoseLedgerCountAggregateInputType = {
+    id?: true
+    userId?: true
+    delta?: true
+    reason?: true
+    refId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type RoseLedgerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RoseLedger to aggregate.
+     */
+    where?: RoseLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoseLedgers to fetch.
+     */
+    orderBy?: RoseLedgerOrderByWithRelationInput | RoseLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RoseLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoseLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoseLedgers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RoseLedgers
+    **/
+    _count?: true | RoseLedgerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RoseLedgerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RoseLedgerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RoseLedgerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RoseLedgerMaxAggregateInputType
+  }
+
+  export type GetRoseLedgerAggregateType<T extends RoseLedgerAggregateArgs> = {
+        [P in keyof T & keyof AggregateRoseLedger]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRoseLedger[P]>
+      : GetScalarType<T[P], AggregateRoseLedger[P]>
+  }
+
+
+
+
+  export type RoseLedgerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoseLedgerWhereInput
+    orderBy?: RoseLedgerOrderByWithAggregationInput | RoseLedgerOrderByWithAggregationInput[]
+    by: RoseLedgerScalarFieldEnum[] | RoseLedgerScalarFieldEnum
+    having?: RoseLedgerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RoseLedgerCountAggregateInputType | true
+    _avg?: RoseLedgerAvgAggregateInputType
+    _sum?: RoseLedgerSumAggregateInputType
+    _min?: RoseLedgerMinAggregateInputType
+    _max?: RoseLedgerMaxAggregateInputType
+  }
+
+  export type RoseLedgerGroupByOutputType = {
+    id: string
+    userId: string
+    delta: number
+    reason: string
+    refId: string | null
+    createdAt: Date
+    _count: RoseLedgerCountAggregateOutputType | null
+    _avg: RoseLedgerAvgAggregateOutputType | null
+    _sum: RoseLedgerSumAggregateOutputType | null
+    _min: RoseLedgerMinAggregateOutputType | null
+    _max: RoseLedgerMaxAggregateOutputType | null
+  }
+
+  type GetRoseLedgerGroupByPayload<T extends RoseLedgerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RoseLedgerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RoseLedgerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RoseLedgerGroupByOutputType[P]>
+            : GetScalarType<T[P], RoseLedgerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RoseLedgerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    delta?: boolean
+    reason?: boolean
+    refId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["roseLedger"]>
+
+  export type RoseLedgerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    delta?: boolean
+    reason?: boolean
+    refId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["roseLedger"]>
+
+  export type RoseLedgerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    delta?: boolean
+    reason?: boolean
+    refId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["roseLedger"]>
+
+  export type RoseLedgerSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    delta?: boolean
+    reason?: boolean
+    refId?: boolean
+    createdAt?: boolean
+  }
+
+  export type RoseLedgerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "delta" | "reason" | "refId" | "createdAt", ExtArgs["result"]["roseLedger"]>
+  export type RoseLedgerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RoseLedgerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RoseLedgerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $RoseLedgerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RoseLedger"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      delta: number
+      reason: string
+      refId: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["roseLedger"]>
+    composites: {}
+  }
+
+  type RoseLedgerGetPayload<S extends boolean | null | undefined | RoseLedgerDefaultArgs> = $Result.GetResult<Prisma.$RoseLedgerPayload, S>
+
+  type RoseLedgerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RoseLedgerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RoseLedgerCountAggregateInputType | true
+    }
+
+  export interface RoseLedgerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RoseLedger'], meta: { name: 'RoseLedger' } }
+    /**
+     * Find zero or one RoseLedger that matches the filter.
+     * @param {RoseLedgerFindUniqueArgs} args - Arguments to find a RoseLedger
+     * @example
+     * // Get one RoseLedger
+     * const roseLedger = await prisma.roseLedger.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RoseLedgerFindUniqueArgs>(args: SelectSubset<T, RoseLedgerFindUniqueArgs<ExtArgs>>): Prisma__RoseLedgerClient<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RoseLedger that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RoseLedgerFindUniqueOrThrowArgs} args - Arguments to find a RoseLedger
+     * @example
+     * // Get one RoseLedger
+     * const roseLedger = await prisma.roseLedger.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RoseLedgerFindUniqueOrThrowArgs>(args: SelectSubset<T, RoseLedgerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RoseLedgerClient<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RoseLedger that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoseLedgerFindFirstArgs} args - Arguments to find a RoseLedger
+     * @example
+     * // Get one RoseLedger
+     * const roseLedger = await prisma.roseLedger.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RoseLedgerFindFirstArgs>(args?: SelectSubset<T, RoseLedgerFindFirstArgs<ExtArgs>>): Prisma__RoseLedgerClient<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RoseLedger that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoseLedgerFindFirstOrThrowArgs} args - Arguments to find a RoseLedger
+     * @example
+     * // Get one RoseLedger
+     * const roseLedger = await prisma.roseLedger.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RoseLedgerFindFirstOrThrowArgs>(args?: SelectSubset<T, RoseLedgerFindFirstOrThrowArgs<ExtArgs>>): Prisma__RoseLedgerClient<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RoseLedgers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoseLedgerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RoseLedgers
+     * const roseLedgers = await prisma.roseLedger.findMany()
+     * 
+     * // Get first 10 RoseLedgers
+     * const roseLedgers = await prisma.roseLedger.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const roseLedgerWithIdOnly = await prisma.roseLedger.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RoseLedgerFindManyArgs>(args?: SelectSubset<T, RoseLedgerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RoseLedger.
+     * @param {RoseLedgerCreateArgs} args - Arguments to create a RoseLedger.
+     * @example
+     * // Create one RoseLedger
+     * const RoseLedger = await prisma.roseLedger.create({
+     *   data: {
+     *     // ... data to create a RoseLedger
+     *   }
+     * })
+     * 
+     */
+    create<T extends RoseLedgerCreateArgs>(args: SelectSubset<T, RoseLedgerCreateArgs<ExtArgs>>): Prisma__RoseLedgerClient<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RoseLedgers.
+     * @param {RoseLedgerCreateManyArgs} args - Arguments to create many RoseLedgers.
+     * @example
+     * // Create many RoseLedgers
+     * const roseLedger = await prisma.roseLedger.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RoseLedgerCreateManyArgs>(args?: SelectSubset<T, RoseLedgerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RoseLedgers and returns the data saved in the database.
+     * @param {RoseLedgerCreateManyAndReturnArgs} args - Arguments to create many RoseLedgers.
+     * @example
+     * // Create many RoseLedgers
+     * const roseLedger = await prisma.roseLedger.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RoseLedgers and only return the `id`
+     * const roseLedgerWithIdOnly = await prisma.roseLedger.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RoseLedgerCreateManyAndReturnArgs>(args?: SelectSubset<T, RoseLedgerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RoseLedger.
+     * @param {RoseLedgerDeleteArgs} args - Arguments to delete one RoseLedger.
+     * @example
+     * // Delete one RoseLedger
+     * const RoseLedger = await prisma.roseLedger.delete({
+     *   where: {
+     *     // ... filter to delete one RoseLedger
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RoseLedgerDeleteArgs>(args: SelectSubset<T, RoseLedgerDeleteArgs<ExtArgs>>): Prisma__RoseLedgerClient<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RoseLedger.
+     * @param {RoseLedgerUpdateArgs} args - Arguments to update one RoseLedger.
+     * @example
+     * // Update one RoseLedger
+     * const roseLedger = await prisma.roseLedger.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RoseLedgerUpdateArgs>(args: SelectSubset<T, RoseLedgerUpdateArgs<ExtArgs>>): Prisma__RoseLedgerClient<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RoseLedgers.
+     * @param {RoseLedgerDeleteManyArgs} args - Arguments to filter RoseLedgers to delete.
+     * @example
+     * // Delete a few RoseLedgers
+     * const { count } = await prisma.roseLedger.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RoseLedgerDeleteManyArgs>(args?: SelectSubset<T, RoseLedgerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RoseLedgers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoseLedgerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RoseLedgers
+     * const roseLedger = await prisma.roseLedger.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RoseLedgerUpdateManyArgs>(args: SelectSubset<T, RoseLedgerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RoseLedgers and returns the data updated in the database.
+     * @param {RoseLedgerUpdateManyAndReturnArgs} args - Arguments to update many RoseLedgers.
+     * @example
+     * // Update many RoseLedgers
+     * const roseLedger = await prisma.roseLedger.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RoseLedgers and only return the `id`
+     * const roseLedgerWithIdOnly = await prisma.roseLedger.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RoseLedgerUpdateManyAndReturnArgs>(args: SelectSubset<T, RoseLedgerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RoseLedger.
+     * @param {RoseLedgerUpsertArgs} args - Arguments to update or create a RoseLedger.
+     * @example
+     * // Update or create a RoseLedger
+     * const roseLedger = await prisma.roseLedger.upsert({
+     *   create: {
+     *     // ... data to create a RoseLedger
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RoseLedger we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RoseLedgerUpsertArgs>(args: SelectSubset<T, RoseLedgerUpsertArgs<ExtArgs>>): Prisma__RoseLedgerClient<$Result.GetResult<Prisma.$RoseLedgerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RoseLedgers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoseLedgerCountArgs} args - Arguments to filter RoseLedgers to count.
+     * @example
+     * // Count the number of RoseLedgers
+     * const count = await prisma.roseLedger.count({
+     *   where: {
+     *     // ... the filter for the RoseLedgers we want to count
+     *   }
+     * })
+    **/
+    count<T extends RoseLedgerCountArgs>(
+      args?: Subset<T, RoseLedgerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RoseLedgerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RoseLedger.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoseLedgerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RoseLedgerAggregateArgs>(args: Subset<T, RoseLedgerAggregateArgs>): Prisma.PrismaPromise<GetRoseLedgerAggregateType<T>>
+
+    /**
+     * Group by RoseLedger.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoseLedgerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RoseLedgerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RoseLedgerGroupByArgs['orderBy'] }
+        : { orderBy?: RoseLedgerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RoseLedgerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRoseLedgerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RoseLedger model
+   */
+  readonly fields: RoseLedgerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RoseLedger.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RoseLedgerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RoseLedger model
+   */
+  interface RoseLedgerFieldRefs {
+    readonly id: FieldRef<"RoseLedger", 'String'>
+    readonly userId: FieldRef<"RoseLedger", 'String'>
+    readonly delta: FieldRef<"RoseLedger", 'Int'>
+    readonly reason: FieldRef<"RoseLedger", 'String'>
+    readonly refId: FieldRef<"RoseLedger", 'String'>
+    readonly createdAt: FieldRef<"RoseLedger", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RoseLedger findUnique
+   */
+  export type RoseLedgerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which RoseLedger to fetch.
+     */
+    where: RoseLedgerWhereUniqueInput
+  }
+
+  /**
+   * RoseLedger findUniqueOrThrow
+   */
+  export type RoseLedgerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which RoseLedger to fetch.
+     */
+    where: RoseLedgerWhereUniqueInput
+  }
+
+  /**
+   * RoseLedger findFirst
+   */
+  export type RoseLedgerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which RoseLedger to fetch.
+     */
+    where?: RoseLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoseLedgers to fetch.
+     */
+    orderBy?: RoseLedgerOrderByWithRelationInput | RoseLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RoseLedgers.
+     */
+    cursor?: RoseLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoseLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoseLedgers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RoseLedgers.
+     */
+    distinct?: RoseLedgerScalarFieldEnum | RoseLedgerScalarFieldEnum[]
+  }
+
+  /**
+   * RoseLedger findFirstOrThrow
+   */
+  export type RoseLedgerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which RoseLedger to fetch.
+     */
+    where?: RoseLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoseLedgers to fetch.
+     */
+    orderBy?: RoseLedgerOrderByWithRelationInput | RoseLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RoseLedgers.
+     */
+    cursor?: RoseLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoseLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoseLedgers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RoseLedgers.
+     */
+    distinct?: RoseLedgerScalarFieldEnum | RoseLedgerScalarFieldEnum[]
+  }
+
+  /**
+   * RoseLedger findMany
+   */
+  export type RoseLedgerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which RoseLedgers to fetch.
+     */
+    where?: RoseLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoseLedgers to fetch.
+     */
+    orderBy?: RoseLedgerOrderByWithRelationInput | RoseLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RoseLedgers.
+     */
+    cursor?: RoseLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoseLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoseLedgers.
+     */
+    skip?: number
+    distinct?: RoseLedgerScalarFieldEnum | RoseLedgerScalarFieldEnum[]
+  }
+
+  /**
+   * RoseLedger create
+   */
+  export type RoseLedgerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RoseLedger.
+     */
+    data: XOR<RoseLedgerCreateInput, RoseLedgerUncheckedCreateInput>
+  }
+
+  /**
+   * RoseLedger createMany
+   */
+  export type RoseLedgerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RoseLedgers.
+     */
+    data: RoseLedgerCreateManyInput | RoseLedgerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RoseLedger createManyAndReturn
+   */
+  export type RoseLedgerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * The data used to create many RoseLedgers.
+     */
+    data: RoseLedgerCreateManyInput | RoseLedgerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RoseLedger update
+   */
+  export type RoseLedgerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RoseLedger.
+     */
+    data: XOR<RoseLedgerUpdateInput, RoseLedgerUncheckedUpdateInput>
+    /**
+     * Choose, which RoseLedger to update.
+     */
+    where: RoseLedgerWhereUniqueInput
+  }
+
+  /**
+   * RoseLedger updateMany
+   */
+  export type RoseLedgerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RoseLedgers.
+     */
+    data: XOR<RoseLedgerUpdateManyMutationInput, RoseLedgerUncheckedUpdateManyInput>
+    /**
+     * Filter which RoseLedgers to update
+     */
+    where?: RoseLedgerWhereInput
+    /**
+     * Limit how many RoseLedgers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RoseLedger updateManyAndReturn
+   */
+  export type RoseLedgerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * The data used to update RoseLedgers.
+     */
+    data: XOR<RoseLedgerUpdateManyMutationInput, RoseLedgerUncheckedUpdateManyInput>
+    /**
+     * Filter which RoseLedgers to update
+     */
+    where?: RoseLedgerWhereInput
+    /**
+     * Limit how many RoseLedgers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RoseLedger upsert
+   */
+  export type RoseLedgerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RoseLedger to update in case it exists.
+     */
+    where: RoseLedgerWhereUniqueInput
+    /**
+     * In case the RoseLedger found by the `where` argument doesn't exist, create a new RoseLedger with this data.
+     */
+    create: XOR<RoseLedgerCreateInput, RoseLedgerUncheckedCreateInput>
+    /**
+     * In case the RoseLedger was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RoseLedgerUpdateInput, RoseLedgerUncheckedUpdateInput>
+  }
+
+  /**
+   * RoseLedger delete
+   */
+  export type RoseLedgerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerInclude<ExtArgs> | null
+    /**
+     * Filter which RoseLedger to delete.
+     */
+    where: RoseLedgerWhereUniqueInput
+  }
+
+  /**
+   * RoseLedger deleteMany
+   */
+  export type RoseLedgerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RoseLedgers to delete
+     */
+    where?: RoseLedgerWhereInput
+    /**
+     * Limit how many RoseLedgers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RoseLedger without action
+   */
+  export type RoseLedgerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoseLedger
+     */
+    select?: RoseLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoseLedger
+     */
+    omit?: RoseLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoseLedgerInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PhoneVerification
+   */
+
+  export type AggregatePhoneVerification = {
+    _count: PhoneVerificationCountAggregateOutputType | null
+    _min: PhoneVerificationMinAggregateOutputType | null
+    _max: PhoneVerificationMaxAggregateOutputType | null
+  }
+
+  export type PhoneVerificationMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    phone: string | null
+    code: string | null
+    expiresAt: Date | null
+    verified: boolean | null
+    createdAt: Date | null
+  }
+
+  export type PhoneVerificationMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    phone: string | null
+    code: string | null
+    expiresAt: Date | null
+    verified: boolean | null
+    createdAt: Date | null
+  }
+
+  export type PhoneVerificationCountAggregateOutputType = {
+    id: number
+    userId: number
+    phone: number
+    code: number
+    expiresAt: number
+    verified: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PhoneVerificationMinAggregateInputType = {
+    id?: true
+    userId?: true
+    phone?: true
+    code?: true
+    expiresAt?: true
+    verified?: true
+    createdAt?: true
+  }
+
+  export type PhoneVerificationMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    phone?: true
+    code?: true
+    expiresAt?: true
+    verified?: true
+    createdAt?: true
+  }
+
+  export type PhoneVerificationCountAggregateInputType = {
+    id?: true
+    userId?: true
+    phone?: true
+    code?: true
+    expiresAt?: true
+    verified?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PhoneVerificationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PhoneVerification to aggregate.
+     */
+    where?: PhoneVerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PhoneVerifications to fetch.
+     */
+    orderBy?: PhoneVerificationOrderByWithRelationInput | PhoneVerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PhoneVerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PhoneVerifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PhoneVerifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PhoneVerifications
+    **/
+    _count?: true | PhoneVerificationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PhoneVerificationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PhoneVerificationMaxAggregateInputType
+  }
+
+  export type GetPhoneVerificationAggregateType<T extends PhoneVerificationAggregateArgs> = {
+        [P in keyof T & keyof AggregatePhoneVerification]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePhoneVerification[P]>
+      : GetScalarType<T[P], AggregatePhoneVerification[P]>
+  }
+
+
+
+
+  export type PhoneVerificationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PhoneVerificationWhereInput
+    orderBy?: PhoneVerificationOrderByWithAggregationInput | PhoneVerificationOrderByWithAggregationInput[]
+    by: PhoneVerificationScalarFieldEnum[] | PhoneVerificationScalarFieldEnum
+    having?: PhoneVerificationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PhoneVerificationCountAggregateInputType | true
+    _min?: PhoneVerificationMinAggregateInputType
+    _max?: PhoneVerificationMaxAggregateInputType
+  }
+
+  export type PhoneVerificationGroupByOutputType = {
+    id: string
+    userId: string
+    phone: string
+    code: string
+    expiresAt: Date
+    verified: boolean
+    createdAt: Date
+    _count: PhoneVerificationCountAggregateOutputType | null
+    _min: PhoneVerificationMinAggregateOutputType | null
+    _max: PhoneVerificationMaxAggregateOutputType | null
+  }
+
+  type GetPhoneVerificationGroupByPayload<T extends PhoneVerificationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PhoneVerificationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PhoneVerificationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PhoneVerificationGroupByOutputType[P]>
+            : GetScalarType<T[P], PhoneVerificationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PhoneVerificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    phone?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    verified?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["phoneVerification"]>
+
+  export type PhoneVerificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    phone?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    verified?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["phoneVerification"]>
+
+  export type PhoneVerificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    phone?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    verified?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["phoneVerification"]>
+
+  export type PhoneVerificationSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    phone?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    verified?: boolean
+    createdAt?: boolean
+  }
+
+  export type PhoneVerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "phone" | "code" | "expiresAt" | "verified" | "createdAt", ExtArgs["result"]["phoneVerification"]>
+  export type PhoneVerificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PhoneVerificationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PhoneVerificationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PhoneVerificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PhoneVerification"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      phone: string
+      code: string
+      expiresAt: Date
+      verified: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["phoneVerification"]>
+    composites: {}
+  }
+
+  type PhoneVerificationGetPayload<S extends boolean | null | undefined | PhoneVerificationDefaultArgs> = $Result.GetResult<Prisma.$PhoneVerificationPayload, S>
+
+  type PhoneVerificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PhoneVerificationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PhoneVerificationCountAggregateInputType | true
+    }
+
+  export interface PhoneVerificationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PhoneVerification'], meta: { name: 'PhoneVerification' } }
+    /**
+     * Find zero or one PhoneVerification that matches the filter.
+     * @param {PhoneVerificationFindUniqueArgs} args - Arguments to find a PhoneVerification
+     * @example
+     * // Get one PhoneVerification
+     * const phoneVerification = await prisma.phoneVerification.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PhoneVerificationFindUniqueArgs>(args: SelectSubset<T, PhoneVerificationFindUniqueArgs<ExtArgs>>): Prisma__PhoneVerificationClient<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PhoneVerification that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PhoneVerificationFindUniqueOrThrowArgs} args - Arguments to find a PhoneVerification
+     * @example
+     * // Get one PhoneVerification
+     * const phoneVerification = await prisma.phoneVerification.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PhoneVerificationFindUniqueOrThrowArgs>(args: SelectSubset<T, PhoneVerificationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PhoneVerificationClient<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PhoneVerification that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PhoneVerificationFindFirstArgs} args - Arguments to find a PhoneVerification
+     * @example
+     * // Get one PhoneVerification
+     * const phoneVerification = await prisma.phoneVerification.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PhoneVerificationFindFirstArgs>(args?: SelectSubset<T, PhoneVerificationFindFirstArgs<ExtArgs>>): Prisma__PhoneVerificationClient<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PhoneVerification that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PhoneVerificationFindFirstOrThrowArgs} args - Arguments to find a PhoneVerification
+     * @example
+     * // Get one PhoneVerification
+     * const phoneVerification = await prisma.phoneVerification.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PhoneVerificationFindFirstOrThrowArgs>(args?: SelectSubset<T, PhoneVerificationFindFirstOrThrowArgs<ExtArgs>>): Prisma__PhoneVerificationClient<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PhoneVerifications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PhoneVerificationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PhoneVerifications
+     * const phoneVerifications = await prisma.phoneVerification.findMany()
+     * 
+     * // Get first 10 PhoneVerifications
+     * const phoneVerifications = await prisma.phoneVerification.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const phoneVerificationWithIdOnly = await prisma.phoneVerification.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PhoneVerificationFindManyArgs>(args?: SelectSubset<T, PhoneVerificationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PhoneVerification.
+     * @param {PhoneVerificationCreateArgs} args - Arguments to create a PhoneVerification.
+     * @example
+     * // Create one PhoneVerification
+     * const PhoneVerification = await prisma.phoneVerification.create({
+     *   data: {
+     *     // ... data to create a PhoneVerification
+     *   }
+     * })
+     * 
+     */
+    create<T extends PhoneVerificationCreateArgs>(args: SelectSubset<T, PhoneVerificationCreateArgs<ExtArgs>>): Prisma__PhoneVerificationClient<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PhoneVerifications.
+     * @param {PhoneVerificationCreateManyArgs} args - Arguments to create many PhoneVerifications.
+     * @example
+     * // Create many PhoneVerifications
+     * const phoneVerification = await prisma.phoneVerification.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PhoneVerificationCreateManyArgs>(args?: SelectSubset<T, PhoneVerificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PhoneVerifications and returns the data saved in the database.
+     * @param {PhoneVerificationCreateManyAndReturnArgs} args - Arguments to create many PhoneVerifications.
+     * @example
+     * // Create many PhoneVerifications
+     * const phoneVerification = await prisma.phoneVerification.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PhoneVerifications and only return the `id`
+     * const phoneVerificationWithIdOnly = await prisma.phoneVerification.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PhoneVerificationCreateManyAndReturnArgs>(args?: SelectSubset<T, PhoneVerificationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PhoneVerification.
+     * @param {PhoneVerificationDeleteArgs} args - Arguments to delete one PhoneVerification.
+     * @example
+     * // Delete one PhoneVerification
+     * const PhoneVerification = await prisma.phoneVerification.delete({
+     *   where: {
+     *     // ... filter to delete one PhoneVerification
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PhoneVerificationDeleteArgs>(args: SelectSubset<T, PhoneVerificationDeleteArgs<ExtArgs>>): Prisma__PhoneVerificationClient<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PhoneVerification.
+     * @param {PhoneVerificationUpdateArgs} args - Arguments to update one PhoneVerification.
+     * @example
+     * // Update one PhoneVerification
+     * const phoneVerification = await prisma.phoneVerification.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PhoneVerificationUpdateArgs>(args: SelectSubset<T, PhoneVerificationUpdateArgs<ExtArgs>>): Prisma__PhoneVerificationClient<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PhoneVerifications.
+     * @param {PhoneVerificationDeleteManyArgs} args - Arguments to filter PhoneVerifications to delete.
+     * @example
+     * // Delete a few PhoneVerifications
+     * const { count } = await prisma.phoneVerification.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PhoneVerificationDeleteManyArgs>(args?: SelectSubset<T, PhoneVerificationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PhoneVerifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PhoneVerificationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PhoneVerifications
+     * const phoneVerification = await prisma.phoneVerification.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PhoneVerificationUpdateManyArgs>(args: SelectSubset<T, PhoneVerificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PhoneVerifications and returns the data updated in the database.
+     * @param {PhoneVerificationUpdateManyAndReturnArgs} args - Arguments to update many PhoneVerifications.
+     * @example
+     * // Update many PhoneVerifications
+     * const phoneVerification = await prisma.phoneVerification.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PhoneVerifications and only return the `id`
+     * const phoneVerificationWithIdOnly = await prisma.phoneVerification.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PhoneVerificationUpdateManyAndReturnArgs>(args: SelectSubset<T, PhoneVerificationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PhoneVerification.
+     * @param {PhoneVerificationUpsertArgs} args - Arguments to update or create a PhoneVerification.
+     * @example
+     * // Update or create a PhoneVerification
+     * const phoneVerification = await prisma.phoneVerification.upsert({
+     *   create: {
+     *     // ... data to create a PhoneVerification
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PhoneVerification we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PhoneVerificationUpsertArgs>(args: SelectSubset<T, PhoneVerificationUpsertArgs<ExtArgs>>): Prisma__PhoneVerificationClient<$Result.GetResult<Prisma.$PhoneVerificationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PhoneVerifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PhoneVerificationCountArgs} args - Arguments to filter PhoneVerifications to count.
+     * @example
+     * // Count the number of PhoneVerifications
+     * const count = await prisma.phoneVerification.count({
+     *   where: {
+     *     // ... the filter for the PhoneVerifications we want to count
+     *   }
+     * })
+    **/
+    count<T extends PhoneVerificationCountArgs>(
+      args?: Subset<T, PhoneVerificationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PhoneVerificationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PhoneVerification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PhoneVerificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PhoneVerificationAggregateArgs>(args: Subset<T, PhoneVerificationAggregateArgs>): Prisma.PrismaPromise<GetPhoneVerificationAggregateType<T>>
+
+    /**
+     * Group by PhoneVerification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PhoneVerificationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PhoneVerificationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PhoneVerificationGroupByArgs['orderBy'] }
+        : { orderBy?: PhoneVerificationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PhoneVerificationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPhoneVerificationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PhoneVerification model
+   */
+  readonly fields: PhoneVerificationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PhoneVerification.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PhoneVerificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PhoneVerification model
+   */
+  interface PhoneVerificationFieldRefs {
+    readonly id: FieldRef<"PhoneVerification", 'String'>
+    readonly userId: FieldRef<"PhoneVerification", 'String'>
+    readonly phone: FieldRef<"PhoneVerification", 'String'>
+    readonly code: FieldRef<"PhoneVerification", 'String'>
+    readonly expiresAt: FieldRef<"PhoneVerification", 'DateTime'>
+    readonly verified: FieldRef<"PhoneVerification", 'Boolean'>
+    readonly createdAt: FieldRef<"PhoneVerification", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PhoneVerification findUnique
+   */
+  export type PhoneVerificationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which PhoneVerification to fetch.
+     */
+    where: PhoneVerificationWhereUniqueInput
+  }
+
+  /**
+   * PhoneVerification findUniqueOrThrow
+   */
+  export type PhoneVerificationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which PhoneVerification to fetch.
+     */
+    where: PhoneVerificationWhereUniqueInput
+  }
+
+  /**
+   * PhoneVerification findFirst
+   */
+  export type PhoneVerificationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which PhoneVerification to fetch.
+     */
+    where?: PhoneVerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PhoneVerifications to fetch.
+     */
+    orderBy?: PhoneVerificationOrderByWithRelationInput | PhoneVerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PhoneVerifications.
+     */
+    cursor?: PhoneVerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PhoneVerifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PhoneVerifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PhoneVerifications.
+     */
+    distinct?: PhoneVerificationScalarFieldEnum | PhoneVerificationScalarFieldEnum[]
+  }
+
+  /**
+   * PhoneVerification findFirstOrThrow
+   */
+  export type PhoneVerificationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which PhoneVerification to fetch.
+     */
+    where?: PhoneVerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PhoneVerifications to fetch.
+     */
+    orderBy?: PhoneVerificationOrderByWithRelationInput | PhoneVerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PhoneVerifications.
+     */
+    cursor?: PhoneVerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PhoneVerifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PhoneVerifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PhoneVerifications.
+     */
+    distinct?: PhoneVerificationScalarFieldEnum | PhoneVerificationScalarFieldEnum[]
+  }
+
+  /**
+   * PhoneVerification findMany
+   */
+  export type PhoneVerificationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which PhoneVerifications to fetch.
+     */
+    where?: PhoneVerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PhoneVerifications to fetch.
+     */
+    orderBy?: PhoneVerificationOrderByWithRelationInput | PhoneVerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PhoneVerifications.
+     */
+    cursor?: PhoneVerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PhoneVerifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PhoneVerifications.
+     */
+    skip?: number
+    distinct?: PhoneVerificationScalarFieldEnum | PhoneVerificationScalarFieldEnum[]
+  }
+
+  /**
+   * PhoneVerification create
+   */
+  export type PhoneVerificationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PhoneVerification.
+     */
+    data: XOR<PhoneVerificationCreateInput, PhoneVerificationUncheckedCreateInput>
+  }
+
+  /**
+   * PhoneVerification createMany
+   */
+  export type PhoneVerificationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PhoneVerifications.
+     */
+    data: PhoneVerificationCreateManyInput | PhoneVerificationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PhoneVerification createManyAndReturn
+   */
+  export type PhoneVerificationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * The data used to create many PhoneVerifications.
+     */
+    data: PhoneVerificationCreateManyInput | PhoneVerificationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PhoneVerification update
+   */
+  export type PhoneVerificationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PhoneVerification.
+     */
+    data: XOR<PhoneVerificationUpdateInput, PhoneVerificationUncheckedUpdateInput>
+    /**
+     * Choose, which PhoneVerification to update.
+     */
+    where: PhoneVerificationWhereUniqueInput
+  }
+
+  /**
+   * PhoneVerification updateMany
+   */
+  export type PhoneVerificationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PhoneVerifications.
+     */
+    data: XOR<PhoneVerificationUpdateManyMutationInput, PhoneVerificationUncheckedUpdateManyInput>
+    /**
+     * Filter which PhoneVerifications to update
+     */
+    where?: PhoneVerificationWhereInput
+    /**
+     * Limit how many PhoneVerifications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PhoneVerification updateManyAndReturn
+   */
+  export type PhoneVerificationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * The data used to update PhoneVerifications.
+     */
+    data: XOR<PhoneVerificationUpdateManyMutationInput, PhoneVerificationUncheckedUpdateManyInput>
+    /**
+     * Filter which PhoneVerifications to update
+     */
+    where?: PhoneVerificationWhereInput
+    /**
+     * Limit how many PhoneVerifications to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PhoneVerification upsert
+   */
+  export type PhoneVerificationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PhoneVerification to update in case it exists.
+     */
+    where: PhoneVerificationWhereUniqueInput
+    /**
+     * In case the PhoneVerification found by the `where` argument doesn't exist, create a new PhoneVerification with this data.
+     */
+    create: XOR<PhoneVerificationCreateInput, PhoneVerificationUncheckedCreateInput>
+    /**
+     * In case the PhoneVerification was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PhoneVerificationUpdateInput, PhoneVerificationUncheckedUpdateInput>
+  }
+
+  /**
+   * PhoneVerification delete
+   */
+  export type PhoneVerificationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationInclude<ExtArgs> | null
+    /**
+     * Filter which PhoneVerification to delete.
+     */
+    where: PhoneVerificationWhereUniqueInput
+  }
+
+  /**
+   * PhoneVerification deleteMany
+   */
+  export type PhoneVerificationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PhoneVerifications to delete
+     */
+    where?: PhoneVerificationWhereInput
+    /**
+     * Limit how many PhoneVerifications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PhoneVerification without action
+   */
+  export type PhoneVerificationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PhoneVerification
+     */
+    select?: PhoneVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PhoneVerification
+     */
+    omit?: PhoneVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PhoneVerificationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ScheduledBoost
+   */
+
+  export type AggregateScheduledBoost = {
+    _count: ScheduledBoostCountAggregateOutputType | null
+    _avg: ScheduledBoostAvgAggregateOutputType | null
+    _sum: ScheduledBoostSumAggregateOutputType | null
+    _min: ScheduledBoostMinAggregateOutputType | null
+    _max: ScheduledBoostMaxAggregateOutputType | null
+  }
+
+  export type ScheduledBoostAvgAggregateOutputType = {
+    durationMin: number | null
+  }
+
+  export type ScheduledBoostSumAggregateOutputType = {
+    durationMin: number | null
+  }
+
+  export type ScheduledBoostMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    scheduledAt: Date | null
+    durationMin: number | null
+    fired: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ScheduledBoostMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    scheduledAt: Date | null
+    durationMin: number | null
+    fired: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ScheduledBoostCountAggregateOutputType = {
+    id: number
+    userId: number
+    scheduledAt: number
+    durationMin: number
+    fired: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ScheduledBoostAvgAggregateInputType = {
+    durationMin?: true
+  }
+
+  export type ScheduledBoostSumAggregateInputType = {
+    durationMin?: true
+  }
+
+  export type ScheduledBoostMinAggregateInputType = {
+    id?: true
+    userId?: true
+    scheduledAt?: true
+    durationMin?: true
+    fired?: true
+    createdAt?: true
+  }
+
+  export type ScheduledBoostMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    scheduledAt?: true
+    durationMin?: true
+    fired?: true
+    createdAt?: true
+  }
+
+  export type ScheduledBoostCountAggregateInputType = {
+    id?: true
+    userId?: true
+    scheduledAt?: true
+    durationMin?: true
+    fired?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ScheduledBoostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ScheduledBoost to aggregate.
+     */
+    where?: ScheduledBoostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduledBoosts to fetch.
+     */
+    orderBy?: ScheduledBoostOrderByWithRelationInput | ScheduledBoostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ScheduledBoostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduledBoosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduledBoosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ScheduledBoosts
+    **/
+    _count?: true | ScheduledBoostCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ScheduledBoostAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ScheduledBoostSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ScheduledBoostMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ScheduledBoostMaxAggregateInputType
+  }
+
+  export type GetScheduledBoostAggregateType<T extends ScheduledBoostAggregateArgs> = {
+        [P in keyof T & keyof AggregateScheduledBoost]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateScheduledBoost[P]>
+      : GetScalarType<T[P], AggregateScheduledBoost[P]>
+  }
+
+
+
+
+  export type ScheduledBoostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduledBoostWhereInput
+    orderBy?: ScheduledBoostOrderByWithAggregationInput | ScheduledBoostOrderByWithAggregationInput[]
+    by: ScheduledBoostScalarFieldEnum[] | ScheduledBoostScalarFieldEnum
+    having?: ScheduledBoostScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ScheduledBoostCountAggregateInputType | true
+    _avg?: ScheduledBoostAvgAggregateInputType
+    _sum?: ScheduledBoostSumAggregateInputType
+    _min?: ScheduledBoostMinAggregateInputType
+    _max?: ScheduledBoostMaxAggregateInputType
+  }
+
+  export type ScheduledBoostGroupByOutputType = {
+    id: string
+    userId: string
+    scheduledAt: Date
+    durationMin: number
+    fired: boolean
+    createdAt: Date
+    _count: ScheduledBoostCountAggregateOutputType | null
+    _avg: ScheduledBoostAvgAggregateOutputType | null
+    _sum: ScheduledBoostSumAggregateOutputType | null
+    _min: ScheduledBoostMinAggregateOutputType | null
+    _max: ScheduledBoostMaxAggregateOutputType | null
+  }
+
+  type GetScheduledBoostGroupByPayload<T extends ScheduledBoostGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ScheduledBoostGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ScheduledBoostGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ScheduledBoostGroupByOutputType[P]>
+            : GetScalarType<T[P], ScheduledBoostGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ScheduledBoostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    scheduledAt?: boolean
+    durationMin?: boolean
+    fired?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scheduledBoost"]>
+
+  export type ScheduledBoostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    scheduledAt?: boolean
+    durationMin?: boolean
+    fired?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scheduledBoost"]>
+
+  export type ScheduledBoostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    scheduledAt?: boolean
+    durationMin?: boolean
+    fired?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scheduledBoost"]>
+
+  export type ScheduledBoostSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    scheduledAt?: boolean
+    durationMin?: boolean
+    fired?: boolean
+    createdAt?: boolean
+  }
+
+  export type ScheduledBoostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "scheduledAt" | "durationMin" | "fired" | "createdAt", ExtArgs["result"]["scheduledBoost"]>
+  export type ScheduledBoostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ScheduledBoostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ScheduledBoostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ScheduledBoostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ScheduledBoost"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      scheduledAt: Date
+      durationMin: number
+      fired: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["scheduledBoost"]>
+    composites: {}
+  }
+
+  type ScheduledBoostGetPayload<S extends boolean | null | undefined | ScheduledBoostDefaultArgs> = $Result.GetResult<Prisma.$ScheduledBoostPayload, S>
+
+  type ScheduledBoostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ScheduledBoostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ScheduledBoostCountAggregateInputType | true
+    }
+
+  export interface ScheduledBoostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ScheduledBoost'], meta: { name: 'ScheduledBoost' } }
+    /**
+     * Find zero or one ScheduledBoost that matches the filter.
+     * @param {ScheduledBoostFindUniqueArgs} args - Arguments to find a ScheduledBoost
+     * @example
+     * // Get one ScheduledBoost
+     * const scheduledBoost = await prisma.scheduledBoost.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ScheduledBoostFindUniqueArgs>(args: SelectSubset<T, ScheduledBoostFindUniqueArgs<ExtArgs>>): Prisma__ScheduledBoostClient<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ScheduledBoost that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ScheduledBoostFindUniqueOrThrowArgs} args - Arguments to find a ScheduledBoost
+     * @example
+     * // Get one ScheduledBoost
+     * const scheduledBoost = await prisma.scheduledBoost.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ScheduledBoostFindUniqueOrThrowArgs>(args: SelectSubset<T, ScheduledBoostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ScheduledBoostClient<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ScheduledBoost that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduledBoostFindFirstArgs} args - Arguments to find a ScheduledBoost
+     * @example
+     * // Get one ScheduledBoost
+     * const scheduledBoost = await prisma.scheduledBoost.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ScheduledBoostFindFirstArgs>(args?: SelectSubset<T, ScheduledBoostFindFirstArgs<ExtArgs>>): Prisma__ScheduledBoostClient<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ScheduledBoost that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduledBoostFindFirstOrThrowArgs} args - Arguments to find a ScheduledBoost
+     * @example
+     * // Get one ScheduledBoost
+     * const scheduledBoost = await prisma.scheduledBoost.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ScheduledBoostFindFirstOrThrowArgs>(args?: SelectSubset<T, ScheduledBoostFindFirstOrThrowArgs<ExtArgs>>): Prisma__ScheduledBoostClient<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ScheduledBoosts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduledBoostFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ScheduledBoosts
+     * const scheduledBoosts = await prisma.scheduledBoost.findMany()
+     * 
+     * // Get first 10 ScheduledBoosts
+     * const scheduledBoosts = await prisma.scheduledBoost.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const scheduledBoostWithIdOnly = await prisma.scheduledBoost.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ScheduledBoostFindManyArgs>(args?: SelectSubset<T, ScheduledBoostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ScheduledBoost.
+     * @param {ScheduledBoostCreateArgs} args - Arguments to create a ScheduledBoost.
+     * @example
+     * // Create one ScheduledBoost
+     * const ScheduledBoost = await prisma.scheduledBoost.create({
+     *   data: {
+     *     // ... data to create a ScheduledBoost
+     *   }
+     * })
+     * 
+     */
+    create<T extends ScheduledBoostCreateArgs>(args: SelectSubset<T, ScheduledBoostCreateArgs<ExtArgs>>): Prisma__ScheduledBoostClient<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ScheduledBoosts.
+     * @param {ScheduledBoostCreateManyArgs} args - Arguments to create many ScheduledBoosts.
+     * @example
+     * // Create many ScheduledBoosts
+     * const scheduledBoost = await prisma.scheduledBoost.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ScheduledBoostCreateManyArgs>(args?: SelectSubset<T, ScheduledBoostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ScheduledBoosts and returns the data saved in the database.
+     * @param {ScheduledBoostCreateManyAndReturnArgs} args - Arguments to create many ScheduledBoosts.
+     * @example
+     * // Create many ScheduledBoosts
+     * const scheduledBoost = await prisma.scheduledBoost.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ScheduledBoosts and only return the `id`
+     * const scheduledBoostWithIdOnly = await prisma.scheduledBoost.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ScheduledBoostCreateManyAndReturnArgs>(args?: SelectSubset<T, ScheduledBoostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ScheduledBoost.
+     * @param {ScheduledBoostDeleteArgs} args - Arguments to delete one ScheduledBoost.
+     * @example
+     * // Delete one ScheduledBoost
+     * const ScheduledBoost = await prisma.scheduledBoost.delete({
+     *   where: {
+     *     // ... filter to delete one ScheduledBoost
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ScheduledBoostDeleteArgs>(args: SelectSubset<T, ScheduledBoostDeleteArgs<ExtArgs>>): Prisma__ScheduledBoostClient<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ScheduledBoost.
+     * @param {ScheduledBoostUpdateArgs} args - Arguments to update one ScheduledBoost.
+     * @example
+     * // Update one ScheduledBoost
+     * const scheduledBoost = await prisma.scheduledBoost.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ScheduledBoostUpdateArgs>(args: SelectSubset<T, ScheduledBoostUpdateArgs<ExtArgs>>): Prisma__ScheduledBoostClient<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ScheduledBoosts.
+     * @param {ScheduledBoostDeleteManyArgs} args - Arguments to filter ScheduledBoosts to delete.
+     * @example
+     * // Delete a few ScheduledBoosts
+     * const { count } = await prisma.scheduledBoost.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ScheduledBoostDeleteManyArgs>(args?: SelectSubset<T, ScheduledBoostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ScheduledBoosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduledBoostUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ScheduledBoosts
+     * const scheduledBoost = await prisma.scheduledBoost.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ScheduledBoostUpdateManyArgs>(args: SelectSubset<T, ScheduledBoostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ScheduledBoosts and returns the data updated in the database.
+     * @param {ScheduledBoostUpdateManyAndReturnArgs} args - Arguments to update many ScheduledBoosts.
+     * @example
+     * // Update many ScheduledBoosts
+     * const scheduledBoost = await prisma.scheduledBoost.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ScheduledBoosts and only return the `id`
+     * const scheduledBoostWithIdOnly = await prisma.scheduledBoost.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ScheduledBoostUpdateManyAndReturnArgs>(args: SelectSubset<T, ScheduledBoostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ScheduledBoost.
+     * @param {ScheduledBoostUpsertArgs} args - Arguments to update or create a ScheduledBoost.
+     * @example
+     * // Update or create a ScheduledBoost
+     * const scheduledBoost = await prisma.scheduledBoost.upsert({
+     *   create: {
+     *     // ... data to create a ScheduledBoost
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ScheduledBoost we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ScheduledBoostUpsertArgs>(args: SelectSubset<T, ScheduledBoostUpsertArgs<ExtArgs>>): Prisma__ScheduledBoostClient<$Result.GetResult<Prisma.$ScheduledBoostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ScheduledBoosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduledBoostCountArgs} args - Arguments to filter ScheduledBoosts to count.
+     * @example
+     * // Count the number of ScheduledBoosts
+     * const count = await prisma.scheduledBoost.count({
+     *   where: {
+     *     // ... the filter for the ScheduledBoosts we want to count
+     *   }
+     * })
+    **/
+    count<T extends ScheduledBoostCountArgs>(
+      args?: Subset<T, ScheduledBoostCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ScheduledBoostCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ScheduledBoost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduledBoostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ScheduledBoostAggregateArgs>(args: Subset<T, ScheduledBoostAggregateArgs>): Prisma.PrismaPromise<GetScheduledBoostAggregateType<T>>
+
+    /**
+     * Group by ScheduledBoost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduledBoostGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ScheduledBoostGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ScheduledBoostGroupByArgs['orderBy'] }
+        : { orderBy?: ScheduledBoostGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ScheduledBoostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetScheduledBoostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ScheduledBoost model
+   */
+  readonly fields: ScheduledBoostFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ScheduledBoost.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ScheduledBoostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ScheduledBoost model
+   */
+  interface ScheduledBoostFieldRefs {
+    readonly id: FieldRef<"ScheduledBoost", 'String'>
+    readonly userId: FieldRef<"ScheduledBoost", 'String'>
+    readonly scheduledAt: FieldRef<"ScheduledBoost", 'DateTime'>
+    readonly durationMin: FieldRef<"ScheduledBoost", 'Int'>
+    readonly fired: FieldRef<"ScheduledBoost", 'Boolean'>
+    readonly createdAt: FieldRef<"ScheduledBoost", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ScheduledBoost findUnique
+   */
+  export type ScheduledBoostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduledBoost to fetch.
+     */
+    where: ScheduledBoostWhereUniqueInput
+  }
+
+  /**
+   * ScheduledBoost findUniqueOrThrow
+   */
+  export type ScheduledBoostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduledBoost to fetch.
+     */
+    where: ScheduledBoostWhereUniqueInput
+  }
+
+  /**
+   * ScheduledBoost findFirst
+   */
+  export type ScheduledBoostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduledBoost to fetch.
+     */
+    where?: ScheduledBoostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduledBoosts to fetch.
+     */
+    orderBy?: ScheduledBoostOrderByWithRelationInput | ScheduledBoostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ScheduledBoosts.
+     */
+    cursor?: ScheduledBoostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduledBoosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduledBoosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ScheduledBoosts.
+     */
+    distinct?: ScheduledBoostScalarFieldEnum | ScheduledBoostScalarFieldEnum[]
+  }
+
+  /**
+   * ScheduledBoost findFirstOrThrow
+   */
+  export type ScheduledBoostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduledBoost to fetch.
+     */
+    where?: ScheduledBoostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduledBoosts to fetch.
+     */
+    orderBy?: ScheduledBoostOrderByWithRelationInput | ScheduledBoostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ScheduledBoosts.
+     */
+    cursor?: ScheduledBoostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduledBoosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduledBoosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ScheduledBoosts.
+     */
+    distinct?: ScheduledBoostScalarFieldEnum | ScheduledBoostScalarFieldEnum[]
+  }
+
+  /**
+   * ScheduledBoost findMany
+   */
+  export type ScheduledBoostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduledBoosts to fetch.
+     */
+    where?: ScheduledBoostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduledBoosts to fetch.
+     */
+    orderBy?: ScheduledBoostOrderByWithRelationInput | ScheduledBoostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ScheduledBoosts.
+     */
+    cursor?: ScheduledBoostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduledBoosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduledBoosts.
+     */
+    skip?: number
+    distinct?: ScheduledBoostScalarFieldEnum | ScheduledBoostScalarFieldEnum[]
+  }
+
+  /**
+   * ScheduledBoost create
+   */
+  export type ScheduledBoostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ScheduledBoost.
+     */
+    data: XOR<ScheduledBoostCreateInput, ScheduledBoostUncheckedCreateInput>
+  }
+
+  /**
+   * ScheduledBoost createMany
+   */
+  export type ScheduledBoostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ScheduledBoosts.
+     */
+    data: ScheduledBoostCreateManyInput | ScheduledBoostCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ScheduledBoost createManyAndReturn
+   */
+  export type ScheduledBoostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * The data used to create many ScheduledBoosts.
+     */
+    data: ScheduledBoostCreateManyInput | ScheduledBoostCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ScheduledBoost update
+   */
+  export type ScheduledBoostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ScheduledBoost.
+     */
+    data: XOR<ScheduledBoostUpdateInput, ScheduledBoostUncheckedUpdateInput>
+    /**
+     * Choose, which ScheduledBoost to update.
+     */
+    where: ScheduledBoostWhereUniqueInput
+  }
+
+  /**
+   * ScheduledBoost updateMany
+   */
+  export type ScheduledBoostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ScheduledBoosts.
+     */
+    data: XOR<ScheduledBoostUpdateManyMutationInput, ScheduledBoostUncheckedUpdateManyInput>
+    /**
+     * Filter which ScheduledBoosts to update
+     */
+    where?: ScheduledBoostWhereInput
+    /**
+     * Limit how many ScheduledBoosts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ScheduledBoost updateManyAndReturn
+   */
+  export type ScheduledBoostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * The data used to update ScheduledBoosts.
+     */
+    data: XOR<ScheduledBoostUpdateManyMutationInput, ScheduledBoostUncheckedUpdateManyInput>
+    /**
+     * Filter which ScheduledBoosts to update
+     */
+    where?: ScheduledBoostWhereInput
+    /**
+     * Limit how many ScheduledBoosts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ScheduledBoost upsert
+   */
+  export type ScheduledBoostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ScheduledBoost to update in case it exists.
+     */
+    where: ScheduledBoostWhereUniqueInput
+    /**
+     * In case the ScheduledBoost found by the `where` argument doesn't exist, create a new ScheduledBoost with this data.
+     */
+    create: XOR<ScheduledBoostCreateInput, ScheduledBoostUncheckedCreateInput>
+    /**
+     * In case the ScheduledBoost was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ScheduledBoostUpdateInput, ScheduledBoostUncheckedUpdateInput>
+  }
+
+  /**
+   * ScheduledBoost delete
+   */
+  export type ScheduledBoostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostInclude<ExtArgs> | null
+    /**
+     * Filter which ScheduledBoost to delete.
+     */
+    where: ScheduledBoostWhereUniqueInput
+  }
+
+  /**
+   * ScheduledBoost deleteMany
+   */
+  export type ScheduledBoostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ScheduledBoosts to delete
+     */
+    where?: ScheduledBoostWhereInput
+    /**
+     * Limit how many ScheduledBoosts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ScheduledBoost without action
+   */
+  export type ScheduledBoostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduledBoost
+     */
+    select?: ScheduledBoostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduledBoost
+     */
+    omit?: ScheduledBoostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduledBoostInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -20926,6 +24690,12 @@ export namespace Prisma {
     isPremium: 'isPremium',
     premiumTier: 'premiumTier',
     boostCredits: 'boostCredits',
+    roseBalance: 'roseBalance',
+    loginStreak: 'loginStreak',
+    lastLoginDate: 'lastLoginDate',
+    phoneNumber: 'phoneNumber',
+    phoneVerified: 'phoneVerified',
+    autoHidden: 'autoHidden',
     profileScore: 'profileScore',
     onboardingStep: 'onboardingStep',
     onboardingCompleted: 'onboardingCompleted',
@@ -21125,6 +24895,43 @@ export namespace Prisma {
   export type ReferralScalarFieldEnum = (typeof ReferralScalarFieldEnum)[keyof typeof ReferralScalarFieldEnum]
 
 
+  export const RoseLedgerScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    delta: 'delta',
+    reason: 'reason',
+    refId: 'refId',
+    createdAt: 'createdAt'
+  };
+
+  export type RoseLedgerScalarFieldEnum = (typeof RoseLedgerScalarFieldEnum)[keyof typeof RoseLedgerScalarFieldEnum]
+
+
+  export const PhoneVerificationScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    phone: 'phone',
+    code: 'code',
+    expiresAt: 'expiresAt',
+    verified: 'verified',
+    createdAt: 'createdAt'
+  };
+
+  export type PhoneVerificationScalarFieldEnum = (typeof PhoneVerificationScalarFieldEnum)[keyof typeof PhoneVerificationScalarFieldEnum]
+
+
+  export const ScheduledBoostScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    scheduledAt: 'scheduledAt',
+    durationMin: 'durationMin',
+    fired: 'fired',
+    createdAt: 'createdAt'
+  };
+
+  export type ScheduledBoostScalarFieldEnum = (typeof ScheduledBoostScalarFieldEnum)[keyof typeof ScheduledBoostScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -21255,6 +25062,12 @@ export namespace Prisma {
     isPremium?: BoolFilter<"User"> | boolean
     premiumTier?: StringFilter<"User"> | string
     boostCredits?: IntFilter<"User"> | number
+    roseBalance?: IntFilter<"User"> | number
+    loginStreak?: IntFilter<"User"> | number
+    lastLoginDate?: StringFilter<"User"> | string
+    phoneNumber?: StringNullableFilter<"User"> | string | null
+    phoneVerified?: BoolFilter<"User"> | boolean
+    autoHidden?: BoolFilter<"User"> | boolean
     profileScore?: IntFilter<"User"> | number
     onboardingStep?: StringFilter<"User"> | string
     onboardingCompleted?: BoolFilter<"User"> | boolean
@@ -21287,6 +25100,9 @@ export namespace Prisma {
     giftsGiven?: GiftListRelationFilter
     giftsReceived?: GiftListRelationFilter
     referrals?: ReferralListRelationFilter
+    roseLedger?: RoseLedgerListRelationFilter
+    phoneVerifications?: PhoneVerificationListRelationFilter
+    scheduledBoosts?: ScheduledBoostListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -21321,6 +25137,12 @@ export namespace Prisma {
     isPremium?: SortOrder
     premiumTier?: SortOrder
     boostCredits?: SortOrder
+    roseBalance?: SortOrder
+    loginStreak?: SortOrder
+    lastLoginDate?: SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
+    phoneVerified?: SortOrder
+    autoHidden?: SortOrder
     profileScore?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -21353,11 +25175,16 @@ export namespace Prisma {
     giftsGiven?: GiftOrderByRelationAggregateInput
     giftsReceived?: GiftOrderByRelationAggregateInput
     referrals?: ReferralOrderByRelationAggregateInput
+    roseLedger?: RoseLedgerOrderByRelationAggregateInput
+    phoneVerifications?: PhoneVerificationOrderByRelationAggregateInput
+    scheduledBoosts?: ScheduledBoostOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    phoneNumber?: string
+    resetToken?: string
     referralCode?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -21391,12 +25218,16 @@ export namespace Prisma {
     isPremium?: BoolFilter<"User"> | boolean
     premiumTier?: StringFilter<"User"> | string
     boostCredits?: IntFilter<"User"> | number
+    roseBalance?: IntFilter<"User"> | number
+    loginStreak?: IntFilter<"User"> | number
+    lastLoginDate?: StringFilter<"User"> | string
+    phoneVerified?: BoolFilter<"User"> | boolean
+    autoHidden?: BoolFilter<"User"> | boolean
     profileScore?: IntFilter<"User"> | number
     onboardingStep?: StringFilter<"User"> | string
     onboardingCompleted?: BoolFilter<"User"> | boolean
     emailVerified?: BoolFilter<"User"> | boolean
     verifyToken?: StringNullableFilter<"User"> | string | null
-    resetToken?: StringNullableFilter<"User"> | string | null
     resetTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
     pushSubscription?: StringNullableFilter<"User"> | string | null
     referredById?: StringNullableFilter<"User"> | string | null
@@ -21422,7 +25253,10 @@ export namespace Prisma {
     giftsGiven?: GiftListRelationFilter
     giftsReceived?: GiftListRelationFilter
     referrals?: ReferralListRelationFilter
-  }, "id" | "email" | "referralCode">
+    roseLedger?: RoseLedgerListRelationFilter
+    phoneVerifications?: PhoneVerificationListRelationFilter
+    scheduledBoosts?: ScheduledBoostListRelationFilter
+  }, "id" | "email" | "phoneNumber" | "resetToken" | "referralCode">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -21456,6 +25290,12 @@ export namespace Prisma {
     isPremium?: SortOrder
     premiumTier?: SortOrder
     boostCredits?: SortOrder
+    roseBalance?: SortOrder
+    loginStreak?: SortOrder
+    lastLoginDate?: SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
+    phoneVerified?: SortOrder
+    autoHidden?: SortOrder
     profileScore?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -21510,6 +25350,12 @@ export namespace Prisma {
     isPremium?: BoolWithAggregatesFilter<"User"> | boolean
     premiumTier?: StringWithAggregatesFilter<"User"> | string
     boostCredits?: IntWithAggregatesFilter<"User"> | number
+    roseBalance?: IntWithAggregatesFilter<"User"> | number
+    loginStreak?: IntWithAggregatesFilter<"User"> | number
+    lastLoginDate?: StringWithAggregatesFilter<"User"> | string
+    phoneNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
+    phoneVerified?: BoolWithAggregatesFilter<"User"> | boolean
+    autoHidden?: BoolWithAggregatesFilter<"User"> | boolean
     profileScore?: IntWithAggregatesFilter<"User"> | number
     onboardingStep?: StringWithAggregatesFilter<"User"> | string
     onboardingCompleted?: BoolWithAggregatesFilter<"User"> | boolean
@@ -22467,6 +26313,195 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Referral"> | Date | string
   }
 
+  export type RoseLedgerWhereInput = {
+    AND?: RoseLedgerWhereInput | RoseLedgerWhereInput[]
+    OR?: RoseLedgerWhereInput[]
+    NOT?: RoseLedgerWhereInput | RoseLedgerWhereInput[]
+    id?: StringFilter<"RoseLedger"> | string
+    userId?: StringFilter<"RoseLedger"> | string
+    delta?: IntFilter<"RoseLedger"> | number
+    reason?: StringFilter<"RoseLedger"> | string
+    refId?: StringNullableFilter<"RoseLedger"> | string | null
+    createdAt?: DateTimeFilter<"RoseLedger"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type RoseLedgerOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    delta?: SortOrder
+    reason?: SortOrder
+    refId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type RoseLedgerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RoseLedgerWhereInput | RoseLedgerWhereInput[]
+    OR?: RoseLedgerWhereInput[]
+    NOT?: RoseLedgerWhereInput | RoseLedgerWhereInput[]
+    userId?: StringFilter<"RoseLedger"> | string
+    delta?: IntFilter<"RoseLedger"> | number
+    reason?: StringFilter<"RoseLedger"> | string
+    refId?: StringNullableFilter<"RoseLedger"> | string | null
+    createdAt?: DateTimeFilter<"RoseLedger"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type RoseLedgerOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    delta?: SortOrder
+    reason?: SortOrder
+    refId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: RoseLedgerCountOrderByAggregateInput
+    _avg?: RoseLedgerAvgOrderByAggregateInput
+    _max?: RoseLedgerMaxOrderByAggregateInput
+    _min?: RoseLedgerMinOrderByAggregateInput
+    _sum?: RoseLedgerSumOrderByAggregateInput
+  }
+
+  export type RoseLedgerScalarWhereWithAggregatesInput = {
+    AND?: RoseLedgerScalarWhereWithAggregatesInput | RoseLedgerScalarWhereWithAggregatesInput[]
+    OR?: RoseLedgerScalarWhereWithAggregatesInput[]
+    NOT?: RoseLedgerScalarWhereWithAggregatesInput | RoseLedgerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RoseLedger"> | string
+    userId?: StringWithAggregatesFilter<"RoseLedger"> | string
+    delta?: IntWithAggregatesFilter<"RoseLedger"> | number
+    reason?: StringWithAggregatesFilter<"RoseLedger"> | string
+    refId?: StringNullableWithAggregatesFilter<"RoseLedger"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"RoseLedger"> | Date | string
+  }
+
+  export type PhoneVerificationWhereInput = {
+    AND?: PhoneVerificationWhereInput | PhoneVerificationWhereInput[]
+    OR?: PhoneVerificationWhereInput[]
+    NOT?: PhoneVerificationWhereInput | PhoneVerificationWhereInput[]
+    id?: StringFilter<"PhoneVerification"> | string
+    userId?: StringFilter<"PhoneVerification"> | string
+    phone?: StringFilter<"PhoneVerification"> | string
+    code?: StringFilter<"PhoneVerification"> | string
+    expiresAt?: DateTimeFilter<"PhoneVerification"> | Date | string
+    verified?: BoolFilter<"PhoneVerification"> | boolean
+    createdAt?: DateTimeFilter<"PhoneVerification"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PhoneVerificationOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    phone?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    verified?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type PhoneVerificationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PhoneVerificationWhereInput | PhoneVerificationWhereInput[]
+    OR?: PhoneVerificationWhereInput[]
+    NOT?: PhoneVerificationWhereInput | PhoneVerificationWhereInput[]
+    userId?: StringFilter<"PhoneVerification"> | string
+    phone?: StringFilter<"PhoneVerification"> | string
+    code?: StringFilter<"PhoneVerification"> | string
+    expiresAt?: DateTimeFilter<"PhoneVerification"> | Date | string
+    verified?: BoolFilter<"PhoneVerification"> | boolean
+    createdAt?: DateTimeFilter<"PhoneVerification"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type PhoneVerificationOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    phone?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    verified?: SortOrder
+    createdAt?: SortOrder
+    _count?: PhoneVerificationCountOrderByAggregateInput
+    _max?: PhoneVerificationMaxOrderByAggregateInput
+    _min?: PhoneVerificationMinOrderByAggregateInput
+  }
+
+  export type PhoneVerificationScalarWhereWithAggregatesInput = {
+    AND?: PhoneVerificationScalarWhereWithAggregatesInput | PhoneVerificationScalarWhereWithAggregatesInput[]
+    OR?: PhoneVerificationScalarWhereWithAggregatesInput[]
+    NOT?: PhoneVerificationScalarWhereWithAggregatesInput | PhoneVerificationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PhoneVerification"> | string
+    userId?: StringWithAggregatesFilter<"PhoneVerification"> | string
+    phone?: StringWithAggregatesFilter<"PhoneVerification"> | string
+    code?: StringWithAggregatesFilter<"PhoneVerification"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"PhoneVerification"> | Date | string
+    verified?: BoolWithAggregatesFilter<"PhoneVerification"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"PhoneVerification"> | Date | string
+  }
+
+  export type ScheduledBoostWhereInput = {
+    AND?: ScheduledBoostWhereInput | ScheduledBoostWhereInput[]
+    OR?: ScheduledBoostWhereInput[]
+    NOT?: ScheduledBoostWhereInput | ScheduledBoostWhereInput[]
+    id?: StringFilter<"ScheduledBoost"> | string
+    userId?: StringFilter<"ScheduledBoost"> | string
+    scheduledAt?: DateTimeFilter<"ScheduledBoost"> | Date | string
+    durationMin?: IntFilter<"ScheduledBoost"> | number
+    fired?: BoolFilter<"ScheduledBoost"> | boolean
+    createdAt?: DateTimeFilter<"ScheduledBoost"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ScheduledBoostOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    scheduledAt?: SortOrder
+    durationMin?: SortOrder
+    fired?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ScheduledBoostWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ScheduledBoostWhereInput | ScheduledBoostWhereInput[]
+    OR?: ScheduledBoostWhereInput[]
+    NOT?: ScheduledBoostWhereInput | ScheduledBoostWhereInput[]
+    userId?: StringFilter<"ScheduledBoost"> | string
+    scheduledAt?: DateTimeFilter<"ScheduledBoost"> | Date | string
+    durationMin?: IntFilter<"ScheduledBoost"> | number
+    fired?: BoolFilter<"ScheduledBoost"> | boolean
+    createdAt?: DateTimeFilter<"ScheduledBoost"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type ScheduledBoostOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    scheduledAt?: SortOrder
+    durationMin?: SortOrder
+    fired?: SortOrder
+    createdAt?: SortOrder
+    _count?: ScheduledBoostCountOrderByAggregateInput
+    _avg?: ScheduledBoostAvgOrderByAggregateInput
+    _max?: ScheduledBoostMaxOrderByAggregateInput
+    _min?: ScheduledBoostMinOrderByAggregateInput
+    _sum?: ScheduledBoostSumOrderByAggregateInput
+  }
+
+  export type ScheduledBoostScalarWhereWithAggregatesInput = {
+    AND?: ScheduledBoostScalarWhereWithAggregatesInput | ScheduledBoostScalarWhereWithAggregatesInput[]
+    OR?: ScheduledBoostScalarWhereWithAggregatesInput[]
+    NOT?: ScheduledBoostScalarWhereWithAggregatesInput | ScheduledBoostScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ScheduledBoost"> | string
+    userId?: StringWithAggregatesFilter<"ScheduledBoost"> | string
+    scheduledAt?: DateTimeWithAggregatesFilter<"ScheduledBoost"> | Date | string
+    durationMin?: IntWithAggregatesFilter<"ScheduledBoost"> | number
+    fired?: BoolWithAggregatesFilter<"ScheduledBoost"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ScheduledBoost"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -22499,6 +26534,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -22531,6 +26572,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -22565,6 +26609,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -22597,6 +26647,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -22631,6 +26684,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -22663,6 +26722,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -22697,6 +26759,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -22729,6 +26797,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -22763,6 +26834,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -22809,6 +26886,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -22855,6 +26938,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -23811,6 +27900,199 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type RoseLedgerCreateInput = {
+    id?: string
+    delta: number
+    reason: string
+    refId?: string | null
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutRoseLedgerInput
+  }
+
+  export type RoseLedgerUncheckedCreateInput = {
+    id?: string
+    userId: string
+    delta: number
+    reason: string
+    refId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type RoseLedgerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    delta?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    refId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRoseLedgerNestedInput
+  }
+
+  export type RoseLedgerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    delta?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    refId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoseLedgerCreateManyInput = {
+    id?: string
+    userId: string
+    delta: number
+    reason: string
+    refId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type RoseLedgerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    delta?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    refId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoseLedgerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    delta?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    refId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PhoneVerificationCreateInput = {
+    id?: string
+    phone: string
+    code: string
+    expiresAt: Date | string
+    verified?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutPhoneVerificationsInput
+  }
+
+  export type PhoneVerificationUncheckedCreateInput = {
+    id?: string
+    userId: string
+    phone: string
+    code: string
+    expiresAt: Date | string
+    verified?: boolean
+    createdAt?: Date | string
+  }
+
+  export type PhoneVerificationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPhoneVerificationsNestedInput
+  }
+
+  export type PhoneVerificationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PhoneVerificationCreateManyInput = {
+    id?: string
+    userId: string
+    phone: string
+    code: string
+    expiresAt: Date | string
+    verified?: boolean
+    createdAt?: Date | string
+  }
+
+  export type PhoneVerificationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PhoneVerificationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduledBoostCreateInput = {
+    id?: string
+    scheduledAt: Date | string
+    durationMin?: number
+    fired?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutScheduledBoostsInput
+  }
+
+  export type ScheduledBoostUncheckedCreateInput = {
+    id?: string
+    userId: string
+    scheduledAt: Date | string
+    durationMin?: number
+    fired?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ScheduledBoostUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    durationMin?: IntFieldUpdateOperationsInput | number
+    fired?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutScheduledBoostsNestedInput
+  }
+
+  export type ScheduledBoostUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    durationMin?: IntFieldUpdateOperationsInput | number
+    fired?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduledBoostCreateManyInput = {
+    id?: string
+    userId: string
+    scheduledAt: Date | string
+    durationMin?: number
+    fired?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ScheduledBoostUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    durationMin?: IntFieldUpdateOperationsInput | number
+    fired?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduledBoostUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    durationMin?: IntFieldUpdateOperationsInput | number
+    fired?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -23979,6 +28261,24 @@ export namespace Prisma {
     none?: ReferralWhereInput
   }
 
+  export type RoseLedgerListRelationFilter = {
+    every?: RoseLedgerWhereInput
+    some?: RoseLedgerWhereInput
+    none?: RoseLedgerWhereInput
+  }
+
+  export type PhoneVerificationListRelationFilter = {
+    every?: PhoneVerificationWhereInput
+    some?: PhoneVerificationWhereInput
+    none?: PhoneVerificationWhereInput
+  }
+
+  export type ScheduledBoostListRelationFilter = {
+    every?: ScheduledBoostWhereInput
+    some?: ScheduledBoostWhereInput
+    none?: ScheduledBoostWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -24040,6 +28340,18 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type RoseLedgerOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PhoneVerificationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ScheduledBoostOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
@@ -24072,6 +28384,12 @@ export namespace Prisma {
     isPremium?: SortOrder
     premiumTier?: SortOrder
     boostCredits?: SortOrder
+    roseBalance?: SortOrder
+    loginStreak?: SortOrder
+    lastLoginDate?: SortOrder
+    phoneNumber?: SortOrder
+    phoneVerified?: SortOrder
+    autoHidden?: SortOrder
     profileScore?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -24091,6 +28409,8 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     boostCredits?: SortOrder
+    roseBalance?: SortOrder
+    loginStreak?: SortOrder
     profileScore?: SortOrder
   }
 
@@ -24126,6 +28446,12 @@ export namespace Prisma {
     isPremium?: SortOrder
     premiumTier?: SortOrder
     boostCredits?: SortOrder
+    roseBalance?: SortOrder
+    loginStreak?: SortOrder
+    lastLoginDate?: SortOrder
+    phoneNumber?: SortOrder
+    phoneVerified?: SortOrder
+    autoHidden?: SortOrder
     profileScore?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -24172,6 +28498,12 @@ export namespace Prisma {
     isPremium?: SortOrder
     premiumTier?: SortOrder
     boostCredits?: SortOrder
+    roseBalance?: SortOrder
+    loginStreak?: SortOrder
+    lastLoginDate?: SortOrder
+    phoneNumber?: SortOrder
+    phoneVerified?: SortOrder
+    autoHidden?: SortOrder
     profileScore?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
@@ -24191,6 +28523,8 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     boostCredits?: SortOrder
+    roseBalance?: SortOrder
+    loginStreak?: SortOrder
     profileScore?: SortOrder
   }
 
@@ -24778,6 +29112,106 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type RoseLedgerCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    delta?: SortOrder
+    reason?: SortOrder
+    refId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RoseLedgerAvgOrderByAggregateInput = {
+    delta?: SortOrder
+  }
+
+  export type RoseLedgerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    delta?: SortOrder
+    reason?: SortOrder
+    refId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RoseLedgerMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    delta?: SortOrder
+    reason?: SortOrder
+    refId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RoseLedgerSumOrderByAggregateInput = {
+    delta?: SortOrder
+  }
+
+  export type PhoneVerificationCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    phone?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    verified?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PhoneVerificationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    phone?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    verified?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PhoneVerificationMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    phone?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    verified?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ScheduledBoostCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    scheduledAt?: SortOrder
+    durationMin?: SortOrder
+    fired?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ScheduledBoostAvgOrderByAggregateInput = {
+    durationMin?: SortOrder
+  }
+
+  export type ScheduledBoostMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    scheduledAt?: SortOrder
+    durationMin?: SortOrder
+    fired?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ScheduledBoostMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    scheduledAt?: SortOrder
+    durationMin?: SortOrder
+    fired?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ScheduledBoostSumOrderByAggregateInput = {
+    durationMin?: SortOrder
+  }
+
   export type MediaCreateNestedManyWithoutUserInput = {
     create?: XOR<MediaCreateWithoutUserInput, MediaUncheckedCreateWithoutUserInput> | MediaCreateWithoutUserInput[] | MediaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MediaCreateOrConnectWithoutUserInput | MediaCreateOrConnectWithoutUserInput[]
@@ -24917,6 +29351,27 @@ export namespace Prisma {
     connect?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
   }
 
+  export type RoseLedgerCreateNestedManyWithoutUserInput = {
+    create?: XOR<RoseLedgerCreateWithoutUserInput, RoseLedgerUncheckedCreateWithoutUserInput> | RoseLedgerCreateWithoutUserInput[] | RoseLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RoseLedgerCreateOrConnectWithoutUserInput | RoseLedgerCreateOrConnectWithoutUserInput[]
+    createMany?: RoseLedgerCreateManyUserInputEnvelope
+    connect?: RoseLedgerWhereUniqueInput | RoseLedgerWhereUniqueInput[]
+  }
+
+  export type PhoneVerificationCreateNestedManyWithoutUserInput = {
+    create?: XOR<PhoneVerificationCreateWithoutUserInput, PhoneVerificationUncheckedCreateWithoutUserInput> | PhoneVerificationCreateWithoutUserInput[] | PhoneVerificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PhoneVerificationCreateOrConnectWithoutUserInput | PhoneVerificationCreateOrConnectWithoutUserInput[]
+    createMany?: PhoneVerificationCreateManyUserInputEnvelope
+    connect?: PhoneVerificationWhereUniqueInput | PhoneVerificationWhereUniqueInput[]
+  }
+
+  export type ScheduledBoostCreateNestedManyWithoutUserInput = {
+    create?: XOR<ScheduledBoostCreateWithoutUserInput, ScheduledBoostUncheckedCreateWithoutUserInput> | ScheduledBoostCreateWithoutUserInput[] | ScheduledBoostUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ScheduledBoostCreateOrConnectWithoutUserInput | ScheduledBoostCreateOrConnectWithoutUserInput[]
+    createMany?: ScheduledBoostCreateManyUserInputEnvelope
+    connect?: ScheduledBoostWhereUniqueInput | ScheduledBoostWhereUniqueInput[]
+  }
+
   export type MediaUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<MediaCreateWithoutUserInput, MediaUncheckedCreateWithoutUserInput> | MediaCreateWithoutUserInput[] | MediaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MediaCreateOrConnectWithoutUserInput | MediaCreateOrConnectWithoutUserInput[]
@@ -25054,6 +29509,27 @@ export namespace Prisma {
     connectOrCreate?: ReferralCreateOrConnectWithoutReferrerInput | ReferralCreateOrConnectWithoutReferrerInput[]
     createMany?: ReferralCreateManyReferrerInputEnvelope
     connect?: ReferralWhereUniqueInput | ReferralWhereUniqueInput[]
+  }
+
+  export type RoseLedgerUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RoseLedgerCreateWithoutUserInput, RoseLedgerUncheckedCreateWithoutUserInput> | RoseLedgerCreateWithoutUserInput[] | RoseLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RoseLedgerCreateOrConnectWithoutUserInput | RoseLedgerCreateOrConnectWithoutUserInput[]
+    createMany?: RoseLedgerCreateManyUserInputEnvelope
+    connect?: RoseLedgerWhereUniqueInput | RoseLedgerWhereUniqueInput[]
+  }
+
+  export type PhoneVerificationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PhoneVerificationCreateWithoutUserInput, PhoneVerificationUncheckedCreateWithoutUserInput> | PhoneVerificationCreateWithoutUserInput[] | PhoneVerificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PhoneVerificationCreateOrConnectWithoutUserInput | PhoneVerificationCreateOrConnectWithoutUserInput[]
+    createMany?: PhoneVerificationCreateManyUserInputEnvelope
+    connect?: PhoneVerificationWhereUniqueInput | PhoneVerificationWhereUniqueInput[]
+  }
+
+  export type ScheduledBoostUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ScheduledBoostCreateWithoutUserInput, ScheduledBoostUncheckedCreateWithoutUserInput> | ScheduledBoostCreateWithoutUserInput[] | ScheduledBoostUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ScheduledBoostCreateOrConnectWithoutUserInput | ScheduledBoostCreateOrConnectWithoutUserInput[]
+    createMany?: ScheduledBoostCreateManyUserInputEnvelope
+    connect?: ScheduledBoostWhereUniqueInput | ScheduledBoostWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -25368,6 +29844,48 @@ export namespace Prisma {
     deleteMany?: ReferralScalarWhereInput | ReferralScalarWhereInput[]
   }
 
+  export type RoseLedgerUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RoseLedgerCreateWithoutUserInput, RoseLedgerUncheckedCreateWithoutUserInput> | RoseLedgerCreateWithoutUserInput[] | RoseLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RoseLedgerCreateOrConnectWithoutUserInput | RoseLedgerCreateOrConnectWithoutUserInput[]
+    upsert?: RoseLedgerUpsertWithWhereUniqueWithoutUserInput | RoseLedgerUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RoseLedgerCreateManyUserInputEnvelope
+    set?: RoseLedgerWhereUniqueInput | RoseLedgerWhereUniqueInput[]
+    disconnect?: RoseLedgerWhereUniqueInput | RoseLedgerWhereUniqueInput[]
+    delete?: RoseLedgerWhereUniqueInput | RoseLedgerWhereUniqueInput[]
+    connect?: RoseLedgerWhereUniqueInput | RoseLedgerWhereUniqueInput[]
+    update?: RoseLedgerUpdateWithWhereUniqueWithoutUserInput | RoseLedgerUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RoseLedgerUpdateManyWithWhereWithoutUserInput | RoseLedgerUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RoseLedgerScalarWhereInput | RoseLedgerScalarWhereInput[]
+  }
+
+  export type PhoneVerificationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PhoneVerificationCreateWithoutUserInput, PhoneVerificationUncheckedCreateWithoutUserInput> | PhoneVerificationCreateWithoutUserInput[] | PhoneVerificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PhoneVerificationCreateOrConnectWithoutUserInput | PhoneVerificationCreateOrConnectWithoutUserInput[]
+    upsert?: PhoneVerificationUpsertWithWhereUniqueWithoutUserInput | PhoneVerificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PhoneVerificationCreateManyUserInputEnvelope
+    set?: PhoneVerificationWhereUniqueInput | PhoneVerificationWhereUniqueInput[]
+    disconnect?: PhoneVerificationWhereUniqueInput | PhoneVerificationWhereUniqueInput[]
+    delete?: PhoneVerificationWhereUniqueInput | PhoneVerificationWhereUniqueInput[]
+    connect?: PhoneVerificationWhereUniqueInput | PhoneVerificationWhereUniqueInput[]
+    update?: PhoneVerificationUpdateWithWhereUniqueWithoutUserInput | PhoneVerificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PhoneVerificationUpdateManyWithWhereWithoutUserInput | PhoneVerificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PhoneVerificationScalarWhereInput | PhoneVerificationScalarWhereInput[]
+  }
+
+  export type ScheduledBoostUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ScheduledBoostCreateWithoutUserInput, ScheduledBoostUncheckedCreateWithoutUserInput> | ScheduledBoostCreateWithoutUserInput[] | ScheduledBoostUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ScheduledBoostCreateOrConnectWithoutUserInput | ScheduledBoostCreateOrConnectWithoutUserInput[]
+    upsert?: ScheduledBoostUpsertWithWhereUniqueWithoutUserInput | ScheduledBoostUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ScheduledBoostCreateManyUserInputEnvelope
+    set?: ScheduledBoostWhereUniqueInput | ScheduledBoostWhereUniqueInput[]
+    disconnect?: ScheduledBoostWhereUniqueInput | ScheduledBoostWhereUniqueInput[]
+    delete?: ScheduledBoostWhereUniqueInput | ScheduledBoostWhereUniqueInput[]
+    connect?: ScheduledBoostWhereUniqueInput | ScheduledBoostWhereUniqueInput[]
+    update?: ScheduledBoostUpdateWithWhereUniqueWithoutUserInput | ScheduledBoostUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ScheduledBoostUpdateManyWithWhereWithoutUserInput | ScheduledBoostUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ScheduledBoostScalarWhereInput | ScheduledBoostScalarWhereInput[]
+  }
+
   export type MediaUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<MediaCreateWithoutUserInput, MediaUncheckedCreateWithoutUserInput> | MediaCreateWithoutUserInput[] | MediaUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MediaCreateOrConnectWithoutUserInput | MediaCreateOrConnectWithoutUserInput[]
@@ -25642,6 +30160,48 @@ export namespace Prisma {
     update?: ReferralUpdateWithWhereUniqueWithoutReferrerInput | ReferralUpdateWithWhereUniqueWithoutReferrerInput[]
     updateMany?: ReferralUpdateManyWithWhereWithoutReferrerInput | ReferralUpdateManyWithWhereWithoutReferrerInput[]
     deleteMany?: ReferralScalarWhereInput | ReferralScalarWhereInput[]
+  }
+
+  export type RoseLedgerUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RoseLedgerCreateWithoutUserInput, RoseLedgerUncheckedCreateWithoutUserInput> | RoseLedgerCreateWithoutUserInput[] | RoseLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RoseLedgerCreateOrConnectWithoutUserInput | RoseLedgerCreateOrConnectWithoutUserInput[]
+    upsert?: RoseLedgerUpsertWithWhereUniqueWithoutUserInput | RoseLedgerUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RoseLedgerCreateManyUserInputEnvelope
+    set?: RoseLedgerWhereUniqueInput | RoseLedgerWhereUniqueInput[]
+    disconnect?: RoseLedgerWhereUniqueInput | RoseLedgerWhereUniqueInput[]
+    delete?: RoseLedgerWhereUniqueInput | RoseLedgerWhereUniqueInput[]
+    connect?: RoseLedgerWhereUniqueInput | RoseLedgerWhereUniqueInput[]
+    update?: RoseLedgerUpdateWithWhereUniqueWithoutUserInput | RoseLedgerUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RoseLedgerUpdateManyWithWhereWithoutUserInput | RoseLedgerUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RoseLedgerScalarWhereInput | RoseLedgerScalarWhereInput[]
+  }
+
+  export type PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PhoneVerificationCreateWithoutUserInput, PhoneVerificationUncheckedCreateWithoutUserInput> | PhoneVerificationCreateWithoutUserInput[] | PhoneVerificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PhoneVerificationCreateOrConnectWithoutUserInput | PhoneVerificationCreateOrConnectWithoutUserInput[]
+    upsert?: PhoneVerificationUpsertWithWhereUniqueWithoutUserInput | PhoneVerificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PhoneVerificationCreateManyUserInputEnvelope
+    set?: PhoneVerificationWhereUniqueInput | PhoneVerificationWhereUniqueInput[]
+    disconnect?: PhoneVerificationWhereUniqueInput | PhoneVerificationWhereUniqueInput[]
+    delete?: PhoneVerificationWhereUniqueInput | PhoneVerificationWhereUniqueInput[]
+    connect?: PhoneVerificationWhereUniqueInput | PhoneVerificationWhereUniqueInput[]
+    update?: PhoneVerificationUpdateWithWhereUniqueWithoutUserInput | PhoneVerificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PhoneVerificationUpdateManyWithWhereWithoutUserInput | PhoneVerificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PhoneVerificationScalarWhereInput | PhoneVerificationScalarWhereInput[]
+  }
+
+  export type ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ScheduledBoostCreateWithoutUserInput, ScheduledBoostUncheckedCreateWithoutUserInput> | ScheduledBoostCreateWithoutUserInput[] | ScheduledBoostUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ScheduledBoostCreateOrConnectWithoutUserInput | ScheduledBoostCreateOrConnectWithoutUserInput[]
+    upsert?: ScheduledBoostUpsertWithWhereUniqueWithoutUserInput | ScheduledBoostUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ScheduledBoostCreateManyUserInputEnvelope
+    set?: ScheduledBoostWhereUniqueInput | ScheduledBoostWhereUniqueInput[]
+    disconnect?: ScheduledBoostWhereUniqueInput | ScheduledBoostWhereUniqueInput[]
+    delete?: ScheduledBoostWhereUniqueInput | ScheduledBoostWhereUniqueInput[]
+    connect?: ScheduledBoostWhereUniqueInput | ScheduledBoostWhereUniqueInput[]
+    update?: ScheduledBoostUpdateWithWhereUniqueWithoutUserInput | ScheduledBoostUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ScheduledBoostUpdateManyWithWhereWithoutUserInput | ScheduledBoostUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ScheduledBoostScalarWhereInput | ScheduledBoostScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutMediaInput = {
@@ -25980,6 +30540,48 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutReferralsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReferralsInput, UserUpdateWithoutReferralsInput>, UserUncheckedUpdateWithoutReferralsInput>
+  }
+
+  export type UserCreateNestedOneWithoutRoseLedgerInput = {
+    create?: XOR<UserCreateWithoutRoseLedgerInput, UserUncheckedCreateWithoutRoseLedgerInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRoseLedgerInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutRoseLedgerNestedInput = {
+    create?: XOR<UserCreateWithoutRoseLedgerInput, UserUncheckedCreateWithoutRoseLedgerInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRoseLedgerInput
+    upsert?: UserUpsertWithoutRoseLedgerInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRoseLedgerInput, UserUpdateWithoutRoseLedgerInput>, UserUncheckedUpdateWithoutRoseLedgerInput>
+  }
+
+  export type UserCreateNestedOneWithoutPhoneVerificationsInput = {
+    create?: XOR<UserCreateWithoutPhoneVerificationsInput, UserUncheckedCreateWithoutPhoneVerificationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPhoneVerificationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutPhoneVerificationsNestedInput = {
+    create?: XOR<UserCreateWithoutPhoneVerificationsInput, UserUncheckedCreateWithoutPhoneVerificationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPhoneVerificationsInput
+    upsert?: UserUpsertWithoutPhoneVerificationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPhoneVerificationsInput, UserUpdateWithoutPhoneVerificationsInput>, UserUncheckedUpdateWithoutPhoneVerificationsInput>
+  }
+
+  export type UserCreateNestedOneWithoutScheduledBoostsInput = {
+    create?: XOR<UserCreateWithoutScheduledBoostsInput, UserUncheckedCreateWithoutScheduledBoostsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutScheduledBoostsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutScheduledBoostsNestedInput = {
+    create?: XOR<UserCreateWithoutScheduledBoostsInput, UserUncheckedCreateWithoutScheduledBoostsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutScheduledBoostsInput
+    upsert?: UserUpsertWithoutScheduledBoostsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutScheduledBoostsInput, UserUpdateWithoutScheduledBoostsInput>, UserUncheckedUpdateWithoutScheduledBoostsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -26685,6 +31287,86 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RoseLedgerCreateWithoutUserInput = {
+    id?: string
+    delta: number
+    reason: string
+    refId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type RoseLedgerUncheckedCreateWithoutUserInput = {
+    id?: string
+    delta: number
+    reason: string
+    refId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type RoseLedgerCreateOrConnectWithoutUserInput = {
+    where: RoseLedgerWhereUniqueInput
+    create: XOR<RoseLedgerCreateWithoutUserInput, RoseLedgerUncheckedCreateWithoutUserInput>
+  }
+
+  export type RoseLedgerCreateManyUserInputEnvelope = {
+    data: RoseLedgerCreateManyUserInput | RoseLedgerCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PhoneVerificationCreateWithoutUserInput = {
+    id?: string
+    phone: string
+    code: string
+    expiresAt: Date | string
+    verified?: boolean
+    createdAt?: Date | string
+  }
+
+  export type PhoneVerificationUncheckedCreateWithoutUserInput = {
+    id?: string
+    phone: string
+    code: string
+    expiresAt: Date | string
+    verified?: boolean
+    createdAt?: Date | string
+  }
+
+  export type PhoneVerificationCreateOrConnectWithoutUserInput = {
+    where: PhoneVerificationWhereUniqueInput
+    create: XOR<PhoneVerificationCreateWithoutUserInput, PhoneVerificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type PhoneVerificationCreateManyUserInputEnvelope = {
+    data: PhoneVerificationCreateManyUserInput | PhoneVerificationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ScheduledBoostCreateWithoutUserInput = {
+    id?: string
+    scheduledAt: Date | string
+    durationMin?: number
+    fired?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ScheduledBoostUncheckedCreateWithoutUserInput = {
+    id?: string
+    scheduledAt: Date | string
+    durationMin?: number
+    fired?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ScheduledBoostCreateOrConnectWithoutUserInput = {
+    where: ScheduledBoostWhereUniqueInput
+    create: XOR<ScheduledBoostCreateWithoutUserInput, ScheduledBoostUncheckedCreateWithoutUserInput>
+  }
+
+  export type ScheduledBoostCreateManyUserInputEnvelope = {
+    data: ScheduledBoostCreateManyUserInput | ScheduledBoostCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type MediaUpsertWithWhereUniqueWithoutUserInput = {
     where: MediaWhereUniqueInput
     update: XOR<MediaUpdateWithoutUserInput, MediaUncheckedUpdateWithoutUserInput>
@@ -27191,6 +31873,91 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Referral"> | Date | string
   }
 
+  export type RoseLedgerUpsertWithWhereUniqueWithoutUserInput = {
+    where: RoseLedgerWhereUniqueInput
+    update: XOR<RoseLedgerUpdateWithoutUserInput, RoseLedgerUncheckedUpdateWithoutUserInput>
+    create: XOR<RoseLedgerCreateWithoutUserInput, RoseLedgerUncheckedCreateWithoutUserInput>
+  }
+
+  export type RoseLedgerUpdateWithWhereUniqueWithoutUserInput = {
+    where: RoseLedgerWhereUniqueInput
+    data: XOR<RoseLedgerUpdateWithoutUserInput, RoseLedgerUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RoseLedgerUpdateManyWithWhereWithoutUserInput = {
+    where: RoseLedgerScalarWhereInput
+    data: XOR<RoseLedgerUpdateManyMutationInput, RoseLedgerUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RoseLedgerScalarWhereInput = {
+    AND?: RoseLedgerScalarWhereInput | RoseLedgerScalarWhereInput[]
+    OR?: RoseLedgerScalarWhereInput[]
+    NOT?: RoseLedgerScalarWhereInput | RoseLedgerScalarWhereInput[]
+    id?: StringFilter<"RoseLedger"> | string
+    userId?: StringFilter<"RoseLedger"> | string
+    delta?: IntFilter<"RoseLedger"> | number
+    reason?: StringFilter<"RoseLedger"> | string
+    refId?: StringNullableFilter<"RoseLedger"> | string | null
+    createdAt?: DateTimeFilter<"RoseLedger"> | Date | string
+  }
+
+  export type PhoneVerificationUpsertWithWhereUniqueWithoutUserInput = {
+    where: PhoneVerificationWhereUniqueInput
+    update: XOR<PhoneVerificationUpdateWithoutUserInput, PhoneVerificationUncheckedUpdateWithoutUserInput>
+    create: XOR<PhoneVerificationCreateWithoutUserInput, PhoneVerificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type PhoneVerificationUpdateWithWhereUniqueWithoutUserInput = {
+    where: PhoneVerificationWhereUniqueInput
+    data: XOR<PhoneVerificationUpdateWithoutUserInput, PhoneVerificationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PhoneVerificationUpdateManyWithWhereWithoutUserInput = {
+    where: PhoneVerificationScalarWhereInput
+    data: XOR<PhoneVerificationUpdateManyMutationInput, PhoneVerificationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PhoneVerificationScalarWhereInput = {
+    AND?: PhoneVerificationScalarWhereInput | PhoneVerificationScalarWhereInput[]
+    OR?: PhoneVerificationScalarWhereInput[]
+    NOT?: PhoneVerificationScalarWhereInput | PhoneVerificationScalarWhereInput[]
+    id?: StringFilter<"PhoneVerification"> | string
+    userId?: StringFilter<"PhoneVerification"> | string
+    phone?: StringFilter<"PhoneVerification"> | string
+    code?: StringFilter<"PhoneVerification"> | string
+    expiresAt?: DateTimeFilter<"PhoneVerification"> | Date | string
+    verified?: BoolFilter<"PhoneVerification"> | boolean
+    createdAt?: DateTimeFilter<"PhoneVerification"> | Date | string
+  }
+
+  export type ScheduledBoostUpsertWithWhereUniqueWithoutUserInput = {
+    where: ScheduledBoostWhereUniqueInput
+    update: XOR<ScheduledBoostUpdateWithoutUserInput, ScheduledBoostUncheckedUpdateWithoutUserInput>
+    create: XOR<ScheduledBoostCreateWithoutUserInput, ScheduledBoostUncheckedCreateWithoutUserInput>
+  }
+
+  export type ScheduledBoostUpdateWithWhereUniqueWithoutUserInput = {
+    where: ScheduledBoostWhereUniqueInput
+    data: XOR<ScheduledBoostUpdateWithoutUserInput, ScheduledBoostUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ScheduledBoostUpdateManyWithWhereWithoutUserInput = {
+    where: ScheduledBoostScalarWhereInput
+    data: XOR<ScheduledBoostUpdateManyMutationInput, ScheduledBoostUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ScheduledBoostScalarWhereInput = {
+    AND?: ScheduledBoostScalarWhereInput | ScheduledBoostScalarWhereInput[]
+    OR?: ScheduledBoostScalarWhereInput[]
+    NOT?: ScheduledBoostScalarWhereInput | ScheduledBoostScalarWhereInput[]
+    id?: StringFilter<"ScheduledBoost"> | string
+    userId?: StringFilter<"ScheduledBoost"> | string
+    scheduledAt?: DateTimeFilter<"ScheduledBoost"> | Date | string
+    durationMin?: IntFilter<"ScheduledBoost"> | number
+    fired?: BoolFilter<"ScheduledBoost"> | boolean
+    createdAt?: DateTimeFilter<"ScheduledBoost"> | Date | string
+  }
+
   export type UserCreateWithoutMediaInput = {
     id?: string
     email: string
@@ -27223,6 +31990,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -27254,6 +32027,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMediaInput = {
@@ -27288,6 +32064,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -27319,6 +32101,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMediaInput = {
@@ -27369,6 +32154,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -27400,6 +32191,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMediaInput = {
@@ -27434,6 +32228,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -27465,6 +32265,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutLikesSentInput = {
@@ -27499,6 +32302,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -27530,6 +32339,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLikesSentInput = {
@@ -27564,6 +32376,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -27595,6 +32413,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLikesSentInput = {
@@ -27634,6 +32455,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -27665,6 +32492,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLikesReceivedInput = {
@@ -27699,6 +32529,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -27730,6 +32566,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLikesReceivedInput = {
@@ -27780,6 +32619,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -27811,6 +32656,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikesSentInput = {
@@ -27845,6 +32693,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -27876,6 +32730,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutLikesReceivedInput = {
@@ -27921,6 +32778,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -27952,6 +32815,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikesReceivedInput = {
@@ -27986,6 +32852,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -28017,6 +32889,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutViewsGivenInput = {
@@ -28051,6 +32926,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -28082,6 +32963,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutViewsGivenInput = {
@@ -28116,6 +33000,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -28147,6 +33037,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutViewsGivenInput = {
@@ -28186,6 +33079,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -28217,6 +33116,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutViewsReceivedInput = {
@@ -28251,6 +33153,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -28282,6 +33190,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutViewsReceivedInput = {
@@ -28332,6 +33243,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -28363,6 +33280,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutViewsGivenInput = {
@@ -28397,6 +33317,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -28428,6 +33354,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutViewsReceivedInput = {
@@ -28473,6 +33402,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -28504,6 +33439,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutViewsReceivedInput = {
@@ -28538,6 +33476,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -28569,6 +33513,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutMessagesInput = {
@@ -28603,6 +33550,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -28634,6 +33587,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesInput = {
@@ -28668,6 +33624,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -28699,6 +33661,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesInput = {
@@ -28773,6 +33738,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -28804,6 +33775,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesInput = {
@@ -28838,6 +33812,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -28869,6 +33849,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MessageReactionUpsertWithWhereUniqueWithoutMessageInput = {
@@ -28946,6 +33929,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -28977,6 +33966,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessageReactionsInput = {
@@ -29011,6 +34003,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -29042,6 +34040,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessageReactionsInput = {
@@ -29125,6 +34126,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29156,6 +34163,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessageReactionsInput = {
@@ -29190,6 +34200,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29221,6 +34237,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutBlocksGivenInput = {
@@ -29255,6 +34274,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -29286,6 +34311,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBlocksGivenInput = {
@@ -29320,6 +34348,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -29351,6 +34385,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBlocksGivenInput = {
@@ -29390,6 +34427,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -29421,6 +34464,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBlocksReceivedInput = {
@@ -29455,6 +34501,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -29486,6 +34538,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBlocksReceivedInput = {
@@ -29536,6 +34591,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29567,6 +34628,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlocksGivenInput = {
@@ -29601,6 +34665,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29632,6 +34702,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutBlocksReceivedInput = {
@@ -29677,6 +34750,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29708,6 +34787,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBlocksReceivedInput = {
@@ -29742,6 +34824,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29773,6 +34861,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutReportsInput = {
@@ -29807,6 +34898,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -29838,6 +34935,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReportsInput = {
@@ -29872,6 +34972,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -29903,6 +35009,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReportsInput = {
@@ -29953,6 +35062,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29984,6 +35099,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReportsInput = {
@@ -30018,6 +35136,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30049,6 +35173,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutFriendRequestsSentInput = {
@@ -30083,6 +35210,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -30114,6 +35247,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFriendRequestsSentInput = {
@@ -30148,6 +35284,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -30179,6 +35321,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFriendRequestsSentInput = {
@@ -30218,6 +35363,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -30249,6 +35400,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFriendRequestsReceivedInput = {
@@ -30283,6 +35437,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -30314,6 +35474,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFriendRequestsReceivedInput = {
@@ -30364,6 +35527,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30395,6 +35564,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFriendRequestsSentInput = {
@@ -30429,6 +35601,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30460,6 +35638,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutFriendRequestsReceivedInput = {
@@ -30505,6 +35686,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30536,6 +35723,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFriendRequestsReceivedInput = {
@@ -30570,6 +35760,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30601,6 +35797,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutLiveRoomsInput = {
@@ -30635,6 +35834,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -30666,6 +35871,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLiveRoomsInput = {
@@ -30700,6 +35908,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -30731,6 +35945,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLiveRoomsInput = {
@@ -30781,6 +35998,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30812,6 +36035,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLiveRoomsInput = {
@@ -30846,6 +36072,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30877,6 +36109,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutRefreshTokensInput = {
@@ -30911,6 +36146,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -30942,6 +36183,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -30976,6 +36220,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -31007,6 +36257,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -31057,6 +36310,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31088,6 +36347,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -31122,6 +36384,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31153,6 +36421,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutDailyLikesInput = {
@@ -31187,6 +36458,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -31218,6 +36495,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDailyLikesInput = {
@@ -31252,6 +36532,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -31283,6 +36569,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDailyLikesInput = {
@@ -31333,6 +36622,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31364,6 +36659,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDailyLikesInput = {
@@ -31398,6 +36696,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31429,6 +36733,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSecurityEventsInput = {
@@ -31463,6 +36770,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -31494,6 +36807,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSecurityEventsInput = {
@@ -31528,6 +36844,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -31559,6 +36881,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSecurityEventsInput = {
@@ -31609,6 +36934,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31640,6 +36971,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSecurityEventsInput = {
@@ -31674,6 +37008,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31705,6 +37045,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSubscriptionInput = {
@@ -31739,6 +37082,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -31770,6 +37119,9 @@ export namespace Prisma {
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubscriptionInput = {
@@ -31804,6 +37156,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -31835,6 +37193,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubscriptionInput = {
@@ -31885,6 +37246,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31916,6 +37283,9 @@ export namespace Prisma {
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubscriptionInput = {
@@ -31950,6 +37320,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31981,6 +37357,9 @@ export namespace Prisma {
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutGiftsGivenInput = {
@@ -32015,6 +37394,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -32046,6 +37431,9 @@ export namespace Prisma {
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGiftsGivenInput = {
@@ -32080,6 +37468,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -32111,6 +37505,9 @@ export namespace Prisma {
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGiftsGivenInput = {
@@ -32150,6 +37547,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -32181,6 +37584,9 @@ export namespace Prisma {
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGiftsReceivedInput = {
@@ -32215,6 +37621,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -32246,6 +37658,9 @@ export namespace Prisma {
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGiftsReceivedInput = {
@@ -32296,6 +37711,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32327,6 +37748,9 @@ export namespace Prisma {
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGiftsGivenInput = {
@@ -32361,6 +37785,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32392,6 +37822,9 @@ export namespace Prisma {
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutGiftsReceivedInput = {
@@ -32437,6 +37870,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32468,6 +37907,9 @@ export namespace Prisma {
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGiftsReceivedInput = {
@@ -32502,6 +37944,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32533,6 +37981,9 @@ export namespace Prisma {
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutReferralsInput = {
@@ -32567,6 +38018,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -32598,6 +38055,9 @@ export namespace Prisma {
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
     giftsGiven?: GiftCreateNestedManyWithoutFromInput
     giftsReceived?: GiftCreateNestedManyWithoutToInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReferralsInput = {
@@ -32632,6 +38092,12 @@ export namespace Prisma {
     isPremium?: boolean
     premiumTier?: string
     boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
     profileScore?: number
     onboardingStep?: string
     onboardingCompleted?: boolean
@@ -32663,6 +38129,9 @@ export namespace Prisma {
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
     giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReferralsInput = {
@@ -32713,6 +38182,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32744,6 +38219,9 @@ export namespace Prisma {
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
     giftsGiven?: GiftUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReferralsInput = {
@@ -32778,6 +38256,12 @@ export namespace Prisma {
     isPremium?: BoolFieldUpdateOperationsInput | boolean
     premiumTier?: StringFieldUpdateOperationsInput | string
     boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
     profileScore?: IntFieldUpdateOperationsInput | number
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32809,6 +38293,945 @@ export namespace Prisma {
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
     giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutRoseLedgerInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaCreateNestedManyWithoutUserInput
+    likesSent?: LikeCreateNestedManyWithoutFromInput
+    likesReceived?: LikeCreateNestedManyWithoutToInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserCreateNestedManyWithoutBlockedInput
+    reports?: ReportCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutRoseLedgerInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutUserInput
+    likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
+    likesReceived?: LikeUncheckedCreateNestedManyWithoutToInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionUncheckedCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomUncheckedCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeUncheckedCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewUncheckedCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewUncheckedCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserUncheckedCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserUncheckedCreateNestedManyWithoutBlockedInput
+    reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutRoseLedgerInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRoseLedgerInput, UserUncheckedCreateWithoutRoseLedgerInput>
+  }
+
+  export type UserUpsertWithoutRoseLedgerInput = {
+    update: XOR<UserUpdateWithoutRoseLedgerInput, UserUncheckedUpdateWithoutRoseLedgerInput>
+    create: XOR<UserCreateWithoutRoseLedgerInput, UserUncheckedCreateWithoutRoseLedgerInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRoseLedgerInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRoseLedgerInput, UserUncheckedUpdateWithoutRoseLedgerInput>
+  }
+
+  export type UserUpdateWithoutRoseLedgerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUpdateManyWithoutToNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRoseLedgerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUncheckedUpdateManyWithoutToNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUncheckedUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUncheckedUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUncheckedUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUncheckedUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUncheckedUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUncheckedUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUncheckedUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutPhoneVerificationsInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaCreateNestedManyWithoutUserInput
+    likesSent?: LikeCreateNestedManyWithoutFromInput
+    likesReceived?: LikeCreateNestedManyWithoutToInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserCreateNestedManyWithoutBlockedInput
+    reports?: ReportCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPhoneVerificationsInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutUserInput
+    likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
+    likesReceived?: LikeUncheckedCreateNestedManyWithoutToInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionUncheckedCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomUncheckedCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeUncheckedCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewUncheckedCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewUncheckedCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserUncheckedCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserUncheckedCreateNestedManyWithoutBlockedInput
+    reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    scheduledBoosts?: ScheduledBoostUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPhoneVerificationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPhoneVerificationsInput, UserUncheckedCreateWithoutPhoneVerificationsInput>
+  }
+
+  export type UserUpsertWithoutPhoneVerificationsInput = {
+    update: XOR<UserUpdateWithoutPhoneVerificationsInput, UserUncheckedUpdateWithoutPhoneVerificationsInput>
+    create: XOR<UserCreateWithoutPhoneVerificationsInput, UserUncheckedCreateWithoutPhoneVerificationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPhoneVerificationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPhoneVerificationsInput, UserUncheckedUpdateWithoutPhoneVerificationsInput>
+  }
+
+  export type UserUpdateWithoutPhoneVerificationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUpdateManyWithoutToNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPhoneVerificationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUncheckedUpdateManyWithoutToNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUncheckedUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUncheckedUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUncheckedUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUncheckedUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUncheckedUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUncheckedUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUncheckedUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    scheduledBoosts?: ScheduledBoostUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutScheduledBoostsInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaCreateNestedManyWithoutUserInput
+    likesSent?: LikeCreateNestedManyWithoutFromInput
+    likesReceived?: LikeCreateNestedManyWithoutToInput
+    messages?: MessageCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserCreateNestedManyWithoutBlockedInput
+    reports?: ReportCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftCreateNestedManyWithoutToInput
+    referrals?: ReferralCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutScheduledBoostsInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    name: string
+    age: number
+    city: string
+    state?: string
+    zipCode?: string
+    pronouns?: string
+    genderIdentity?: string
+    sexualOrientation?: string
+    polyPreference?: string
+    bio: string
+    interests?: string
+    lookingFor?: string
+    profileTheme?: string
+    profileGraphic?: string
+    musicUrl?: string
+    profileMotto?: string
+    dreamDate?: string
+    avatar?: string
+    latitude?: number
+    longitude?: number
+    profilePrompts?: string
+    verified?: boolean
+    verifiedStatus?: string
+    paused?: boolean
+    boostedUntil?: Date | string | null
+    isPremium?: boolean
+    premiumTier?: string
+    boostCredits?: number
+    roseBalance?: number
+    loginStreak?: number
+    lastLoginDate?: string
+    phoneNumber?: string | null
+    phoneVerified?: boolean
+    autoHidden?: boolean
+    profileScore?: number
+    onboardingStep?: string
+    onboardingCompleted?: boolean
+    emailVerified?: boolean
+    verifyToken?: string | null
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    pushSubscription?: string | null
+    referralCode?: string | null
+    referredById?: string | null
+    lastSeen?: Date | string | null
+    createdAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutUserInput
+    likesSent?: LikeUncheckedCreateNestedManyWithoutFromInput
+    likesReceived?: LikeUncheckedCreateNestedManyWithoutToInput
+    messages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    messageReactions?: MessageReactionUncheckedCreateNestedManyWithoutUserInput
+    liveRooms?: LiveRoomUncheckedCreateNestedManyWithoutHostInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    dailyLikes?: DailyLikeUncheckedCreateNestedManyWithoutUserInput
+    viewsGiven?: ProfileViewUncheckedCreateNestedManyWithoutViewerInput
+    viewsReceived?: ProfileViewUncheckedCreateNestedManyWithoutViewedInput
+    blocksGiven?: BlockedUserUncheckedCreateNestedManyWithoutBlockerInput
+    blocksReceived?: BlockedUserUncheckedCreateNestedManyWithoutBlockedInput
+    reports?: ReportUncheckedCreateNestedManyWithoutReporterInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    friendRequestsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    friendRequestsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    giftsGiven?: GiftUncheckedCreateNestedManyWithoutFromInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutToInput
+    referrals?: ReferralUncheckedCreateNestedManyWithoutReferrerInput
+    roseLedger?: RoseLedgerUncheckedCreateNestedManyWithoutUserInput
+    phoneVerifications?: PhoneVerificationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutScheduledBoostsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutScheduledBoostsInput, UserUncheckedCreateWithoutScheduledBoostsInput>
+  }
+
+  export type UserUpsertWithoutScheduledBoostsInput = {
+    update: XOR<UserUpdateWithoutScheduledBoostsInput, UserUncheckedUpdateWithoutScheduledBoostsInput>
+    create: XOR<UserCreateWithoutScheduledBoostsInput, UserUncheckedCreateWithoutScheduledBoostsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutScheduledBoostsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutScheduledBoostsInput, UserUncheckedUpdateWithoutScheduledBoostsInput>
+  }
+
+  export type UserUpdateWithoutScheduledBoostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUpdateManyWithoutToNestedInput
+    messages?: MessageUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUpdateManyWithoutToNestedInput
+    referrals?: ReferralUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutScheduledBoostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    age?: IntFieldUpdateOperationsInput | number
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    pronouns?: StringFieldUpdateOperationsInput | string
+    genderIdentity?: StringFieldUpdateOperationsInput | string
+    sexualOrientation?: StringFieldUpdateOperationsInput | string
+    polyPreference?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    interests?: StringFieldUpdateOperationsInput | string
+    lookingFor?: StringFieldUpdateOperationsInput | string
+    profileTheme?: StringFieldUpdateOperationsInput | string
+    profileGraphic?: StringFieldUpdateOperationsInput | string
+    musicUrl?: StringFieldUpdateOperationsInput | string
+    profileMotto?: StringFieldUpdateOperationsInput | string
+    dreamDate?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    profilePrompts?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedStatus?: StringFieldUpdateOperationsInput | string
+    paused?: BoolFieldUpdateOperationsInput | boolean
+    boostedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    premiumTier?: StringFieldUpdateOperationsInput | string
+    boostCredits?: IntFieldUpdateOperationsInput | number
+    roseBalance?: IntFieldUpdateOperationsInput | number
+    loginStreak?: IntFieldUpdateOperationsInput | number
+    lastLoginDate?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    autoHidden?: BoolFieldUpdateOperationsInput | boolean
+    profileScore?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: StringFieldUpdateOperationsInput | string
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pushSubscription?: NullableStringFieldUpdateOperationsInput | string | null
+    referralCode?: NullableStringFieldUpdateOperationsInput | string | null
+    referredById?: NullableStringFieldUpdateOperationsInput | string | null
+    lastSeen?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutUserNestedInput
+    likesSent?: LikeUncheckedUpdateManyWithoutFromNestedInput
+    likesReceived?: LikeUncheckedUpdateManyWithoutToNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    messageReactions?: MessageReactionUncheckedUpdateManyWithoutUserNestedInput
+    liveRooms?: LiveRoomUncheckedUpdateManyWithoutHostNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    dailyLikes?: DailyLikeUncheckedUpdateManyWithoutUserNestedInput
+    viewsGiven?: ProfileViewUncheckedUpdateManyWithoutViewerNestedInput
+    viewsReceived?: ProfileViewUncheckedUpdateManyWithoutViewedNestedInput
+    blocksGiven?: BlockedUserUncheckedUpdateManyWithoutBlockerNestedInput
+    blocksReceived?: BlockedUserUncheckedUpdateManyWithoutBlockedNestedInput
+    reports?: ReportUncheckedUpdateManyWithoutReporterNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    friendRequestsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    friendRequestsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    giftsGiven?: GiftUncheckedUpdateManyWithoutFromNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutToNestedInput
+    referrals?: ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+    roseLedger?: RoseLedgerUncheckedUpdateManyWithoutUserNestedInput
+    phoneVerifications?: PhoneVerificationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MediaCreateManyUserInput = {
@@ -32953,6 +39376,31 @@ export namespace Prisma {
     id?: string
     refereeId: string
     rewardGiven?: boolean
+    createdAt?: Date | string
+  }
+
+  export type RoseLedgerCreateManyUserInput = {
+    id?: string
+    delta: number
+    reason: string
+    refId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type PhoneVerificationCreateManyUserInput = {
+    id?: string
+    phone: string
+    code: string
+    expiresAt: Date | string
+    verified?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ScheduledBoostCreateManyUserInput = {
+    id?: string
+    scheduledAt: Date | string
+    durationMin?: number
+    fired?: boolean
     createdAt?: Date | string
   }
 
@@ -33390,6 +39838,81 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     refereeId?: StringFieldUpdateOperationsInput | string
     rewardGiven?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoseLedgerUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    delta?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    refId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoseLedgerUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    delta?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    refId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoseLedgerUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    delta?: IntFieldUpdateOperationsInput | number
+    reason?: StringFieldUpdateOperationsInput | string
+    refId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PhoneVerificationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PhoneVerificationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PhoneVerificationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduledBoostUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    durationMin?: IntFieldUpdateOperationsInput | number
+    fired?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduledBoostUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    durationMin?: IntFieldUpdateOperationsInput | number
+    fired?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduledBoostUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scheduledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    durationMin?: IntFieldUpdateOperationsInput | number
+    fired?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

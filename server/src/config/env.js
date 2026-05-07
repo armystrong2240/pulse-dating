@@ -24,6 +24,11 @@ const EnvSchema = z.object({
   PAYPAL_CLIENT_SECRET: z.string().default(""),
   PAYPAL_PLAN_PLUS_ID: z.string().default(""),
   PAYPAL_PLAN_GOLD_ID: z.string().default(""),
+  OPENAI_API_KEY: z.string().default(""),
+  TWILIO_ACCOUNT_SID: z.string().default(""),
+  TWILIO_AUTH_TOKEN: z.string().default(""),
+  TWILIO_PHONE_NUMBER: z.string().default(""),
+  REDIS_URL: z.string().default(""),
 });
 
 const parsed = EnvSchema.safeParse(process.env);
@@ -98,3 +103,8 @@ export const PAYPAL_CLIENT_ID = envData.PAYPAL_CLIENT_ID;
 export const PAYPAL_CLIENT_SECRET = envData.PAYPAL_CLIENT_SECRET;
 export const PAYPAL_PLAN_PLUS_ID = envData.PAYPAL_PLAN_PLUS_ID;
 export const PAYPAL_PLAN_GOLD_ID = envData.PAYPAL_PLAN_GOLD_ID;
+export const OPENAI_API_KEY = envData.OPENAI_API_KEY;
+export const TWILIO_ACCOUNT_SID = envData.TWILIO_ACCOUNT_SID;
+export const TWILIO_AUTH_TOKEN = envData.TWILIO_AUTH_TOKEN;
+export const TWILIO_PHONE_NUMBER = envData.TWILIO_PHONE_NUMBER;
+export const REDIS_URL = envData.REDIS_URL;

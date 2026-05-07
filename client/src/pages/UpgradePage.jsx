@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../api/client";
+import { api, toAssetUrl } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 
 const PLAN_FEATURES = {
@@ -68,6 +68,12 @@ export default function UpgradePage() {
   const [error, setError] = useState("");
   const [subscription, setSubscription] = useState(null);
   const [subLoading, setSubLoading] = useState(true);
+  const [roses, setRoses] = useState(null);
+  const [leaderboard, setLeaderboard] = useState([]);
+  const [boostDate, setBoostDate] = useState("");
+  const [boostTime, setBoostTime] = useState("");
+  const [boostMsg, setBoostMsg] = useState("");
+  const [scheduledBoosts, setScheduledBoosts] = useState([]);
 
   const currentTier = user?.premiumTier || "free";
 
@@ -76,7 +82,28 @@ export default function UpgradePage() {
       .then((r) => setSubscription(r.data.subscription))
       .catch(() => {})
       .finally(() => setSubLoading(false));
+    api.get("/roses").then((r) => setRoses(r.data)).catch(() => {});
+    api.get("/gifts/leaderboard").then((r) => setLeaderboard(r.data.leaderboard || [])).catch(() => {});
+    api.get("/boosts").then((r) => setScheduledBoosts(r.data || [])).catch(() => {});
   }, []);
+
+  async function handleScheduleBoost() {
+    if (!boostDate || !boostTime) return setBoostMsg("Pick a date and time.");
+    const scheduledAt = new Date(`${boostDate}T${boostTime}`).toISOString();
+    try {
+      const { data } = await api.post("/boosts", { scheduledAt, durationMin: 30 });
+      setScheduledBoosts((prev) => [...prev, data]);
+      setBoostMsg("✓ Boost scheduled!");
+      setBoostDate(""); setBoostTime("");
+    } catch (e) {
+      setBoostMsg(e.response?.data?.error || "Failed to schedule boost.");
+    }
+  }
+
+  async function handleCancelBoost(id) {
+    await api.delete(`/boosts/${id}`).catch(() => {});
+    setScheduledBoosts((prev) => prev.filter((b) => b.id !== id));
+  }
 
   async function handleUpgrade(tier) {
     setLoading(true);
@@ -271,6 +298,109 @@ export default function UpgradePage() {
           ))}
         </div>
       </div>
+    </div>
+
+        {/* ── Roses currency ───────────────────────────────────────── */}
+        {roses !== null && (
+          <div style={{ marginTop: 48, background: "#111", border: "1px solid #333", borderRadius: 16, padding: "1.5rem" }}>
+            <h2 style={{ margin: "0 0 4px", fontSize: "1.4rem" }}>🌹 Roses — Your Premium Currency</h2>
+            <p style={{ color: "#aaa", fontSize: 13, marginBottom: 16 }}>
+              Earn Roses through login streaks and referrals. Spend them on Super Likes and Boosts.
+            </p>
+            <div style={{ display: "flex", gap: 32, flexWrap: "wrap", marginBottom: 16 }}>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "2.5rem", fontWeight: 800, color: "#e74c3c" }}>{roses.balance}</div>
+                <div style={{ color: "#aaa", fontSize: 12 }}>Current Balance</div>
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 600, marginBottom: 8, fontSize: 13 }}>Streak milestones</div>
+                {[
+                  { days: 5, bonus: 2 }, { days: 7, bonus: 5 },
+                  { days: 14, bonus: 10 }, { days: 30, bonus: 25 },
+                ].map(({ days, bonus }) => (
+                  <div key={days} style={{ display: "flex", justifyContent: "space-between", color: "#ccc", fontSize: 12, marginBottom: 4, maxWidth: 220 }}>
+                    <span>🔥 {days}-day streak</span>
+                    <span style={{ color: "#e74c3c" }}>+{bonus} 🌹</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {roses.balance === 0 && (
+              <button
+                onClick={() => api.post("/roses/claim-referral").then((r) => setRoses((prev) => ({ ...prev, balance: r.data.balance }))).catch(() => {})}
+                style={{ background: "#e74c3c", color: "#fff", border: "none", borderRadius: 8, padding: "0.5rem 1.2rem", cursor: "pointer", fontSize: 14 }}
+              >
+                Claim Referral Roses
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* ── Gift Leaderboard ──────────────────────────────────────── */}
+        {leaderboard.length > 0 && (
+          <div style={{ marginTop: 32, background: "#111", border: "1px solid #333", borderRadius: 16, padding: "1.5rem" }}>
+            <h2 style={{ margin: "0 0 4px", fontSize: "1.4rem" }}>🎁 Most Gifted This Month</h2>
+            <p style={{ color: "#aaa", fontSize: 13, marginBottom: 16 }}>Top receivers of virtual gifts in the community.</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {leaderboard.map((row) => (
+                <div key={row.user.id} style={{ display: "flex", alignItems: "center", gap: 12, background: "#1a1a2e", borderRadius: 10, padding: "0.6rem 1rem" }}>
+                  <span style={{ fontWeight: 800, fontSize: 16, color: row.rank === 1 ? "#f1c40f" : row.rank === 2 ? "#aaa" : row.rank === 3 ? "#cd7f32" : "#555", minWidth: 24 }}>
+                    {row.rank === 1 ? "🥇" : row.rank === 2 ? "🥈" : row.rank === 3 ? "🥉" : `#${row.rank}`}
+                  </span>
+                  {row.user.avatar && (
+                    <img src={toAssetUrl(row.user.avatar)} alt={row.user.name} style={{ width: 36, height: 36, borderRadius: "50%", objectFit: "cover" }} />
+                  )}
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 600, fontSize: 14 }}>{row.user.name}</div>
+                    <div style={{ color: "#777", fontSize: 12 }}>{row.user.city}</div>
+                  </div>
+                  <div style={{ color: "#e74c3c", fontWeight: 700 }}>🎁 {row.giftCount}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── Boost Scheduler ──────────────────────────────────────── */}
+        {currentTier !== "free" && (
+          <div style={{ marginTop: 32, background: "#111", border: "1px solid #333", borderRadius: 16, padding: "1.5rem" }}>
+            <h2 style={{ margin: "0 0 4px", fontSize: "1.4rem" }}>⚡ Schedule a Profile Boost</h2>
+            <p style={{ color: "#aaa", fontSize: 13, marginBottom: 16 }}>Pick a future time to automatically boost your profile visibility for 30 minutes.</p>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "flex-end", marginBottom: 12 }}>
+              <div>
+                <label style={{ fontSize: 12, color: "#aaa", display: "block", marginBottom: 4 }}>Date</label>
+                <input type="date" value={boostDate} onChange={(e) => setBoostDate(e.target.value)}
+                  min={new Date().toISOString().slice(0, 10)}
+                  style={{ background: "#1a1a2e", border: "1px solid #333", color: "#fff", borderRadius: 8, padding: "0.5rem", fontSize: 14 }} />
+              </div>
+              <div>
+                <label style={{ fontSize: 12, color: "#aaa", display: "block", marginBottom: 4 }}>Time</label>
+                <input type="time" value={boostTime} onChange={(e) => setBoostTime(e.target.value)}
+                  style={{ background: "#1a1a2e", border: "1px solid #333", color: "#fff", borderRadius: 8, padding: "0.5rem", fontSize: 14 }} />
+              </div>
+              <button onClick={handleScheduleBoost}
+                style={{ background: "#9b59b6", color: "#fff", border: "none", borderRadius: 8, padding: "0.5rem 1.2rem", cursor: "pointer", fontSize: 14 }}>
+                Schedule Boost
+              </button>
+            </div>
+            {boostMsg && <div style={{ fontSize: 13, color: boostMsg.startsWith("✓") ? "#2ecc71" : "#e74c3c", marginBottom: 12 }}>{boostMsg}</div>}
+            {scheduledBoosts.length > 0 && (
+              <div>
+                <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 8 }}>Scheduled</div>
+                {scheduledBoosts.map((b) => (
+                  <div key={b.id} style={{ display: "flex", alignItems: "center", gap: 12, color: "#ccc", fontSize: 13, marginBottom: 6 }}>
+                    <span>⏰ {new Date(b.scheduledAt).toLocaleString()} — {b.durationMin} min</span>
+                    <button onClick={() => handleCancelBoost(b.id)}
+                      style={{ background: "none", border: "1px solid #555", color: "#e74c3c", borderRadius: 6, padding: "2px 8px", cursor: "pointer", fontSize: 12 }}>
+                      Cancel
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+    </div>
     </div>
   );
 }

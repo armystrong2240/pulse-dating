@@ -13,6 +13,7 @@ export const Navbar = () => {
   const unreadMatches = socket?.unreadMatches ?? 0;
   const [pendingFriends, setPendingFriends] = useState(0);
   const [onboardingNeeded, setOnboardingNeeded] = useState(false);
+  const [roses, setRoses] = useState(null);
 
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -20,6 +21,7 @@ export const Navbar = () => {
     if (!user) return;
     api.get("/admin/stats").then(() => setIsAdmin(true)).catch(() => setIsAdmin(false));
     api.get("/friends/requests").then((r) => setPendingFriends(r.data.length)).catch(() => {});
+    api.get("/roses").then((r) => setRoses(r.data.balance)).catch(() => {});
     if (user?.isAdmin) {
       setOnboardingNeeded(false);
       return;
@@ -84,6 +86,11 @@ export const Navbar = () => {
           <NavLink to="/referrals" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             🎁 Invite
           </NavLink>
+          {roses !== null && (
+            <NavLink to="/upgrade" className="nav-link" style={{ color: "#e74c3c", fontWeight: 600 }} title="Your Roses balance">
+              🌹 {roses}
+            </NavLink>
+          )}
           {(!user?.isPremium) && (
             <NavLink to="/upgrade" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
               style={{ color: "#f39c12", fontWeight: 700 }}>

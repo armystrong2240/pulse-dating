@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import { z } from "zod";
 import { ADMIN_EMAILS, BCRYPT_ROUNDS, CLIENT_URL, isProduction } from "../config/env.js";
 import { parseInterests, prisma, serializeInterests } from "../db.js";
+import { awardLoginStreak } from "../lib/backgroundJobs.js";
 import {
   decryptSensitiveUserFields,
   encryptSensitiveUserFields,
@@ -259,6 +260,8 @@ router.post("/login", loginLimiter, async (req, res) => {
   });
 
   setRefreshCookie(res, refreshToken);
+  // Non-blocking streak award
+  awardLoginStreak(user.id).catch(() => {});
   return res.json({ token: accessToken, user: toPublic(user) });
 });
 

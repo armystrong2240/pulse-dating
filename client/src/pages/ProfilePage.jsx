@@ -146,6 +146,12 @@ export const ProfilePage = () => {
   const [verifyStatus, setVerifyStatus] = useState("");
   const [actionMsg, setActionMsg] = useState("");
   const [quality, setQuality] = useState(null);
+  // Phone verification
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneVerified, setPhoneVerified] = useState(false);
+  const [phoneCode, setPhoneCode] = useState("");
+  const [phoneSent, setPhoneSent] = useState(false);
+  const [phoneMsg, setPhoneMsg] = useState("");
   // Friendship
   const [friendStatus, setFriendStatus] = useState("none"); // none | pending | accepted
   const [friendshipId, setFriendshipId] = useState(null);
@@ -184,6 +190,8 @@ export const ProfilePage = () => {
       setVerifyStatus(profileRes.data.verifiedStatus || "");
       setBlocked(blocksRes.data.some((b) => b.id === id));
       if (user?.id === id) {
+        setPhoneNumber(profileRes.data.phoneNumber || "");
+        setPhoneVerified(!!profileRes.data.phoneVerified);
         api.get("/profile-quality/me")
           .then((r) => setQuality(r.data))
           .catch(() => setQuality(null));
@@ -369,6 +377,42 @@ export const ProfilePage = () => {
       showAction("Unfriended.");
     } catch { /* ignore */ } finally {
       setFriendLoading(false);
+    }
+  };
+
+  const onSendPhoneCode = async () => {
+    setPhoneMsg("");
+    try {
+      await api.post("/phone/send", { phoneNumber });
+      setPhoneSent(true);
+      setPhoneMsg("Code sent! Check your SMS.");
+    } catch (e) {
+      setPhoneMsg(e.response?.data?.error || "Failed to send code.");
+    }
+  };
+
+  const onVerifyPhone = async () => {
+    setPhoneMsg("");
+    try {
+      await api.post("/phone/verify", { phoneNumber, code: phoneCode });
+      setPhoneVerified(true);
+      setPhoneSent(false);
+      setPhoneCode("");
+      setPhoneMsg("✓ Phone verified!");
+    } catch (e) {
+      setPhoneMsg(e.response?.data?.error || "Invalid code.");
+    }
+  };
+
+  const onUnlinkPhone = async () => {
+    setPhoneMsg("");
+    try {
+      await api.delete("/phone");
+      setPhoneNumber("");
+      setPhoneVerified(false);
+      setPhoneMsg("Phone number removed.");
+    } catch (e) {
+      setPhoneMsg(e.response?.data?.error || "Failed to unlink phone.");
     }
   };
 
@@ -868,6 +912,52 @@ export const ProfilePage = () => {
                         <input value={form.interestsText} onChange={(e) => onField("interestsText", e.target.value)} placeholder="Interests (comma-separated)" />
                         <textarea value={form.bio} onChange={(e) => onField("bio", e.target.value)} placeholder="About me" rows={4} />
                         <div style={{ gridColumn: "1 / -1", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                          <label style={{ fontWeight: 600, fontSize: "0.9rem" }}>📱 Phone Verification</label>
+                          {phoneVerified ? (
+                            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+                              <span style={{ color: "#2ecc71", fontSize: "0.85rem" }}>✓ Verified: {phoneNumber}</span>
+                              <button type="button" className="btn-secondary" style={{ fontSize: "0.8rem", padding: "0.25rem 0.6rem" }} onClick={onUnlinkPhone}>Unlink</button>
+                            </div>
+                          ) : (
+                            <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem", maxWidth: 360 }}>
+                              <input
+                                type="tel"
+                                placeholder="+1 555 000 0000"
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                disabled={phoneSent}
+                                style={{ fontSize: "0.9rem" }}
+                              />
+                              {phoneSent && (
+                                <input
+                                  type="text"
+                                  placeholder="Enter 6-digit code"
+                                  value={phoneCode}
+                                  onChange={(e) => setPhoneCode(e.target.value)}
+                                  maxLength={6}
+                                  style={{ fontSize: "0.9rem", letterSpacing: 4 }}
+                                />
+                              )}
+                              <div style={{ display: "flex", gap: "0.5rem" }}>
+                                {!phoneSent ? (
+                                  <button type="button" className="btn-primary" style={{ fontSize: "0.85rem" }} onClick={onSendPhoneCode} disabled={!phoneNumber.trim()}>
+                                    Send Code
+                                  </button>
+                                ) : (
+                                  <>
+                                    <button type="button" className="btn-primary" style={{ fontSize: "0.85rem" }} onClick={onVerifyPhone} disabled={phoneCode.length < 4}>
+                                      Verify
+                                    </button>
+                                    <button type="button" className="btn-secondary" style={{ fontSize: "0.85rem" }} onClick={() => { setPhoneSent(false); setPhoneCode(""); setPhoneMsg(""); }}>
+                                      Cancel
+                                    </button>
+                                  </>
+                                )}
+                              </div>
+                              {phoneMsg && <span style={{ fontSize: "0.82rem", color: phoneMsg.startsWith("✓") ? "#2ecc71" : "#e74c3c" }}>{phoneMsg}</span>}
+                            </div>
+                          )}
+                        </div>
                           <textarea value={form.lookingFor} onChange={(e) => onField("lookingFor", e.target.value)} placeholder="What I am looking for" rows={3} />
                           <select value={form.polyPreference} onChange={(e) => onField("polyPreference", e.target.value)} style={{ marginTop: "0.25rem" }}>
                             <option value="">Relationship style (optional)</option>

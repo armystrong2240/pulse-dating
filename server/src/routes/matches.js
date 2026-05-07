@@ -2,6 +2,7 @@ import { Router } from "express";
 import { parseInterests, prisma } from "../db.js";
 import { requireAuth } from "../middleware/auth.js";
 import { sendPushToUser } from "./push.js";
+import { generateIcebreaker } from "../lib/aiServices.js";
 
 const router = Router();
 
@@ -143,12 +144,10 @@ router.post("/like/:targetId", requireAuth, async (req, res) => {
   if (mutualMatch) {
     const { io, userSockets } = req.app.locals;
     const [me, them] = await Promise.all([
-      prisma.user.findUnique({ where: { id: fromId }, select: { id: true, name: true, avatar: true, interests: true } }),
-      prisma.user.findUnique({ where: { id: toId }, select: { id: true, name: true, avatar: true, interests: true } }),
+      prisma.user.findUnique({ where: { id: fromId }, select: { id: true, name: true, avatar: true, interests: true, age: true, lookingFor: true } }),
+      prisma.user.findUnique({ where: { id: toId }, select: { id: true, name: true, avatar: true, interests: true, age: true, lookingFor: true } }),
     ]);
-    const meInts = (() => { try { return JSON.parse(me.interests); } catch { return []; } })();
-    const themInts = (() => { try { return JSON.parse(them.interests); } catch { return []; } })();
-    const icebreaker = getIcebreaker(meInts, themInts);
+    const icebreaker = await generateIcebreaker(me, them);
     userSockets?.get(toId)?.forEach((sid) =>
       io.to(sid).emit("match:new", { matchedUser: { id: me.id, name: me.name, avatar: me.avatar }, icebreaker })
     );
@@ -320,9 +319,7 @@ router.get("/daily-pick", requireAuth, async (req, res) => {
 
   scored.sort((a, b) => b.score - a.score);
   const pick = scored[0].u;
-  const meInts = myInterests;
-  const themInts = (() => { try { return JSON.parse(pick.interests); } catch { return []; } })();
-  const icebreaker = getIcebreaker(meInts, themInts);
+  const icebreaker = await generateIcebreaker(me, pick);
 
   return res.json({ ...toPublic(pick, pick.media), icebreaker });
 });
