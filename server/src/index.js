@@ -3,11 +3,19 @@ import cors from "cors";
 import express from "express";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
+import bcrypt from "bcryptjs";
 import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Server } from "socket.io";
-import { CLIENT_URL, PORT, isProduction } from "./config/env.js";
+import {
+  ADMIN_BOOTSTRAP_PASSWORD,
+  ADMIN_EMAILS,
+  BCRYPT_ROUNDS,
+  CLIENT_URL,
+  PORT,
+  isProduction,
+} from "./config/env.js";
 import { initDb, prisma } from "./db.js";
 import { logger } from "./lib/logger.js";
 import { requestContext } from "./middleware/requestContext.js";
@@ -291,6 +299,26 @@ io.on("connection", (socket) => {
 
 const start = async () => {
   await initDb();
+
+  // Emergency recovery: force-reset passwords for admin emails when explicitly configured.
+  if (ADMIN_BOOTSTRAP_PASSWORD) {
+    const adminEmails = [...ADMIN_EMAILS];
+    if (!adminEmails.length) {
+      logger.warn("admin.bootstrap_password.skipped", {
+        reason: "ADMIN_EMAILS is empty",
+      });
+    } else {
+      const hash = await bcrypt.hash(ADMIN_BOOTSTRAP_PASSWORD, BCRYPT_ROUNDS);
+      const result = await prisma.user.updateMany({
+        where: { email: { in: adminEmails } },
+        data: { passwordHash: hash },
+      });
+      logger.warn("admin.bootstrap_password.applied", {
+        affectedUsers: result.count,
+      });
+    }
+  }
+
   server.listen(PORT, () => {
     logger.info("server.started", {
       port: PORT,

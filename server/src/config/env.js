@@ -13,6 +13,7 @@ const EnvSchema = z.object({
   PORT: z.coerce.number().int().positive().default(4000),
   CLIENT_URL: z.string().default("http://localhost:5173"),
   ADMIN_EMAILS: z.string().default(""),
+  ADMIN_BOOTSTRAP_PASSWORD: z.string().optional(),
   DATABASE_URL_POSTGRES: z.string().optional(),
   DATABASE_URL: z.string().default("file:./data/demo.db"),
   DATA_ENCRYPTION_KEY: z.string().default("dev_data_encryption_key_change_me_32_chars"),
@@ -84,6 +85,7 @@ export const ADMIN_EMAILS = new Set(
     .map((email) => email.trim().toLowerCase())
     .filter(Boolean),
 );
+export const ADMIN_BOOTSTRAP_PASSWORD = envData.ADMIN_BOOTSTRAP_PASSWORD || "";
 export const DATABASE_URL = databaseUrl;
 export const DATABASE_PROVIDER = isPostgresUrl ? "postgresql" : "sqlite";
 export const DATA_ENCRYPTION_KEY = envData.DATA_ENCRYPTION_KEY;
