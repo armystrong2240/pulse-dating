@@ -5,3 +5,9 @@ node_modules
 *.db-shm
 server/generated/
 client/dist/
+.env
+.env.local
+.env.production
+**/.env
+**/.env.local
+**/.env.production
