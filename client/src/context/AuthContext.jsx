@@ -58,8 +58,15 @@ export const AuthProvider = ({ children }) => {
     applyToken(null, null);
   };
 
+  const loginWithFacebook = async (fbAccessToken) => {
+    const { data } = await api.post("/auth/facebook", { accessToken: fbAccessToken });
+    applyToken(data.token, data.user);
+    registerPushNotifications();
+    return data.user;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, loginWithFacebook }}>
       {children}
     </AuthContext.Provider>
   );

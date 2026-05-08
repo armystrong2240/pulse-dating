@@ -4,7 +4,7 @@ import { Router } from "express";
 import rateLimit from "express-rate-limit";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
-import { ADMIN_EMAILS, BCRYPT_ROUNDS, CLIENT_URL, isProduction } from "../config/env.js";
+import { ADMIN_EMAILS, BCRYPT_ROUNDS, CLIENT_URL, FACEBOOK_APP_SECRET, isProduction } from "../config/env.js";
 import { parseInterests, prisma, serializeInterests } from "../db.js";
 import { awardLoginStreak } from "../lib/backgroundJobs.js";
 import {
@@ -486,6 +486,109 @@ router.post("/reset-password", async (req, res) => {
   await prisma.refreshToken.deleteMany({ where: { userId: user.id } });
 
   return res.json({ ok: true, message: "Password reset successfully" });
+});
+
+// ── Facebook OAuth ─────────────────────────────────────────────────────────
+router.post("/facebook", loginLimiter, async (req, res) => {
+  const { accessToken } = req.body;
+  if (!accessToken) return res.status(400).json({ error: "Facebook access token required" });
+
+  // 1. Verify the token with Facebook Graph API
+  let fbProfile;
+  try {
+    // If FACEBOOK_APP_SECRET is set, use app-token-based verification for extra security
+    let verifyUrl;
+    if (FACEBOOK_APP_SECRET) {
+      const appTokenRes = await fetch(
+        `https://graph.facebook.com/oauth/access_token?client_id=${process.env.VITE_FACEBOOK_APP_ID || process.env.FACEBOOK_APP_ID}&client_secret=${FACEBOOK_APP_SECRET}&grant_type=client_credentials`
+      ).then((r) => r.json());
+      const appToken = appTokenRes.access_token;
+      if (appToken) {
+        const inspect = await fetch(
+          `https://graph.facebook.com/debug_token?input_token=${accessToken}&access_token=${appToken}`
+        ).then((r) => r.json());
+        if (!inspect.data?.is_valid) {
+          return res.status(401).json({ error: "Invalid Facebook token" });
+        }
+      }
+    }
+
+    // Fetch user profile from Facebook
+    const profileRes = await fetch(
+      `https://graph.facebook.com/me?fields=id,name,email,picture.type(large)&access_token=${accessToken}`
+    );
+    if (!profileRes.ok) return res.status(401).json({ error: "Could not fetch Facebook profile" });
+    fbProfile = await profileRes.json();
+    if (fbProfile.error || !fbProfile.id) {
+      return res.status(401).json({ error: "Invalid Facebook access token" });
+    }
+  } catch {
+    return res.status(502).json({ error: "Failed to reach Facebook. Please try again." });
+  }
+
+  const fbId = fbProfile.id;
+  const fbEmail = fbProfile.email || null;
+  const fbName = fbProfile.name || "New User";
+  const fbAvatar = fbProfile.picture?.data?.url || "";
+
+  // 2. Find existing user by facebookId first, then by email
+  let user = await prisma.user.findUnique({ where: { facebookId: fbId } });
+
+  if (!user && fbEmail) {
+    user = await prisma.user.findUnique({ where: { email: fbEmail } });
+    if (user) {
+      // Link facebook ID to existing email account
+      user = await prisma.user.update({
+        where: { id: user.id },
+        data: { facebookId: fbId },
+      });
+    }
+  }
+
+  // 3. Auto-create account if no match found
+  if (!user) {
+    // Use FB email or generate a placeholder (FB doesn't always share email)
+    const email = fbEmail || `fb_${fbId}@facebook.noreply`;
+    // Check if placeholder email is already taken (edge case: duplicate fb_id account)
+    const emailTaken = await prisma.user.findUnique({ where: { email } });
+    if (emailTaken) {
+      return res.status(409).json({ error: "An account with this email already exists. Please log in normally." });
+    }
+
+    const passwordHash = await bcrypt.hash(crypto.randomUUID(), BCRYPT_ROUNDS);
+    user = await prisma.user.create({
+      data: {
+        email,
+        passwordHash,
+        facebookId: fbId,
+        name: fbName,
+        age: 18,           // placeholder — user completes profile during onboarding
+        city: "",
+        bio: "",
+        avatar: fbAvatar,
+        emailVerified: true, // FB verified email
+        onboardingCompleted: false,
+        onboardingStep: "basics",
+        referralCode: crypto.randomBytes(6).toString("hex"),
+      },
+    });
+  }
+
+  // 4. Issue tokens — same flow as normal login
+  const { accessToken: jwtToken, refreshToken } = issueTokens(user.id, user.email);
+  const hashed = hashRefreshToken(refreshToken);
+  const expiresAt = new Date(Date.now() + REFRESH_EXPIRY_DAYS * 24 * 60 * 60 * 1000);
+  await prisma.refreshToken.create({ data: { token: hashed, userId: user.id, expiresAt } });
+  setRefreshCookie(res, refreshToken);
+
+  await logSecurityEvent(user.id, "login", req, { method: "facebook" });
+  await awardLoginStreak(user.id);
+
+  const safe = parseInterests(decryptSensitiveUserFields(
+    (({ passwordHash: _, ...pub }) => ({ ...pub, isAdmin: ADMIN_EMAILS.has(String(pub.email || "").toLowerCase()) }))(user)
+  ));
+
+  return res.json({ token: jwtToken, user: safe });
 });
 
 export default router;

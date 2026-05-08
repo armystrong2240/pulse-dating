@@ -48,6 +48,7 @@ model User {
   autoHidden          Boolean   @default(false)
   profileScore        Int       @default(0)
   profileVisibility   String    @default("{}") // JSON: hidden field keys
+  facebookId          String?   @unique
   onboardingStep      String    @default("basics")
   onboardingCompleted Boolean   @default(false)
   emailVerified       Boolean   @default(false)

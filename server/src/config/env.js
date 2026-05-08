@@ -29,6 +29,8 @@ const EnvSchema = z.object({
   TWILIO_AUTH_TOKEN: z.string().default(""),
   TWILIO_PHONE_NUMBER: z.string().default(""),
   REDIS_URL: z.string().default(""),
+  FACEBOOK_APP_ID: z.string().default(""),
+  FACEBOOK_APP_SECRET: z.string().default(""),
 });
 
 const parsed = EnvSchema.safeParse(process.env);
@@ -108,3 +110,5 @@ export const TWILIO_ACCOUNT_SID = envData.TWILIO_ACCOUNT_SID;
 export const TWILIO_AUTH_TOKEN = envData.TWILIO_AUTH_TOKEN;
 export const TWILIO_PHONE_NUMBER = envData.TWILIO_PHONE_NUMBER;
 export const REDIS_URL = envData.REDIS_URL;
+export const FACEBOOK_APP_ID = envData.FACEBOOK_APP_ID;
+export const FACEBOOK_APP_SECRET = envData.FACEBOOK_APP_SECRET;
