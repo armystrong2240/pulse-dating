@@ -132,7 +132,9 @@ router.post("/checkout", requireAuth, async (req, res) => {
 
     const user = await prisma.user.findUnique({ where: { id: req.user.id } });
     const baseUrl = CLIENT_URL.split(",")[0].trim();
-    const session = await stripe.checkout.sessions.create({
+    let session;
+    try {
+      session = await stripe.checkout.sessions.create({
       mode: "subscription",
       customer_email: user.email,
       line_items: [{ price: stripePriceId, quantity: 1 }],
@@ -140,9 +142,12 @@ router.post("/checkout", requireAuth, async (req, res) => {
       subscription_data: {
         metadata: { userId: user.id, tier },
       },
-      success_url: `${baseUrl}/billing/success?provider=stripe&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/upgrade`,
-    });
+        success_url: `${baseUrl}/billing/success?provider=stripe&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${baseUrl}/upgrade`,
+      });
+    } catch (stripeErr) {
+      return res.status(502).json({ error: `Stripe error: ${stripeErr.message}` });
+    }
 
     await prisma.subscription.upsert({
       where: { userId: user.id },
