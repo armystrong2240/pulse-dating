@@ -25,6 +25,7 @@ import CreatorSetupPage from "./pages/CreatorSetupPage";
 import CreatorDashboardPage from "./pages/CreatorDashboardPage";
 import CreatorProfilePage from "./pages/CreatorProfilePage";
 import CreatorFeedPage from "./pages/CreatorFeedPage";
+import BugReportButton from "./components/BugReportButton";
 import "./App.css";
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
+        <BugReportButton />
       </div>
       </SocketProvider>
     </AuthProvider>

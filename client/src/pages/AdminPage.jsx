@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 
-const TABS = ["Overview", "Users", "Reports", "Subscriptions", "Security", "OTP"];
+const TABS = ["Overview", "Users", "Reports", "Subscriptions", "Security", "OTP", "Growth", "Support"];
 
 export default function AdminPage() {
   const { user } = useAuth();
@@ -16,6 +16,9 @@ export default function AdminPage() {
   const [subscriptions, setSubscriptions] = useState(null);
   const [security, setSecurity] = useState(null);
   const [otpStats, setOtpStats] = useState(null);
+  const [growth, setGrowth] = useState(null);
+  const [supportTickets, setSupportTickets] = useState([]);
+  const [supportFilter, setSupportFilter] = useState("");
   const [loading, setLoading] = useState(false);
   const [resettingPassword, setResettingPassword] = useState(false);
   const [newAdminPassword, setNewAdminPassword] = useState("");
@@ -53,6 +56,12 @@ export default function AdminPage() {
       } else if (t === "OTP") {
         const { data } = await api.get("/security-admin/otp-stats?hours=24");
         setOtpStats(data);
+      } else if (t === "Growth") {
+        const { data } = await api.get("/admin/growth");
+        setGrowth(data);
+      } else if (t === "Support") {
+        const { data } = await api.get(`/admin/support${supportFilter ? `?status=${supportFilter}` : ""}`);
+        setSupportTickets(data);
       }
     } catch (err) {
       if (err.response?.status === 403) {
@@ -600,6 +609,112 @@ export default function AdminPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </>
+      )}
+
+      {tab === "Growth" && growth && (
+        <>
+          <div style={s.card}>
+            <div style={{ fontSize: "0.7rem", color: "#88aacc", marginBottom: 12, letterSpacing: 1 }}>OVERVIEW</div>
+            <div style={s.statGrid}>
+              {[
+                ["Total Users", growth.overview.total],
+                ["DAU", growth.overview.dau],
+                ["WAU", growth.overview.wau],
+                ["MAU", growth.overview.mau],
+                ["Premium", growth.overview.premiumCount],
+                ["Onboarded", growth.overview.onboardedCount],
+              ].map(([label, val]) => (
+                <div key={label} style={s.statBox}>
+                  <div style={s.statVal}>{val}</div>
+                  <div style={s.statLabel}>{label.toUpperCase()}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={s.card}>
+            <div style={{ fontSize: "0.7rem", color: "#88aacc", marginBottom: 12, letterSpacing: 1 }}>GROWTH (7-DAY)</div>
+            <div style={s.statGrid}>
+              {[
+                ["New Users (last 7d)", growth.growth.newLast7],
+                ["New Users (prev 7d)", growth.growth.newPrev7],
+                ["7d Retention Rate", `${growth.retention.rate}%`],
+                ["Retained (7d+)", growth.retention.retained],
+                ["Dormant (30d)", growth.churnSignals.dormantLast7days],
+              ].map(([label, val]) => (
+                <div key={label} style={s.statBox}>
+                  <div style={s.statVal}>{val}</div>
+                  <div style={s.statLabel}>{label.toUpperCase()}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={s.card}>
+            <div style={{ fontSize: "0.7rem", color: "#88aacc", marginBottom: 12, letterSpacing: 1 }}>NEW SIGNUPS — LAST 30 DAYS</div>
+            <div style={{ display: "flex", gap: 4, alignItems: "flex-end", height: 80, flexWrap: "wrap" }}>
+              {Object.entries(growth.signupsByDay).map(([date, count]) => {
+                const maxVal = Math.max(...Object.values(growth.signupsByDay), 1);
+                return (
+                  <div key={date} title={`${date}: ${count} signups`} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+                    <div style={{ width: 12, background: "#9b59b6", borderRadius: 3, height: `${Math.round((count / maxVal) * 64)}px`, minHeight: 2 }} />
+                    <span style={{ fontSize: "0.45rem", color: "#556", writingMode: "vertical-lr" }}>{date.slice(5)}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </>
+      )}
+
+      {tab === "Support" && (
+        <>
+          <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
+            {["", "open", "in_progress", "resolved"].map((f) => (
+              <button key={f || "all"} style={s.tab(supportFilter === f)}
+                onClick={() => { setSupportFilter(f); loadTab("Support"); }}>
+                {f === "" ? "All" : f.replace("_", " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+              </button>
+            ))}
+          </div>
+          <div style={s.card}>
+            {supportTickets.length === 0 ? (
+              <p style={{ color: "#556", textAlign: "center" }}>No tickets found.</p>
+            ) : (
+              <table style={s.table}>
+                <thead>
+                  <tr>
+                    {["Type", "Status", "User", "Message", "Page", "Date", "Action"].map((h) => (
+                      <th key={h} style={s.th}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {supportTickets.map((t) => (
+                    <tr key={t.id}>
+                      <td style={s.td}><span style={{ background: t.type === "bug" ? "rgba(239,68,68,0.2)" : "rgba(59,130,246,0.2)", color: t.type === "bug" ? "#f87171" : "#93c5fd", padding: "2px 6px", borderRadius: 4, fontSize: "0.65rem" }}>{t.type}</span></td>
+                      <td style={s.td}><span style={{ background: t.status === "resolved" ? "rgba(34,197,94,0.2)" : t.status === "in_progress" ? "rgba(245,158,11,0.2)" : "rgba(255,255,255,0.05)", color: t.status === "resolved" ? "#4ade80" : t.status === "in_progress" ? "#fbbf24" : "#aaa", padding: "2px 6px", borderRadius: 4, fontSize: "0.65rem" }}>{t.status.replace("_", " ")}</span></td>
+                      <td style={s.td}>{t.user ? `${t.user.name} (${t.user.email})` : "Guest"}</td>
+                      <td style={{ ...s.td, maxWidth: 280, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={t.message}>{t.message}</td>
+                      <td style={s.td}>{t.page || "—"}</td>
+                      <td style={s.td}>{new Date(t.createdAt).toLocaleDateString()}</td>
+                      <td style={s.td}>
+                        {t.status !== "resolved" && (
+                          <button style={s.btn("#059669")} onClick={async () => {
+                            try { await api.patch(`/support/tickets/${t.id}`, { status: "resolved" }); loadTab("Support"); } catch {}
+                          }}>Resolve</button>
+                        )}
+                        {t.status === "open" && (
+                          <button style={s.btn("#b45309")} onClick={async () => {
+                            try { await api.patch(`/support/tickets/${t.id}`, { status: "in_progress" }); loadTab("Support"); } catch {}
+                          }}>In Progress</button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </>
       )}

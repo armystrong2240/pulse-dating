@@ -5,6 +5,12 @@
 import crypto from "crypto";
 import { prisma } from "../db.js";
 import { logger } from "./logger.js";
+import {
+  sendDripDay1,
+  sendDripDay3,
+  sendDripDay7,
+  sendDripDay14,
+} from "../mailer.js";
 
 const MATCH_EXPIRY_HOURS = 72;
 const REPORT_AUTO_HIDE_THRESHOLD = 3;
@@ -178,6 +184,64 @@ export async function awardLoginStreak(userId) {
   }
 }
 
+// ── Drip email campaign ───────────────────────────────────────────────────────
+// We track which drip emails have been sent via SecurityEvent log to avoid resending.
+// Day buckets: 1d, 3d, 7d, 14d since createdAt — only for users who verified email.
+const DRIP_SCHEDULE = [
+  { dayMin: 1,  dayMax: 2,  eventType: "drip_day1",  fn: sendDripDay1 },
+  { dayMin: 3,  dayMax: 4,  eventType: "drip_day3",  fn: sendDripDay3 },
+  { dayMin: 7,  dayMax: 9,  eventType: "drip_day7",  fn: sendDripDay7 },
+  { dayMin: 14, dayMax: 17, eventType: "drip_day14", fn: sendDripDay14 },
+];
+
+async function sendDripEmails() {
+  try {
+    const now = Date.now();
+    let sent = 0;
+    for (const drip of DRIP_SCHEDULE) {
+      const minAge = new Date(now - drip.dayMin * 86400000);
+      const maxAge = new Date(now - drip.dayMax * 86400000);
+      // Users in the age window who have verified email and have not opted out
+      const candidates = await prisma.user.findMany({
+        where: {
+          createdAt: { gte: maxAge, lte: minAge },
+          emailVerified: true,
+          email: { not: { endsWith: "@phone.noreply" } },
+          paused: false,
+          autoHidden: false,
+        },
+        select: { id: true, email: true, name: true },
+      });
+      for (const u of candidates) {
+        // Check if we already sent this drip
+        const already = await prisma.securityEvent.findFirst({
+          where: { userId: u.id, eventType: drip.eventType },
+          select: { id: true },
+        });
+        if (already) continue;
+        try {
+          await drip.fn(u.email, u.name || "there");
+          await prisma.securityEvent.create({
+            data: {
+              id: crypto.randomUUID(),
+              userId: u.id,
+              email: u.email,
+              eventType: drip.eventType,
+              severity: "info",
+            },
+          });
+          sent++;
+        } catch (err) {
+          logger.warn("jobs.drip.send_error", { userId: u.id, drip: drip.eventType, error: err?.message });
+        }
+      }
+    }
+    if (sent > 0) logger.info("jobs.drip.done", { sent });
+  } catch (err) {
+    logger.error("jobs.drip.error", { error: err?.message });
+  }
+}
+
 // ── Start all background jobs ─────────────────────────────────────────────
 export function startBackgroundJobs() {
   // Run every hour
@@ -187,11 +251,16 @@ export function startBackgroundJobs() {
     await fireScheduledBoosts();
   }, 60 * 60 * 1000);
 
+  // Drip emails — run every 6 hours
+  setInterval(async () => {
+    await sendDripEmails();
+  }, 6 * 60 * 60 * 1000);
+
   // Fire once on startup after a short delay
   setTimeout(async () => {
     await autoHideReported();
     await fireScheduledBoosts();
   }, 10_000);
 
-  logger.info("jobs.started", { jobs: ["match_expiry", "auto_hide", "scheduled_boosts"] });
+  logger.info("jobs.started", { jobs: ["match_expiry", "auto_hide", "scheduled_boosts", "drip_emails"] });
 }

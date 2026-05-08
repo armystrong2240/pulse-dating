@@ -2,6 +2,18 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api/client";
 
+const APP = "https://www.pulsedate.net";
+
+function buildShareUrl(baseUrl, source) {
+  if (!baseUrl) return "";
+  // Append UTM params to track acquisition source
+  const url = new URL(baseUrl, APP);
+  url.searchParams.set("utm_source", source);
+  url.searchParams.set("utm_medium", "referral");
+  url.searchParams.set("utm_campaign", "invite");
+  return url.toString();
+}
+
 export default function ReferralPage() {
   const navigate = useNavigate();
   const [data, setData] = useState(null);
@@ -27,7 +39,7 @@ export default function ReferralPage() {
 
   async function handleCopy() {
     if (!data?.shareUrl) return;
-    await navigator.clipboard.writeText(data.shareUrl);
+    await navigator.clipboard.writeText(buildShareUrl(data.shareUrl, "copy"));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
@@ -113,6 +125,30 @@ export default function ReferralPage() {
           <div style={{ marginTop: 8, color: "#666", fontSize: 12 }}>
             Code: <strong style={{ color: "#aaa" }}>{data?.code}</strong>
           </div>
+          {/* Social share buttons */}
+          {data?.shareUrl && (
+            <div style={{ display: "flex", gap: 8, marginTop: 16, flexWrap: "wrap" }}>
+              {[
+                { label: "𝕏 Twitter", color: "#1da1f2", href: (url) => `https://twitter.com/intent/tweet?text=${encodeURIComponent("Join me on PulseDate — the dating app that actually works 💘")}&url=${encodeURIComponent(url)}` },
+                { label: "📘 Facebook", color: "#1877f2", href: (url) => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}` },
+                { label: "💬 WhatsApp", color: "#25d366", href: (url) => `https://wa.me/?text=${encodeURIComponent("Join me on PulseDate 💘 " + url)}` },
+                { label: "✉ Email", color: "#e91e8c", href: (url) => `mailto:?subject=${encodeURIComponent("Join me on PulseDate!")}&body=${encodeURIComponent("Hey! I've been using PulseDate and thought you'd love it. Use my link to join: " + url)}` },
+              ].map(({ label, color, href }) => {
+                const utmUrl = buildShareUrl(data.shareUrl, label.toLowerCase().replace(/[^a-z]+/g, "-"));
+                return (
+                  <a
+                    key={label}
+                    href={href(utmUrl)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ background: color, color: "#fff", textDecoration: "none", borderRadius: 8, padding: "0.45rem 0.85rem", fontSize: 12, fontWeight: 600 }}
+                  >
+                    {label}
+                  </a>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Redeem a code */}

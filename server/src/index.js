@@ -8,6 +8,7 @@ import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Server } from "socket.io";
+import * as Sentry from "@sentry/node";
 import {
   ADMIN_BOOTSTRAP_PASSWORD,
   ADMIN_EMAILS,
@@ -36,11 +37,21 @@ import phoneRoutes from "./routes/phone.js";
 import boostsRoutes from "./routes/boosts.js";
 import nearbyRoutes from "./routes/nearby.js";
 import creatorRoutes from "./routes/creator.js";
+import supportRoutes from "./routes/support.js";
 import securityAdminRoutes from "./routes/securityAdmin.js";
 import adminRoutes from "./routes/admin.js";
 import safetyRoutes from "./routes/safety.js";
 import pushRoutes from "./routes/push.js";
 import { startBackgroundJobs } from "./lib/backgroundJobs.js";
+
+// Sentry must be initialised before express is created
+if (process.env.SENTRY_DSN) {
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+    environment: process.env.NODE_ENV || "development",
+    tracesSampleRate: 0.1,
+  });
+}
 
 const app = express();
 const server = http.createServer(app);
@@ -173,6 +184,7 @@ app.use("/api/phone", apiLimiter, phoneRoutes);
 app.use("/api/boosts", apiLimiter, boostsRoutes);
 app.use("/api/nearby", apiLimiter, nearbyRoutes);
 app.use("/api/creator", apiLimiter, creatorRoutes);
+app.use("/api/support", apiLimiter, supportRoutes);
 app.get("/api/health", (_req, res) =>
   res.json({ ok: true, timestamp: new Date().toISOString() }),
 );
@@ -184,6 +196,11 @@ app.get("/api/ready", async (_req, res) => {
     return res.status(503).json({ ok: false, checks: { database: "down" } });
   }
 });
+
+// Sentry error capture (must come before generic error handler)
+if (process.env.SENTRY_DSN) {
+  app.use(Sentry.expressErrorHandler());
+}
 
 app.use((err, req, res, next) => {
   logger.error("http.request.error", {

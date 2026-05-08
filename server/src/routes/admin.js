@@ -208,4 +208,89 @@ router.get("/subscriptions", requireAuth, requireAdmin, async (req, res) => {
   });
 });
 
+// ── Growth dashboard ──────────────────────────────────────────────────────────
+
+router.get("/growth", requireAuth, requireAdmin, async (_req, res) => {
+  const now = new Date();
+  const days30ago = new Date(now - 30 * 86400000);
+  const days7ago  = new Date(now - 7  * 86400000);
+  const days1ago  = new Date(now - 1  * 86400000);
+
+  // New signups per day (last 30 days) — raw dates aggregated in JS
+  const recentUsers = await prisma.user.findMany({
+    where: { createdAt: { gte: days30ago } },
+    select: { createdAt: true, lastSeen: true, isPremium: true, onboardingCompleted: true },
+    orderBy: { createdAt: "asc" },
+  });
+
+  // Bucket by date string
+  const signupsByDay = {};
+  for (const u of recentUsers) {
+    const d = u.createdAt.toISOString().slice(0, 10);
+    signupsByDay[d] = (signupsByDay[d] || 0) + 1;
+  }
+
+  // DAU: users seen in last 24h
+  const dau = await prisma.user.count({ where: { lastSeen: { gte: days1ago } } });
+  // WAU: users seen in last 7 days
+  const wau = await prisma.user.count({ where: { lastSeen: { gte: days7ago } } });
+  // MAU: users seen in last 30 days
+  const mau = await prisma.user.count({ where: { lastSeen: { gte: days30ago } } });
+  // Total users
+  const total = await prisma.user.count();
+  // Premium users
+  const premiumCount = await prisma.user.count({ where: { isPremium: true } });
+  // Onboarding completion rate
+  const onboardedCount = await prisma.user.count({ where: { onboardingCompleted: true } });
+
+  // Churn signals: users who signed up 7–30 days ago and haven't been seen in 7 days
+  const days30to7 = await prisma.user.count({
+    where: {
+      createdAt: { gte: days30ago, lt: days7ago },
+      OR: [{ lastSeen: null }, { lastSeen: { lt: days7ago } }],
+    },
+  });
+
+  // Retention: of users who signed up 7+ days ago, how many came back after day 1?
+  const signedUp7daysAgo = await prisma.user.count({ where: { createdAt: { lt: days7ago } } });
+  const retained = signedUp7daysAgo > 0
+    ? await prisma.user.count({
+        where: {
+          createdAt: { lt: days7ago },
+          lastSeen: { gte: days7ago },
+        },
+      })
+    : 0;
+
+  // New users last 7d vs prior 7d (growth rate)
+  const days14ago = new Date(now - 14 * 86400000);
+  const newLast7  = await prisma.user.count({ where: { createdAt: { gte: days7ago } } });
+  const newPrev7  = await prisma.user.count({ where: { createdAt: { gte: days14ago, lt: days7ago } } });
+
+  return res.json({
+    overview: { total, dau, wau, mau, premiumCount, onboardedCount },
+    signupsByDay,
+    growth: { newLast7, newPrev7 },
+    retention: {
+      signedUp7daysAgo,
+      retained,
+      rate: signedUp7daysAgo > 0 ? Math.round((retained / signedUp7daysAgo) * 100) : 0,
+    },
+    churnSignals: { dormantLast7days: days30to7 },
+  });
+});
+
+// ── Support tickets ───────────────────────────────────────────────────────────
+
+router.get("/support", requireAuth, requireAdmin, async (req, res) => {
+  const status = req.query.status || undefined;
+  const tickets = await prisma.supportTicket.findMany({
+    where: status ? { status } : undefined,
+    orderBy: { createdAt: "desc" },
+    take: 100,
+    include: { user: { select: { id: true, name: true, email: true } } },
+  });
+  return res.json(tickets);
+});
+
 export default router;
