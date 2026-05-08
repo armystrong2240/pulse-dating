@@ -10,6 +10,9 @@ import {
   CLIENT_URL,
   FACEBOOK_APP_ID,
   FACEBOOK_APP_SECRET,
+  TWILIO_ACCOUNT_SID,
+  TWILIO_AUTH_TOKEN,
+  TWILIO_PHONE_NUMBER,
   isProduction,
 } from "../config/env.js";
 import { parseInterests, prisma, serializeInterests } from "../db.js";
@@ -117,6 +120,25 @@ const MagicLinkRequestSchema = z.object({
 const MagicLinkVerifySchema = z.object({
   token: z.string().min(24),
 });
+
+const PhoneOtpRequestSchema = z.object({
+  phone: z.string().regex(/^[+]?[1-9]\d{7,14}$/, "Phone must be in E.164 format (+1234567890)"),
+});
+
+const PhoneOtpVerifySchema = z.object({
+  phone: z.string().regex(/^[+]?[1-9]\d{7,14}$/, "Phone must be in E.164 format (+1234567890)"),
+  code: z.string().length(6),
+});
+
+let twilioClient = null;
+async function getTwilio() {
+  if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN) return null;
+  if (!twilioClient) {
+    const { default: Twilio } = await import("twilio");
+    twilioClient = new Twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+  }
+  return twilioClient;
+}
 
 function issueTokens(userId, email) {
   const accessToken = jwt.sign({ id: userId, email }, JWT_SECRET, {
@@ -535,6 +557,136 @@ router.post("/magic-link/verify", loginLimiter, async (req, res) => {
     severity: "info",
   });
 
+  return res.json({ token: accessToken, user: toPublic(user) });
+});
+
+router.post("/phone-otp/request", loginLimiter, async (req, res) => {
+  const parsed = PhoneOtpRequestSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: parsed.error.issues[0].message });
+  }
+
+  const phone = parsed.data.phone.startsWith("+") ? parsed.data.phone : `+${parsed.data.phone}`;
+  const user = await prisma.user.findFirst({
+    where: {
+      phoneNumber: phone,
+      phoneVerified: true,
+    },
+    select: { id: true, phoneNumber: true },
+  });
+
+  // Keep response generic to prevent account enumeration via phone number.
+  if (!user) {
+    return res.json({ ok: true, message: "If this phone is registered, a verification code has been sent." });
+  }
+
+  const code = String(Math.floor(100000 + Math.random() * 900000));
+  const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+
+  await prisma.phoneVerification.updateMany({
+    where: {
+      userId: user.id,
+      phone,
+      verified: false,
+    },
+    data: { expiresAt: new Date(0) },
+  });
+
+  await prisma.phoneVerification.create({
+    data: {
+      id: crypto.randomUUID(),
+      userId: user.id,
+      phone,
+      code,
+      expiresAt,
+    },
+  });
+
+  const twilio = await getTwilio();
+  if (twilio && TWILIO_PHONE_NUMBER) {
+    try {
+      await twilio.messages.create({
+        body: `Your PulseDate login code is: ${code}. Expires in 10 minutes.`,
+        from: TWILIO_PHONE_NUMBER,
+        to: phone,
+      });
+    } catch {
+      return res.status(502).json({ error: "Failed to send SMS. Please try again." });
+    }
+  } else {
+    console.info(`[phone-login DEV] code for ${phone}: ${code}`);
+  }
+
+  return res.json({ ok: true, message: "If this phone is registered, a verification code has been sent." });
+});
+
+router.post("/phone-otp/verify", loginLimiter, async (req, res) => {
+  const parsed = PhoneOtpVerifySchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: parsed.error.issues[0].message });
+  }
+
+  const phone = parsed.data.phone.startsWith("+") ? parsed.data.phone : `+${parsed.data.phone}`;
+  const { code } = parsed.data;
+
+  const user = await prisma.user.findFirst({
+    where: {
+      phoneNumber: phone,
+      phoneVerified: true,
+    },
+  });
+
+  if (!user) {
+    return res.status(400).json({ error: "Invalid or expired verification code" });
+  }
+
+  const record = await prisma.phoneVerification.findFirst({
+    where: {
+      userId: user.id,
+      phone,
+      code,
+      verified: false,
+      expiresAt: { gt: new Date() },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  if (!record) {
+    await logSecurityEvent(req, {
+      userId: user.id,
+      email: user.email,
+      eventType: "auth.phone_otp.failed",
+      severity: "warn",
+      metadata: { phone },
+    });
+    return res.status(400).json({ error: "Invalid or expired verification code" });
+  }
+
+  await prisma.phoneVerification.update({
+    where: { id: record.id },
+    data: { verified: true },
+  });
+
+  const { accessToken, refreshToken } = issueTokens(user.id, user.email);
+  const refreshTokenHash = hashRefreshToken(refreshToken);
+  await prisma.refreshToken.create({
+    data: {
+      userId: user.id,
+      token: refreshTokenHash,
+      expiresAt: new Date(Date.now() + REFRESH_EXPIRY_DAYS * 86400 * 1000),
+    },
+  });
+
+  await logSecurityEvent(req, {
+    userId: user.id,
+    email: user.email,
+    eventType: "auth.phone_otp.success",
+    severity: "info",
+    metadata: { phone },
+  });
+
+  setRefreshCookie(res, refreshToken);
+  awardLoginStreak(user.id).catch(() => {});
   return res.json({ token: accessToken, user: toPublic(user) });
 });
 

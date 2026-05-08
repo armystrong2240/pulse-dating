@@ -40,7 +40,9 @@ export const LoginPage = () => {
     login,
     loginWithFacebook,
     loginWithMagicLink,
+    loginWithPhoneOtp,
     requestMagicLink,
+    requestPhoneOtp,
   } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,6 +52,10 @@ export const LoginPage = () => {
   const [magicLoading, setMagicLoading] = useState(false);
   const [magicVerifying, setMagicVerifying] = useState(false);
   const [magicMessage, setMagicMessage] = useState("");
+  const [phoneForm, setPhoneForm] = useState({ phone: "", code: "" });
+  const [phoneCodeSent, setPhoneCodeSent] = useState(false);
+  const [phoneLoading, setPhoneLoading] = useState(false);
+  const [phoneMessage, setPhoneMessage] = useState("");
   const successMessage = location.state?.message;
 
   useEffect(() => {
@@ -80,6 +86,9 @@ export const LoginPage = () => {
 
   const onChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const onPhoneChange = (e) =>
+    setPhoneForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -133,6 +142,48 @@ export const LoginPage = () => {
     }
   };
 
+  const onSendPhoneCode = async () => {
+    if (!phoneForm.phone.trim()) {
+      setError("Enter your phone number in E.164 format (+1234567890).");
+      return;
+    }
+    try {
+      setPhoneLoading(true);
+      setError("");
+      setPhoneMessage("");
+      await requestPhoneOtp(phoneForm.phone.trim());
+      setPhoneCodeSent(true);
+      setPhoneMessage("If this phone is registered, a login code has been sent.");
+    } catch (err) {
+      setError(err.response?.data?.error || "Could not send phone login code");
+    } finally {
+      setPhoneLoading(false);
+    }
+  };
+
+  const onVerifyPhoneCode = async () => {
+    if (!phoneForm.phone.trim() || !phoneForm.code.trim()) {
+      setError("Enter your phone and 6-digit code.");
+      return;
+    }
+    try {
+      setPhoneLoading(true);
+      setError("");
+      const signedInUser = await loginWithPhoneOtp(phoneForm.phone.trim(), phoneForm.code.trim());
+      navigate(
+        signedInUser?.isAdmin
+          ? "/admin"
+          : signedInUser?.onboardingCompleted
+            ? "/"
+            : "/onboarding",
+      );
+    } catch (err) {
+      setError(err.response?.data?.error || "Invalid or expired phone code");
+    } finally {
+      setPhoneLoading(false);
+    }
+  };
+
   return (
     <section className="page auth-page">
       <h2>Welcome back</h2>
@@ -164,11 +215,54 @@ export const LoginPage = () => {
           className="btn-secondary"
           type="button"
           onClick={onSendMagicLink}
-          disabled={magicLoading || magicVerifying}
+          disabled={magicLoading || magicVerifying || phoneLoading}
         >
           {magicLoading ? "Sending link..." : "Email me a sign-in link"}
         </button>
       </form>
+
+      <div className="stack-form auth-form" style={{ marginTop: "0.8rem" }}>
+        <input
+          name="phone"
+          type="tel"
+          value={phoneForm.phone}
+          onChange={onPhoneChange}
+          placeholder="Phone in E.164 format (+1234567890)"
+          autoComplete="tel"
+        />
+        {phoneCodeSent && (
+          <input
+            name="code"
+            type="text"
+            value={phoneForm.code}
+            onChange={onPhoneChange}
+            placeholder="6-digit code"
+            maxLength={6}
+            inputMode="numeric"
+            autoComplete="one-time-code"
+          />
+        )}
+        <div style={{ display: "grid", gridTemplateColumns: phoneCodeSent ? "1fr 1fr" : "1fr", gap: "0.6rem" }}>
+          <button
+            className="btn-secondary"
+            type="button"
+            onClick={onSendPhoneCode}
+            disabled={phoneLoading || magicVerifying || fbLoading}
+          >
+            {phoneLoading ? "Sending..." : phoneCodeSent ? "Resend code" : "Text me a login code"}
+          </button>
+          {phoneCodeSent && (
+            <button
+              className="btn-primary"
+              type="button"
+              onClick={onVerifyPhoneCode}
+              disabled={phoneLoading || magicVerifying || fbLoading}
+            >
+              {phoneLoading ? "Verifying..." : "Sign in with code"}
+            </button>
+          )}
+        </div>
+      </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", margin: "1rem 0" }}>
         <div style={{ flex: 1, height: 1, background: "#333" }} />
@@ -178,7 +272,7 @@ export const LoginPage = () => {
 
       <button
         onClick={onFacebookLogin}
-        disabled={fbLoading || magicVerifying}
+        disabled={fbLoading || magicVerifying || phoneLoading}
         style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.6rem", width: "100%", padding: "0.65rem 1rem", background: "#1877f2", color: "#fff", border: "none", borderRadius: 8, fontSize: "0.95rem", fontWeight: 600, cursor: "pointer", opacity: fbLoading ? 0.7 : 1 }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
@@ -189,6 +283,7 @@ export const LoginPage = () => {
 
       {magicVerifying && <p className="muted">Verifying your sign-in link...</p>}
       {magicMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{magicMessage}</p>}
+      {phoneMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{phoneMessage}</p>}
       {successMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{successMessage}</p>}
       {error && <p className="error">{error}</p>}
 

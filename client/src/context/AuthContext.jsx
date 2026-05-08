@@ -77,6 +77,18 @@ export const AuthProvider = ({ children }) => {
     return data.user;
   };
 
+  const requestPhoneOtp = async (phone) => {
+    const { data } = await api.post("/auth/phone-otp/request", { phone });
+    return data;
+  };
+
+  const loginWithPhoneOtp = async (phone, code) => {
+    const { data } = await api.post("/auth/phone-otp/verify", { phone, code });
+    applyToken(data.token, data.user);
+    registerPushNotifications();
+    return data.user;
+  };
+
   return (
     <AuthContext.Provider value={{
       user,
@@ -87,6 +99,8 @@ export const AuthProvider = ({ children }) => {
       loginWithFacebook,
       requestMagicLink,
       loginWithMagicLink,
+      requestPhoneOtp,
+      loginWithPhoneOtp,
     }}>
       {children}
     </AuthContext.Provider>
