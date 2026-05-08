@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 
-const TABS = ["Overview", "Users", "Reports", "Subscriptions", "Security"];
+const TABS = ["Overview", "Users", "Reports", "Subscriptions", "Security", "OTP"];
 
 export default function AdminPage() {
   const { user } = useAuth();
@@ -15,6 +15,7 @@ export default function AdminPage() {
   const [reports, setReports] = useState([]);
   const [subscriptions, setSubscriptions] = useState(null);
   const [security, setSecurity] = useState(null);
+  const [otpStats, setOtpStats] = useState(null);
   const [loading, setLoading] = useState(false);
   const [resettingPassword, setResettingPassword] = useState(false);
   const [newAdminPassword, setNewAdminPassword] = useState("");
@@ -49,6 +50,9 @@ export default function AdminPage() {
       } else if (t === "Security") {
         const { data } = await api.get("/security-admin/summary?hours=24");
         setSecurity(data);
+      } else if (t === "OTP") {
+        const { data } = await api.get("/security-admin/otp-stats?hours=24");
+        setOtpStats(data);
       }
     } catch (err) {
       if (err.response?.status === 403) {
@@ -528,6 +532,74 @@ export default function AdminPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+        </>
+      )}
+      {/* ── OTP ── */}
+      {tab === "OTP" && otpStats && (
+        <>
+          <div style={s.card}>
+            <div style={{ fontSize: "0.7rem", color: "#88aacc", marginBottom: 12, letterSpacing: 1 }}>PHONE OTP — LAST 24 HOURS</div>
+            <div style={s.statGrid}>
+              {[
+                ["Signups via Phone", otpStats.phone.signups],
+                ["OTP Successes", otpStats.phone.successes],
+                ["OTP Failures", otpStats.phone.failures],
+                ["Success Rate", otpStats.phone.successRate !== null ? `${otpStats.phone.successRate}%` : "N/A"],
+              ].map(([label, val]) => (
+                <div key={label} style={s.statBox}>
+                  <div style={s.statVal}>{val}</div>
+                  <div style={s.statLabel}>{label.toUpperCase()}</div>
+                </div>
+              ))}
+            </div>
+            {otpStats.phone.topFailedIps.length > 0 && (
+              <>
+                <div style={{ fontSize: "0.7rem", color: "#ff8888", margin: "16px 0 8px", letterSpacing: 1 }}>TOP FAILING IPs</div>
+                <table style={s.table}>
+                  <thead><tr><th style={s.th}>IP</th><th style={s.th}>Failures</th></tr></thead>
+                  <tbody>
+                    {otpStats.phone.topFailedIps.map(({ key, count }) => (
+                      <tr key={key}>
+                        <td style={{ ...s.td, fontFamily: "monospace" }}>{key}</td>
+                        <td style={{ ...s.td, color: "#ff8888", fontWeight: 700 }}>{count}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </>
+            )}
+            {otpStats.phone.topFailedPhones.length > 0 && (
+              <>
+                <div style={{ fontSize: "0.7rem", color: "#ffaa44", margin: "16px 0 8px", letterSpacing: 1 }}>TOP FAILING PHONES</div>
+                <table style={s.table}>
+                  <thead><tr><th style={s.th}>Phone / Email</th><th style={s.th}>Failures</th></tr></thead>
+                  <tbody>
+                    {otpStats.phone.topFailedPhones.map(({ key, count }) => (
+                      <tr key={key}>
+                        <td style={{ ...s.td, fontFamily: "monospace" }}>{key}</td>
+                        <td style={{ ...s.td, color: "#ffaa44", fontWeight: 700 }}>{count}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </>
+            )}
+          </div>
+          <div style={s.card}>
+            <div style={{ fontSize: "0.7rem", color: "#88aacc", marginBottom: 12, letterSpacing: 1 }}>MAGIC LINK — LAST 24 HOURS</div>
+            <div style={s.statGrid}>
+              {[
+                ["Requests", otpStats.magic.requests],
+                ["Verified", otpStats.magic.successes],
+                ["Success Rate", otpStats.magic.successRate !== null ? `${otpStats.magic.successRate}%` : "N/A"],
+              ].map(([label, val]) => (
+                <div key={label} style={s.statBox}>
+                  <div style={s.statVal}>{val}</div>
+                  <div style={s.statLabel}>{label.toUpperCase()}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </>
       )}

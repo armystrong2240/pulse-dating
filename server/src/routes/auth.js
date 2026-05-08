@@ -503,6 +503,13 @@ router.post("/magic-link/request", loginLimiter, async (req, res) => {
     console.error("[mailer] magic login email failed:", err?.message || err)
   );
 
+  await logSecurityEvent(req, {
+    userId: user.id,
+    email: user.email,
+    eventType: "auth.magic_link.request",
+    severity: "info",
+  });
+
   return res.json({ ok: true });
 });
 
@@ -567,7 +574,7 @@ router.post("/phone-otp/request", loginLimiter, async (req, res) => {
   }
 
   const phone = parsed.data.phone.startsWith("+") ? parsed.data.phone : `+${parsed.data.phone}`;
-  const user = await prisma.user.findFirst({
+  let user = await prisma.user.findFirst({
     where: {
       phoneNumber: phone,
       phoneVerified: true,
@@ -575,9 +582,44 @@ router.post("/phone-otp/request", loginLimiter, async (req, res) => {
     select: { id: true, phoneNumber: true },
   });
 
-  // Keep response generic to prevent account enumeration via phone number.
+  // Auto-create a minimal account if no verified phone user exists yet.
   if (!user) {
-    return res.json({ ok: true, message: "If this phone is registered, a verification code has been sent." });
+    const syntheticEmail = `phone_${phone.replace(/\D/g, "").slice(-10)}@phone.noreply`;
+    const existingByEmail = await prisma.user.findUnique({ where: { email: syntheticEmail } });
+    const existingByPhone = await prisma.user.findFirst({ where: { phoneNumber: phone } });
+
+    if (!existingByEmail && !existingByPhone) {
+      const passwordHash = await bcrypt.hash(crypto.randomUUID(), BCRYPT_ROUNDS);
+      const newUser = await prisma.user.create({
+        data: {
+          email: syntheticEmail,
+          passwordHash,
+          phoneNumber: phone,
+          phoneVerified: true,
+          name: "New User",
+          age: 18,
+          city: "",
+          bio: "",
+          onboardingCompleted: false,
+          referralCode: crypto.randomBytes(6).toString("hex"),
+        },
+        select: { id: true, phoneNumber: true },
+      });
+
+      await logSecurityEvent(req, {
+        userId: newUser.id,
+        email: syntheticEmail,
+        eventType: "auth.phone_otp.signup",
+        severity: "info",
+        metadata: { phone },
+      });
+
+      user = newUser;
+    } else {
+      // Phone already exists but phoneVerified is false, or a conflict exists.
+      // Keep response generic to avoid enumeration.
+      return res.json({ ok: true, message: "If this phone is registered, a verification code has been sent." });
+    }
   }
 
   const code = String(Math.floor(100000 + Math.random() * 900000));

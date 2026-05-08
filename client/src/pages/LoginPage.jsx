@@ -56,7 +56,21 @@ export const LoginPage = () => {
   const [phoneCodeSent, setPhoneCodeSent] = useState(false);
   const [phoneLoading, setPhoneLoading] = useState(false);
   const [phoneMessage, setPhoneMessage] = useState("");
+  const [cooldownPhone, setCooldownPhone] = useState(0);
+  const [cooldownMagic, setCooldownMagic] = useState(0);
   const successMessage = location.state?.message;
+
+  useEffect(() => {
+    if (cooldownPhone <= 0) return;
+    const t = setTimeout(() => setCooldownPhone((c) => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [cooldownPhone]);
+
+  useEffect(() => {
+    if (cooldownMagic <= 0) return;
+    const t = setTimeout(() => setCooldownMagic((c) => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [cooldownMagic]);
 
   useEffect(() => {
     const token = new URLSearchParams(location.search).get("magic");
@@ -135,6 +149,7 @@ export const LoginPage = () => {
       setError("");
       await requestMagicLink(form.email.trim());
       setMagicMessage("If that email is registered, a secure sign-in link has been sent.");
+      setCooldownMagic(60);
     } catch (err) {
       setError(err.response?.data?.error || "Could not send sign-in link");
     } finally {
@@ -154,6 +169,7 @@ export const LoginPage = () => {
       await requestPhoneOtp(phoneForm.phone.trim());
       setPhoneCodeSent(true);
       setPhoneMessage("If this phone is registered, a login code has been sent.");
+      setCooldownPhone(60);
     } catch (err) {
       setError(err.response?.data?.error || "Could not send phone login code");
     } finally {
@@ -215,9 +231,9 @@ export const LoginPage = () => {
           className="btn-secondary"
           type="button"
           onClick={onSendMagicLink}
-          disabled={magicLoading || magicVerifying || phoneLoading}
+          disabled={magicLoading || magicVerifying || phoneLoading || cooldownMagic > 0}
         >
-          {magicLoading ? "Sending link..." : "Email me a sign-in link"}
+          {magicLoading ? "Sending link..." : cooldownMagic > 0 ? `Resend in ${cooldownMagic}s` : "Email me a sign-in link"}
         </button>
       </form>
 
@@ -247,9 +263,15 @@ export const LoginPage = () => {
             className="btn-secondary"
             type="button"
             onClick={onSendPhoneCode}
-            disabled={phoneLoading || magicVerifying || fbLoading}
+            disabled={phoneLoading || magicVerifying || fbLoading || cooldownPhone > 0}
           >
-            {phoneLoading ? "Sending..." : phoneCodeSent ? "Resend code" : "Text me a login code"}
+            {phoneLoading
+              ? "Sending..."
+              : cooldownPhone > 0
+                ? `Resend in ${cooldownPhone}s`
+                : phoneCodeSent
+                  ? "Resend code"
+                  : "Text me a login code"}
           </button>
           {phoneCodeSent && (
             <button

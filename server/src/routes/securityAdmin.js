@@ -128,4 +128,78 @@ router.get("/events", requireAuth, requireAdmin, async (req, res) => {
   });
 });
 
+router.get("/otp-stats", requireAuth, requireAdmin, async (req, res) => {
+  const hours = clampInt(req.query.hours, 24, 1, 24 * 30);
+  const since = new Date(Date.now() - hours * 60 * 60 * 1000);
+
+  const events = await prisma.securityEvent.findMany({
+    where: {
+      createdAt: { gte: since },
+      eventType: {
+        in: [
+          "auth.phone_otp.signup",
+          "auth.phone_otp.success",
+          "auth.phone_otp.failed",
+          "auth.magic_link.request",
+          "auth.magic_link.success",
+        ],
+      },
+    },
+    select: { eventType: true, email: true, ip: true, createdAt: true },
+    orderBy: { createdAt: "desc" },
+    take: 10000,
+  });
+
+  const counts = {
+    phoneSignup: 0,
+    phoneSuccess: 0,
+    phoneFailed: 0,
+    magicRequest: 0,
+    magicSuccess: 0,
+  };
+  const failedByIp = {};
+  const failedByPhone = {};
+
+  for (const ev of events) {
+    if (ev.eventType === "auth.phone_otp.signup") counts.phoneSignup++;
+    else if (ev.eventType === "auth.phone_otp.success") counts.phoneSuccess++;
+    else if (ev.eventType === "auth.phone_otp.failed") {
+      counts.phoneFailed++;
+      if (ev.ip) failedByIp[ev.ip] = (failedByIp[ev.ip] || 0) + 1;
+      if (ev.email) failedByPhone[ev.email] = (failedByPhone[ev.email] || 0) + 1;
+    } else if (ev.eventType === "auth.magic_link.request") counts.magicRequest++;
+    else if (ev.eventType === "auth.magic_link.success") counts.magicSuccess++;
+  }
+
+  const top = (dict) =>
+    Object.entries(dict)
+      .map(([key, count]) => ({ key, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5);
+
+  const phoneTotal = counts.phoneSuccess + counts.phoneFailed;
+  const phoneSuccessRate = phoneTotal > 0 ? Math.round((counts.phoneSuccess / phoneTotal) * 100) : null;
+  const magicTotal = counts.magicRequest;
+  const magicSuccessRate = magicTotal > 0 ? Math.round((counts.magicSuccess / magicTotal) * 100) : null;
+
+  return res.json({
+    ok: true,
+    windowHours: hours,
+    since: since.toISOString(),
+    phone: {
+      signups: counts.phoneSignup,
+      successes: counts.phoneSuccess,
+      failures: counts.phoneFailed,
+      successRate: phoneSuccessRate,
+      topFailedIps: top(failedByIp),
+      topFailedPhones: top(failedByPhone),
+    },
+    magic: {
+      requests: counts.magicRequest,
+      successes: counts.magicSuccess,
+      successRate: magicSuccessRate,
+    },
+  });
+});
+
 export default router;
