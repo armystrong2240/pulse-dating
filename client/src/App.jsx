@@ -21,6 +21,10 @@ import BillingSuccessPage from "./pages/BillingSuccessPage";
 import ReferralPage from "./pages/ReferralPage";
 import AdminPage from "./pages/AdminPage";
 import NearbyPage from "./pages/NearbyPage";
+import CreatorSetupPage from "./pages/CreatorSetupPage";
+import CreatorDashboardPage from "./pages/CreatorDashboardPage";
+import CreatorProfilePage from "./pages/CreatorProfilePage";
+import CreatorFeedPage from "./pages/CreatorFeedPage";
 import "./App.css";
 
 function App() {
@@ -52,6 +56,10 @@ function App() {
             <Route path="/billing/success" element={<ProtectedRoute><BillingSuccessPage /></ProtectedRoute>} />
             <Route path="/referrals" element={<ProtectedRoute><ReferralPage /></ProtectedRoute>} />
             <Route path="/nearby" element={<ProtectedRoute><NearbyPage /></ProtectedRoute>} />
+            <Route path="/creator/setup" element={<ProtectedRoute><CreatorSetupPage /></ProtectedRoute>} />
+            <Route path="/creator/dashboard" element={<ProtectedRoute><CreatorDashboardPage /></ProtectedRoute>} />
+            <Route path="/creator/feed" element={<ProtectedRoute><CreatorFeedPage /></ProtectedRoute>} />
+            <Route path="/creator/:id" element={<ProtectedRoute><CreatorProfilePage /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

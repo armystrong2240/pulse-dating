@@ -35,6 +35,7 @@ import rosesRoutes from "./routes/roses.js";
 import phoneRoutes from "./routes/phone.js";
 import boostsRoutes from "./routes/boosts.js";
 import nearbyRoutes from "./routes/nearby.js";
+import creatorRoutes from "./routes/creator.js";
 import securityAdminRoutes from "./routes/securityAdmin.js";
 import adminRoutes from "./routes/admin.js";
 import safetyRoutes from "./routes/safety.js";
@@ -171,6 +172,7 @@ app.use("/api/roses", apiLimiter, rosesRoutes);
 app.use("/api/phone", apiLimiter, phoneRoutes);
 app.use("/api/boosts", apiLimiter, boostsRoutes);
 app.use("/api/nearby", apiLimiter, nearbyRoutes);
+app.use("/api/creator", apiLimiter, creatorRoutes);
 app.get("/api/health", (_req, res) =>
   res.json({ ok: true, timestamp: new Date().toISOString() }),
 );

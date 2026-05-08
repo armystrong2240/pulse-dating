@@ -40,6 +40,7 @@ const PLAN_FEATURES = {
       "Advanced filters",
       "Read receipts",
       "Send virtual gifts",
+      "📍 Nearby grid (Grindr-style)",
     ],
   },
   gold: {
@@ -57,6 +58,7 @@ const PLAN_FEATURES = {
       "5 free gifts/month",
       "Profile highlighted in search",
       "Gold badge on profile",
+      "📍 Nearby grid (Grindr-style)",
     ],
   },
 };
@@ -398,6 +400,25 @@ export default function UpgradePage() {
             )}
           </div>
         )}
+
+        {/* ── Creator Monetization ──────────────────────────────────── */}
+        <div style={{ marginTop: 32, background: "#111", border: "1px solid #7c3aed", borderRadius: 16, padding: "1.5rem" }}>
+          <h2 style={{ margin: "0 0 4px", fontSize: "1.4rem" }}>🎬 Become a Creator</h2>
+          <p style={{ color: "#aaa", fontSize: 13, marginBottom: 16 }}>
+            Share exclusive content with subscribers. <strong style={{ color: "#c4b5fd" }}>Free to start</strong> — PulseDate keeps 25%, you keep 75%. Set your own monthly subscription price, post photos/videos, and earn tips from fans.
+          </p>
+          <ul style={{ color: "#ccc", fontSize: 13, paddingLeft: "1.25rem", marginBottom: "1rem", lineHeight: 1.8 }}>
+            <li>Set your own monthly price ($1–$500)</li>
+            <li>Pay-per-view posts for one-time unlocks</li>
+            <li>Receive tips from any fan</li>
+            <li>Subscribers get all PPV posts free</li>
+            <li>Cash out when balance ≥ $10 (via PayPal)</li>
+          </ul>
+          <a href="/creator/setup"
+            style={{ display: "inline-block", background: "linear-gradient(135deg,#7c3aed,#db2777)", color: "#fff", textDecoration: "none", borderRadius: 10, padding: ".7rem 1.5rem", fontWeight: 700, fontSize: 15 }}>
+            Enable Creator Mode
+          </a>
+        </div>
       </div>
     </div>
   );

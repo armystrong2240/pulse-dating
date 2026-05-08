@@ -63,6 +63,11 @@ model User {
   lastSeen      DateTime?
   showInNearby    Boolean  @default(false)
   nearbyPrivacy   String   @default("approximate")  // "exact" | "approximate"
+  isCreator       Boolean  @default(false)
+  creatorPrice    Float    @default(0)
+  creatorBio      String   @default("")
+  creatorCover    String   @default("")
+  creatorEarnings Float    @default(0)
   createdAt    DateTime @default(now())
 
   media          Media[]
@@ -88,6 +93,11 @@ model User {
   roseLedger             RoseLedger[]
   phoneVerifications     PhoneVerification[]
   scheduledBoosts        ScheduledBoost[]
+  fanSubscriptions       CreatorSubscription[] @relation("FanSubscriptions")
+  creatorSubscribers     CreatorSubscription[] @relation("CreatorSubscribers")
+  creatorPosts           CreatorPost[]
+  tipsSent               CreatorTip[]          @relation("TipsSent")
+  tipsReceived           CreatorTip[]          @relation("TipsReceived")
 
   @@index([latitude, longitude])
 }
@@ -326,4 +336,62 @@ model ScheduledBoost {
 
   @@index([userId])
   @@index([scheduledAt])
+}
+
+model CreatorSubscription {
+  id            String   @id @default(uuid())
+  fanId         String
+  creatorId     String
+  paypalOrderId String?
+  status        String   @default("active")
+  expiresAt     DateTime
+  createdAt     DateTime @default(now())
+
+  fan     User @relation("FanSubscriptions",   fields: [fanId],     references: [id], onDelete: Cascade)
+  creator User @relation("CreatorSubscribers", fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@unique([fanId, creatorId])
+  @@index([creatorId])
+}
+
+model CreatorPost {
+  id        String   @id @default(uuid())
+  creatorId String
+  caption   String   @default("")
+  mediaUrl  String   @default("")
+  mediaType String   @default("image")
+  isPPV     Boolean  @default(false)
+  ppvPrice  Float    @default(0)
+  createdAt DateTime @default(now())
+
+  creator User               @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  unlocks CreatorPostUnlock[]
+
+  @@index([creatorId])
+}
+
+model CreatorPostUnlock {
+  id            String   @id @default(uuid())
+  postId        String
+  userId        String
+  paypalOrderId String?
+  createdAt     DateTime @default(now())
+
+  post CreatorPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+}
+
+model CreatorTip {
+  id            String   @id @default(uuid())
+  fromId        String
+  toId          String
+  amount        Float
+  message       String   @default("")
+  context       String   @default("profile")
+  paypalOrderId String?
+  createdAt     DateTime @default(now())
+
+  from User @relation("TipsSent",     fields: [fromId], references: [id], onDelete: Cascade)
+  to   User @relation("TipsReceived", fields: [toId],   references: [id], onDelete: Cascade)
 }

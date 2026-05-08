@@ -84,6 +84,16 @@ export const Navbar = () => {
             style={user?.isPremium ? { color: "#c89ef5" } : {}}>
             📍 Nearby{!user?.isPremium && <span style={{ fontSize: "0.6rem", marginLeft: 3, verticalAlign: "middle" }}>🔒</span>}
           </NavLink>
+          {user?.isCreator ? (
+            <NavLink to="/creator/dashboard" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+              style={{ color: "#7c3aed" }}>
+              🎬 Creator
+            </NavLink>
+          ) : (
+            <NavLink to="/creator/feed" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+              🎬 Feed
+            </NavLink>
+          )}
           <NavLink to="/viewed-me" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             👁 Viewed Me
           </NavLink>
