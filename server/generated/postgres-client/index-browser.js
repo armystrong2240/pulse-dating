@@ -162,6 +162,8 @@ exports.Prisma.UserScalarFieldEnum = {
   profileScore: 'profileScore',
   profileVisibility: 'profileVisibility',
   facebookId: 'facebookId',
+  magicLoginToken: 'magicLoginToken',
+  magicLoginTokenExpiry: 'magicLoginTokenExpiry',
   onboardingStep: 'onboardingStep',
   onboardingCompleted: 'onboardingCompleted',
   emailVerified: 'emailVerified',

@@ -2822,6 +2822,8 @@ export namespace Prisma {
     profileScore: number | null
     profileVisibility: string | null
     facebookId: string | null
+    magicLoginToken: string | null
+    magicLoginTokenExpiry: Date | null
     onboardingStep: string | null
     onboardingCompleted: boolean | null
     emailVerified: boolean | null
@@ -2876,6 +2878,8 @@ export namespace Prisma {
     profileScore: number | null
     profileVisibility: string | null
     facebookId: string | null
+    magicLoginToken: string | null
+    magicLoginTokenExpiry: Date | null
     onboardingStep: string | null
     onboardingCompleted: boolean | null
     emailVerified: boolean | null
@@ -2930,6 +2934,8 @@ export namespace Prisma {
     profileScore: number
     profileVisibility: number
     facebookId: number
+    magicLoginToken: number
+    magicLoginTokenExpiry: number
     onboardingStep: number
     onboardingCompleted: number
     emailVerified: number
@@ -3006,6 +3012,8 @@ export namespace Prisma {
     profileScore?: true
     profileVisibility?: true
     facebookId?: true
+    magicLoginToken?: true
+    magicLoginTokenExpiry?: true
     onboardingStep?: true
     onboardingCompleted?: true
     emailVerified?: true
@@ -3060,6 +3068,8 @@ export namespace Prisma {
     profileScore?: true
     profileVisibility?: true
     facebookId?: true
+    magicLoginToken?: true
+    magicLoginTokenExpiry?: true
     onboardingStep?: true
     onboardingCompleted?: true
     emailVerified?: true
@@ -3114,6 +3124,8 @@ export namespace Prisma {
     profileScore?: true
     profileVisibility?: true
     facebookId?: true
+    magicLoginToken?: true
+    magicLoginTokenExpiry?: true
     onboardingStep?: true
     onboardingCompleted?: true
     emailVerified?: true
@@ -3255,6 +3267,8 @@ export namespace Prisma {
     profileScore: number
     profileVisibility: string
     facebookId: string | null
+    magicLoginToken: string | null
+    magicLoginTokenExpiry: Date | null
     onboardingStep: string
     onboardingCompleted: boolean
     emailVerified: boolean
@@ -3328,6 +3342,8 @@ export namespace Prisma {
     profileScore?: boolean
     profileVisibility?: boolean
     facebookId?: boolean
+    magicLoginToken?: boolean
+    magicLoginTokenExpiry?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -3406,6 +3422,8 @@ export namespace Prisma {
     profileScore?: boolean
     profileVisibility?: boolean
     facebookId?: boolean
+    magicLoginToken?: boolean
+    magicLoginTokenExpiry?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -3460,6 +3478,8 @@ export namespace Prisma {
     profileScore?: boolean
     profileVisibility?: boolean
     facebookId?: boolean
+    magicLoginToken?: boolean
+    magicLoginTokenExpiry?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -3514,6 +3534,8 @@ export namespace Prisma {
     profileScore?: boolean
     profileVisibility?: boolean
     facebookId?: boolean
+    magicLoginToken?: boolean
+    magicLoginTokenExpiry?: boolean
     onboardingStep?: boolean
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -3527,7 +3549,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "age" | "city" | "state" | "zipCode" | "pronouns" | "genderIdentity" | "sexualOrientation" | "polyPreference" | "bio" | "interests" | "lookingFor" | "profileTheme" | "profileGraphic" | "musicUrl" | "profileMotto" | "dreamDate" | "avatar" | "latitude" | "longitude" | "profilePrompts" | "verified" | "verifiedStatus" | "paused" | "boostedUntil" | "isPremium" | "premiumTier" | "boostCredits" | "roseBalance" | "loginStreak" | "lastLoginDate" | "phoneNumber" | "phoneVerified" | "autoHidden" | "profileScore" | "profileVisibility" | "facebookId" | "onboardingStep" | "onboardingCompleted" | "emailVerified" | "verifyToken" | "resetToken" | "resetTokenExpiry" | "pushSubscription" | "referralCode" | "referredById" | "lastSeen" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "age" | "city" | "state" | "zipCode" | "pronouns" | "genderIdentity" | "sexualOrientation" | "polyPreference" | "bio" | "interests" | "lookingFor" | "profileTheme" | "profileGraphic" | "musicUrl" | "profileMotto" | "dreamDate" | "avatar" | "latitude" | "longitude" | "profilePrompts" | "verified" | "verifiedStatus" | "paused" | "boostedUntil" | "isPremium" | "premiumTier" | "boostCredits" | "roseBalance" | "loginStreak" | "lastLoginDate" | "phoneNumber" | "phoneVerified" | "autoHidden" | "profileScore" | "profileVisibility" | "facebookId" | "magicLoginToken" | "magicLoginTokenExpiry" | "onboardingStep" | "onboardingCompleted" | "emailVerified" | "verifyToken" | "resetToken" | "resetTokenExpiry" | "pushSubscription" | "referralCode" | "referredById" | "lastSeen" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     media?: boolean | User$mediaArgs<ExtArgs>
     likesSent?: boolean | User$likesSentArgs<ExtArgs>
@@ -3625,6 +3647,8 @@ export namespace Prisma {
       profileScore: number
       profileVisibility: string
       facebookId: string | null
+      magicLoginToken: string | null
+      magicLoginTokenExpiry: Date | null
       onboardingStep: string
       onboardingCompleted: boolean
       emailVerified: boolean
@@ -4122,6 +4146,8 @@ export namespace Prisma {
     readonly profileScore: FieldRef<"User", 'Int'>
     readonly profileVisibility: FieldRef<"User", 'String'>
     readonly facebookId: FieldRef<"User", 'String'>
+    readonly magicLoginToken: FieldRef<"User", 'String'>
+    readonly magicLoginTokenExpiry: FieldRef<"User", 'DateTime'>
     readonly onboardingStep: FieldRef<"User", 'String'>
     readonly onboardingCompleted: FieldRef<"User", 'Boolean'>
     readonly emailVerified: FieldRef<"User", 'Boolean'>
@@ -24725,6 +24751,8 @@ export namespace Prisma {
     profileScore: 'profileScore',
     profileVisibility: 'profileVisibility',
     facebookId: 'facebookId',
+    magicLoginToken: 'magicLoginToken',
+    magicLoginTokenExpiry: 'magicLoginTokenExpiry',
     onboardingStep: 'onboardingStep',
     onboardingCompleted: 'onboardingCompleted',
     emailVerified: 'emailVerified',
@@ -25099,6 +25127,8 @@ export namespace Prisma {
     profileScore?: IntFilter<"User"> | number
     profileVisibility?: StringFilter<"User"> | string
     facebookId?: StringNullableFilter<"User"> | string | null
+    magicLoginToken?: StringNullableFilter<"User"> | string | null
+    magicLoginTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
     onboardingStep?: StringFilter<"User"> | string
     onboardingCompleted?: BoolFilter<"User"> | boolean
     emailVerified?: BoolFilter<"User"> | boolean
@@ -25176,6 +25206,8 @@ export namespace Prisma {
     profileScore?: SortOrder
     profileVisibility?: SortOrder
     facebookId?: SortOrderInput | SortOrder
+    magicLoginToken?: SortOrderInput | SortOrder
+    magicLoginTokenExpiry?: SortOrderInput | SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
@@ -25217,6 +25249,7 @@ export namespace Prisma {
     email?: string
     phoneNumber?: string
     facebookId?: string
+    magicLoginToken?: string
     resetToken?: string
     referralCode?: string
     AND?: UserWhereInput | UserWhereInput[]
@@ -25258,6 +25291,7 @@ export namespace Prisma {
     autoHidden?: BoolFilter<"User"> | boolean
     profileScore?: IntFilter<"User"> | number
     profileVisibility?: StringFilter<"User"> | string
+    magicLoginTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
     onboardingStep?: StringFilter<"User"> | string
     onboardingCompleted?: BoolFilter<"User"> | boolean
     emailVerified?: BoolFilter<"User"> | boolean
@@ -25290,7 +25324,7 @@ export namespace Prisma {
     roseLedger?: RoseLedgerListRelationFilter
     phoneVerifications?: PhoneVerificationListRelationFilter
     scheduledBoosts?: ScheduledBoostListRelationFilter
-  }, "id" | "email" | "phoneNumber" | "facebookId" | "resetToken" | "referralCode">
+  }, "id" | "email" | "phoneNumber" | "facebookId" | "magicLoginToken" | "resetToken" | "referralCode">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -25333,6 +25367,8 @@ export namespace Prisma {
     profileScore?: SortOrder
     profileVisibility?: SortOrder
     facebookId?: SortOrderInput | SortOrder
+    magicLoginToken?: SortOrderInput | SortOrder
+    magicLoginTokenExpiry?: SortOrderInput | SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
@@ -25395,6 +25431,8 @@ export namespace Prisma {
     profileScore?: IntWithAggregatesFilter<"User"> | number
     profileVisibility?: StringWithAggregatesFilter<"User"> | string
     facebookId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    magicLoginToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    magicLoginTokenExpiry?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     onboardingStep?: StringWithAggregatesFilter<"User"> | string
     onboardingCompleted?: BoolWithAggregatesFilter<"User"> | boolean
     emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
@@ -26581,6 +26619,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -26658,6 +26698,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -26735,6 +26777,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -26812,6 +26856,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -26889,6 +26935,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -26943,6 +26991,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -26997,6 +27047,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -28445,6 +28497,8 @@ export namespace Prisma {
     profileScore?: SortOrder
     profileVisibility?: SortOrder
     facebookId?: SortOrder
+    magicLoginToken?: SortOrder
+    magicLoginTokenExpiry?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
@@ -28509,6 +28563,8 @@ export namespace Prisma {
     profileScore?: SortOrder
     profileVisibility?: SortOrder
     facebookId?: SortOrder
+    magicLoginToken?: SortOrder
+    magicLoginTokenExpiry?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
@@ -28563,6 +28619,8 @@ export namespace Prisma {
     profileScore?: SortOrder
     profileVisibility?: SortOrder
     facebookId?: SortOrder
+    magicLoginToken?: SortOrder
+    magicLoginTokenExpiry?: SortOrder
     onboardingStep?: SortOrder
     onboardingCompleted?: SortOrder
     emailVerified?: SortOrder
@@ -32057,6 +32115,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32133,6 +32193,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32225,6 +32287,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -32301,6 +32365,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -32377,6 +32443,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32453,6 +32521,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32534,6 +32604,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32610,6 +32682,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -32702,6 +32776,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -32778,6 +32854,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -32865,6 +32943,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -32941,6 +33021,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33017,6 +33099,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33093,6 +33177,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33174,6 +33260,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33250,6 +33338,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33342,6 +33432,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33418,6 +33510,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33505,6 +33599,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33581,6 +33677,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33657,6 +33755,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33733,6 +33833,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -33849,6 +33951,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -33925,6 +34029,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34044,6 +34150,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34120,6 +34228,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34245,6 +34355,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34321,6 +34433,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34397,6 +34511,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34473,6 +34589,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34554,6 +34672,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34630,6 +34750,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -34722,6 +34844,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34798,6 +34922,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34885,6 +35011,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -34961,6 +35089,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35037,6 +35167,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35113,6 +35245,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35205,6 +35339,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35281,6 +35417,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35357,6 +35495,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35433,6 +35573,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35514,6 +35656,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35590,6 +35734,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -35682,6 +35828,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35758,6 +35906,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35845,6 +35995,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35921,6 +36073,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -35997,6 +36151,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36073,6 +36229,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36165,6 +36323,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36241,6 +36401,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36317,6 +36479,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36393,6 +36557,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36485,6 +36651,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36561,6 +36729,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36637,6 +36807,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36713,6 +36885,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -36805,6 +36979,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36881,6 +37057,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -36957,6 +37135,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37033,6 +37213,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37125,6 +37307,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37201,6 +37385,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37277,6 +37463,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37353,6 +37541,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37445,6 +37635,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37521,6 +37713,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37597,6 +37791,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37673,6 +37869,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37754,6 +37952,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37830,6 +38030,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -37922,6 +38124,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -37998,6 +38202,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38085,6 +38291,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38161,6 +38369,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38237,6 +38447,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -38313,6 +38525,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -38405,6 +38619,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38481,6 +38697,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38557,6 +38775,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -38633,6 +38853,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -38725,6 +38947,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38801,6 +39025,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -38877,6 +39103,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -38953,6 +39181,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -39045,6 +39275,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -39121,6 +39353,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -39197,6 +39431,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -39273,6 +39509,8 @@ export namespace Prisma {
     profileScore?: number
     profileVisibility?: string
     facebookId?: string | null
+    magicLoginToken?: string | null
+    magicLoginTokenExpiry?: Date | string | null
     onboardingStep?: string
     onboardingCompleted?: boolean
     emailVerified?: boolean
@@ -39365,6 +39603,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -39441,6 +39681,8 @@ export namespace Prisma {
     profileScore?: IntFieldUpdateOperationsInput | number
     profileVisibility?: StringFieldUpdateOperationsInput | string
     facebookId?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginToken?: NullableStringFieldUpdateOperationsInput | string | null
+    magicLoginTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     onboardingStep?: StringFieldUpdateOperationsInput | string
     onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean

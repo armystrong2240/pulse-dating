@@ -2,6 +2,39 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+const FB_SDK_SRC = "https://connect.facebook.net/en_US/sdk.js";
+
+const loadFacebookSdk = () => new Promise((resolve, reject) => {
+  if (window.FB) return resolve(window.FB);
+  const existing = document.querySelector(`script[src="${FB_SDK_SRC}"]`);
+  if (existing) {
+    existing.addEventListener("load", () => resolve(window.FB), { once: true });
+    existing.addEventListener("error", () => reject(new Error("Failed to load Facebook SDK")), { once: true });
+    return;
+  }
+  const script = document.createElement("script");
+  script.src = FB_SDK_SRC;
+  script.async = true;
+  script.defer = true;
+  script.crossOrigin = "anonymous";
+  script.onload = () => resolve(window.FB);
+  script.onerror = () => reject(new Error("Failed to load Facebook SDK"));
+  document.body.appendChild(script);
+});
+
+const ensureFacebookReady = async () => {
+  const appId = import.meta.env.VITE_FACEBOOK_APP_ID;
+  if (!appId) throw new Error("Facebook login is not configured.");
+  const FB = await loadFacebookSdk();
+  FB.init({
+    appId,
+    cookie: true,
+    xfbml: false,
+    version: "v19.0",
+  });
+  return FB;
+};
+
 const INTEREST_TAGS = [
   "Travel","Fitness","Music","Photography","Cooking","Gaming","Art","Reading",
   "Hiking","Movies","Dancing","Yoga","Tech","Fashion","Sports","Foodie",
@@ -76,23 +109,28 @@ export const RegisterPage = () => {
     }
   };
 
-  const onFacebookRegister = () => {
-    if (!window.FB) return setError("Facebook SDK not loaded. Please refresh.");
+  const onFacebookRegister = async () => {
     setFbLoading(true);
     setError("");
-    window.FB.login(async (response) => {
-      if (response.authResponse?.accessToken) {
-        try {
-          const signedInUser = await loginWithFacebook(response.authResponse.accessToken);
-          navigate(signedInUser?.onboardingCompleted ? "/" : "/onboarding");
-        } catch (err) {
-          setError(err.response?.data?.error || "Facebook sign-up failed");
+    try {
+      const FB = await ensureFacebookReady();
+      FB.login(async (response) => {
+        if (response.authResponse?.accessToken) {
+          try {
+            const signedInUser = await loginWithFacebook(response.authResponse.accessToken);
+            navigate(signedInUser?.onboardingCompleted ? "/" : "/onboarding");
+          } catch (err) {
+            setError(err.response?.data?.error || "Facebook sign-up failed");
+          }
+        } else {
+          setError("Facebook login was cancelled or denied.");
         }
-      } else {
-        setError("Facebook login was cancelled or denied.");
-      }
+        setFbLoading(false);
+      }, { scope: "email,public_profile" });
+    } catch (err) {
+      setError(err?.message || "Facebook login is unavailable right now.");
       setFbLoading(false);
-    }, { scope: "email,public_profile" });
+    }
   };
 
   const progress = Math.round(((step + 1) / STEPS.length) * 100);

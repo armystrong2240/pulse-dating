@@ -1,15 +1,82 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+const FB_SDK_SRC = "https://connect.facebook.net/en_US/sdk.js";
+
+const loadFacebookSdk = () => new Promise((resolve, reject) => {
+  if (window.FB) return resolve(window.FB);
+  const existing = document.querySelector(`script[src="${FB_SDK_SRC}"]`);
+  if (existing) {
+    existing.addEventListener("load", () => resolve(window.FB), { once: true });
+    existing.addEventListener("error", () => reject(new Error("Failed to load Facebook SDK")), { once: true });
+    return;
+  }
+  const script = document.createElement("script");
+  script.src = FB_SDK_SRC;
+  script.async = true;
+  script.defer = true;
+  script.crossOrigin = "anonymous";
+  script.onload = () => resolve(window.FB);
+  script.onerror = () => reject(new Error("Failed to load Facebook SDK"));
+  document.body.appendChild(script);
+});
+
+const ensureFacebookReady = async () => {
+  const appId = import.meta.env.VITE_FACEBOOK_APP_ID;
+  if (!appId) throw new Error("Facebook login is not configured.");
+  const FB = await loadFacebookSdk();
+  FB.init({
+    appId,
+    cookie: true,
+    xfbml: false,
+    version: "v19.0",
+  });
+  return FB;
+};
+
 export const LoginPage = () => {
-  const { login, loginWithFacebook } = useAuth();
+  const {
+    login,
+    loginWithFacebook,
+    loginWithMagicLink,
+    requestMagicLink,
+  } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [fbLoading, setFbLoading] = useState(false);
+  const [magicLoading, setMagicLoading] = useState(false);
+  const [magicVerifying, setMagicVerifying] = useState(false);
+  const [magicMessage, setMagicMessage] = useState("");
   const successMessage = location.state?.message;
+
+  useEffect(() => {
+    const token = new URLSearchParams(location.search).get("magic");
+    if (!token) return;
+
+    setMagicVerifying(true);
+    setError("");
+    loginWithMagicLink(token)
+      .then((signedInUser) => {
+        navigate(
+          signedInUser?.isAdmin
+            ? "/admin"
+            : signedInUser?.onboardingCompleted
+              ? "/"
+              : "/onboarding",
+          { replace: true },
+        );
+      })
+      .catch((err) => {
+        setError(err.response?.data?.error || "Sign-in link is invalid or expired");
+        const next = new URLSearchParams(location.search);
+        next.delete("magic");
+        navigate({ pathname: "/login", search: next.toString() }, { replace: true });
+      })
+      .finally(() => setMagicVerifying(false));
+  }, [location.search, navigate]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -25,23 +92,45 @@ export const LoginPage = () => {
     }
   };
 
-  const onFacebookLogin = () => {
-    if (!window.FB) return setError("Facebook SDK not loaded. Please refresh.");
+  const onFacebookLogin = async () => {
     setFbLoading(true);
     setError("");
-    window.FB.login(async (response) => {
-      if (response.authResponse?.accessToken) {
-        try {
-          const signedInUser = await loginWithFacebook(response.authResponse.accessToken);
-          navigate(signedInUser?.isAdmin ? "/admin" : signedInUser?.onboardingCompleted ? "/" : "/onboarding");
-        } catch (err) {
-          setError(err.response?.data?.error || "Facebook login failed");
+    try {
+      const FB = await ensureFacebookReady();
+      FB.login(async (response) => {
+        if (response.authResponse?.accessToken) {
+          try {
+            const signedInUser = await loginWithFacebook(response.authResponse.accessToken);
+            navigate(signedInUser?.isAdmin ? "/admin" : signedInUser?.onboardingCompleted ? "/" : "/onboarding");
+          } catch (err) {
+            setError(err.response?.data?.error || "Facebook login failed");
+          }
+        } else {
+          setError("Facebook login was cancelled or denied.");
         }
-      } else {
-        setError("Facebook login was cancelled or denied.");
-      }
+        setFbLoading(false);
+      }, { scope: "email,public_profile" });
+    } catch (err) {
+      setError(err?.message || "Facebook login is unavailable right now.");
       setFbLoading(false);
-    }, { scope: "email,public_profile" });
+    }
+  };
+
+  const onSendMagicLink = async () => {
+    if (!form.email.trim()) {
+      setError("Enter your email first to receive a sign-in link.");
+      return;
+    }
+    try {
+      setMagicLoading(true);
+      setError("");
+      await requestMagicLink(form.email.trim());
+      setMagicMessage("If that email is registered, a secure sign-in link has been sent.");
+    } catch (err) {
+      setError(err.response?.data?.error || "Could not send sign-in link");
+    } finally {
+      setMagicLoading(false);
+    }
   };
 
   return (
@@ -71,6 +160,14 @@ export const LoginPage = () => {
         <button className="btn-primary" type="submit">
           Sign In
         </button>
+        <button
+          className="btn-secondary"
+          type="button"
+          onClick={onSendMagicLink}
+          disabled={magicLoading || magicVerifying}
+        >
+          {magicLoading ? "Sending link..." : "Email me a sign-in link"}
+        </button>
       </form>
 
       <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", margin: "1rem 0" }}>
@@ -81,7 +178,7 @@ export const LoginPage = () => {
 
       <button
         onClick={onFacebookLogin}
-        disabled={fbLoading}
+        disabled={fbLoading || magicVerifying}
         style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.6rem", width: "100%", padding: "0.65rem 1rem", background: "#1877f2", color: "#fff", border: "none", borderRadius: 8, fontSize: "0.95rem", fontWeight: 600, cursor: "pointer", opacity: fbLoading ? 0.7 : 1 }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
@@ -90,6 +187,8 @@ export const LoginPage = () => {
         {fbLoading ? "Connecting..." : "Continue with Facebook"}
       </button>
 
+      {magicVerifying && <p className="muted">Verifying your sign-in link...</p>}
+      {magicMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{magicMessage}</p>}
       {successMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{successMessage}</p>}
       {error && <p className="error">{error}</p>}
 

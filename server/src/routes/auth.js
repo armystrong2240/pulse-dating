@@ -4,7 +4,14 @@ import { Router } from "express";
 import rateLimit from "express-rate-limit";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
-import { ADMIN_EMAILS, BCRYPT_ROUNDS, CLIENT_URL, FACEBOOK_APP_SECRET, isProduction } from "../config/env.js";
+import {
+  ADMIN_EMAILS,
+  BCRYPT_ROUNDS,
+  CLIENT_URL,
+  FACEBOOK_APP_ID,
+  FACEBOOK_APP_SECRET,
+  isProduction,
+} from "../config/env.js";
 import { parseInterests, prisma, serializeInterests } from "../db.js";
 import { awardLoginStreak } from "../lib/backgroundJobs.js";
 import {
@@ -13,7 +20,11 @@ import {
 } from "../lib/dataProtection.js";
 import { logSecurityEvent } from "../lib/securityEvents.js";
 import { JWT_SECRET, REFRESH_SECRET, requireAuth } from "../middleware/auth.js";
-import { sendPasswordResetEmail, sendVerificationEmail } from "../mailer.js";
+import {
+  sendMagicLoginEmail,
+  sendPasswordResetEmail,
+  sendVerificationEmail,
+} from "../mailer.js";
 
 const router = Router();
 const REFRESH_COOKIE = "pd_refresh";
@@ -97,6 +108,14 @@ const LoginSchema = z.object({
 
 const DeleteAccountSchema = z.object({
   password: z.string().min(1, "Password is required"),
+});
+
+const MagicLinkRequestSchema = z.object({
+  email: z.string().email(),
+});
+
+const MagicLinkVerifySchema = z.object({
+  token: z.string().min(24),
 });
 
 function issueTokens(userId, email) {
@@ -435,6 +454,90 @@ router.get("/verify-email", async (req, res) => {
   return res.json({ ok: true, message: "Email verified! You can close this tab." });
 });
 
+router.post("/magic-link/request", loginLimiter, async (req, res) => {
+  const parsed = MagicLinkRequestSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: parsed.error.issues[0].message });
+  }
+
+  const email = parsed.data.email.toLowerCase();
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user) {
+    return res.json({ ok: true });
+  }
+
+  const rawToken = crypto.randomBytes(32).toString("hex");
+  const tokenHash = crypto.createHash("sha256").update(rawToken).digest("hex");
+  const magicLoginTokenExpiry = new Date(Date.now() + 15 * 60 * 1000);
+
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { magicLoginToken: tokenHash, magicLoginTokenExpiry },
+  });
+
+  const baseUrl = CLIENT_URL.split(",")[0].trim() || `${req.protocol}://${req.get("host")}`;
+  const url = `${baseUrl}/login?magic=${encodeURIComponent(rawToken)}`;
+  sendMagicLoginEmail(user.email, user.name, url).catch((err) =>
+    console.error("[mailer] magic login email failed:", err?.message || err)
+  );
+
+  return res.json({ ok: true });
+});
+
+router.post("/magic-link/verify", loginLimiter, async (req, res) => {
+  const parsed = MagicLinkVerifySchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: parsed.error.issues[0].message });
+  }
+
+  const tokenHash = crypto
+    .createHash("sha256")
+    .update(parsed.data.token)
+    .digest("hex");
+
+  const user = await prisma.user.findFirst({
+    where: {
+      magicLoginToken: tokenHash,
+      magicLoginTokenExpiry: { gt: new Date() },
+    },
+  });
+
+  if (!user) {
+    await logSecurityEvent(req, {
+      eventType: "auth.magic_link.verify_failed",
+      severity: "warn",
+    });
+    return res.status(400).json({ error: "Invalid or expired sign-in link" });
+  }
+
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { magicLoginToken: null, magicLoginTokenExpiry: null },
+  });
+
+  const { accessToken, refreshToken } = issueTokens(user.id, user.email);
+  const refreshTokenHash = hashRefreshToken(refreshToken);
+  await prisma.refreshToken.create({
+    data: {
+      userId: user.id,
+      token: refreshTokenHash,
+      expiresAt: new Date(Date.now() + REFRESH_EXPIRY_DAYS * 86400 * 1000),
+    },
+  });
+
+  setRefreshCookie(res, refreshToken);
+  awardLoginStreak(user.id).catch(() => {});
+
+  await logSecurityEvent(req, {
+    userId: user.id,
+    email: user.email,
+    eventType: "auth.magic_link.success",
+    severity: "info",
+  });
+
+  return res.json({ token: accessToken, user: toPublic(user) });
+});
+
 // ── Forgot Password ────────────────────────────────────────────────────────
 router.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
@@ -497,10 +600,9 @@ router.post("/facebook", loginLimiter, async (req, res) => {
   let fbProfile;
   try {
     // If FACEBOOK_APP_SECRET is set, use app-token-based verification for extra security
-    let verifyUrl;
-    if (FACEBOOK_APP_SECRET) {
+    if (FACEBOOK_APP_ID && FACEBOOK_APP_SECRET) {
       const appTokenRes = await fetch(
-        `https://graph.facebook.com/oauth/access_token?client_id=${process.env.VITE_FACEBOOK_APP_ID || process.env.FACEBOOK_APP_ID}&client_secret=${FACEBOOK_APP_SECRET}&grant_type=client_credentials`
+        `https://graph.facebook.com/oauth/access_token?client_id=${FACEBOOK_APP_ID}&client_secret=${FACEBOOK_APP_SECRET}&grant_type=client_credentials`
       ).then((r) => r.json());
       const appToken = appTokenRes.access_token;
       if (appToken) {
@@ -581,7 +683,13 @@ router.post("/facebook", loginLimiter, async (req, res) => {
   await prisma.refreshToken.create({ data: { token: hashed, userId: user.id, expiresAt } });
   setRefreshCookie(res, refreshToken);
 
-  await logSecurityEvent(user.id, "login", req, { method: "facebook" });
+  await logSecurityEvent(req, {
+    userId: user.id,
+    email: user.email,
+    eventType: "auth.facebook.success",
+    severity: "info",
+    metadata: { method: "facebook" },
+  });
   await awardLoginStreak(user.id);
 
   const safe = parseInterests(decryptSensitiveUserFields(

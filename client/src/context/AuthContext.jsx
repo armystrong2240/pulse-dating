@@ -65,8 +65,29 @@ export const AuthProvider = ({ children }) => {
     return data.user;
   };
 
+  const requestMagicLink = async (email) => {
+    const { data } = await api.post("/auth/magic-link/request", { email });
+    return data;
+  };
+
+  const loginWithMagicLink = async (token) => {
+    const { data } = await api.post("/auth/magic-link/verify", { token });
+    applyToken(data.token, data.user);
+    registerPushNotifications();
+    return data.user;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, loginWithFacebook }}>
+    <AuthContext.Provider value={{
+      user,
+      loading,
+      login,
+      register,
+      logout,
+      loginWithFacebook,
+      requestMagicLink,
+      loginWithMagicLink,
+    }}>
       {children}
     </AuthContext.Provider>
   );

@@ -36,3 +36,12 @@ export async function sendPasswordResetEmail(to, name, url) {
     <p style="color:#888;font-size:12px">This link expires in 1 hour. If you didn't request this, you can safely ignore this email.</p>
   `);
 }
+
+export async function sendMagicLoginEmail(to, name, url) {
+  await send(to, "Your PulseDate sign-in link", `
+    <h2>Hey ${name || "there"}!</h2>
+    <p>Use this secure link to sign in to PulseDate.</p>
+    <p><a href="${url}" style="background:#1f9d55;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;display:inline-block;">Sign in securely</a></p>
+    <p style="color:#888;font-size:12px">This link expires in 15 minutes and can only be used once.</p>
+  `);
+}

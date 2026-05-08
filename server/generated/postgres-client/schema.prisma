@@ -9,57 +9,59 @@ datasource db {
 }
 
 model User {
-  id                  String    @id @default(uuid())
-  email               String    @unique
-  passwordHash        String
-  name                String
-  age                 Int
-  city                String
-  state               String    @default("")
-  zipCode             String    @default("")
-  pronouns            String    @default("")
-  genderIdentity      String    @default("")
-  sexualOrientation   String    @default("")
-  polyPreference      String    @default("")
-  bio                 String
-  interests           String    @default("[]") // JSON array stored as string for SQLite
-  lookingFor          String    @default("Open to meeting people")
-  profileTheme        String    @default("sunset")
-  profileGraphic      String    @default("none")
-  musicUrl            String    @default("")
-  profileMotto        String    @default("")
-  dreamDate           String    @default("")
-  avatar              String    @default("")
-  latitude            Float     @default(0)
-  longitude           Float     @default(0)
-  profilePrompts      String    @default("[]") // JSON [{q,a}]
-  verified            Boolean   @default(false)
-  verifiedStatus      String    @default("") // "" | "pending" | "verified"
-  paused              Boolean   @default(false)
-  boostedUntil        DateTime?
-  isPremium           Boolean   @default(false)
-  premiumTier         String    @default("free")
-  boostCredits        Int       @default(0)
-  roseBalance         Int       @default(0)
-  loginStreak         Int       @default(0)
-  lastLoginDate       String    @default("")
-  phoneNumber         String?   @unique
-  phoneVerified       Boolean   @default(false)
-  autoHidden          Boolean   @default(false)
-  profileScore        Int       @default(0)
-  profileVisibility   String    @default("{}") // JSON: hidden field keys
-  facebookId          String?   @unique
-  onboardingStep      String    @default("basics")
-  onboardingCompleted Boolean   @default(false)
-  emailVerified       Boolean   @default(false)
-  verifyToken         String?
-  resetToken          String?   @unique
-  resetTokenExpiry    DateTime?
-  pushSubscription    String?
-  referralCode        String?   @unique
-  referredById        String?
-  lastSeen            DateTime?
-  createdAt           DateTime  @default(now())
+  id                    String    @id @default(uuid())
+  email                 String    @unique
+  passwordHash          String
+  name                  String
+  age                   Int
+  city                  String
+  state                 String    @default("")
+  zipCode               String    @default("")
+  pronouns              String    @default("")
+  genderIdentity        String    @default("")
+  sexualOrientation     String    @default("")
+  polyPreference        String    @default("")
+  bio                   String
+  interests             String    @default("[]") // JSON array stored as string for SQLite
+  lookingFor            String    @default("Open to meeting people")
+  profileTheme          String    @default("sunset")
+  profileGraphic        String    @default("none")
+  musicUrl              String    @default("")
+  profileMotto          String    @default("")
+  dreamDate             String    @default("")
+  avatar                String    @default("")
+  latitude              Float     @default(0)
+  longitude             Float     @default(0)
+  profilePrompts        String    @default("[]") // JSON [{q,a}]
+  verified              Boolean   @default(false)
+  verifiedStatus        String    @default("") // "" | "pending" | "verified"
+  paused                Boolean   @default(false)
+  boostedUntil          DateTime?
+  isPremium             Boolean   @default(false)
+  premiumTier           String    @default("free")
+  boostCredits          Int       @default(0)
+  roseBalance           Int       @default(0)
+  loginStreak           Int       @default(0)
+  lastLoginDate         String    @default("")
+  phoneNumber           String?   @unique
+  phoneVerified         Boolean   @default(false)
+  autoHidden            Boolean   @default(false)
+  profileScore          Int       @default(0)
+  profileVisibility     String    @default("{}") // JSON: hidden field keys
+  facebookId            String?   @unique
+  magicLoginToken       String?   @unique
+  magicLoginTokenExpiry DateTime?
+  onboardingStep        String    @default("basics")
+  onboardingCompleted   Boolean   @default(false)
+  emailVerified         Boolean   @default(false)
+  verifyToken           String?
+  resetToken            String?   @unique
+  resetTokenExpiry      DateTime?
+  pushSubscription      String?
+  referralCode          String?   @unique
+  referredById          String?
+  lastSeen              DateTime?
+  createdAt             DateTime  @default(now())
 
   media                  Media[]
   likesSent              Like[]              @relation("LikeFrom")
