@@ -248,6 +248,8 @@ const UpdateSchema = z.object({
   longitude: z.coerce.number().min(-180).max(180).optional(),
   profilePrompts: z.array(z.object({ q: z.string(), a: z.string() })).max(5).optional(),
   profileVisibility: z.record(z.boolean()).optional(),
+  showInNearby: z.boolean().optional(),
+  nearbyPrivacy: z.enum(["exact", "approximate"]).optional(),
 });
 
 router.put("/:id", requireAuth, async (req, res) => {

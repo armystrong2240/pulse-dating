@@ -80,6 +80,10 @@ export const Navbar = () => {
           <NavLink to="/live" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             Live
           </NavLink>
+          <NavLink to="/nearby" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+            style={user?.isPremium ? { color: "#c89ef5" } : {}}>
+            📍 Nearby{!user?.isPremium && <span style={{ fontSize: "0.6rem", marginLeft: 3, verticalAlign: "middle" }}>🔒</span>}
+          </NavLink>
           <NavLink to="/viewed-me" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             👁 Viewed Me
           </NavLink>

@@ -20,6 +20,7 @@ import UpgradePage from "./pages/UpgradePage";
 import BillingSuccessPage from "./pages/BillingSuccessPage";
 import ReferralPage from "./pages/ReferralPage";
 import AdminPage from "./pages/AdminPage";
+import NearbyPage from "./pages/NearbyPage";
 import "./App.css";
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
             <Route path="/upgrade" element={<ProtectedRoute><UpgradePage /></ProtectedRoute>} />
             <Route path="/billing/success" element={<ProtectedRoute><BillingSuccessPage /></ProtectedRoute>} />
             <Route path="/referrals" element={<ProtectedRoute><ReferralPage /></ProtectedRoute>} />
+            <Route path="/nearby" element={<ProtectedRoute><NearbyPage /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

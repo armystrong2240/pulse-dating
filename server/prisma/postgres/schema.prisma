@@ -61,6 +61,8 @@ model User {
   referralCode  String?  @unique
   referredById  String?
   lastSeen      DateTime?
+  showInNearby    Boolean  @default(false)
+  nearbyPrivacy   String   @default("approximate")  // "exact" | "approximate"
   createdAt    DateTime @default(now())
 
   media          Media[]

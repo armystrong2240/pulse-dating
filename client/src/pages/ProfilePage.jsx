@@ -248,6 +248,8 @@ export const ProfilePage = () => {
     longitude: p.longitude ?? 0,
     profilePrompts: Array.isArray(p.profilePrompts) ? p.profilePrompts : [],
     profileVisibility: (() => { try { return typeof p.profileVisibility === "object" ? (p.profileVisibility || {}) : JSON.parse(p.profileVisibility || "{}"); } catch { return {}; } })(),
+    showInNearby: p.showInNearby ?? false,
+    nearbyPrivacy: p.nearbyPrivacy ?? "approximate",
   }), []);
 
   useEffect(() => {
@@ -535,6 +537,8 @@ export const ProfilePage = () => {
           .map((i) => i.trim())
           .filter(Boolean),
         profileVisibility: form.profileVisibility || {},
+        showInNearby: form.showInNearby ?? false,
+        nearbyPrivacy: form.nearbyPrivacy ?? "approximate",
       };
 
       const { data } = await api.put(`/profiles/${id}`, payload);
@@ -1132,6 +1136,39 @@ export const ProfilePage = () => {
                             </label>
                           );
                         })}
+                        {/* Nearby opt-in section */}
+                        <div style={{ marginTop: "1.25rem", padding: "0.75rem 1rem", background: "rgba(155,89,182,0.07)", border: "1px solid rgba(155,89,182,0.2)", borderRadius: 10 }}>
+                          <div style={{ fontWeight: 700, color: "#c89ef5", marginBottom: "0.5rem", fontSize: "0.85rem" }}>📍 Nearby (Premium Feature)</div>
+                          <label style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer", marginBottom: "0.6rem" }}>
+                            <div
+                              onClick={() => onField("showInNearby", !form.showInNearby)}
+                              style={{
+                                width: 44, height: 24, borderRadius: 12,
+                                background: form.showInNearby ? "#9b59b6" : "#334",
+                                position: "relative", cursor: "pointer", transition: "background 0.2s",
+                                border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0,
+                              }}
+                            >
+                              <div style={{
+                                position: "absolute", top: 3, left: form.showInNearby ? 22 : 2,
+                                width: 16, height: 16, borderRadius: "50%", background: "#fff",
+                                transition: "left 0.2s",
+                              }} />
+                            </div>
+                            <span style={{ fontSize: "0.85rem", color: "#e0e8ff" }}>Show me in the Nearby grid</span>
+                          </label>
+                          <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.82rem", color: "#e0e8ff" }}>
+                            Distance shown to others:
+                            <select
+                              value={form.nearbyPrivacy || "approximate"}
+                              onChange={(e) => onField("nearbyPrivacy", e.target.value)}
+                              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", color: "#e0e8ff", padding: "4px 10px", borderRadius: 6, fontSize: "0.8rem" }}
+                            >
+                              <option value="approximate">Approximate (safer)</option>
+                              <option value="exact">Exact distance</option>
+                            </select>
+                          </label>
+                        </div>
                       </div>
                     )}
                   </>
