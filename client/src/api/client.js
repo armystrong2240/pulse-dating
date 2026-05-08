@@ -7,6 +7,8 @@ export const api = axios.create({
   withCredentials: true, // send httpOnly refresh cookie
 });
 
+export default api;
+
 // Restore auth token from storage on load
 const storedToken = localStorage.getItem("pd_token");
 if (storedToken) {

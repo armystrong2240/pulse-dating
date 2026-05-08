@@ -24,6 +24,10 @@ const EnvSchema = z.object({
   PAYPAL_CLIENT_SECRET: z.string().default(""),
   PAYPAL_PLAN_PLUS_ID: z.string().default(""),
   PAYPAL_PLAN_GOLD_ID: z.string().default(""),
+  STRIPE_SECRET_KEY: z.string().default(""),
+  STRIPE_WEBHOOK_SECRET: z.string().default(""),
+  STRIPE_PRICE_PLUS_ID: z.string().default(""),
+  STRIPE_PRICE_GOLD_ID: z.string().default(""),
   OPENAI_API_KEY: z.string().default(""),
   TWILIO_ACCOUNT_SID: z.string().default(""),
   TWILIO_AUTH_TOKEN: z.string().default(""),
@@ -105,6 +109,10 @@ export const PAYPAL_CLIENT_ID = envData.PAYPAL_CLIENT_ID;
 export const PAYPAL_CLIENT_SECRET = envData.PAYPAL_CLIENT_SECRET;
 export const PAYPAL_PLAN_PLUS_ID = envData.PAYPAL_PLAN_PLUS_ID;
 export const PAYPAL_PLAN_GOLD_ID = envData.PAYPAL_PLAN_GOLD_ID;
+export const STRIPE_SECRET_KEY = envData.STRIPE_SECRET_KEY;
+export const STRIPE_WEBHOOK_SECRET = envData.STRIPE_WEBHOOK_SECRET;
+export const STRIPE_PRICE_PLUS_ID = envData.STRIPE_PRICE_PLUS_ID;
+export const STRIPE_PRICE_GOLD_ID = envData.STRIPE_PRICE_GOLD_ID;
 export const OPENAI_API_KEY = envData.OPENAI_API_KEY;
 export const TWILIO_ACCOUNT_SID = envData.TWILIO_ACCOUNT_SID;
 export const TWILIO_AUTH_TOKEN = envData.TWILIO_AUTH_TOKEN;

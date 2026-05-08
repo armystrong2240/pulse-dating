@@ -1,6 +1,7 @@
 ﻿import crypto from "crypto";
 import { Router } from "express";
 import axios from "axios";
+import Stripe from "stripe";
 import { prisma } from "../db.js";
 import { requireAuth } from "../middleware/auth.js";
 import {
@@ -9,6 +10,10 @@ import {
   PAYPAL_CLIENT_SECRET,
   PAYPAL_PLAN_PLUS_ID,
   PAYPAL_PLAN_GOLD_ID,
+  STRIPE_SECRET_KEY,
+  STRIPE_WEBHOOK_SECRET,
+  STRIPE_PRICE_PLUS_ID,
+  STRIPE_PRICE_GOLD_ID,
   NODE_ENV,
 } from "../config/env.js";
 
@@ -19,6 +24,8 @@ const PAYPAL_BASE =
   NODE_ENV === "production"
     ? "https://api-m.paypal.com"
     : "https://api-m.sandbox.paypal.com";
+
+const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null;
 
 // Get a short-lived PayPal access token
 async function getPayPalToken() {
@@ -45,6 +52,7 @@ export const PLANS = {
   plus: {
     name: "PulsDate Plus",
     planId: () => PAYPAL_PLAN_PLUS_ID,
+    stripePriceId: () => STRIPE_PRICE_PLUS_ID,
     price: 9.99,
     features: [
       "Unlimited likes",
@@ -58,6 +66,7 @@ export const PLANS = {
   gold: {
     name: "PulsDate Gold",
     planId: () => PAYPAL_PLAN_GOLD_ID,
+    stripePriceId: () => STRIPE_PRICE_GOLD_ID,
     price: 19.99,
     features: [
       "Everything in Plus",
@@ -72,7 +81,13 @@ export const PLANS = {
 
 // GET /api/billing/plans — public price list
 router.get("/plans", (_req, res) => {
+  const providers = {
+    paypal: Boolean(PAYPAL_CLIENT_ID && PAYPAL_CLIENT_SECRET && PAYPAL_PLAN_PLUS_ID && PAYPAL_PLAN_GOLD_ID),
+    stripeCard: Boolean(STRIPE_SECRET_KEY && STRIPE_PRICE_PLUS_ID && STRIPE_PRICE_GOLD_ID),
+  };
+
   return res.json({
+    providers,
     plans: [
       {
         tier: "free",
@@ -94,11 +109,62 @@ router.get("/subscription", requireAuth, async (req, res) => {
   return res.json({ subscription: sub || null });
 });
 
-// POST /api/billing/checkout — create a PayPal subscription and return approval URL
+// POST /api/billing/checkout — create a subscription checkout session for PayPal or Stripe
 router.post("/checkout", requireAuth, async (req, res) => {
-  const { tier } = req.body;
+  const { tier, provider = "paypal" } = req.body;
   if (!["plus", "gold"].includes(tier)) {
     return res.status(400).json({ error: "Invalid tier. Choose plus or gold." });
+  }
+
+  if (!["paypal", "stripe"].includes(provider)) {
+    return res.status(400).json({ error: "Invalid provider. Choose paypal or stripe." });
+  }
+
+  if (provider === "stripe") {
+    if (!stripe) {
+      return res.status(503).json({ error: "Card checkout is not configured yet." });
+    }
+
+    const stripePriceId = PLANS[tier].stripePriceId();
+    if (!stripePriceId) {
+      return res.status(503).json({ error: "Card checkout plan is not configured yet." });
+    }
+
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
+    const baseUrl = CLIENT_URL.split(",")[0].trim();
+    const session = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      customer_email: user.email,
+      line_items: [{ price: stripePriceId, quantity: 1 }],
+      metadata: { userId: user.id, tier },
+      subscription_data: {
+        metadata: { userId: user.id, tier },
+      },
+      success_url: `${baseUrl}/billing/success?provider=stripe&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/upgrade`,
+    });
+
+    await prisma.subscription.upsert({
+      where: { userId: user.id },
+      update: {
+        stripeCustomerId: `stripe_pending_${user.id}`,
+        stripeSubscriptionId: null,
+        stripePriceId: stripePriceId,
+        tier,
+        status: "pending",
+      },
+      create: {
+        id: crypto.randomUUID(),
+        userId: user.id,
+        stripeCustomerId: `stripe_pending_${user.id}`,
+        stripeSubscriptionId: null,
+        stripePriceId: stripePriceId,
+        tier,
+        status: "pending",
+      },
+    });
+
+    return res.json({ url: session.url });
   }
 
   const planId = PLANS[tier].planId();
@@ -151,6 +217,7 @@ router.post("/checkout", requireAuth, async (req, res) => {
   await prisma.subscription.upsert({
     where: { userId: user.id },
     update: {
+      stripeCustomerId: `paypal_pending_${user.id}`,
       stripeSubscriptionId: response.data.id,
       stripePriceId: planId,
       tier,
@@ -159,7 +226,7 @@ router.post("/checkout", requireAuth, async (req, res) => {
     create: {
       id: crypto.randomUUID(),
       userId: user.id,
-      stripeCustomerId: "",
+      stripeCustomerId: `paypal_pending_${user.id}`,
       stripeSubscriptionId: response.data.id,
       stripePriceId: planId,
       tier,
@@ -168,6 +235,74 @@ router.post("/checkout", requireAuth, async (req, res) => {
   });
 
   return res.json({ url: approveLink.href });
+});
+
+// POST /api/billing/stripe/confirm — activate a Stripe subscription after checkout redirect
+router.post("/stripe/confirm", requireAuth, async (req, res) => {
+  const { session_id } = req.body;
+  if (!session_id) {
+    return res.status(400).json({ error: "session_id is required" });
+  }
+  if (!stripe) {
+    return res.status(503).json({ error: "Card checkout is not configured yet." });
+  }
+
+  const session = await stripe.checkout.sessions.retrieve(session_id, {
+    expand: ["subscription", "customer"],
+  });
+
+  const sub = session.subscription;
+  if (!sub || typeof sub === "string") {
+    return res.status(400).json({ error: "Stripe subscription not found in checkout session." });
+  }
+
+  const userId = sub.metadata?.userId || session.metadata?.userId;
+  const tier = sub.metadata?.tier || session.metadata?.tier || "plus";
+  if (userId !== req.user.id) {
+    return res.status(403).json({ error: "Checkout session does not belong to this account." });
+  }
+
+  const customerId =
+    typeof session.customer === "string"
+      ? session.customer
+      : session.customer?.id || `stripe_pending_${userId}`;
+
+  const periodEnd = sub.current_period_end
+    ? new Date(sub.current_period_end * 1000)
+    : null;
+
+  await prisma.subscription.upsert({
+    where: { userId },
+    update: {
+      stripeCustomerId: customerId,
+      stripeSubscriptionId: sub.id,
+      stripePriceId: sub.items?.data?.[0]?.price?.id || "",
+      tier,
+      status: sub.status === "active" || sub.status === "trialing" ? "active" : "pending",
+      currentPeriodEnd: periodEnd,
+      cancelAtPeriodEnd: false,
+    },
+    create: {
+      id: crypto.randomUUID(),
+      userId,
+      stripeCustomerId: customerId,
+      stripeSubscriptionId: sub.id,
+      stripePriceId: sub.items?.data?.[0]?.price?.id || "",
+      tier,
+      status: sub.status === "active" || sub.status === "trialing" ? "active" : "pending",
+      currentPeriodEnd: periodEnd,
+      cancelAtPeriodEnd: false,
+    },
+  });
+
+  if (sub.status === "active" || sub.status === "trialing") {
+    await prisma.user.update({
+      where: { id: userId },
+      data: { isPremium: true, premiumTier: tier },
+    });
+  }
+
+  return res.json({ success: true, tier, status: sub.status });
 });
 
 // POST /api/billing/capture — activate subscription after PayPal redirects back
@@ -244,6 +379,32 @@ router.post("/cancel", requireAuth, async (req, res) => {
     return res.status(400).json({ error: "No active subscription found." });
   }
 
+  if (sub.stripeSubscriptionId?.startsWith("sub_")) {
+    if (!stripe) {
+      return res.status(503).json({ error: "Card billing is not configured." });
+    }
+    const updated = await stripe.subscriptions.update(sub.stripeSubscriptionId, {
+      cancel_at_period_end: true,
+    });
+    const periodEnd = updated.current_period_end
+      ? new Date(updated.current_period_end * 1000)
+      : sub.currentPeriodEnd;
+
+    await prisma.subscription.update({
+      where: { userId: req.user.id },
+      data: {
+        status: "active",
+        currentPeriodEnd: periodEnd,
+        cancelAtPeriodEnd: true,
+      },
+    });
+
+    return res.json({
+      success: true,
+      message: "Subscription cancelled. You keep access until the billing period ends.",
+    });
+  }
+
   const token = await getPayPalToken();
   await axios.post(
     `${PAYPAL_BASE}/v1/billing/subscriptions/${sub.stripeSubscriptionId}/cancel`,
@@ -265,6 +426,24 @@ router.post("/cancel", requireAuth, async (req, res) => {
     success: true,
     message: "Subscription cancelled. You keep access until the billing period ends.",
   });
+});
+
+// POST /api/billing/webhook/stripe — Stripe webhook events
+router.post("/webhook/stripe", async (req, res) => {
+  try {
+    if (!stripe || !STRIPE_WEBHOOK_SECRET) {
+      return res.status(503).json({ error: "Stripe webhook is not configured." });
+    }
+    const sig = req.headers["stripe-signature"];
+    if (!sig) return res.status(400).json({ error: "Missing stripe-signature header" });
+
+    const event = stripe.webhooks.constructEvent(req.rawBody || "", sig, STRIPE_WEBHOOK_SECRET);
+    await handleStripeWebhookEvent(event);
+    return res.json({ received: true });
+  } catch (err) {
+    console.error("Stripe webhook error:", err);
+    return res.status(400).json({ error: "Webhook processing failed" });
+  }
 });
 
 // POST /api/billing/webhook — PayPal IPN/webhook events
@@ -366,6 +545,162 @@ async function handleWebhookEvent(event) {
         where: { stripeSubscriptionId: subId },
         data: { status: "past_due" },
       });
+      break;
+    }
+
+    default:
+      break;
+  }
+}
+
+async function handleStripeWebhookEvent(event) {
+  const localStatusFromStripe = (stripeStatus) => {
+    switch (stripeStatus) {
+      case "active":
+        return "active";
+      case "trialing":
+        return "trialing";
+      case "past_due":
+      case "incomplete":
+      case "paused":
+        return "past_due";
+      case "canceled":
+      case "incomplete_expired":
+      case "unpaid":
+        return "canceled";
+      default:
+        return "pending";
+    }
+  };
+
+  const resolveDbSubscription = async ({ stripeSubscriptionId, stripeCustomerId }) => {
+    if (stripeSubscriptionId) {
+      const bySubId = await prisma.subscription.findFirst({
+        where: { stripeSubscriptionId },
+      });
+      if (bySubId) return bySubId;
+    }
+    if (stripeCustomerId) {
+      return prisma.subscription.findFirst({
+        where: { stripeCustomerId: String(stripeCustomerId) },
+      });
+    }
+    return null;
+  };
+
+  const upsertFromStripeSubscription = async (sub) => {
+    const dbExisting = await resolveDbSubscription({
+      stripeSubscriptionId: sub.id,
+      stripeCustomerId: sub.customer,
+    });
+
+    const userId = sub.metadata?.userId || dbExisting?.userId;
+    if (!userId) return;
+
+    const tier = sub.metadata?.tier || dbExisting?.tier || "plus";
+    const localStatus = localStatusFromStripe(sub.status);
+    const periodEnd = sub.current_period_end ? new Date(sub.current_period_end * 1000) : null;
+    const stripeCustomerId = String(sub.customer || dbExisting?.stripeCustomerId || `stripe_pending_${userId}`);
+
+    await prisma.subscription.upsert({
+      where: { userId },
+      update: {
+        stripeCustomerId,
+        stripeSubscriptionId: sub.id,
+        stripePriceId: sub.items?.data?.[0]?.price?.id || dbExisting?.stripePriceId || "",
+        tier,
+        status: localStatus,
+        currentPeriodEnd: periodEnd,
+        cancelAtPeriodEnd: Boolean(sub.cancel_at_period_end),
+      },
+      create: {
+        id: crypto.randomUUID(),
+        userId,
+        stripeCustomerId,
+        stripeSubscriptionId: sub.id,
+        stripePriceId: sub.items?.data?.[0]?.price?.id || "",
+        tier,
+        status: localStatus,
+        currentPeriodEnd: periodEnd,
+        cancelAtPeriodEnd: Boolean(sub.cancel_at_period_end),
+      },
+    });
+
+    if (localStatus === "active" || localStatus === "trialing") {
+      await prisma.user.update({
+        where: { id: userId },
+        data: { isPremium: true, premiumTier: tier },
+      });
+    } else if (localStatus === "canceled") {
+      await prisma.user.update({
+        where: { id: userId },
+        data: { isPremium: false, premiumTier: "free" },
+      });
+    }
+  };
+
+  switch (event.type) {
+    case "checkout.session.completed": {
+      const session = event.data.object;
+      if (session.mode !== "subscription" || !session.subscription) break;
+      const stripeSub = await stripe.subscriptions.retrieve(String(session.subscription));
+      await upsertFromStripeSubscription(stripeSub);
+      break;
+    }
+
+    case "customer.subscription.created":
+    case "customer.subscription.updated": {
+      const sub = event.data.object;
+      await upsertFromStripeSubscription(sub);
+      break;
+    }
+
+    case "customer.subscription.deleted": {
+      const sub = event.data.object;
+      const dbSub = await prisma.subscription.findFirst({
+        where: { stripeSubscriptionId: sub.id },
+      });
+      if (!dbSub) break;
+
+      await prisma.subscription.update({
+        where: { userId: dbSub.userId },
+        data: {
+          status: "canceled",
+          tier: "free",
+          cancelAtPeriodEnd: false,
+        },
+      });
+      await prisma.user.update({
+        where: { id: dbSub.userId },
+        data: { isPremium: false, premiumTier: "free" },
+      });
+      break;
+    }
+
+    case "invoice.payment_failed":
+    case "invoice.payment_action_required": {
+      const invoice = event.data.object;
+      const stripeSubscriptionId = typeof invoice.subscription === "string"
+        ? invoice.subscription
+        : invoice.subscription?.id;
+      if (!stripeSubscriptionId) break;
+
+      await prisma.subscription.updateMany({
+        where: { stripeSubscriptionId },
+        data: { status: "past_due" },
+      });
+      break;
+    }
+
+    case "invoice.paid": {
+      const invoice = event.data.object;
+      const stripeSubscriptionId = typeof invoice.subscription === "string"
+        ? invoice.subscription
+        : invoice.subscription?.id;
+      if (!stripeSubscriptionId) break;
+
+      const stripeSub = await stripe.subscriptions.retrieve(stripeSubscriptionId);
+      await upsertFromStripeSubscription(stripeSub);
       break;
     }
 

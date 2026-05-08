@@ -11,9 +11,30 @@ export default function BillingSuccessPage() {
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
+    const provider = params.get("provider") || "paypal";
+    const stripeSessionId = params.get("session_id");
     const subscriptionId = params.get("subscription_id");
 
     async function activate() {
+      if (provider === "stripe") {
+        if (!stripeSessionId) {
+          setErrorMsg("Missing Stripe session id.");
+          setStatus("error");
+          return;
+        }
+        try {
+          await api.post("/billing/stripe/confirm", { session_id: stripeSessionId });
+          if (refreshUser) await refreshUser();
+          setStatus("success");
+          setTimeout(() => navigate("/"), 4000);
+        } catch (e) {
+          const msg = e.response?.data?.error || "Could not activate card subscription. Please contact support.";
+          setErrorMsg(msg);
+          setStatus("error");
+        }
+        return;
+      }
+
       if (!subscriptionId) {
         // Fallback: just refresh and redirect (e.g. webhook already handled it)
         if (refreshUser) await refreshUser();
@@ -34,7 +55,7 @@ export default function BillingSuccessPage() {
     }
 
     activate();
-  }, []);
+  }, [navigate, params, refreshUser]);
 
   return (
     <div style={{
@@ -53,7 +74,7 @@ export default function BillingSuccessPage() {
         <>
           <div style={{ fontSize: 48 }}>⏳</div>
           <h1 style={{ fontSize: "1.8rem", fontWeight: 800, margin: 0 }}>Activating your subscription…</h1>
-          <p style={{ color: "#aaa", maxWidth: 400 }}>Just a moment while we confirm with PayPal.</p>
+          <p style={{ color: "#aaa", maxWidth: 400 }}>Just a moment while we confirm your payment.</p>
         </>
       )}
       {status === "success" && (

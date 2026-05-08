@@ -87,14 +87,6 @@ export default function CreatorDashboardPage() {
     }
   }
 
-  async function deletePost(postId) {
-    if (!window.confirm("Delete this post?")) return;
-    try {
-      await api.delete(`/creator/posts/${postId}`);
-      loadDash();
-    } catch {}
-  }
-
   async function uploadCover(e) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -104,7 +96,9 @@ export default function CreatorDashboardPage() {
       fd.append("cover", file);
       await api.post("/creator/me/cover", fd, { headers: { "Content-Type": "multipart/form-data" } });
       loadDash();
-    } catch {}
+    } catch (err) {
+      setError(err.response?.data?.error || "Failed to upload cover.");
+    }
     setCoverLoading(false);
   }
 
@@ -115,7 +109,9 @@ export default function CreatorDashboardPage() {
       await api.patch("/creator/me", { price: Number(editPrice), bio: editBio });
       setEditMode(false);
       loadDash();
-    } catch {}
+    } catch (err) {
+      setError(err.response?.data?.error || "Failed to save settings.");
+    }
     setEditLoading(false);
   }
 

@@ -110,6 +110,13 @@ async function autoHideReported() {
 // ── Scheduled boosts ─────────────────────────────────────────────────────
 async function fireScheduledBoosts() {
   try {
+    if (!prisma?.scheduledBoost) {
+      logger.warn("jobs.boost.skipped", {
+        reason: "scheduledBoost delegate unavailable on Prisma client",
+      });
+      return;
+    }
+
     const due = await prisma.scheduledBoost.findMany({
       where: { fired: false, scheduledAt: { lte: new Date() } },
     });

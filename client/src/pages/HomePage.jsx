@@ -174,7 +174,6 @@ export const HomePage = () => {
   const [geoStatus, setGeoStatus] = useState(""); // '', 'loading', 'active', 'denied'
   const [lastUndoProfile, setLastUndoProfile] = useState(null);
   const [dailyPick, setDailyPick] = useState(null);
-  const [icebreakerModal, setIcebreakerModal] = useState(null); // { name, icebreaker, id }
   const [quality, setQuality] = useState(null);
   const [qualityLoading, setQualityLoading] = useState(true);
 

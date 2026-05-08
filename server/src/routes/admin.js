@@ -193,8 +193,10 @@ router.get("/subscriptions", requireAuth, requireAdmin, async (req, res) => {
   });
 
   const active = subscriptions.filter((s) => s.status === "active" || s.status === "trialing");
+  const trialing = subscriptions.filter((s) => s.status === "trialing");
   const canceled = subscriptions.filter((s) => s.status === "canceled");
   const pastDue = subscriptions.filter((s) => s.status === "past_due");
+  const pending = subscriptions.filter((s) => s.status === "pending");
 
   const mrr = active.reduce((acc, s) => {
     const tierPrice = s.tier === "gold" ? 19.99 : s.tier === "plus" ? 9.99 : 0;
@@ -203,7 +205,13 @@ router.get("/subscriptions", requireAuth, requireAdmin, async (req, res) => {
 
   return res.json({
     mrr: Math.round(mrr * 100) / 100,
-    counts: { active: active.length, canceled: canceled.length, pastDue: pastDue.length },
+    counts: {
+      active: active.length,
+      trialing: trialing.length,
+      canceled: canceled.length,
+      pastDue: pastDue.length,
+      pending: pending.length,
+    },
     subscriptions: subscriptions.slice(0, 50),
   });
 });

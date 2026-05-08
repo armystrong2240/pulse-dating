@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import api from "../api/client.js";
-import { useAuth } from "../context/AuthContext.jsx";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
@@ -14,7 +13,6 @@ export default function CreatorProfilePage() {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -74,7 +72,7 @@ export default function CreatorProfilePage() {
   async function subscribe() {
     try {
       const { data } = await api.post(`/creator/${id}/subscribe`);
-      window.location.href = data.approveUrl;
+      window.location.assign(data.approveUrl);
     } catch (err) {
       setError(err.response?.data?.error || "Subscription error.");
     }
@@ -86,7 +84,7 @@ export default function CreatorProfilePage() {
       if (data.alreadyUnlocked || data.free) {
         loadProfile();
       } else {
-        window.location.href = data.approveUrl;
+        window.location.assign(data.approveUrl);
       }
     } catch (err) {
       setError(err.response?.data?.error || "Unlock error.");
@@ -101,7 +99,7 @@ export default function CreatorProfilePage() {
     setTipLoading(true);
     try {
       const { data } = await api.post(`/creator/tip/${id}`, { amount: amt, message: tipMessage, context: "profile" });
-      window.location.href = data.approveUrl;
+      window.location.assign(data.approveUrl);
     } catch (err) {
       setTipError(err.response?.data?.error || "Failed to send tip.");
     } finally {

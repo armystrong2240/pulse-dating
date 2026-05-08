@@ -69,21 +69,25 @@ export default function UpgradePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [subscription, setSubscription] = useState(null);
-  const [subLoading, setSubLoading] = useState(true);
   const [roses, setRoses] = useState(null);
   const [leaderboard, setLeaderboard] = useState([]);
   const [boostDate, setBoostDate] = useState("");
   const [boostTime, setBoostTime] = useState("");
   const [boostMsg, setBoostMsg] = useState("");
   const [scheduledBoosts, setScheduledBoosts] = useState([]);
+  const [providers, setProviders] = useState({ paypal: true, stripeCard: true });
 
   const currentTier = user?.premiumTier || "free";
 
   useEffect(() => {
     api.get("/billing/subscription")
       .then((r) => setSubscription(r.data.subscription))
-      .catch(() => {})
-      .finally(() => setSubLoading(false));
+      .catch(() => {});
+    api.get("/billing/plans")
+      .then((r) => {
+        if (r.data?.providers) setProviders(r.data.providers);
+      })
+      .catch(() => {});
     api.get("/roses").then((r) => setRoses(r.data)).catch(() => {});
     api.get("/gifts/leaderboard").then((r) => setLeaderboard(r.data.leaderboard || [])).catch(() => {});
     api.get("/boosts").then((r) => setScheduledBoosts(r.data || [])).catch(() => {});
@@ -107,12 +111,12 @@ export default function UpgradePage() {
     setScheduledBoosts((prev) => prev.filter((b) => b.id !== id));
   }
 
-  async function handleUpgrade(tier) {
+  async function handleUpgrade(tier, provider = "paypal") {
     setLoading(true);
     setError("");
     try {
-      const res = await api.post("/billing/checkout", { tier });
-      window.location.href = res.data.url;
+      const res = await api.post("/billing/checkout", { tier, provider });
+      window.location.assign(res.data.url);
     } catch (e) {
       const msg = e.response?.data?.error || "Failed to start checkout. Please try again.";
       setError(msg);
@@ -152,6 +156,28 @@ export default function UpgradePage() {
           <p style={{ color: "#aaa", marginTop: 12, fontSize: "1.1rem" }}>
             Find better matches, faster. Unlock the features that matter.
           </p>
+          <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginTop: 14 }}>
+            <span style={{
+              border: "1px solid #374151",
+              borderRadius: 999,
+              padding: "4px 10px",
+              fontSize: 12,
+              color: providers.stripeCard ? "#a7f3d0" : "#fca5a5",
+              background: providers.stripeCard ? "rgba(16,185,129,0.12)" : "rgba(239,68,68,0.12)",
+            }}>
+              Card Checkout: {providers.stripeCard ? "Available" : "Unavailable"}
+            </span>
+            <span style={{
+              border: "1px solid #374151",
+              borderRadius: 999,
+              padding: "4px 10px",
+              fontSize: 12,
+              color: providers.paypal ? "#93c5fd" : "#fca5a5",
+              background: providers.paypal ? "rgba(59,130,246,0.12)" : "rgba(239,68,68,0.12)",
+            }}>
+              PayPal: {providers.paypal ? "Available" : "Unavailable"}
+            </span>
+          </div>
         </div>
 
         {/* Current plan banner */}
@@ -206,7 +232,6 @@ export default function UpgradePage() {
           {["free", "plus", "gold"].map((tier) => {
             const plan = PLAN_FEATURES[tier];
             const isCurrent = currentTier === tier;
-            const isUpgrade = tier !== "free" && !isCurrent;
 
             return (
               <div
@@ -268,25 +293,46 @@ export default function UpgradePage() {
                 ) : tier === "free" ? (
                   <div style={{ textAlign: "center", color: "#555", fontSize: 13 }}>Basic access</div>
                 ) : (
-                  <button
-                    onClick={() => handleUpgrade(tier)}
-                    disabled={loading}
-                    style={{
-                      width: "100%",
-                      background: plan.gradient,
-                      color: "#fff",
-                      border: "none",
-                      borderRadius: 10,
-                      padding: "0.9rem",
-                      fontSize: 15,
-                      fontWeight: 700,
-                      cursor: loading ? "not-allowed" : "pointer",
-                      opacity: loading ? 0.7 : 1,
-                      transition: "opacity 0.2s",
-                    }}
-                  >
-                    {loading ? "Redirecting..." : `Get ${plan.name}`}
-                  </button>
+                  <div style={{ display: "grid", gap: 10 }}>
+                    <button
+                      onClick={() => handleUpgrade(tier, "stripe")}
+                      disabled={loading || !providers.stripeCard}
+                      style={{
+                        width: "100%",
+                        background: plan.gradient,
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: 10,
+                        padding: "0.9rem",
+                        fontSize: 15,
+                        fontWeight: 700,
+                        cursor: loading ? "not-allowed" : "pointer",
+                        opacity: loading || !providers.stripeCard ? 0.7 : 1,
+                        transition: "opacity 0.2s",
+                      }}
+                    >
+                      {!providers.stripeCard ? "Card Unavailable" : loading ? "Redirecting..." : "Pay with Card"}
+                    </button>
+                    <button
+                      onClick={() => handleUpgrade(tier, "paypal")}
+                      disabled={loading || !providers.paypal}
+                      style={{
+                        width: "100%",
+                        background: "#111827",
+                        color: "#fff",
+                        border: "1px solid #374151",
+                        borderRadius: 10,
+                        padding: "0.75rem",
+                        fontSize: 14,
+                        fontWeight: 600,
+                        cursor: loading ? "not-allowed" : "pointer",
+                        opacity: loading || !providers.paypal ? 0.7 : 1,
+                        transition: "opacity 0.2s",
+                      }}
+                    >
+                      {!providers.paypal ? "PayPal Unavailable" : loading ? "Redirecting..." : "Pay with PayPal"}
+                    </button>
+                  </div>
                 )}
               </div>
             );
@@ -295,7 +341,7 @@ export default function UpgradePage() {
 
         {/* Trust signals */}
         <div style={{ display: "flex", justifyContent: "center", gap: 32, marginTop: 48, flexWrap: "wrap" }}>
-          {["🔒 Secure Payments via PayPal", "↩ Cancel Anytime", "💳 No Hidden Fees"].map((item) => (
+          {["🔒 Secure Payments via Card or PayPal", "↩ Cancel Anytime", "💳 No Hidden Fees"].map((item) => (
             <div key={item} style={{ color: "#666", fontSize: 13 }}>{item}</div>
           ))}
         </div>

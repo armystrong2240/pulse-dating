@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api, toAssetUrl } from "../api/client";
-import { useAuth } from "../context/AuthContext";
 
 const SafetyCardModal = ({ profile, onClose }) => {
   const info = `Date Safety Info\nName: ${profile.name}\nAge: ${profile.age}\nCity: ${profile.city}\nProfile: ${window.location.origin}/profiles/${profile.id}\nTime: ${new Date().toLocaleString()}`;
@@ -27,7 +26,6 @@ const SafetyCardModal = ({ profile, onClose }) => {
 };
 
 export const MatchesPage = () => {
-  const { user } = useAuth();
   const navigate = useNavigate();
   const [matches, setMatches] = useState([]);
   const [pending, setPending] = useState([]);

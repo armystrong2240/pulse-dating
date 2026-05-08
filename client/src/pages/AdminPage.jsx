@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { api } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 
@@ -27,11 +27,7 @@ export default function AdminPage() {
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(""), 3000); };
 
-  useEffect(() => {
-    loadTab(tab);
-  }, [tab, userPage, userSearch]);
-
-  const loadTab = async (t) => {
+  const loadTab = useCallback(async (t) => {
     setLoading(true);
     setError("");
     try {
@@ -72,7 +68,11 @@ export default function AdminPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [supportFilter, userPage, userSearch]);
+
+  useEffect(() => {
+    loadTab(tab);
+  }, [loadTab, tab, userPage, userSearch]);
 
   const banUser = async (id, name) => {
     if (!confirm(`Ban ${name}? This will pause their account.`)) return;
@@ -443,12 +443,20 @@ export default function AdminPage() {
                 <div style={s.statLabel}>ACTIVE</div>
               </div>
               <div style={s.statBox}>
+                <div style={{ ...s.statVal, color: "#66ccff" }}>{subscriptions.counts.trialing || 0}</div>
+                <div style={s.statLabel}>TRIALING</div>
+              </div>
+              <div style={s.statBox}>
                 <div style={{ ...s.statVal, color: "#ff8888" }}>{subscriptions.counts.canceled}</div>
                 <div style={s.statLabel}>CANCELED</div>
               </div>
               <div style={s.statBox}>
                 <div style={{ ...s.statVal, color: "#ffaa00" }}>{subscriptions.counts.pastDue}</div>
                 <div style={s.statLabel}>PAST DUE</div>
+              </div>
+              <div style={s.statBox}>
+                <div style={{ ...s.statVal, color: "#cccccc" }}>{subscriptions.counts.pending || 0}</div>
+                <div style={s.statLabel}>PENDING</div>
               </div>
             </div>
           </div>
@@ -469,7 +477,19 @@ export default function AdminPage() {
                     <td style={{ ...s.td, color: tierColor(sub.tier), fontWeight: 600 }}>
                       {(sub.tier || "free").toUpperCase()}
                     </td>
-                    <td style={{ ...s.td, color: sub.status === "active" ? "#00ff88" : "#ff8888" }}>
+                    <td style={{
+                      ...s.td,
+                      color:
+                        sub.status === "active"
+                          ? "#00ff88"
+                          : sub.status === "trialing"
+                            ? "#66ccff"
+                            : sub.status === "past_due"
+                              ? "#ffaa00"
+                              : sub.status === "pending"
+                                ? "#cccccc"
+                                : "#ff8888",
+                    }}>
                       {sub.status?.toUpperCase()}
                     </td>
                     <td style={{ ...s.td, color: "#556" }}>{new Date(sub.createdAt).toLocaleDateString()}</td>
@@ -701,12 +721,12 @@ export default function AdminPage() {
                       <td style={s.td}>
                         {t.status !== "resolved" && (
                           <button style={s.btn("#059669")} onClick={async () => {
-                            try { await api.patch(`/support/tickets/${t.id}`, { status: "resolved" }); loadTab("Support"); } catch {}
+                            try { await api.patch(`/support/tickets/${t.id}`, { status: "resolved" }); loadTab("Support"); } catch { showToast("Failed to update ticket."); }
                           }}>Resolve</button>
                         )}
                         {t.status === "open" && (
                           <button style={s.btn("#b45309")} onClick={async () => {
-                            try { await api.patch(`/support/tickets/${t.id}`, { status: "in_progress" }); loadTab("Support"); } catch {}
+                            try { await api.patch(`/support/tickets/${t.id}`, { status: "in_progress" }); loadTab("Support"); } catch { showToast("Failed to update ticket."); }
                           }}>In Progress</button>
                         )}
                       </td>

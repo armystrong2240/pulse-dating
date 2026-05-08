@@ -21,12 +21,12 @@ self.addEventListener("notificationclick", (event) => {
   event.notification.close();
   const url = event.notification.data?.url || "/";
   event.waitUntil(
-    clients
+    self.clients
       .matchAll({ type: "window", includeUncontrolled: true })
       .then((list) => {
         const match = list.find((w) => new URL(w.url).pathname === url);
         if (match) return match.focus();
-        return clients.openWindow(url);
+        return self.clients.openWindow(url);
       })
   );
 });

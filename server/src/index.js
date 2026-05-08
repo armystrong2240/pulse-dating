@@ -121,7 +121,7 @@ app.use(requestContext);
 app.use(cookieParser());
 // Capture raw body for Stripe webhooks before JSON parsing
 app.use((req, _res, next) => {
-  if (req.originalUrl === "/api/billing/webhook") {
+  if (req.originalUrl === "/api/billing/webhook" || req.originalUrl === "/api/billing/webhook/stripe") {
     let raw = "";
     req.setEncoding("utf8");
     req.on("data", (chunk) => { raw += chunk; });

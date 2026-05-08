@@ -7,6 +7,7 @@ const SocketContext = createContext(null);
 export const SocketProvider = ({ children }) => {
   const { user } = useAuth();
   const socketRef = useRef(null);
+  const [socket, setSocket] = useState(null);
   const [matchPopup, setMatchPopup] = useState(null);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [unreadMatches, setUnreadMatches] = useState(0);
@@ -23,6 +24,7 @@ export const SocketProvider = ({ children }) => {
       withCredentials: true,
     });
     socketRef.current = socket;
+    setSocket(socket);
 
     socket.on("connect", () => {
       socket.emit("auth:identify", user.id);
@@ -50,7 +52,11 @@ export const SocketProvider = ({ children }) => {
       setTimeout(() => setFriendPopup(null), 4000);
     });
 
-    return () => socket.disconnect();
+    return () => {
+      socket.disconnect();
+      socketRef.current = null;
+      setSocket(null);
+    };
   }, [user]);
 
   const clearUnreadMessages = () => setUnreadMessages(0);
@@ -58,7 +64,7 @@ export const SocketProvider = ({ children }) => {
 
   return (
     <SocketContext.Provider value={{
-      socket: socketRef.current,
+      socket,
       matchPopup,
       unreadMessages,
       unreadMatches,

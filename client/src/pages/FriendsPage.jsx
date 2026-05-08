@@ -54,7 +54,7 @@ function RequestCard({ item, onAccept, onDecline }) {
         </div>
       </Link>
       <div className="friend-card-actions">
-        <button className="btn-sm btn-accent" onClick={() => onAccept(friendshipId, user.id)}>
+          <button className="btn-sm btn-accent" onClick={() => onAccept(friendshipId)}>
           ✓ Accept
         </button>
         <button className="btn-sm btn-ghost" onClick={() => onDecline(friendshipId)}>
@@ -121,7 +121,7 @@ export default function FriendsPage() {
     setFriends((prev) => prev.filter((f) => f.id !== userId));
   };
 
-  const onAccept = async (friendshipId, userId) => {
+  const onAccept = async (friendshipId) => {
     await api.post(`/friends/accept/${friendshipId}`);
     setRequests((prev) => prev.filter((r) => r.friendshipId !== friendshipId));
     // Reload friends to include newly accepted

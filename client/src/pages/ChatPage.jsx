@@ -215,7 +215,7 @@ export const ChatPage = () => {
     } catch (e) {
       const msg = e.response?.data?.error || "Could not send gift.";
       if (e.response?.data?.requiresUpgrade) {
-        window.location.href = "/upgrade";
+        window.location.assign("/upgrade");
       } else {
         alert(msg);
       }
