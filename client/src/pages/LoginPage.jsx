@@ -201,8 +201,8 @@ export const LoginPage = () => {
   };
 
 
-  // Hero image aligned to brand audience and tone
-  const heroImageUrl = "https://source.unsplash.com/1200x675/?african-american,couple,romance";
+  // Fixed hero image selected by user
+  const heroImageUrl = "https://i.pinimg.com/originals/fb/64/8e/fb648eb3ceef0555837b77087f396338.jpg";
 
   return (
     <section className="page auth-page">
