@@ -144,7 +144,7 @@ function issueTokens(userId, email) {
   const accessToken = jwt.sign({ id: userId, email }, JWT_SECRET, {
     expiresIn: "15m",
   });
-  const refreshToken = jwt.sign({ id: userId }, REFRESH_SECRET, {
+  const refreshToken = jwt.sign({ id: userId, jti: crypto.randomUUID() }, REFRESH_SECRET, {
     expiresIn: `${REFRESH_EXPIRY_DAYS}d`,
   });
   return { accessToken, refreshToken };
