@@ -200,8 +200,28 @@ export const LoginPage = () => {
     }
   };
 
+
+  // Black coupe image (royalty-free, unsplash example)
+  const coupeUrl = "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=800&q=80";
+
   return (
     <section className="page auth-page">
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "1.5rem" }}>
+        <img
+          src={coupeUrl}
+          alt="Black coupe car"
+          style={{
+            width: "100%",
+            maxWidth: 340,
+            borderRadius: 16,
+            boxShadow: "0 4px 32px rgba(0,0,0,0.25)",
+            marginBottom: 18,
+            objectFit: "cover",
+            aspectRatio: "16/9",
+            background: "#111"
+          }}
+        />
+      </div>
       <h2>Welcome back</h2>
       <p className="muted">Sign in to continue to PulseDate</p>
 
