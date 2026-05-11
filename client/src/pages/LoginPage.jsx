@@ -205,139 +205,150 @@ export const LoginPage = () => {
   const heroImageUrl = "https://i.pinimg.com/originals/fb/64/8e/fb648eb3ceef0555837b77087f396338.jpg";
 
   return (
-    <section className="page auth-page">
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "1.5rem" }}>
-        <img
-          src={heroImageUrl}
-          alt="African American couple smiling together"
-          style={{
-            width: "100%",
-            maxWidth: 340,
-            height: "auto",
-            borderRadius: 16,
-            boxShadow: "0 4px 32px rgba(0,0,0,0.25)",
-            marginBottom: 18,
-            objectFit: "contain",
-            background: "#111"
-          }}
-        />
-      </div>
-      <h2>Welcome back</h2>
-      <p className="muted">Sign in to continue to PulseDate</p>
-
-      <form className="stack-form auth-form" onSubmit={onSubmit}>
-        <input
-          name="email"
-          type="email"
-          value={form.email}
-          onChange={onChange}
-          placeholder="Email"
-          required
-          autoComplete="email"
-        />
-        <input
-          name="password"
-          type="password"
-          value={form.password}
-          onChange={onChange}
-          placeholder="Password"
-          required
-          autoComplete="current-password"
-        />
-        <button className="btn-primary" type="submit">
-          Sign In
-        </button>
-        <button
-          className="btn-secondary"
-          type="button"
-          onClick={onSendMagicLink}
-          disabled={magicLoading || magicVerifying || phoneLoading || cooldownMagic > 0}
-        >
-          {magicLoading ? "Sending link..." : cooldownMagic > 0 ? `Resend in ${cooldownMagic}s` : "Email me a sign-in link"}
-        </button>
-      </form>
-
-      <div className="stack-form auth-form" style={{ marginTop: "0.8rem" }}>
-        <input
-          name="phone"
-          type="tel"
-          value={phoneForm.phone}
-          onChange={onPhoneChange}
-          placeholder="Phone in E.164 format (+1234567890)"
-          autoComplete="tel"
-        />
-        {phoneCodeSent && (
-          <input
-            name="code"
-            type="text"
-            value={phoneForm.code}
-            onChange={onPhoneChange}
-            placeholder="6-digit code"
-            maxLength={6}
-            inputMode="numeric"
-            autoComplete="one-time-code"
+    <section className="page auth-page" style={{ maxWidth: 980, width: "100%" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "1.6rem",
+          alignItems: "start",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start" }}>
+          <img
+            src={heroImageUrl}
+            alt="African American couple smiling together"
+            style={{
+              width: "100%",
+              maxWidth: 430,
+              height: "auto",
+              borderRadius: 16,
+              boxShadow: "0 4px 32px rgba(0,0,0,0.25)",
+              objectFit: "contain",
+              background: "#111",
+            }}
           />
-        )}
-        <div style={{ display: "grid", gridTemplateColumns: phoneCodeSent ? "1fr 1fr" : "1fr", gap: "0.6rem" }}>
-          <button
-            className="btn-secondary"
-            type="button"
-            onClick={onSendPhoneCode}
-            disabled={phoneLoading || magicVerifying || fbLoading || cooldownPhone > 0}
-          >
-            {phoneLoading
-              ? "Sending..."
-              : cooldownPhone > 0
-                ? `Resend in ${cooldownPhone}s`
-                : phoneCodeSent
-                  ? "Resend code"
-                  : "Text me a login code"}
-          </button>
-          {phoneCodeSent && (
-            <button
-              className="btn-primary"
-              type="button"
-              onClick={onVerifyPhoneCode}
-              disabled={phoneLoading || magicVerifying || fbLoading}
-            >
-              {phoneLoading ? "Verifying..." : "Sign in with code"}
+        </div>
+
+        <div>
+          <h2>Welcome back</h2>
+          <p className="muted">Sign in to continue to PulseDate</p>
+
+          <form className="stack-form auth-form" onSubmit={onSubmit}>
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={onChange}
+              placeholder="Email"
+              required
+              autoComplete="email"
+            />
+            <input
+              name="password"
+              type="password"
+              value={form.password}
+              onChange={onChange}
+              placeholder="Password"
+              required
+              autoComplete="current-password"
+            />
+            <button className="btn-primary" type="submit">
+              Sign In
             </button>
-          )}
+            <button
+              className="btn-secondary"
+              type="button"
+              onClick={onSendMagicLink}
+              disabled={magicLoading || magicVerifying || phoneLoading || cooldownMagic > 0}
+            >
+              {magicLoading ? "Sending link..." : cooldownMagic > 0 ? `Resend in ${cooldownMagic}s` : "Email me a sign-in link"}
+            </button>
+          </form>
+
+          <div className="stack-form auth-form" style={{ marginTop: "0.8rem" }}>
+            <input
+              name="phone"
+              type="tel"
+              value={phoneForm.phone}
+              onChange={onPhoneChange}
+              placeholder="Phone in E.164 format (+1234567890)"
+              autoComplete="tel"
+            />
+            {phoneCodeSent && (
+              <input
+                name="code"
+                type="text"
+                value={phoneForm.code}
+                onChange={onPhoneChange}
+                placeholder="6-digit code"
+                maxLength={6}
+                inputMode="numeric"
+                autoComplete="one-time-code"
+              />
+            )}
+            <div style={{ display: "grid", gridTemplateColumns: phoneCodeSent ? "1fr 1fr" : "1fr", gap: "0.6rem" }}>
+              <button
+                className="btn-secondary"
+                type="button"
+                onClick={onSendPhoneCode}
+                disabled={phoneLoading || magicVerifying || fbLoading || cooldownPhone > 0}
+              >
+                {phoneLoading
+                  ? "Sending..."
+                  : cooldownPhone > 0
+                    ? `Resend in ${cooldownPhone}s`
+                    : phoneCodeSent
+                      ? "Resend code"
+                      : "Text me a login code"}
+              </button>
+              {phoneCodeSent && (
+                <button
+                  className="btn-primary"
+                  type="button"
+                  onClick={onVerifyPhoneCode}
+                  disabled={phoneLoading || magicVerifying || fbLoading}
+                >
+                  {phoneLoading ? "Verifying..." : "Sign in with code"}
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", margin: "1rem 0" }}>
+            <div style={{ flex: 1, height: 1, background: "#333" }} />
+            <span className="muted" style={{ fontSize: "0.8rem" }}>or</span>
+            <div style={{ flex: 1, height: 1, background: "#333" }} />
+          </div>
+
+          <button
+            onClick={onFacebookLogin}
+            disabled={fbLoading || magicVerifying || phoneLoading}
+            style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.6rem", width: "100%", padding: "0.65rem 1rem", background: "#1877f2", color: "#fff", border: "none", borderRadius: 8, fontSize: "0.95rem", fontWeight: 600, cursor: "pointer", opacity: fbLoading ? 0.7 : 1 }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+              <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+            </svg>
+            {fbLoading ? "Connecting..." : "Continue with Facebook"}
+          </button>
+
+          {magicVerifying && <p className="muted">Verifying your sign-in link...</p>}
+          {magicMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{magicMessage}</p>}
+          {phoneMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{phoneMessage}</p>}
+          {successMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{successMessage}</p>}
+          {error && <p className="error">{error}</p>}
+
+          <p className="muted" style={{ marginTop: "1rem" }}>
+            <Link to="/forgot-password" className="link">Forgot password?</Link>
+          </p>
+          <p className="muted" style={{ marginTop: "0.5rem" }}>
+            New here?{" "}
+            <Link to="/register" className="link">
+              Create a profile
+            </Link>
+          </p>
         </div>
       </div>
-
-      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", margin: "1rem 0" }}>
-        <div style={{ flex: 1, height: 1, background: "#333" }} />
-        <span className="muted" style={{ fontSize: "0.8rem" }}>or</span>
-        <div style={{ flex: 1, height: 1, background: "#333" }} />
-      </div>
-
-      <button
-        onClick={onFacebookLogin}
-        disabled={fbLoading || magicVerifying || phoneLoading}
-        style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.6rem", width: "100%", padding: "0.65rem 1rem", background: "#1877f2", color: "#fff", border: "none", borderRadius: 8, fontSize: "0.95rem", fontWeight: 600, cursor: "pointer", opacity: fbLoading ? 0.7 : 1 }}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
-          <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
-        </svg>
-        {fbLoading ? "Connecting..." : "Continue with Facebook"}
-      </button>
-
-      {magicVerifying && <p className="muted">Verifying your sign-in link...</p>}
-      {magicMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{magicMessage}</p>}
-      {phoneMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{phoneMessage}</p>}
-      {successMessage && <p style={{ color: "#4caf50", marginTop: "0.5rem" }}>{successMessage}</p>}
-      {error && <p className="error">{error}</p>}
-
-      <p className="muted" style={{ marginTop: "1rem" }}>
-        <Link to="/forgot-password" className="link">Forgot password?</Link>
-      </p>
-      <p className="muted" style={{ marginTop: "0.5rem" }}>
-        New here?{" "}
-        <Link to="/register" className="link">
-          Create a profile
-        </Link>
-      </p>
     </section>
   );
 };
