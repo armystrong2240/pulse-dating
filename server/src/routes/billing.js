@@ -10,14 +10,15 @@ import {
   PAYPAL_CLIENT_SECRET,
   PAYPAL_PLAN_PLUS_ID,
   PAYPAL_PLAN_GOLD_ID,
-  STRIPE_SECRET_KEY,
-  STRIPE_WEBHOOK_SECRET,
-  STRIPE_PRICE_PLUS_ID,
-  STRIPE_PRICE_GOLD_ID,
   NODE_ENV,
 } from "../config/env.js";
 
 const router = Router();
+
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
+const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || "";
+const STRIPE_PRICE_PLUS_ID = process.env.STRIPE_PRICE_PLUS_ID || "";
+const STRIPE_PRICE_GOLD_ID = process.env.STRIPE_PRICE_GOLD_ID || "";
 
 // PayPal API base — sandbox for dev/test, live for production
 const PAYPAL_BASE =
