@@ -201,15 +201,15 @@ export const LoginPage = () => {
   };
 
 
-  // Black coupe image (royalty-free, unsplash example)
-  const coupeUrl = "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=800&q=80";
+  // Hero image aligned to brand audience and tone
+  const heroImageUrl = "https://source.unsplash.com/1200x675/?african-american,couple,romance";
 
   return (
     <section className="page auth-page">
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "1.5rem" }}>
         <img
-          src={coupeUrl}
-          alt="Black coupe car"
+          src={heroImageUrl}
+          alt="African American couple smiling together"
           style={{
             width: "100%",
             maxWidth: 340,
