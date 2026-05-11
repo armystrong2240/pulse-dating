@@ -213,11 +213,11 @@ export const LoginPage = () => {
           style={{
             width: "100%",
             maxWidth: 340,
+            height: "auto",
             borderRadius: 16,
             boxShadow: "0 4px 32px rgba(0,0,0,0.25)",
             marginBottom: 18,
-            objectFit: "cover",
-            aspectRatio: "16/9",
+            objectFit: "contain",
             background: "#111"
           }}
         />
